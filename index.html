@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeSMC UGT CLM - Área de Servicio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --ugt-red: #e30613;
+            --ugt-dark: #2d2d2d;
+            --bg-light: #f4f7f6;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--ugt-dark);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background: var(--white);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid var(--ugt-red);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--ugt-red);
+            letter-spacing: -0.5px;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, var(--ugt-red) 0%, #b3050f 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        .hero h1 { margin-bottom: 1rem; font-size: 1.8rem; }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--white);
+            color: var(--ugt-red);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 1rem;
+            transition: transform 0.2s;
+        }
+
+        /* GRID LAYOUT */
+        .container {
+            max-width: 1000px;
+            margin: -2rem auto 2rem;
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            margin: 2rem 0 1rem;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--ugt-dark);
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-left-color: var(--ugt-red);
+        }
+
+        .card i {
+            font-size: 1.5rem;
+            margin-right: 1.2rem;
+            color: var(--ugt-red);
+            width: 30px;
+            text-align: center;
+        }
+
+        .card-content h3 { font-size: 1rem; margin-bottom: 0.2rem; }
+        .card-content p { font-size: 0.85rem; color: #777; }
+
+        /* SOCIAL CHANNELS */
+        .social-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-icon {
+            font-size: 1.8rem;
+            color: var(--ugt-dark);
+            transition: color 0.3s;
+        }
+
+        .social-icon.wa:hover { color: #25D366; }
+        .social-icon.ig:hover { color: #E1306C; }
+        .social-icon.tk:hover { color: #000000; }
+
+        /* FOOTER */
+        footer {
+            background: var(--ugt-dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            margin-top: 3rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-text">FeSMC UGT CLM</div>
+    </header>
+
+    <section class="hero">
+        <h1>Tu sindicato en el móvil</h1>
+        <p>Servicios, Movilidad y Consumo en Castilla-La Mancha</p>
+        <a href="https://www.ugt.es/ficha-de-afiliacion" class="cta-button">¡AFÍLIATE AHORA!</a>
+    </section>
+
+    <div class="container">
+        
+        <h2 class="section-title">Canales Oficiales</h2>
+        <div class="social-bar">
+            <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="social-icon wa" title="WhatsApp">💬</a>
+            <a href="https://www.instagram.com/fesmcugtclm" class="social-icon ig" title="Instagram">📸</a>
+            <a href="https://www.tiktok.com/@fesmcugtclm" class="social-icon tk" title="TikTok">📱</a>
+        </div>
+
+        <h2 class="section-title">Calculadoras y Modelos</h2>
+        <div class="grid">
+            <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/calculadora-vacaciones" class="card">
+                <i>📅</i>
+                <div class="card-content">
+                    <h3>Calculadora Vacaciones</h3>
+                    <p>Calcula tus días pendientes</p>
+                </div>
+            </a>
+            <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/despido" class="card">
+                <i>⚖️</i>
+                <div class="card-content">
+                    <h3>Indemnización Despido</h3>
+                    <p>Cálculo oficial (CGPJ)</p>
+                </div>
+            </a>
+            <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos" class="card">
+                <i>📝</i>
+                <div class="card-content">
+                    <h3>Modelos y Escritos</h3>
+                    <p>Plantillas para tus reclamaciones</p>
+                </div>
+            </a>
+            <a href="https://e.pcloud.link/publink/show?code=kZqvpdZFdLEdibwWjbbbDBeo4oHqhnTbdNV" class="card">
+                <i>🎓</i>
+                <div class="card-content">
+                    <h3>Permiso Formación</h3>
+                    <p>Solicitud oficial de permiso</p>
+                </div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Nuestras APPs</h2>
+        <div class="grid">
+            <a href="https://play.google.com/store/search?q=Ugt%20registra" class="card">
+                <i>📲</i>
+                <div class="card-content">
+                    <h3>UGT Registra</h3>
+                    <p>Control de jornada laboral</p>
+                </div>
+            </a>
+            <a href="https://www.ugt.es/ugt-app" class="card">
+                <i>👤</i>
+                <div class="card-content">
+                    <h3>App del Afiliado</h3>
+                    <p>Gestión personal y servicios</p>
+                </div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Información y Convenios</h2>
+        <div class="grid">
+            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha" class="card">
+                <i>📚</i>
+                <div class="card-content">
+                    <h3>Convenios CLM</h3>
+                    <p>Consulta el convenio de tu sector</p>
+                </div>
+            </a>
+            <a href="https://www.ugtclm.es/" class="card">
+                <i>🌐</i>
+                <div class="card-content">
+                    <h3>UGT Castilla-La Mancha</h3>
+                    <p>Web oficial regional</p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p><strong>FeSMC UGT Castilla-La Mancha</strong></p>
+        <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 1rem;">Unión General de Trabajadoras y Trabajadores</p>
+    </footer>
+
+</body>
+</html>
