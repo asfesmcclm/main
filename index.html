@@ -64,60 +64,93 @@
     <div id="modalSedes" class="modal-overlay" onclick="closeModalExterno(event, 'modalSedes')">
         <div class="modal-content">
             <h2><i data-lucide="map-pin"></i> Sedes UGT CLM</h2>
-            <button class="btn-provincia" onclick="toggleSedes('sedesAlbacete')">Albacete <i data-lucide="chevron-down"></i></button>
-<div id="sedesAlbacete" class="lista-sedes">
-    <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left: 12px; background: #fffafa; border-radius: 4px;">
-        <h4 style="color: var(--ugt-dark); font-weight: 800;">FeSMC UGT Albacete</h4>
-        <p>C/ Luis Rosales, 7 - Planta 1</p>
-        <div class="sede-actions">
-            <a href="tel:967521850" class="btn-action" style="background: var(--ugt-red); color: white;"><i data-lucide="phone"></i> 967 521 850</a>
-            <a href="mailto:albacete@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
-        </div>
-    </div>
-
-    <div class="sede-item" style="margin-top: 10px; opacity: 0.8;">
-        <h4 style="font-size: 0.75rem; color: #666;">UGT Unión Provincial (Sede)</h4>
-        <p style="font-size: 0.7rem;">C/ Luis Rosales, 7</p>
-        <div class="sede-actions">
-            <a href="tel:967215514" class="btn-action" style="font-size: 0.65rem;"><i data-lucide="phone"></i> Centralita: 967 215 514</a>
-        </div>
-    </div>
-
-    <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
-    
-    <div class="sede-item">
-        <h4>Almansa</h4>
-        <p>Plaza del Rey D. Jaime I, 7</p>
-        <div class="sede-actions"><a href="tel:967342954" class="btn-action"><i data-lucide="phone"></i> 967 342 954</a></div>
-    </div>
-    <div class="sede-item">
-        <h4>Hellín</h4>
-        <p>C/ Juan XXIII, 5</p>
-        <div class="sede-actions"><a href="tel:967304030" class="btn-action"><i data-lucide="phone"></i> 967 304 030</a></div>
-    </div>
-    <div class="sede-item">
-        <h4>Villarrobledo</h4>
-        <p>C/ Cruz Verde, 4</p>
-        <div class="sede-actions"><a href="tel:967142014" class="btn-action"><i data-lucide="phone"></i> 967 142 014</a></div>
-    </div>
-</div>
-
             
+            <button class="btn-provincia" onclick="toggleSedes('sedesAlbacete')">Albacete <i data-lucide="chevron-down"></i></button>
+            <div id="sedesAlbacete" class="lista-sedes">
+                <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left: 12px; background: #fffafa;">
+                    <h4 style="color: var(--ugt-dark); font-weight: 800;">FeSMC UGT Albacete</h4>
+                    <p>C/ Luis Rosales, 7 - Planta 1</p>
+                    <div class="sede-actions">
+                        <a href="tel:967521850" class="btn-action" style="background: var(--ugt-red); color: white;"><i data-lucide="phone"></i> 967 521 850</a>
+                        <a href="mailto:albacete@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
+                    </div>
+                </div>
+                <div class="sede-item" style="opacity: 0.7; margin-top: 5px;">
+                    <h4 style="font-size: 0.75rem;">UGT Unión Provincial</h4>
+                    <div class="sede-actions"><a href="tel:967215514" class="btn-action"><i data-lucide="phone"></i> 967 215 514</a></div>
+                </div>
+                <div class="sede-item"><h4>Almansa</h4><p>Plaza del Rey D. Jaime I, 7</p></div>
+                <div class="sede-item"><h4>Hellín</h4><p>C/ Juan XXIII, 5</p></div>
+                <div class="sede-item"><h4>Villarrobledo</h4><p>C/ Cruz Verde, 4</p></div>
+            </div>
+
+            <button class="btn-provincia" onclick="toggleSedes('sedesCR')">Ciudad Real <i data-lucide="chevron-down"></i></button>
+            <div id="sedesCR" class="lista-sedes">
+                <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left: 12px; background: #fffafa;">
+                    <h4 style="color: var(--ugt-dark); font-weight: 800;">FeSMC UGT Ciudad Real</h4>
+                    <p>Residencial Ronda Bl. 5 - Semisótano</p>
+                    <div class="sede-actions">
+                        <a href="tel:926253535" class="btn-action" style="background: var(--ugt-red); color: white;"><i data-lucide="phone"></i> 926 25 35 35</a>
+                        <a href="mailto:ciudadreal@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
+                    </div>
+                </div>
+                <div class="sede-item" style="opacity: 0.7; margin-top: 5px;">
+                    <h4 style="font-size: 0.75rem;">UGT Unión Provincial</h4>
+                    <p>C/ Alarcos, 24</p>
+                    <div class="sede-actions"><a href="tel:926214945" class="btn-action"><i data-lucide="phone"></i> 926 214 945</a></div>
+                </div>
+                <div class="sede-item"><h4>Alcázar de S. Juan</h4><p>C/ La Feria, 13</p></div>
+                <div class="sede-item"><h4>Puertollano</h4><p>C/ Juan Bravo, 6</p></div>
+                <div class="sede-item"><h4>Tomelloso</h4><p>C/ Socuéllamos, 98</p></div>
+            </div>
+
             <button class="btn-provincia" onclick="toggleSedes('sedesCuenca')">Cuenca <i data-lucide="chevron-down"></i></button>
             <div id="sedesCuenca" class="lista-sedes">
-                <div class="sede-item"><h4>Cuenca (Provincial)</h4><p>Av. Reyes Católicos, 78</p><div class="sede-actions"><a href="tel:969211213" class="btn-action"><i data-lucide="phone"></i> 969 211 213</a><a href="mailto:ugt@cuenca.ugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a></div></div>
-                <div class="sede-item"><h4>Tarancón</h4><p>C/ Garcilaso de la Vega, 4</p><div class="sede-actions"><a href="tel:969322063" class="btn-action"><i data-lucide="phone"></i> 969 322 063</a></div></div>
+                <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left: 12px; background: #fffafa;">
+                    <h4 style="color: var(--ugt-dark); font-weight: 800;">FeSMC UGT Cuenca</h4>
+                    <p>Avenida Reyes Católicos, 78</p>
+                    <div class="sede-actions">
+                        <a href="tel:969211213" class="btn-action" style="background: var(--ugt-red); color: white;"><i data-lucide="phone"></i> 969 211 213</a>
+                        <a href="mailto:cuenca@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
+                    </div>
+                </div>
+                <div class="sede-item"><h4>Tarancón</h4><p>C/ Garcilaso de la Vega, 4</p></div>
             </div>
-            <button class="btn-provincia" onclick="toggleSedes('sedesGuada')">Guadalajara <i data-lucide="chevron-down"></i></button>
+
+            <button class="btn-provincia" onclick="toggleSedes('sedesGuada')">Guadalajara / Regional <i data-lucide="chevron-down"></i></button>
             <div id="sedesGuada" class="lista-sedes">
-                <div class="sede-item"><h4>Guadalajara (Provincial)</h4><p>Plaza de España, 12</p><div class="sede-actions"><a href="tel:949223980" class="btn-action"><i data-lucide="phone"></i> 949 223 980</a><a href="mailto:ugt@guadalajara.ugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a></div></div>
+                <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left: 12px; background: #fffafa;">
+                    <h4 style="color: var(--ugt-dark); font-weight: 800;">FeSMC UGT CLM (Sede Regional)</h4>
+                    <p>Plaza de España, 12 - 2ª Planta</p>
+                    <div class="sede-actions">
+                        <a href="tel:949223980" class="btn-action" style="background: var(--ugt-red); color: white;"><i data-lucide="phone"></i> 949 223 980</a>
+                        <a href="mailto:castillalamancha@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
+                    </div>
+                </div>
+                <div class="sede-item" style="opacity: 0.7; margin-top: 5px;">
+                    <h4 style="font-size: 0.75rem;">FeSMC UGT Guadalajara</h4>
+                    <div class="sede-actions"><a href="mailto:guadalajara@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email Directo</a></div>
+                </div>
             </div>
+
             <button class="btn-provincia" onclick="toggleSedes('sedesToledo')">Toledo <i data-lucide="chevron-down"></i></button>
             <div id="sedesToledo" class="lista-sedes">
-                <div class="sede-item"><h4>Toledo (Regional)</h4><p>Cuesta de Carlos V, 1</p><div class="sede-actions"><a href="tel:925252518" class="btn-action"><i data-lucide="phone"></i> 925 252 518</a><a href="mailto:ugt@clmancha.ugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a></div></div>
-                <div class="sede-item"><h4>Talavera</h4><p>C/ Mesones, 38</p><div class="sede-actions"><a href="tel:925813300" class="btn-action"><i data-lucide="phone"></i> 925 813 300</a></div></div>
+                <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left: 12px; background: #fffafa;">
+                    <h4 style="color: var(--ugt-dark); font-weight: 800;">FeSMC UGT Toledo</h4>
+                    <p>Cuesta de Carlos V, 1 - 1º Izq.</p>
+                    <div class="sede-actions">
+                        <a href="tel:949223980" class="btn-action" style="background: var(--ugt-red); color: white;"><i data-lucide="phone"></i> 949 223 980</a>
+                        <a href="mailto:toledo@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
+                    </div>
+                </div>
+                <div class="sede-item" style="opacity: 0.7; margin-top: 5px;">
+                    <h4 style="font-size: 0.75rem;">UGT Unión Regional</h4>
+                    <div class="sede-actions"><a href="tel:925252518" class="btn-action"><i data-lucide="phone"></i> 925 252 518</a></div>
+                </div>
+                <div class="sede-item"><h4>Talavera</h4><p>C/ Mesones, 38</p></div>
                 <div class="sede-item"><h4>Ocaña</h4><p>C/ La Mata, 5</p></div>
             </div>
+
             <a href="javascript:void(0)" onclick="closeModal('modalSedes')" class="btn-close">Cerrar</a>
         </div>
     </div>
@@ -125,7 +158,7 @@
     <div id="modalCalculadoras" class="modal-overlay" onclick="closeModalExterno(event, 'modalCalculadoras')">
         <div class="modal-content">
             <h2><i data-lucide="calculator"></i> Calculadoras</h2>
-            <div class="legal-notice"><i data-lucide="alert-triangle"></i><p>AVISO: Cálculos orientativos. La ley o tu Convenio podrían variar los resultados. Contacta con UGT para un estudio oficial.</p></div>
+            <div class="legal-notice"><i data-lucide="alert-triangle"></i><p>AVISO: Cálculos orientativos. Contacta con UGT para un estudio oficial.</p></div>
             <div class="sector-list">
                 <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/calculadora-vacaciones" class="btn-sector" target="_blank"><i data-lucide="calendar"></i> Vacaciones</a>
                 <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/despido" class="btn-sector" target="_blank"><i data-lucide="gavel"></i> Despido</a>
@@ -137,10 +170,9 @@
     <div id="modalModelos" class="modal-overlay" onclick="closeModalExterno(event, 'modalModelos')">
         <div class="modal-content">
             <h2><i data-lucide="file-text"></i> Modelos y Escritos</h2>
-            <div class="legal-notice"><i data-lucide="shield-alert"></i><p>IMPORTANTE: Estas plantillas son referencias. Su uso incorrecto puede conllevar pérdida de derechos. Recomendamos supervisión sindical.</p></div>
+            <div class="legal-notice"><i data-lucide="shield-alert"></i><p>IMPORTANTE: Estas plantillas son referencias. Recomendamos supervisión sindical.</p></div>
             <div class="sector-list">
                 <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos" class="btn-sector" target="_blank"><i data-lucide="files"></i> Ver todos los modelos</a>
-                <a href="https://e.pcloud.link/publink/show?code=kZqvpdZFdLEdibwWjbbbDBeo4oHqhnTbdNV" class="btn-sector" target="_blank"><i data-lucide="graduation-cap"></i> Permiso Formación</a>
             </div>
             <a href="javascript:void(0)" onclick="closeModal('modalModelos')" class="btn-close">Volver</a>
         </div>
@@ -156,7 +188,6 @@
                 <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=carreteras-urbanos-y-logistica#search-form-documentos" class="btn-sector" target="_blank"><i data-lucide="truck"></i> Transportes</a>
                 <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=limpieza#search-form-documentos" class="btn-sector" target="_blank"><i data-lucide="sparkles"></i> Limpieza</a>
                 <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha" class="btn-sector" target="_blank"><i data-lucide="plus-circle"></i> Otros Sectores CLM</a>
-                
                 <div class="sector-label">Nacional / Estatal</div>
                 <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=estatal#search-form-documentos" class="btn-sector" style="border-color:var(--ugt-red)" target="_blank"><i data-lucide="landmark"></i> Convenios Estatales</a>
             </div>
@@ -167,10 +198,10 @@
     <div id="modalRegistra" class="modal-overlay" onclick="closeModalExterno(event, 'modalRegistra')">
         <div class="modal-content">
             <h2>UGT Registra</h2>
-            <p>Registra tu jornada de forma segura:</p>
+            <p>Control de jornada seguro:</p>
             <ul>
-                <li>Control de entradas, salidas y descansos.</li>
-                <li>Generación de informes para la empresa/inspección.</li>
+                <li>Entradas, salidas y descansos.</li>
+                <li>Informes para inspección.</li>
             </ul>
             <div class="modal-actions"><a href="#" id="link-registra-final" class="btn-modal btn-primary" target="_blank">Descargar Aplicación</a></div>
             <a href="javascript:void(0)" onclick="closeModal('modalRegistra')" class="btn-close">Volver</a>
@@ -180,10 +211,10 @@
     <div id="modalAfiliado" class="modal-overlay" onclick="closeModalExterno(event, 'modalAfiliado')">
         <div class="modal-content">
             <h2>App del Afiliado</h2>
-            <p>Acceso exclusivo para afiliados. Requiere claves enviadas a tu email oficial por seguridad (GDPR).</p>
+            <p>Acceso exclusivo. Requiere claves oficiales (GDPR).</p>
             <div class="modal-actions">
                 <a href="https://www.ugt.es/ugt-app" class="btn-modal btn-primary" target="_blank">Solicitar mis Claves</a>
-                <a href="#" id="link-afiliado-final" class="btn-modal btn-secondary" target="_blank">Ya tengo claves, descargar</a>
+                <a href="#" id="link-afiliado-final" class="btn-modal btn-secondary" target="_blank">Ya tengo claves</a>
             </div>
             <a href="javascript:void(0)" onclick="closeModal('modalAfiliado')" class="btn-close">Cerrar</a>
         </div>
