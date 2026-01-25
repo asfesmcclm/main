@@ -1,7 +1,7 @@
-// 1. Inicializar Iconos de Lucide
+// 1. Inicializar Iconos
 lucide.createIcons();
 
-// 2. Funciones para Modales (Abrir y Cerrar)
+// 2. Función para abrir modales
 function openModal(id) {
     const modal = document.getElementById(id);
     if (modal) {
@@ -10,6 +10,7 @@ function openModal(id) {
     }
 }
 
+// 3. Función para cerrar modales
 function closeModal(id) {
     const modal = document.getElementById(id);
     if (modal) {
@@ -18,45 +19,48 @@ function closeModal(id) {
     }
 }
 
-// 3. Cerrar modales al hacer clic fuera del recuadro blanco
+// 4. Cerrar al pulsar fuera del contenido
 function closeModalExterno(event, id) {
     if (event.target.id === id) {
         closeModal(id);
     }
 }
 
-// 4. Control de Acordeón de Sedes (Abrir una y cerrar las otras)
+// 5. FUNCIÓN DE LAS SEDES (La que hace que se desplieguen)
 function toggleSedes(id) {
     const lista = document.getElementById(id);
-    const todas = document.querySelectorAll('.lista-sedes');
-    
-    todas.forEach(s => {
-        if (s.id !== id) s.classList.remove('active');
-    });
+    if (lista) {
+        // Buscamos todas las listas de sedes para cerrar las que estén abiertas
+        const todas = document.querySelectorAll('.lista-sedes');
+        todas.forEach(s => {
+            if (s.id !== id) {
+                s.classList.remove('active');
+                s.style.display = 'none'; // Asegura que se oculten
+            }
+        });
 
-    lista.classList.toggle('active');
+        // Alternamos la que hemos pulsado
+        if (lista.style.display === 'block') {
+            lista.style.display = 'none';
+            lista.classList.remove('active');
+        } else {
+            lista.style.display = 'block';
+            lista.classList.add('active');
+        }
+    }
 }
 
-// 5. Enlaces Inteligentes para las Apps (Detectar sistema operativo)
+// 6. Enlaces inteligentes para Apps
 function setupAppLinks() {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    
-    // Enlace UGT Registra
     const linkRegistra = document.getElementById('link-registra-final');
     if(linkRegistra) {
-        linkRegistra.href = isIOS 
-            ? "https://apps.apple.com/es/app/ugt-registra/id1465851456" 
-            : "https://play.google.com/store/apps/details?id=org.ugt.ugtregistra";
+        linkRegistra.href = isIOS ? "https://apps.apple.com/es/app/ugt-registra/id1465851456" : "https://play.google.com/store/apps/details?id=org.ugt.ugtregistra";
     }
-
-    // Enlace App Afiliado
     const linkAfiliado = document.getElementById('link-afiliado-final');
     if(linkAfiliado) {
-        linkAfiliado.href = isIOS 
-            ? "https://apps.apple.com/es/app/ugt-app/id1440223785" 
-            : "https://play.google.com/store/apps/details?id=com.ugt.afiliados";
+        linkAfiliado.href = isIOS ? "https://apps.apple.com/es/app/ugt-app/id1440223785" : "https://play.google.com/store/apps/details?id=com.ugt.afiliados";
     }
 }
 
-// Ejecutar al cargar la página
 window.onload = setupAppLinks;
