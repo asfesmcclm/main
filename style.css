@@ -166,83 +166,59 @@ header {
 
 
 /* =========================================
-   7. SEDES Y CONVENIOS (Corregido)
+   7. SEDES Y CONVENIOS (Corregido Ancho Completo)
    ========================================= */
 
-/* Oculta las listas de sedes por defecto */
-.lista-sedes {
-    display: none; 
-    padding: 10px 5px;
-    background: #f9f9f9;
-    border-radius: 0 0 12px 12px;
-    margin-top: -10px; /* Une la lista al botón de la provincia */
-    margin-bottom: 15px;
+/* Forzamos a que el modal trate a los elementos como una lista vertical */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
+/* Los botones de provincia ahora ocupan TODO el ancho disponible */
+.btn-provincia {
+    display: flex;             /* Para alinear texto y flecha */
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;               /* CLAVE: Ocupa todo el ancho */
+    padding: 16px;             /* Un poco más de aire */
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+    margin-bottom: 5px;        /* Separación entre botones */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+/* La lista desplegable también debe ocupar todo el ancho */
+.lista-sedes {
+    display: none; 
+    width: 100%;               /* CLAVE: Ocupa todo el ancho */
+    padding: 5px 0;            /* Espaciado interno */
+}
+
+/* Las tarjetas de cada sede dentro de la lista */
 .sede-item {
     background: white;
     padding: 15px;
     border-radius: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;       /* Separación entre sedes de la misma provincia */
     border: 1px solid #eee;
-    border-left: 4px solid #ccc; /* Borde gris por defecto */
+    border-left: 4px solid #ccc; 
+    width: 100%;               /* Aseguramos ancho completo */
 }
 
-/* Resaltado para la sede principal de cada provincia */
-.sede-item[style*="border-left: 4px solid var(--ugt-red)"] {
-    border-left: 4px solid var(--ugt-red) !important;
-}
-
-.sede-item h4 {
-    font-size: 1rem;
-    margin-bottom: 5px;
-}
-
-.sede-item p {
-    font-size: 0.85rem;
-    color: #666;
-    margin-bottom: 10px;
-}
-
-.btn-action {
-    flex: 1;
+/* El contenedor de botones de acción (Llamar/Email) */
+.sede-actions {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 10px;
-    border-radius: 8px;
-    background: #f1f3f5;
-    color: #333;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.85rem;
+    gap: 10px;
+    margin-top: 12px;
+    width: 100%;
 }
-
-.btn-sector {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: white;
-    padding: 12px;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    text-decoration: none;
-    color: #333;
-    margin-bottom: 8px;
-}
-
-.legal-notice {
-    background: #fff9db;
-    border: 1px solid #ffe066;
-    padding: 12px;
-    border-radius: 10px;
-    font-size: 0.8rem;
-    color: #856404;
-    margin-bottom: 15px;
-}
-
-
 /* =========================================
    8. MENÚ INFERIOR (Tus clases: .bottom-nav y .nav-item)
    ========================================= */
