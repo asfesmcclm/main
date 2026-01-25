@@ -231,5 +231,39 @@
 
     <script src="script.js"></script>
     <script>lucide.createIcons();</script>
+
+<div id="modalRegistra" class="modal-overlay" onclick="closeModalExterno(event, 'modalRegistra')">
+        <div class="modal-content">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="img/registra.png" style="width: 80px; height: 80px; object-fit: contain; border-radius: 15px;">
+                <h2 style="margin-top: 10px;">UGT Registra</h2>
+            </div>
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px; text-align: center;">Aplicación oficial para el registro de jornada laboral de UGT.</p>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <a href="https://registra.ugt.es/" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; background: #f1f3f5; color: #333; text-decoration: none; border-radius: 12px; font-weight: bold; border: 1px solid #ddd;">
+                    <i data-lucide="external-link"></i> Abrir en el Navegador
+                </a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalRegistra')" class="btn-close">Cerrar</a>
+        </div>
+    </div>
+
+    <div id="modalAfiliado" class="modal-overlay" onclick="closeModalExterno(event, 'modalAfiliado')">
+        <div class="modal-content">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="img/ugtapp.png" style="width: 80px; height: 80px; object-fit: contain; border-radius: 15px;">
+                <h2 style="margin-top: 10px;">App del Afiliado</h2>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <a href="https://vnd.fscugt.es/claves" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; background: #f1f3f5; color: #333; text-decoration: none; border-radius: 12px; font-weight: bold; border: 1px solid #ddd;">
+                    <i data-lucide="key"></i> Solicitar Claves
+                </a>
+                <a href="https://vnd.fscugt.es/" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; background: var(--ugt-red); color: white; text-decoration: none; border-radius: 12px; font-weight: bold;">
+                    <i data-lucide="user"></i> Acceder a mi área
+                </a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalAfiliado')" class="btn-close" style="margin-top: 15px;">Cerrar</a>
+        </div>
+    </div>    
 </body>
 </html>
