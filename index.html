@@ -107,79 +107,126 @@
         </div>
     </div>
 
-    <div id="modalSedes" class="modal-overlay" onclick="closeModalExterno(event, 'modalSedes')">
-        <div class="modal-content">
-            <h2><i data-lucide="map-pin"></i> Sedes UGT CLM</h2>
-            
-            <button class="btn-provincia" onclick="toggleSedes('sedesAlbacete')">Albacete <i data-lucide="chevron-down"></i></button>
-            <div id="sedesAlbacete" class="lista-sedes">
-                <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left:10px;">
-                    <h4 style="color:var(--ugt-red)">FeSMC UGT Albacete</h4>
-                    <p>C/ Luis Rosales, 7 - Planta 1</p>
-                    <div class="sede-actions">
-                        <a href="tel:967521850" class="btn-action" style="background:var(--ugt-red);color:white"><i data-lucide="phone"></i> 967 521 850</a>
-                        <a href="mailto:albacete@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
-                    </div>
-                </div>
-                <div class="sede-item"><h4>Almansa</h4><p>Plaza del Rey D. Jaime I, 7</p><div class="sede-actions"><a href="tel:967342954" class="btn-action"><i data-lucide="phone"></i> 967 342 954</a></div></div>
-                <div class="sede-item"><h4>Hellín</h4><p>C/ Juan XXIII, 5</p><div class="sede-actions"><a href="tel:967304030" class="btn-action"><i data-lucide="phone"></i> 967 304 030</a></div></div>
-                <div class="sede-item"><h4>Villarrobledo</h4><p>C/ Cruz Verde, 4</p><div class="sede-actions"><a href="tel:967142014" class="btn-action"><i data-lucide="phone"></i> 967 142 014</a></div></div>
-            </div>
 
-            <button class="btn-provincia" onclick="toggleSedes('sedesCR')">Ciudad Real <i data-lucide="chevron-down"></i></button>
-            <div id="sedesCR" class="lista-sedes">
-                <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left:10px;">
-                    <h4 style="color:var(--ugt-red)">FeSMC UGT Ciudad Real</h4>
-                    <p>Residencial Ronda Bl. 5 - Semisótano</p>
-                    <div class="sede-actions">
-                        <a href="tel:926253535" class="btn-action" style="background:var(--ugt-red);color:white"><i data-lucide="phone"></i> 926 25 35 35</a>
-                        <a href="mailto:ciudadreal@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
-                    </div>
-                </div>
-                <div class="sede-item"><h4>Alcázar de S. Juan</h4><p>C/ La Feria, 13</p><div class="sede-actions"><a href="tel:926546123" class="btn-action"><i data-lucide="phone"></i> 926 546 123</a></div></div>
-                <div class="sede-item"><h4>Manzanares</h4><p>C/ Molinos de Viento, 1</p><div class="sede-actions"><a href="tel:926611762" class="btn-action"><i data-lucide="phone"></i> 926 611 762</a></div></div>
-                <div class="sede-item"><h4>Puertollano</h4><p>C/ Juan Bravo, 6</p><div class="sede-actions"><a href="tel:926425728" class="btn-action"><i data-lucide="phone"></i> 926 425 728</a></div></div>
-                <div class="sede-item"><h4>Tomelloso</h4><p>C/ Socuéllamos, 98</p><div class="sede-actions"><a href="tel:667767769" class="btn-action"><i data-lucide="phone"></i> 667 767 769</a></div></div>
-            </div>
 
-            <button class="btn-provincia" onclick="toggleSedes('sedesCuenca')">Cuenca <i data-lucide="chevron-down"></i></button>
-            <div id="sedesCuenca" class="lista-sedes">
-                <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left:10px;">
-                    <h4 style="color:var(--ugt-red)">FeSMC UGT Cuenca</h4>
-                    <div class="sede-actions">
-                        <a href="tel:969211213" class="btn-action" style="background:var(--ugt-red);color:white"><i data-lucide="phone"></i> 969 211 213</a>
-                        <a href="mailto:cuenca@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
-                    </div>
-                </div>
-                <div class="sede-item"><h4>Tarancón</h4><p>C/ Garcilaso de la Vega, local 4</p><div class="sede-actions"><a href="tel:969322063" class="btn-action"><i data-lucide="phone"></i> 969 322 063</a></div></div>
-            </div>
-
-            <button class="btn-provincia" onclick="toggleSedes('sedesGuada')">Guadalajara <i data-lucide="chevron-down"></i></button>
-            <div id="sedesGuada" class="lista-sedes">
-                <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left:10px;">
-                    <h4 style="color:var(--ugt-red)">FeSMC UGT CLM (Regional)</h4>
-                    <div class="sede-actions">
-                        <a href="tel:949223980" class="btn-action" style="background:var(--ugt-red);color:white"><i data-lucide="phone"></i> 949 223 980</a>
-                        <a href="mailto:castillalamancha@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
-                    </div>
+<div id="modalSedes" class="modal-overlay" onclick="closeModalExterno(event, 'modalSedes')">
+    <div class="modal-content">
+        <h2><i data-lucide="map-pin"></i> Sedes UGT CLM</h2>
+        
+        <button class="btn-provincia" onclick="toggleSedes('sedesAlbacete')">Albacete <i data-lucide="chevron-down"></i></button>
+        <div id="sedesAlbacete" class="lista-sedes">
+            <div class="sede-item" style="border-left: 4px solid #666; padding-left:10px; margin-bottom:15px; background:#f9f9f9;">
+                <h4 style="color:#333">UGT Unión Provincial Albacete</h4>
+                <p>C/ Luis Rosales, 7</p>
+                <div class="sede-actions">
+                    <a href="tel:967215514" class="btn-action"><i data-lucide="phone"></i> 967 215 514</a>
+                    <a href="mailto:ugt@albacete.ugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
                 </div>
             </div>
-
-            <button class="btn-provincia" onclick="toggleSedes('sedesToledo')">Toledo <i data-lucide="chevron-down"></i></button>
-            <div id="sedesToledo" class="lista-sedes">
-                <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left:10px;">
-                    <h4 style="color:var(--ugt-red)">FeSMC UGT Toledo</h4>
-                    <div class="sede-actions">
-                        <a href="tel:925252518" class="btn-action" style="background:var(--ugt-red);color:white"><i data-lucide="phone"></i> 925 252 518</a>
-                        <a href="mailto:toledo@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
-                    </div>
+            <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left:10px;">
+                <h4 style="color:var(--ugt-red)">FeSMC UGT Albacete</h4>
+                <p>C/ Luis Rosales, 7 - Planta 1</p>
+                <div class="sede-actions">
+                    <a href="tel:967521850" class="btn-action" style="background:var(--ugt-red);color:white"><i data-lucide="phone"></i> 967 521 850</a>
+                    <a href="mailto:albacete@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
                 </div>
-                <div class="sede-item"><h4>Talavera de la Reina</h4><p>C/ Mesones, 38</p><div class="sede-actions"><a href="tel:925813300" class="btn-action"><i data-lucide="phone"></i> 925 813 300</a></div></div>
             </div>
-            <a href="javascript:void(0)" onclick="closeModal('modalSedes')" class="btn-close">Cerrar</a>
+            <div class="sede-item"><h4>Almansa</h4><p>Plaza del Rey D. Jaime I, 7</p><div class="sede-actions"><a href="tel:967342954" class="btn-action"><i data-lucide="phone"></i> 967 342 954</a></div></div>
+            <div class="sede-item"><h4>Hellín</h4><p>C/ Juan XXIII, 5</p><div class="sede-actions"><a href="tel:967304030" class="btn-action"><i data-lucide="phone"></i> 967 304 030</a></div></div>
+            <div class="sede-item"><h4>Villarrobledo</h4><p>C/ Cruz Verde, 4</p><div class="sede-actions"><a href="tel:967142014" class="btn-action"><i data-lucide="phone"></i> 967 142 014</a></div></div>
         </div>
-    </div>
 
+        <button class="btn-provincia" onclick="toggleSedes('sedesCR')">Ciudad Real <i data-lucide="chevron-down"></i></button>
+        <div id="sedesCR" class="lista-sedes">
+            <div class="sede-item" style="border-left: 4px solid #666; padding-left:10px; margin-bottom:15px; background:#f9f9f9;">
+                <h4 style="color:#333">UGT Unión Provincial Ciudad Real</h4>
+                <p>C/ Alarcos, 24</p>
+                <div class="sede-actions">
+                    <a href="tel:926214945" class="btn-action"><i data-lucide="phone"></i> 926 214 945</a>
+                    <a href="mailto:ugt@ciudadreal.ugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
+                </div>
+            </div>
+            <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left:10px;">
+                <h4 style="color:var(--ugt-red)">FeSMC UGT Ciudad Real</h4>
+                <p>Residencial Ronda Bl. 5 - Semisótano</p>
+                <div class="sede-actions">
+                    <a href="tel:926253535" class="btn-action" style="background:var(--ugt-red);color:white"><i data-lucide="phone"></i> 926 25 35 35</a>
+                    <a href="mailto:ciudadreal@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
+                </div>
+            </div>
+            <div class="sede-item"><h4>Alcázar de S. Juan</h4><p>C/ La Feria, 13</p><div class="sede-actions"><a href="tel:926546123" class="btn-action"><i data-lucide="phone"></i> 926 546 123</a></div></div>
+            <div class="sede-item"><h4>Manzanares</h4><p>C/ Molinos de Viento, 1</p><div class="sede-actions"><a href="tel:926611762" class="btn-action"><i data-lucide="phone"></i> 926 611 762</a></div></div>
+            <div class="sede-item"><h4>Puertollano</h4><p>C/ Juan Bravo, 6</p><div class="sede-actions"><a href="tel:926425728" class="btn-action"><i data-lucide="phone"></i> 926 425 728</a></div></div>
+            <div class="sede-item"><h4>Socuéllamos</h4><p>C/ de la Feria, 10</p></div>
+            <div class="sede-item"><h4>Tomelloso</h4><p>C/ Socuéllamos, 98</p><div class="sede-actions"><a href="tel:667767769" class="btn-action"><i data-lucide="phone"></i> 667 767 769</a></div></div>
+            <div class="sede-item"><h4>Valdepeñas</h4><p>C/ Unión 33, primero</p></div>
+        </div>
+
+        <button class="btn-provincia" onclick="toggleSedes('sedesCuenca')">Cuenca <i data-lucide="chevron-down"></i></button>
+        <div id="sedesCuenca" class="lista-sedes">
+            <div class="sede-item" style="border-left: 4px solid #666; padding-left:10px; margin-bottom:15px; background:#f9f9f9;">
+                <h4 style="color:#333">UGT Unión Provincial Cuenca</h4>
+                <p>Avenida Reyes Católicos, 78</p>
+                <div class="sede-actions">
+                    <a href="tel:969211213" class="btn-action"><i data-lucide="phone"></i> 969 211 213</a>
+                    <a href="mailto:ugt@cuenca.ugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
+                </div>
+            </div>
+            <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left:10px;">
+                <h4 style="color:var(--ugt-red)">FeSMC UGT Cuenca</h4>
+                <div class="sede-actions">
+                    <a href="tel:969211213" class="btn-action" style="background:var(--ugt-red);color:white"><i data-lucide="phone"></i> 969 211 213</a>
+                    <a href="mailto:cuenca@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
+                </div>
+            </div>
+            <div class="sede-item"><h4>Tarancón</h4><p>C/ Garcilaso de la Vega, local 4</p><div class="sede-actions"><a href="tel:969322063" class="btn-action"><i data-lucide="phone"></i> 969 322 063</a></div></div>
+        </div>
+
+        <button class="btn-provincia" onclick="toggleSedes('sedesGuada')">Guadalajara <i data-lucide="chevron-down"></i></button>
+        <div id="sedesGuada" class="lista-sedes">
+            <div class="sede-item" style="border-left: 4px solid #666; padding-left:10px; margin-bottom:15px; background:#f9f9f9;">
+                <h4 style="color:#333">UGT Unión Provincial Guadalajara</h4>
+                <p>Plaza de España, 12</p>
+                <div class="sede-actions">
+                    <a href="tel:949223980" class="btn-action"><i data-lucide="phone"></i> 949 223 980</a>
+                    <a href="mailto:ugt@guadalajara.ugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
+                </div>
+            </div>
+            <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left:10px;">
+                <h4 style="color:var(--ugt-red)">FeSMC UGT CLM (Sede Regional)</h4>
+                <div class="sede-actions">
+                    <a href="tel:949223980" class="btn-action" style="background:var(--ugt-red);color:white"><i data-lucide="phone"></i> 949 223 980</a>
+                    <a href="mailto:castillalamancha@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-provincia" onclick="toggleSedes('sedesToledo')">Toledo <i data-lucide="chevron-down"></i></button>
+        <div id="sedesToledo" class="lista-sedes">
+            <div class="sede-item" style="border-left: 4px solid #666; padding-left:10px; margin-bottom:15px; background:#f9f9f9;">
+                <h4 style="color:#333">UGT Unión Provincial Toledo</h4>
+                <p>Cuesta de Carlos V, 1</p>
+                <div class="sede-actions">
+                    <a href="tel:925252518" class="btn-action"><i data-lucide="phone"></i> 925 252 518</a>
+                    <a href="mailto:ugt@clmancha.ugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
+                </div>
+            </div>
+            <div class="sede-item" style="border-left: 4px solid var(--ugt-red); padding-left:10px;">
+                <h4 style="color:var(--ugt-red)">FeSMC UGT Toledo</h4>
+                <div class="sede-actions">
+                    <a href="tel:925252518" class="btn-action" style="background:var(--ugt-red);color:white"><i data-lucide="phone"></i> 925 252 518</a>
+                    <a href="mailto:toledo@fesmcugt.org" class="btn-action"><i data-lucide="mail"></i> Email</a>
+                </div>
+            </div>
+            <div class="sede-item"><h4>Talavera de la Reina</h4><p>C/ Mesones, 38</p><div class="sede-actions"><a href="tel:925813300" class="btn-action"><i data-lucide="phone"></i> 925 813 300</a></div></div>
+            <div class="sede-item"><h4>Ocaña</h4><p>C/ La Mata, 5</p></div>
+        </div>
+
+        <a href="javascript:void(0)" onclick="closeModal('modalSedes')" class="btn-close">Cerrar</a>
+    </div>
+</div>
+
+    
     <div id="modalCalculadoras" class="modal-overlay" onclick="closeModalExterno(event, 'modalCalculadoras')">
         <div class="modal-content">
             <h2><i data-lucide="calculator"></i> Calculadoras</h2>
