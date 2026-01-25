@@ -78,3 +78,21 @@ header { background: var(--white); padding: 1.2rem; text-align: center; position
 footer { padding: 2rem 1.5rem; text-align: center; opacity: 0.5; font-size: 0.75rem; }
 
 @media (min-width: 600px) { .grid { grid-template-columns: repeat(3, 1fr); } .modal-content { border-radius: 20px; } }
+
+
+/* Estilo para los botones de noticias/novedades */
+.sector-list .btn-sector div {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.sector-list .btn-sector strong {
+    font-size: 0.95rem;
+    color: var(--ugt-dark);
+}
+
+.sector-list .btn-sector small {
+    font-size: 0.75rem;
+    color: #666;
+}
