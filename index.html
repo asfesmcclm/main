@@ -247,6 +247,20 @@
             <a href="javascript:void(0)" onclick="closeModal('modalRegistra')" class="btn-close">Cerrar</a>
         </div>
     </div>
+  <div id="modalRegistra" class="modal-overlay" onclick="closeModalExterno(event, 'modalRegistra')">
+        <div class="modal-content">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="img/registra.png" style="width: 80px; height: 80px; object-fit: contain; border-radius: 15px;">
+                <h2 style="margin-top: 10px;">UGT Registra</h2>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <a href="javascript:void(0)" onclick="openApp('registra')" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; background: var(--ugt-red); color: white; text-decoration: none; border-radius: 12px; font-weight: bold;">
+                    <i data-lucide="download"></i> Descargar / Abrir App
+                </a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalRegistra')" class="btn-close">Cerrar</a>
+        </div>
+    </div>
 
     <div id="modalAfiliado" class="modal-overlay" onclick="closeModalExterno(event, 'modalAfiliado')">
         <div class="modal-content">
@@ -254,16 +268,26 @@
                 <img src="img/ugtapp.png" style="width: 80px; height: 80px; object-fit: contain; border-radius: 15px;">
                 <h2 style="margin-top: 10px;">App del Afiliado</h2>
             </div>
+            
+            <div style="background: #fff3cd; color: #856404; padding: 12px; border-radius: 10px; font-size: 0.85rem; margin-bottom: 15px; border: 1px solid #ffeeba; display: flex; gap: 10px; align-items: flex-start;">
+                <i data-lucide="alert-circle" style="flex-shrink: 0; width: 18px;"></i>
+                <p style="margin: 0;"><strong>Atención:</strong> Para acceder necesitas claves. Si no las tienes, solicítalas antes de descargar.</p>
+            </div>
+
             <div style="display: flex; flex-direction: column; gap: 12px;">
-                <a href="https://vnd.fscugt.es/claves" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; background: #f1f3f5; color: #333; text-decoration: none; border-radius: 12px; font-weight: bold; border: 1px solid #ddd;">
+                <a href="https://vnd.ugt.org/claves" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; background: #f1f3f5; color: #333; text-decoration: none; border-radius: 12px; font-weight: bold; border: 1px solid #ddd;">
                     <i data-lucide="key"></i> Solicitar Claves
                 </a>
-                <a href="https://vnd.fscugt.es/" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; background: var(--ugt-red); color: white; text-decoration: none; border-radius: 12px; font-weight: bold;">
-                    <i data-lucide="user"></i> Acceder a mi área
+                <a href="javascript:void(0)" onclick="openApp('afiliado')" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; background: var(--ugt-red); color: white; text-decoration: none; border-radius: 12px; font-weight: bold;">
+                    <i data-lucide="download"></i> Descargar / Abrir App
                 </a>
             </div>
             <a href="javascript:void(0)" onclick="closeModal('modalAfiliado')" class="btn-close" style="margin-top: 15px;">Cerrar</a>
         </div>
-    </div>    
+    </div>
+
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>
+
