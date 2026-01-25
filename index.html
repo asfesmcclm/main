@@ -41,31 +41,33 @@
         .card { background: var(--white); padding: 1.2rem; border-radius: var(--radius); text-decoration: none; color: var(--ugt-dark); display: flex; flex-direction: column; align-items: flex-start; box-shadow: var(--shadow); transition: all 0.2s ease; border: 1px solid rgba(0,0,0,0.02); cursor: pointer; }
         .card:active { transform: scale(0.96); background-color: #f9f9f9; }
         
-        /* Iconos Lucide */
         .card i { color: var(--ugt-red); margin-bottom: 0.8rem; background: #fff0f1; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; }
-        
-        /* Estilo para las Imágenes de las Apps */
-        .app-img { width: 50px; height: 50px; border-radius: 12px; margin-bottom: 0.8rem; object-fit: cover; box-shadow: 0 2px 6px rgba(0,0,0,0.1); border: 1px solid #eee; }
-
+        .app-img { width: 50px; height: 50px; border-radius: 12px; margin-bottom: 0.8rem; object-fit: cover; border: 1px solid #eee; }
         .card-content h3 { font-size: 0.85rem; font-weight: 700; line-height: 1.2; margin-bottom: 0.3rem; }
         .card-content p { font-size: 0.75rem; color: #777; }
 
-        /* SOCIAL BAR */
         .social-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
         .social-card { background: var(--white); padding: 1rem; border-radius: var(--radius); text-align: center; text-decoration: none; color: var(--ugt-dark); box-shadow: var(--shadow); display: flex; justify-content: center; align-items: center; }
 
         /* MODALES */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: flex-end; z-index: 3000; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; justify-content: center; align-items: flex-end; z-index: 3000; }
         .modal-content { background: var(--white); width: 100%; max-width: 500px; padding: 2rem; border-radius: 30px 30px 0 0; animation: slideUp 0.3s ease-out; max-height: 90vh; overflow-y: auto; }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        
         .modal-content h2 { font-size: 1.2rem; color: var(--ugt-red); margin-bottom: 1rem; }
-        .modal-content p { font-size: 0.9rem; color: #444; margin-bottom: 0.8rem; }
-        .modal-content ul { font-size: 0.85rem; color: #555; margin-left: 1.2rem; margin-bottom: 1rem; }
+        .modal-content p { font-size: 0.9rem; color: #666; margin-bottom: 1.5rem; }
+        
+        /* Botones de sectores dentro del modal convenios */
+        .sector-list { display: flex; flex-direction: column; gap: 0.6rem; }
+        .btn-sector { display: flex; align-items: center; padding: 1rem; background: #f8f9fa; border-radius: 14px; text-decoration: none; color: var(--ugt-dark); font-weight: 600; font-size: 0.9rem; border: 1px solid #eee; transition: background 0.2s; }
+        .btn-sector:active { background: #eee; }
+        .btn-sector i { margin-right: 12px; color: var(--ugt-red); }
+
         .modal-actions { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.5rem; }
-        .btn-modal { padding: 1rem; border-radius: 12px; text-align: center; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; }
+        .btn-modal { padding: 1rem; border-radius: 12px; text-align: center; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: none; }
         .btn-primary { background: var(--ugt-red); color: white; }
         .btn-secondary { background: #eee; color: var(--ugt-dark); }
-        .btn-close { color: #888; font-size: 0.8rem; margin-top: 1rem; display: block; text-align: center; text-decoration: none; }
+        .btn-close { color: #888; font-size: 0.8rem; margin-top: 1.5rem; display: block; text-align: center; text-decoration: none; }
 
         /* BOTTOM NAVIGATION */
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 0.8rem 0 calc(0.8rem + env(safe-area-inset-bottom)); border-top: 1px solid rgba(0,0,0,0.05); z-index: 2000; }
@@ -120,26 +122,20 @@
         <div class="grid">
             <div class="card" onclick="openModal('modalRegistra')">
                 <img src="img/registra.png" class="app-img" alt="UGT Registra">
-                <div class="card-content">
-                    <h3>UGT Registra</h3>
-                    <p>Control jornada</p>
-                </div>
+                <div class="card-content"><h3>UGT Registra</h3><p>Control jornada</p></div>
             </div>
             <div class="card" onclick="openModal('modalAfiliado')">
                 <img src="img/ugtapp.png" class="app-img" alt="UGT App">
-                <div class="card-content">
-                    <h3>App del Afiliado</h3>
-                    <p>Gestión personal</p>
-                </div>
+                <div class="card-content"><h3>App del Afiliado</h3><p>Gestión personal</p></div>
             </div>
         </div>
 
         <h2 class="section-title">Información</h2>
         <div class="grid">
-            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha" class="card">
+            <div class="card" onclick="openModal('modalConvenios')">
                 <i data-lucide="book-open"></i>
                 <div class="card-content"><h3>Convenios CLM</h3><p>Consulta tu sector</p></div>
-            </a>
+            </div>
             <a href="https://www.ugtclm.es/" class="card">
                 <i data-lucide="globe"></i>
                 <div class="card-content"><h3>Web Oficial</h3><p>UGT CLM Online</p></div>
@@ -154,25 +150,54 @@
             <p>Herramienta para el registro sencillo de la jornada laboral.</p>
             <ul>
                 <li>Registro de jornadas y descansos.</li>
-                <li>Generación de informes.</li>
-                <li>Exportación de datos de jornada.</li>
+                <li>Generación de informes y exportación.</li>
             </ul>
             <div class="modal-actions">
                 <a href="#" id="link-registra-final" class="btn-modal btn-primary" target="_blank">Descargar Aplicación</a>
             </div>
-            <a href="javascript:void(0)" onclick="closeModal('modalRegistra')" class="btn-close">Volver atrás</a>
+            <a href="javascript:void(0)" onclick="closeModal('modalRegistra')" class="btn-close">Cerrar</a>
         </div>
     </div>
 
     <div id="modalAfiliado" class="modal-overlay" onclick="closeModalExterno(event, 'modalAfiliado')">
         <div class="modal-content">
             <h2>Acceso a UGT App</h2>
-            <p>Uso exclusivo para afiliados. Requiere claves enviadas por correo electrónico según normativa GDPR.</p>
+            <p>Exclusivo para afiliados. Requiere claves enviadas por correo electrónico (GDPR).</p>
             <div class="modal-actions">
                 <a href="https://www.ugt.es/ugt-app" class="btn-modal btn-primary" target="_blank">Solicitar Credenciales</a>
                 <a href="#" id="link-afiliado-final" class="btn-modal btn-secondary" target="_blank">Ya tengo claves, descargar</a>
             </div>
-            <a href="javascript:void(0)" onclick="closeModal('modalAfiliado')" class="btn-close">Cerrar aviso</a>
+            <a href="javascript:void(0)" onclick="closeModal('modalAfiliado')" class="btn-close">Cerrar</a>
+        </div>
+    </div>
+
+    <div id="modalConvenios" class="modal-overlay" onclick="closeModalExterno(event, 'modalConvenios')">
+        <div class="modal-content">
+            <h2>Convenios Colectivos</h2>
+            <p>Selecciona tu sector para acceder directamente a los convenios de Castilla-La Mancha:</p>
+            
+            <div class="sector-list">
+                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=comercio-y-grandes-almacenes#search-form-documentos" class="btn-sector" target="_blank">
+                    <i data-lucide="shopping-bag"></i> Comercio
+                </a>
+                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=hosteleria-restauracion-social-y-turismo#search-form-documentos" class="btn-sector" target="_blank">
+                    <i data-lucide="utensils"></i> Hostelería y Turismo
+                </a>
+                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=carreteras-urbanos-y-logistica#search-form-documentos" class="btn-sector" target="_blank">
+                    <i data-lucide="truck"></i> Transportes y Logística
+                </a>
+                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=limpieza#search-form-documentos" class="btn-sector" target="_blank">
+                    <i data-lucide="sparkles"></i> Limpieza
+                </a>
+                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=seguridad-privada-y-servicios-auxiliares#search-form-documentos" class="btn-sector" target="_blank">
+                    <i data-lucide="shield-check"></i> Seguridad Privada
+                </a>
+                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha#search-form-documentos" class="btn-sector" target="_blank">
+                    <i data-lucide="search"></i> Ver todos los sectores
+                </a>
+            </div>
+
+            <a href="javascript:void(0)" onclick="closeModal('modalConvenios')" class="btn-close">Volver al inicio</a>
         </div>
     </div>
 
@@ -184,7 +209,6 @@
     </nav>
 
     <script>
-        // Inicializar iconos de Lucide
         lucide.createIcons();
 
         function configurarEnlacesApps() {
