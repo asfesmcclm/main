@@ -107,14 +107,31 @@ function toggleSedes(id) {
     }
 }
 
-// 6. ENLACES INTELIGENTES PARA APPS
 function setupAppLinks() {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    
+    // Enlaces de Registra
     const linkRegistra = document.getElementById('link-registra-final');
-    if(linkRegistra) linkRegistra.href = isIOS ? "https://apps.apple.com/es/app/ugt-registra/id1465851456" : "https://play.google.com/store/apps/details?id=org.ugt.ugtregistra";
+    if(linkRegistra) {
+        linkRegistra.href = isIOS 
+            ? "https://apps.apple.com/es/app/ugt-registra/id6737269009" 
+            : "https://play.google.com/store/apps/details?id=org.ugt.ugtregistra";
+    }
+    
+    // Enlaces de App Afiliado
     const linkAfiliado = document.getElementById('link-afiliado-final');
-    if(linkAfiliado) linkAfiliado.href = isIOS ? "https://apps.apple.com/es/app/ugt-app/id1440223785" : "https://play.google.com/store/apps/details?id=com.ugt.afiliados";
+    if(linkAfiliado) {
+        linkAfiliado.href = isIOS 
+            ? "https://apps.apple.com/es/app/ugt-app/id1531325029" 
+            : "https://play.google.com/store/apps/details?id=com.ugt.afiliados";
+    }
 }
+
+// IMPORTANTE: Llama a la función cuando cargue el documento
+document.addEventListener('DOMContentLoaded', () => {
+    setupAppLinks();
+    if(window.lucide) lucide.createIcons();
+});
 
 // EJECUCIÓN AL CARGAR
 window.onload = setupAppLinks;
