@@ -258,6 +258,38 @@
         </div>
     </div>
 
+    <div id="modalCalendario" class="modal-overlay" onclick="closeModalExterno(event, 'modalCalendario')">
+        <div class="modal-content">
+            <h2><i data-lucide="calendar-days"></i> Calendario Laboral 2026</h2>
+            
+            <div class="legal-notice">
+                <i data-lucide="info"></i>
+                <p>Se resaltan en <strong>rojo</strong> los próximos festivos según la fecha actual.</p>
+            </div>
+
+            <div class="sector-list">
+                <div class="sector-label">Próximos Festivos CLM</div>
+                <div id="lista-festivos" class="date-list">
+                    </div>
+
+                <div class="sector-label">Comercio (Aperturas Domingos/Festivos)</div>
+                <div id="lista-comercio" class="date-list">
+                    </div>
+
+                <div class="sector-label">Documentación Oficial</div>
+                <a href="https://docm.jccm.es/portaldocm/descargarArchivo.do?ruta=2025/06/26/pdf/2025_5159.pdf&tipo=rutaDocm" class="btn-sector" target="_blank">
+                    <i data-lucide="file-text"></i> Decreto Festivos (DOCM)
+                </a>
+                <a href="https://docm.jccm.es/docm/verArchivoHtml.do?ruta=2025/10/17/html/2025_7733.html&tipo=rutaDocm" class="btn-sector" target="_blank">
+                    <i data-lucide="shopping-cart"></i> Orden Aperturas Comercio
+                </a>
+                <a href="https://e.pcloud.link/publink/show?code=XZi6BaZ1V2ESon2t8RLvbS5UgFSbXhmFEvk" class="btn-sector" style="border-color: var(--ugt-red);" target="_blank">
+                    <i data-lucide="file-down"></i> Calendario 2026 (PDF)
+                </a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalCalendario')" class="btn-close">Cerrar</a>
+        </div>
+    </div>
     <nav class="bottom-nav">
         <a href="#" class="nav-item active"><i data-lucide="home"></i><span>Inicio</span></a>
         <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="nav-item"><i data-lucide="message-square"></i><span>Canal</span></a>
