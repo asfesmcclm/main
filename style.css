@@ -1,244 +1,190 @@
 /* =========================================
-   1. VARIABLES Y BASE
+   1. BASE Y CONTENEDOR (Arregla el estrechamiento)
    ========================================= */
 :root {
     --ugt-red: #e30613;
-    --ugt-black: #1d1d1b;
-    --bg-light: #f8f9fa;
-    --white: #ffffff;
-    --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --bg-light: #f4f4f4;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    -webkit-tap-highlight-color: transparent;
+    font-family: -apple-system, system-ui, sans-serif;
 }
 
 body {
     background-color: var(--bg-light);
-    color: var(--ugt-black);
-    line-height: 1.4;
+    color: #1d1d1b;
+}
+
+/* Evita que se vea estrecho en PC y lo centra */
+.container {
+    width: 100%;
+    max-width: 500px; /* Ancho de móvil estándar */
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
 /* =========================================
-   2. CABECERA (HEADER) - AJUSTADO PARA LOGO
+   2. CABECERA (Arregla el logo inmenso)
    ========================================= */
 header {
-    background: var(--white);
-    padding: 8px 0;
+    background: white;
+    padding: 10px 0;
+    border-bottom: 2px solid var(--ugt-red);
     display: flex;
     justify-content: center;
-    align-items: center;
-    border-bottom: 2px solid var(--ugt-red);
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .main-logo {
-    height: 38px; /* Tamaño optimizado para no empujar el contenido */
+    height: 45px; /* Altura fija para que no crezca en PC */
     width: auto;
-    display: block;
+    max-width: 90%;
+    object-fit: contain;
 }
 
 /* =========================================
-   3. SECCIÓN HERO (ZONA ROJA)
+   3. HERO (Arregla el botón de Afíliate azul)
    ========================================= */
 .hero {
     background: linear-gradient(135deg, var(--ugt-red) 0%, #b3050f 100%);
-    color: var(--white);
-    padding: 25px 20px;
+    color: white;
+    padding: 30px 20px;
     text-align: center;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-    margin-bottom: 15px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    margin-bottom: 20px;
 }
 
-.hero h1 { 
-    font-size: 1.5rem; 
-    margin-bottom: 8px; 
-    font-weight: 700;
-}
+.hero h1 { font-size: 1.6rem; margin-bottom: 10px; }
 
-.hero p { 
-    font-size: 0.9rem; 
-    margin-bottom: 12px; 
-    opacity: 0.95;
-    max-width: 280px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.hero a {
-    color: var(--white);
-    text-decoration: underline;
-    font-weight: bold;
-    font-size: 0.9rem;
+/* Botón blanco de Afíliate */
+.btn-afiliate {
     display: inline-block;
-    padding: 5px 10px;
+    background: white;
+    color: var(--ugt-red) !important;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 /* =========================================
-   4. CONTENEDOR Y GRID
+   4. GRID (Arregla los iconos amontonados)
    ========================================= */
-.container { 
-    padding: 0 15px; 
-    max-width: 500px; 
-    margin: 0 auto; 
-}
-
 .section-title {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #888;
-    margin: 15px 0 10px 5px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #777;
+    margin: 25px 0 10px 5px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 20px;
+    grid-template-columns: 1fr 1fr; /* Dos columnas siempre */
+    gap: 15px;
 }
 
-/* Tarjetas / Botones */
 .card {
-    background: var(--white);
-    padding: 15px 10px;
-    border-radius: 16px;
+    background: white;
+    padding: 20px 10px;
+    border-radius: 18px;
     text-align: center;
-    box-shadow: var(--shadow);
     text-decoration: none;
-    color: var(--ugt-black);
-    border: 1px solid rgba(0,0,0,0.03);
-    transition: transform 0.1s ease;
+    color: #1d1d1b;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    display: block; /* Asegura que los elementos se apilen */
 }
-
-.card:active { transform: scale(0.96); }
 
 .card i {
-    font-size: 22px;
+    font-size: 26px;
     color: var(--ugt-red);
-    margin-bottom: 8px;
-    display: block;
+    margin-bottom: 12px;
 }
 
-.card h3 { font-size: 0.9rem; margin-bottom: 4px; }
-.card p { font-size: 0.75rem; color: #777; line-height: 1.2; }
+.card h3 { font-size: 1rem; margin-bottom: 5px; }
+.card p { font-size: 0.8rem; color: #666; }
 
-/* Tarjeta destacada (Calendario) */
+/* Tarjeta Calendario (Ancho completo) */
 .card-full {
     grid-column: span 2;
     display: flex;
     align-items: center;
     text-align: left;
-    padding: 18px 20px;
+    padding: 20px;
     gap: 15px;
 }
 
-.card-full i { margin-bottom: 0; font-size: 28px; }
-.card-full div { flex: 1; }
-
-/* Estilo para el logo de REGISTRA dentro de su card */
+/* Arreglo para logos de Apps (Registra, etc) */
 .card img {
-    height: 40px;
-    margin-bottom: 5px;
+    height: 40px; 
+    width: auto;
+    margin-bottom: 10px;
 }
 
 /* =========================================
-   5. MODALES (TIPO DRAWER MÓVIL)
+   5. PIE DE PÁGINA (Arregla amontonamiento)
+   ========================================= */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 botones iguales */
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    z-index: 1000;
+}
+
+.nav-item {
+    text-align: center;
+    text-decoration: none;
+    color: #888;
+    font-size: 0.7rem;
+}
+
+.nav-item i {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 3px;
+    color: #888;
+}
+
+/* =========================================
+   6. MODALES
    ========================================= */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.7);
     display: none;
     justify-content: center;
     align-items: flex-end;
     z-index: 2000;
-    backdrop-filter: blur(2px);
 }
 
 .modal-content {
-    background: var(--white);
+    background: white;
     width: 100%;
     max-width: 500px;
-    max-height: 85vh;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
-    padding: 25px 20px;
+    padding: 25px;
+    max-height: 85vh;
     overflow-y: auto;
-    position: relative;
-    transform: translateY(100%);
-    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .modal-overlay.active { display: flex; }
-.modal-overlay.active .modal-content { transform: translateY(0); }
 
-/* =========================================
-   6. LISTAS Y COMPONENTES INTERNOS
-   ========================================= */
-.date-list { margin-bottom: 15px; border-radius: 12px; overflow: hidden; border: 1px solid #eee; }
-
-.date-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 12px 15px;
-    background: white;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 0.9rem;
-}
-
-.date-past { text-decoration: line-through; opacity: 0.5; background: #fafafa; }
-.date-highlight { background: #fff5f5; border-left: 4px solid var(--ugt-red); }
-
-.sector-label {
-    font-size: 0.75rem;
-    font-weight: bold;
-    color: #555;
-    margin: 10px 0 5px;
-}
-
-.btn-sector {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: #f8f9fa;
-    padding: 12px;
-    border-radius: 10px;
-    text-decoration: none;
-    color: var(--ugt-black);
-    margin-bottom: 8px;
-    font-size: 0.85rem;
-    border: 1px solid #eee;
-}
-
-.btn-close {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    background: #f0f0f0;
-    text-align: center;
-    border-radius: 12px;
-    text-decoration: none;
-    color: #444;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-/* =========================================
-   7. FOOTER
-   ========================================= */
-footer {
-    text-align: center;
-    padding: 40px 20px;
-    color: #bbb;
-    font-size: 0.75rem;
-}
+footer { padding: 80px 0 100px 0; text-align: center; color: #ccc; font-size: 0.8rem; }
