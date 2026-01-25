@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -45,6 +44,10 @@
                 <i data-lucide="book-open"></i>
                 <div class="card-content"><h3>Convenios</h3><p>Tu sector en PDF</p></div>
             </div>
+            <div class="card" onclick="openModal('modalModelos')">
+                <i data-lucide="file-text"></i>
+                <div class="card-content"><h3>Modelos</h3><p>Escritos oficiales</p></div>
+            </div>
         </div>
 
         <h2 class="section-title">Nuestras APPs Oficiales</h2>
@@ -65,7 +68,6 @@
     <div id="modalNovedades" class="modal-overlay" onclick="closeModalExterno(event, 'modalNovedades')">
         <div class="modal-content">
             <h2><i data-lucide="newspaper"></i> Actualidad Sindical</h2>
-            <p>Fuentes de información actualizada:</p>
             <div class="sector-list">
                 <a href="https://x.com/ugt_comunica" class="btn-sector" target="_blank">
                     <i data-lucide="twitter"></i> 
@@ -185,8 +187,58 @@
                     </div>
                 </div>
             </div>
-
             <a href="javascript:void(0)" onclick="closeModal('modalSedes')" class="btn-close">Cerrar</a>
+        </div>
+    </div>
+
+    <div id="modalCalculadoras" class="modal-overlay" onclick="closeModalExterno(event, 'modalCalculadoras')">
+        <div class="modal-content">
+            <h2><i data-lucide="calculator"></i> Calculadoras</h2>
+            <div class="legal-notice"><i data-lucide="alert-triangle"></i><p>Cálculos orientativos.</p></div>
+            <div class="sector-list">
+                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/calculadora-vacaciones" class="btn-sector" target="_blank"><i data-lucide="calendar"></i> Vacaciones</a>
+                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/despido" class="btn-sector" target="_blank"><i data-lucide="gavel"></i> Despido</a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalCalculadoras')" class="btn-close">Volver</a>
+        </div>
+    </div>
+
+    <div id="modalModelos" class="modal-overlay" onclick="closeModalExterno(event, 'modalModelos')">
+        <div class="modal-content">
+            <h2><i data-lucide="file-text"></i> Modelos</h2>
+            <div class="sector-list">
+                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos" class="btn-sector" target="_blank"><i data-lucide="files"></i> Ver todos</a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalModelos')" class="btn-close">Volver</a>
+        </div>
+    </div>
+
+    <div id="modalConvenios" class="modal-overlay" onclick="closeModalExterno(event, 'modalConvenios')">
+        <div class="modal-content">
+            <h2>Convenios</h2>
+            <div class="sector-list">
+                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha" class="btn-sector" target="_blank"><i data-lucide="plus-circle"></i> Ver Convenios</a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalConvenios')" class="btn-close">Cerrar</a>
+        </div>
+    </div>
+
+    <div id="modalRegistra" class="modal-overlay" onclick="closeModalExterno(event, 'modalRegistra')">
+        <div class="modal-content">
+            <h2>UGT Registra</h2>
+            <div class="modal-actions"><a href="#" id="link-registra-final" class="btn-modal btn-primary" target="_blank">Descargar</a></div>
+            <a href="javascript:void(0)" onclick="closeModal('modalRegistra')" class="btn-close">Volver</a>
+        </div>
+    </div>
+
+    <div id="modalAfiliado" class="modal-overlay" onclick="closeModalExterno(event, 'modalAfiliado')">
+        <div class="modal-content">
+            <h2>App Afiliado</h2>
+            <div class="modal-actions">
+                <a href="https://www.ugt.es/ugt-app" class="btn-modal btn-primary" target="_blank">Claves</a>
+                <a href="#" id="link-afiliado-final" class="btn-modal btn-secondary" target="_blank">Abrir App</a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalAfiliado')" class="btn-close">Cerrar</a>
         </div>
     </div>
 
