@@ -16,7 +16,7 @@
 body {
     background-color: var(--bg-light);
     color: #1d1d1b;
-    padding-bottom: 100px; /* Espacio para que el menú no tape el final */
+    padding-bottom: 110px; /* Espacio extra para que el menú no tape nada */
 }
 
 .container {
@@ -27,7 +27,7 @@ body {
 }
 
 /* =========================================
-   2. HEADER Y HERO
+   2. HEADER Y HERO (Botón Afíliate)
    ========================================= */
 header {
     background: white;
@@ -55,9 +55,6 @@ header {
     margin-bottom: 15px;
 }
 
-.hero h1 { font-size: 1.6rem; margin-bottom: 10px; font-weight: 800; }
-
-/* Botón Afíliate (Corregido a .cta-button como tienes en tu HTML) */
 .cta-button {
     display: inline-block;
     background: white;
@@ -71,31 +68,7 @@ header {
 }
 
 /* =========================================
-   3. CANALES SOCIALES (Arreglado)
-   ========================================= */
-.social-bar {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.social-card {
-    flex: 1;
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: var(--ugt-red);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.social-card i { width: 28px; height: 28px; }
-
-/* =========================================
-   4. GRID Y TARJETAS
+   3. GRID GENERAL Y TARJETAS (Sedes, Novedades...)
    ========================================= */
 .section-title {
     font-size: 0.85rem;
@@ -103,7 +76,6 @@ header {
     color: #888;
     margin: 25px 0 12px 5px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .grid {
@@ -121,8 +93,6 @@ header {
     text-decoration: none;
     color: #1d1d1b;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    cursor: pointer;
-    transition: transform 0.2s;
 }
 
 .card i {
@@ -132,35 +102,36 @@ header {
     display: inline-block;
 }
 
-.card h3 { font-size: 1rem; margin-bottom: 4px; font-weight: 700; }
-.card p { font-size: 0.8rem; color: #777; line-height: 1.2; }
+/* =========================================
+   4. SECCIÓN ESPECÍFICA DE APPS (Lo que fallaba)
+   ========================================= */
+.app-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
-/* Imagen de Apps */
-.app-img {
-    height: 50px;
+/* Clase para los logos de UGT Registra y App Afiliado */
+.app-logo, .app-img {
+    height: 45px;
+    width: auto;
     margin-bottom: 10px;
+    object-fit: contain;
 }
 
 /* =========================================
-   5. SEDES Y CONTACTO (Corregido según tu HTML)
+   5. SEDES Y CONVENIOS (Listados internos)
    ========================================= */
 .sede-item {
     background: #fdfdfd;
     padding: 15px;
     border-radius: 12px;
     margin-bottom: 15px;
-    border: 1px solid #eee;
-}
-
-.sede-item h4 {
-    margin-bottom: 8px;
-    font-size: 1.1rem;
-}
-
-.sede-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
+    border-left: 4px solid var(--ugt-red);
+    border-right: 1px solid #eee;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
 .btn-action {
@@ -173,39 +144,9 @@ header {
     border-radius: 8px;
     text-decoration: none;
     font-size: 0.85rem;
-    font-weight: 600;
     background: #f1f3f5;
     color: #333;
-}
-
-/* Botón de provincia (Desplegable) */
-.btn-provincia {
-    width: 100%;
-    padding: 15px;
-    background: white;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    font-size: 1rem;
-    color: #333;
-    cursor: pointer;
-}
-
-/* =========================================
-   6. CONVENIOS Y MODELOS (Botones blancos)
-   ========================================= */
-.sector-list { display: flex; flex-direction: column; gap: 10px; }
-
-.sector-label {
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: #aaa;
-    margin-top: 15px;
-    text-transform: uppercase;
+    font-weight: 600;
 }
 
 .btn-sector {
@@ -218,13 +159,9 @@ header {
     border-radius: 12px;
     text-decoration: none;
     color: #333;
-    font-weight: 600;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    margin-bottom: 10px;
 }
 
-.btn-sector i { color: var(--ugt-red); }
-
-/* Aviso legal (Amarillo) */
 .legal-notice {
     background: #fff9db;
     border: 1px solid #ffe066;
@@ -233,13 +170,10 @@ header {
     font-size: 0.85rem;
     color: #856404;
     margin: 15px 0;
-    display: flex;
-    gap: 12px;
-    line-height: 1.4;
 }
 
 /* =========================================
-   7. MENÚ INFERIOR (Arreglado total)
+   6. MENÚ INFERIOR (Arreglado 4 columnas)
    ========================================= */
 .bottom-nav {
     position: fixed;
@@ -271,20 +205,15 @@ header {
 
 .nav-item span {
     font-size: 0.7rem;
-    font-weight: 600;
-}
-
-.nav-item.active {
-    color: var(--ugt-red);
 }
 
 /* =========================================
-   8. MODALES
+   7. MODALES
    ========================================= */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.75);
+    background: rgba(0,0,0,0.7);
     display: none;
     justify-content: center;
     align-items: flex-end;
@@ -292,33 +221,12 @@ header {
 }
 
 .modal-content {
-    background: #f8f9fa;
+    background: white;
     width: 100%;
     max-width: 500px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     padding: 25px;
-    max-height: 90vh;
+    max-height: 85vh;
     overflow-y: auto;
-}
-
-.modal-content h2 {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.btn-close {
-    display: block;
-    width: 100%;
-    padding: 16px;
-    background: #eee;
-    text-align: center;
-    border-radius: 15px;
-    color: #444;
-    font-weight: 700;
-    text-decoration: none;
-    margin-top: 20px;
 }
