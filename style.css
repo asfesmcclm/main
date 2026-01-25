@@ -164,16 +164,44 @@ header {
     background: #f9f9f9;
 }
 
+
 /* =========================================
-   7. SEDES Y CONVENIOS (Tus clases originales)
+   7. SEDES Y CONVENIOS (Corregido)
    ========================================= */
+
+/* Oculta las listas de sedes por defecto */
+.lista-sedes {
+    display: none; 
+    padding: 10px 5px;
+    background: #f9f9f9;
+    border-radius: 0 0 12px 12px;
+    margin-top: -10px; /* Une la lista al botón de la provincia */
+    margin-bottom: 15px;
+}
+
 .sede-item {
     background: white;
     padding: 15px;
     border-radius: 12px;
-    margin-bottom: 15px;
-    border-left: 4px solid var(--ugt-red);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    border-left: 4px solid #ccc; /* Borde gris por defecto */
+}
+
+/* Resaltado para la sede principal de cada provincia */
+.sede-item[style*="border-left: 4px solid var(--ugt-red)"] {
+    border-left: 4px solid var(--ugt-red) !important;
+}
+
+.sede-item h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.sede-item p {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 10px;
 }
 
 .btn-action {
@@ -188,6 +216,7 @@ header {
     color: #333;
     text-decoration: none;
     font-weight: 600;
+    font-size: 0.85rem;
 }
 
 .btn-sector {
@@ -210,7 +239,9 @@ header {
     border-radius: 10px;
     font-size: 0.8rem;
     color: #856404;
+    margin-bottom: 15px;
 }
+
 
 /* =========================================
    8. MENÚ INFERIOR (Tus clases: .bottom-nav y .nav-item)
