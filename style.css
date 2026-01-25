@@ -1,10 +1,9 @@
 /* =========================================
-   1. BASE Y CONTENEDOR (Original)
+   1. BASE Y RESET
    ========================================= */
 :root {
     --ugt-red: #e30613;
     --bg-light: #f4f4f4;
-    --white: #ffffff;
 }
 
 * {
@@ -17,7 +16,7 @@
 body {
     background-color: var(--bg-light);
     color: #1d1d1b;
-    padding-bottom: 90px;
+    padding-bottom: 100px;
 }
 
 .container {
@@ -28,7 +27,7 @@ body {
 }
 
 /* =========================================
-   2. HEADER Y LOGO (Ajustado)
+   2. CABECERA Y HERO
    ========================================= */
 header {
     background: white;
@@ -41,14 +40,8 @@ header {
     z-index: 1000;
 }
 
-.main-logo {
-    height: 42px;
-    width: auto;
-}
+.main-logo { height: 42px; width: auto; }
 
-/* =========================================
-   3. HERO Y BOTÓN (Tus clases: .hero y .cta-button)
-   ========================================= */
 .hero {
     background: linear-gradient(135deg, var(--ugt-red) 0%, #b3050f 100%);
     color: white;
@@ -68,33 +61,10 @@ header {
     text-decoration: none;
     font-weight: bold;
     margin-top: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 /* =========================================
-   4. CANALES SOCIALES (Tu clase: .social-bar)
-   ========================================= */
-.social-bar {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.social-card {
-    flex: 1;
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: var(--ugt-red);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-/* =========================================
-   5. GRID Y TARJETAS (Incluye .app-card y .app-img)
+   3. GRID Y TARJETAS PRINCIPALES
    ========================================= */
 .section-title {
     font-size: 0.85rem;
@@ -128,121 +98,68 @@ header {
     display: block;
 }
 
-/* Específicos de APPs según tu HTML */
-.app-card { display: flex; flex-direction: column; align-items: center; }
-.app-img { height: 45px; width: auto; margin-bottom: 10px; }
-
 /* =========================================
-   6. CALENDARIO: RESALTADO (Lo que pediste)
+   4. BOTONES DE SECTOR Y ACCIÓN (Convenios, Modelos, etc.)
    ========================================= */
-.date-list {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #eee;
-}
-
-.date-item {
+.btn-sector {
     display: flex;
-    justify-content: space-between;
-    padding: 12px 15px;
-    border-bottom: 1px solid #eee;
-    font-size: 0.9rem;
-}
-
-/* Resaltado en ROJO para el próximo festivo */
-.date-highlight {
-    background-color: #fff0f0 !important;
-    border-left: 4px solid var(--ugt-red);
-    color: var(--ugt-red);
-    font-weight: bold;
-}
-
-.date-past {
-    text-decoration: line-through;
-    opacity: 0.4;
-    background: #f9f9f9;
-}
-
-
-/* =========================================
-   7. SEDES Y CONVENIOS (Corregido Ancho Completo)
-   ========================================= */
-
-/* Forzamos a que el modal trate a los elementos como una lista vertical */
-.modal-content {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* Los botones de provincia ahora ocupan TODO el ancho disponible */
-.btn-provincia {
-    display: flex;             /* Para alinear texto y flecha */
-    justify-content: space-between;
     align-items: center;
-    width: 100%;               /* CLAVE: Ocupa todo el ancho */
-    padding: 16px;             /* Un poco más de aire */
+    gap: 12px;
     background: white;
-    border: 1px solid #ddd;
+    padding: 14px;
+    border: 1px solid #eee;
     border-radius: 12px;
-    font-weight: bold;
-    font-size: 1rem;
+    text-decoration: none;
     color: #333;
-    cursor: pointer;
-    margin-bottom: 5px;        /* Separación entre botones */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    margin-bottom: 10px;
+    font-weight: 500;
+    width: 100%;
 }
 
-/* La lista desplegable también debe ocupar todo el ancho */
-.lista-sedes {
-    display: none; 
-    width: 100%;               /* CLAVE: Ocupa todo el ancho */
-    padding: 5px 0;            /* Espaciado interno */
+.btn-sector i {
+    color: var(--ugt-red);
 }
 
-/* Las tarjetas de cada sede dentro de la lista */
-.sede-item {
-    background: white;
+.sede-actions, .actions-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.btn-action {
+    flex: 1;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: #f1f3f5;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: #333;
+    font-weight: 600;
+}
+
+/* =========================================
+   5. AVISOS LEGALES / NOTAS (Amarillo)
+   ========================================= */
+.legal-notice {
+    background: #fff9db;
+    border: 1px solid #ffe066;
     padding: 15px;
     border-radius: 12px;
-    margin-bottom: 12px;       /* Separación entre sedes de la misma provincia */
-    border: 1px solid #eee;
-    border-left: 4px solid #ccc; 
-    width: 100%;               /* Aseguramos ancho completo */
+    font-size: 0.8rem;
+    color: #856404;
+    line-height: 1.4;
+    margin-bottom: 20px;
 }
-
-/* El contenedor de botones de acción (Llamar/Email) */
-.sede-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
-    width: 100%;
-}
-/* =========================================
-   8. MENÚ INFERIOR (Tus clases: .bottom-nav y .nav-item)
-   ========================================= */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 500px;
-    background: white;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding: 12px 0 25px 0;
-    border-top: 1px solid #eee;
-    z-index: 1000;
-}
-
-.nav-item { text-align: center; text-decoration: none; color: #999; }
-.nav-item i { display: block; font-size: 22px; margin-bottom: 3px; }
-.nav-item span { font-size: 0.7rem; }
 
 /* =========================================
-   9. MODALES
+   6. MODALES Y SEDES
    ========================================= */
 .modal-overlay {
     position: fixed;
@@ -265,15 +182,67 @@ header {
     overflow-y: auto;
 }
 
-.btn-close, .close {
+.btn-provincia {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.lista-sedes { display: none; margin-bottom: 15px; }
+
+.sede-item {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+}
+
+/* =========================================
+   7. MENÚ INFERIOR Y EXTRAS
+   ========================================= */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 12px 0 25px 0;
+    border-top: 1px solid #eee;
+    z-index: 1000;
+}
+
+.nav-item { text-align: center; text-decoration: none; color: #999; }
+.nav-item i { display: block; font-size: 22px; margin-bottom: 4px; }
+.nav-item span { font-size: 0.7rem; }
+
+.date-highlight {
+    background-color: #fff0f0 !important;
+    border-left: 4px solid var(--ugt-red) !important;
+    color: var(--ugt-red) !important;
+}
+
+.btn-close {
     display: block;
     width: 100%;
     padding: 15px;
     background: #eee;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 12px;
     color: #333;
     font-weight: bold;
     text-decoration: none;
-    margin-top: 15px;
+    margin-top: 20px;
 }
