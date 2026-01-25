@@ -294,25 +294,32 @@
             <a href="javascript:void(0)" onclick="closeModal('modalModelos')" class="btn-close">Volver</a>
         </div>
     </div>
-    <div id="modalRegistra" class="modal-overlay" onclick="closeModalExterno(event, 'modalRegistra')">
-        <div class="modal-content">
-            <h2>UGT Registra</h2>
-            <div class="modal-actions"><a href="#" id="link-registra-final" class="btn-modal btn-primary" target="_blank">Descargar</a></div>
-            <a href="javascript:void(0)" onclick="closeModal('modalRegistra')" class="btn-close">Volver</a>
+    
+    
+    
+ <div class="grid">
+    <div class="card" onclick="openModal('modalRegistra')" style="display: flex; flex-direction: column; align-items: center; padding: 15px;">
+        <img src="img/registra.png" alt="UGT Registra" 
+             style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; border-radius: 12px;">
+        <div class="card-content" style="text-align: center;">
+            <h3 style="font-size: 1rem; margin-bottom: 4px;">UGT Registra</h3>
+            <p style="font-size: 0.8rem; color: #666;">Control jornada</p>
         </div>
     </div>
 
-    <div id="modalAfiliado" class="modal-overlay" onclick="closeModalExterno(event, 'modalAfiliado')">
-        <div class="modal-content">
-            <h2>App del Afiliado</h2>
-            <div class="modal-actions">
-                <a href="https://www.ugt.es/ugt-app" class="btn-modal btn-primary" target="_blank">Claves</a>
-                <a href="#" id="link-afiliado-final" class="btn-modal btn-secondary" target="_blank">Abrir App</a>
-            </div>
-            <a href="javascript:void(0)" onclick="closeModal('modalAfiliado')" class="btn-close">Cerrar</a>
+    <div class="card" onclick="openModal('modalAfiliado')" style="display: flex; flex-direction: column; align-items: center; padding: 15px;">
+        <img src="img/ugtapp.png" alt="UGT App" 
+             style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; border-radius: 12px;">
+        <div class="card-content" style="text-align: center;">
+            <h3 style="font-size: 1rem; margin-bottom: 4px;">App Afiliado</h3>
+            <p style="font-size: 0.8rem; color: #666;">Gestión personal</p>
         </div>
     </div>
-
+</div>
+    
+    
+    
+    
     <div id="modalCalendario" class="modal-overlay" onclick="closeModalExterno(event, 'modalCalendario')">
         <div class="modal-content">
             <h2><i data-lucide="calendar-days"></i> Calendario Laboral 2026</h2>
