@@ -4,251 +4,241 @@
 :root {
     --ugt-red: #e30613;
     --ugt-black: #1d1d1b;
-    --bg-light: #f4f4f4;
+    --bg-light: #f8f9fa;
     --white: #ffffff;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
     background-color: var(--bg-light);
     color: var(--ugt-black);
-    line-height: 1.6;
+    line-height: 1.4;
 }
 
 /* =========================================
-   2. CABECERA (HEADER) CON LOGO
+   2. CABECERA (HEADER) - AJUSTADO PARA LOGO
    ========================================= */
 header {
     background: var(--white);
-    padding: 12px 0;
+    padding: 8px 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 3px solid var(--ugt-red);
+    border-bottom: 2px solid var(--ugt-red);
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .main-logo {
-    height: 50px; /* Altura del logo en móviles */
+    height: 38px; /* Tamaño optimizado para no empujar el contenido */
     width: auto;
     display: block;
-    transition: transform 0.3s ease;
 }
 
 /* =========================================
-   3. SECCIÓN HERO (LA PARTE ROJA)
+   3. SECCIÓN HERO (ZONA ROJA)
    ========================================= */
 .hero {
     background: linear-gradient(135deg, var(--ugt-red) 0%, #b3050f 100%);
     color: var(--white);
-    padding: 40px 20px;
+    padding: 25px 20px;
     text-align: center;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    margin-bottom: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    margin-bottom: 15px;
 }
 
-.hero h1 { font-size: 1.8rem; margin-bottom: 10px; }
-.hero p { font-size: 1rem; opacity: 0.9; }
+.hero h1 { 
+    font-size: 1.5rem; 
+    margin-bottom: 8px; 
+    font-weight: 700;
+}
+
+.hero p { 
+    font-size: 0.9rem; 
+    margin-bottom: 12px; 
+    opacity: 0.95;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero a {
+    color: var(--white);
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: inline-block;
+    padding: 5px 10px;
+}
 
 /* =========================================
-   4. GRID DE HERRAMIENTAS Y BOTONES
+   4. CONTENEDOR Y GRID
    ========================================= */
-.container { padding: 0 15px; max-width: 600px; margin: 0 auto; }
+.container { 
+    padding: 0 15px; 
+    max-width: 500px; 
+    margin: 0 auto; 
+}
 
 .section-title {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #666;
-    margin: 20px 0 10px 5px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #888;
+    margin: 15px 0 10px 5px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    gap: 12px;
     margin-bottom: 20px;
 }
 
-/* Botones Principales */
+/* Tarjetas / Botones */
 .card {
     background: var(--white);
-    padding: 20px;
-    border-radius: 15px;
+    padding: 15px 10px;
+    border-radius: 16px;
     text-align: center;
     box-shadow: var(--shadow);
     text-decoration: none;
     color: var(--ugt-black);
-    transition: transform 0.2s;
-    border: 1px solid #eee;
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: transform 0.1s ease;
 }
 
-.card:active { transform: scale(0.95); }
+.card:active { transform: scale(0.96); }
 
 .card i {
-    font-size: 24px;
+    font-size: 22px;
     color: var(--ugt-red);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     display: block;
 }
 
-/* Botón Especial Calendario (Ancho completo) */
+.card h3 { font-size: 0.9rem; margin-bottom: 4px; }
+.card p { font-size: 0.75rem; color: #777; line-height: 1.2; }
+
+/* Tarjeta destacada (Calendario) */
 .card-full {
     grid-column: span 2;
     display: flex;
     align-items: center;
-    justify-content: center;
+    text-align: left;
+    padding: 18px 20px;
     gap: 15px;
-    padding: 25px;
-    border-left: 5px solid var(--ugt-red);
+}
+
+.card-full i { margin-bottom: 0; font-size: 28px; }
+.card-full div { flex: 1; }
+
+/* Estilo para el logo de REGISTRA dentro de su card */
+.card img {
+    height: 40px;
+    margin-bottom: 5px;
 }
 
 /* =========================================
-   5. MODALES (ESTRUCTURA)
+   5. MODALES (TIPO DRAWER MÓVIL)
    ========================================= */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.6);
     display: none;
     justify-content: center;
-    align-items: flex-end; /* Abre desde abajo en móviles */
+    align-items: flex-end;
     z-index: 2000;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(2px);
 }
 
 .modal-content {
     background: var(--white);
     width: 100%;
     max-width: 500px;
-    max-height: 90vh;
+    max-height: 85vh;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
-    padding: 30px 20px;
+    padding: 25px 20px;
     overflow-y: auto;
     position: relative;
     transform: translateY(100%);
-    transition: transform 0.3s ease-out;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .modal-overlay.active { display: flex; }
 .modal-overlay.active .modal-content { transform: translateY(0); }
 
-.modal-content h2 {
-    color: var(--ugt-red);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
 /* =========================================
-   6. LISTAS DEL CALENDARIO (FESTIVOS)
+   6. LISTAS Y COMPONENTES INTERNOS
    ========================================= */
-.date-list {
-    margin-bottom: 20px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    overflow: hidden;
-}
+.date-list { margin-bottom: 15px; border-radius: 12px; overflow: hidden; border: 1px solid #eee; }
 
 .date-item {
     display: flex;
     justify-content: space-between;
     padding: 12px 15px;
-    border-bottom: 1px solid #eee;
-    font-size: 0.95rem;
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9rem;
 }
 
-.date-item span { font-weight: bold; color: #555; }
-
-/* Estilos dinámicos para festivos */
-.date-past {
-    text-decoration: line-through;
-    opacity: 0.5;
-    background-color: #f0f0f0;
-}
-
-.date-highlight {
-    background-color: #fff0f0;
-    border-left: 4px solid var(--ugt-red);
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { background-color: #fff0f0; }
-    50% { background-color: #ffe0e0; }
-    100% { background-color: #fff0f0; }
-}
+.date-past { text-decoration: line-through; opacity: 0.5; background: #fafafa; }
+.date-highlight { background: #fff5f5; border-left: 4px solid var(--ugt-red); }
 
 .sector-label {
-    background: #eee;
-    padding: 5px 10px;
+    font-size: 0.75rem;
     font-weight: bold;
-    font-size: 0.8rem;
-    margin-top: 15px;
-    border-radius: 5px;
+    color: #555;
+    margin: 10px 0 5px;
 }
 
-/* =========================================
-   7. BOTONES DE ACCIÓN Y CIERRE
-   ========================================= */
 .btn-sector {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: var(--white);
-    padding: 15px;
-    margin: 10px 0;
+    background: #f8f9fa;
+    padding: 12px;
     border-radius: 10px;
     text-decoration: none;
     color: var(--ugt-black);
-    border: 1px solid #ddd;
-    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    border: 1px solid #eee;
 }
 
 .btn-close {
     display: block;
     width: 100%;
     padding: 15px;
-    background: #eee;
+    background: #f0f0f0;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 12px;
     text-decoration: none;
-    color: #333;
+    color: #444;
     font-weight: bold;
-    margin-top: 20px;
-}
-
-.legal-notice {
-    background: #fff8e1;
-    border: 1px solid #ffe082;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
+    margin-top: 10px;
 }
 
 /* =========================================
-   8. FOOTER
+   7. FOOTER
    ========================================= */
 footer {
     text-align: center;
-    padding: 30px 20px;
-    color: #888;
-    font-size: 0.85rem;
+    padding: 40px 20px;
+    color: #bbb;
+    font-size: 0.75rem;
 }
