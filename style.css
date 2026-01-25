@@ -309,3 +309,57 @@ header {
     border: 1px solid #eee;
 }
 
+/* =========================================
+   CORRECCIÓN FINAL: APPS Y LOGOS
+   ========================================= */
+
+/* 1. Evita que los logos se deformen */
+.app-logo {
+    width: 55px !important;
+    height: 55px !important;
+    min-width: 55px;
+    object-fit: contain; /* Ajusta la imagen sin estirarla */
+    background: #f8f9fa;
+    padding: 5px;
+    border-radius: 12px;
+    margin-right: 15px;
+}
+
+/* 2. El contenedor de la App */
+.card-app {
+    background: white;
+    padding: 15px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+/* 3. Convierte los enlaces azules en BOTONES grises */
+.app-link, .btn-action-app, .btn-app-link {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: #f1f3f5; /* Color gris suave */
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: #333 !important; /* Forzamos color oscuro para que no sea azul */
+    font-weight: 600;
+    border: 1px solid #e9ecef;
+}
+
+/* 4. Alineación de los botones (Abrir App / Claves) */
+.app-actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
