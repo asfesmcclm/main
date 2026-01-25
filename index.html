@@ -2,151 +2,211 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>FeSMC UGT CLM - Área de Servicio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --ugt-red: #e30613;
-            --ugt-dark: #2d2d2d;
-            --bg-light: #f4f7f6;
+            --ugt-dark: #1a1a1a;
+            --bg-light: #f2f4f7;
             --white: #ffffff;
-            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow: 0 4px 12px rgba(0,0,0,0.05);
+            --radius: 18px;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-light);
             color: var(--ugt-dark);
-            line-height: 1.6;
+            line-height: 1.4;
+            padding-bottom: 90px; /* Espacio para la barra inferior */
+            overflow-x: hidden;
         }
 
         /* HEADER */
         header {
             background: var(--white);
-            padding: 1.5rem;
+            padding: 1.2rem;
             text-align: center;
-            border-bottom: 3px solid var(--ugt-red);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: var(--shadow);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
         }
 
         .logo-text {
-            font-weight: 700;
-            font-size: 1.4rem;
+            font-weight: 800;
+            font-size: 1rem;
             color: var(--ugt-red);
-            letter-spacing: -0.5px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         /* HERO SECTION */
         .hero {
-            background: linear-gradient(135deg, var(--ugt-red) 0%, #b3050f 100%);
+            background: var(--ugt-red);
+            background: linear-gradient(180deg, var(--ugt-red) 0%, #b3050f 100%);
             color: white;
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1.5rem;
             text-align: center;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 1rem;
         }
 
-        .hero h1 { margin-bottom: 1rem; font-size: 1.8rem; }
+        .hero h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .hero p { font-size: 0.9rem; opacity: 0.9; font-weight: 400; }
         
         .cta-button {
             display: inline-block;
             background: var(--white);
             color: var(--ugt-red);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
+            padding: 0.8rem 1.8rem;
+            border-radius: 14px;
             text-decoration: none;
             font-weight: 700;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             transition: transform 0.2s;
         }
 
-        /* GRID LAYOUT */
+        .cta-button:active { transform: scale(0.95); }
+
+        /* CONTAINER */
         .container {
-            max-width: 1000px;
-            margin: -2rem auto 2rem;
-            padding: 0 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1.2rem;
         }
 
         .section-title {
-            margin: 2rem 0 1rem;
-            font-size: 1.1rem;
+            margin: 1.8rem 0 0.8rem 0.2rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            color: #666;
-            font-weight: 600;
+            color: #7a7a7a;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
+        /* GRID SYSTEM - 2 COLUMNAS */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.2rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
         }
 
-        /* CARDS */
+        /* CARDS ESTILO APP */
         .card {
             background: var(--white);
-            padding: 1.5rem;
-            border-radius: 12px;
+            padding: 1.2rem;
+            border-radius: var(--radius);
             text-decoration: none;
             color: var(--ugt-dark);
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
             box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(0,0,0,0.02);
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-left-color: var(--ugt-red);
+        .card:active {
+            transform: scale(0.96);
+            background-color: #f9f9f9;
         }
 
         .card i {
-            font-size: 1.5rem;
-            margin-right: 1.2rem;
-            color: var(--ugt-red);
-            width: 30px;
-            text-align: center;
-        }
-
-        .card-content h3 { font-size: 1rem; margin-bottom: 0.2rem; }
-        .card-content p { font-size: 0.85rem; color: #777; }
-
-        /* SOCIAL CHANNELS */
-        .social-bar {
+            font-style: normal;
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            background: #fff0f1;
+            width: 48px;
+            height: 48px;
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 1.5rem;
-            margin: 2rem 0;
+            border-radius: 12px;
         }
 
-        .social-icon {
-            font-size: 1.8rem;
-            color: var(--ugt-dark);
-            transition: color 0.3s;
+        .card-content h3 { 
+            font-size: 0.85rem; 
+            font-weight: 700; 
+            line-height: 1.2;
+            margin-bottom: 0.3rem;
+        }
+        
+        .card-content p { 
+            font-size: 0.75rem; 
+            color: #777; 
+            font-weight: 400;
         }
 
-        .social-icon.wa:hover { color: #25D366; }
-        .social-icon.ig:hover { color: #E1306C; }
-        .social-icon.tk:hover { color: #000000; }
+        /* SOCIAL BAR (CHANNELS) */
+        .social-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-card {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        /* BOTTOM NAVIGATION */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.8rem 0 calc(0.8rem + env(safe-area-inset-bottom));
+            border-top: 1px solid rgba(0,0,0,0.05);
+            z-index: 2000;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #8e8e93;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .nav-item i { font-style: normal; font-size: 1.3rem; }
+        .nav-item span { font-size: 0.65rem; font-weight: 600; }
+        .nav-item.active { color: var(--ugt-red); }
 
         /* FOOTER */
         footer {
-            background: var(--ugt-dark);
-            color: white;
+            padding: 2rem 1.5rem;
             text-align: center;
-            padding: 3rem 1.5rem;
-            margin-top: 3rem;
+            opacity: 0.5;
         }
+        footer p { font-size: 0.75rem; }
 
-        /* RESPONSIVE */
-        @media (max-width: 600px) {
-            .grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 1.5rem; }
+        /* Ajuste escritorio */
+        @media (min-width: 600px) {
+            .grid { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
 </head>
@@ -166,9 +226,9 @@
         
         <h2 class="section-title">Canales Oficiales</h2>
         <div class="social-bar">
-            <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="social-icon wa" title="WhatsApp">💬</a>
-            <a href="https://www.instagram.com/fesmcugtclm" class="social-icon ig" title="Instagram">📸</a>
-            <a href="https://www.tiktok.com/@fesmcugtclm" class="social-icon tk" title="TikTok">📱</a>
+            <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="social-card">💬</a>
+            <a href="https://www.instagram.com/fesmcugtclm" class="social-card">📸</a>
+            <a href="https://www.tiktok.com/@fesmcugtclm" class="social-card">📱</a>
         </div>
 
         <h2 class="section-title">Calculadoras y Modelos</h2>
@@ -177,28 +237,28 @@
                 <i>📅</i>
                 <div class="card-content">
                     <h3>Calculadora Vacaciones</h3>
-                    <p>Calcula tus días pendientes</p>
+                    <p>Días pendientes</p>
                 </div>
             </a>
             <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/despido" class="card">
                 <i>⚖️</i>
                 <div class="card-content">
                     <h3>Indemnización Despido</h3>
-                    <p>Cálculo oficial (CGPJ)</p>
+                    <p>Cálculo oficial</p>
                 </div>
             </a>
             <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos" class="card">
                 <i>📝</i>
                 <div class="card-content">
                     <h3>Modelos y Escritos</h3>
-                    <p>Plantillas para tus reclamaciones</p>
+                    <p>Reclamaciones</p>
                 </div>
             </a>
             <a href="https://e.pcloud.link/publink/show?code=kZqvpdZFdLEdibwWjbbbDBeo4oHqhnTbdNV" class="card">
                 <i>🎓</i>
                 <div class="card-content">
                     <h3>Permiso Formación</h3>
-                    <p>Solicitud oficial de permiso</p>
+                    <p>Solicitud oficial</p>
                 </div>
             </a>
         </div>
@@ -209,42 +269,60 @@
                 <i>📲</i>
                 <div class="card-content">
                     <h3>UGT Registra</h3>
-                    <p>Control de jornada laboral</p>
+                    <p>Control jornada</p>
                 </div>
             </a>
             <a href="https://www.ugt.es/ugt-app" class="card">
                 <i>👤</i>
                 <div class="card-content">
                     <h3>App del Afiliado</h3>
-                    <p>Gestión personal y servicios</p>
+                    <p>Gestión personal</p>
                 </div>
             </a>
         </div>
 
-        <h2 class="section-title">Información y Convenios</h2>
+        <h2 class="section-title">Información</h2>
         <div class="grid">
             <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha" class="card">
                 <i>📚</i>
                 <div class="card-content">
                     <h3>Convenios CLM</h3>
-                    <p>Consulta el convenio de tu sector</p>
+                    <p>Consulta tu sector</p>
                 </div>
             </a>
             <a href="https://www.ugtclm.es/" class="card">
                 <i>🌐</i>
                 <div class="card-content">
-                    <h3>UGT Castilla-La Mancha</h3>
-                    <p>Web oficial regional</p>
+                    <h3>Web Oficial</h3>
+                    <p>UGT CLM Online</p>
                 </div>
             </a>
         </div>
 
+        <footer>
+            <p><strong>FeSMC UGT Castilla-La Mancha</strong></p>
+            <p>Unión General de Trabajadoras y Trabajadores</p>
+        </footer>
     </div>
 
-    <footer>
-        <p><strong>FeSMC UGT Castilla-La Mancha</strong></p>
-        <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 1rem;">Unión General de Trabajadoras y Trabajadores</p>
-    </footer>
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <i>🏠</i>
+            <span>Inicio</span>
+        </a>
+        <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="nav-item">
+            <i>💬</i>
+            <span>Canal</span>
+        </a>
+        <a href="https://www.ugtclm.es/" class="nav-item">
+            <i>🌐</i>
+            <span>Web</span>
+        </a>
+        <a href="https://www.ugt.es/ficha-de-afiliacion" class="nav-item">
+            <i>✍️</i>
+            <span>Afiliarse</span>
+        </a>
+    </nav>
 
 </body>
 </html>
