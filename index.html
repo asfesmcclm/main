@@ -119,4 +119,91 @@
             </div>
             <div class="card" onclick="openModal('modalAfiliado')">
                 <i>👤</i>
-                <div class="card-
+                <div class="card-content">
+                    <h3>App del Afiliado</h3>
+                    <p>Gestión personal</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Información</h2>
+        <div class="grid">
+            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha" class="card"><i>📚</i><div class="card-content"><h3>Convenios CLM</h3><p>Consulta tu sector</p></div></a>
+            <a href="https://www.ugtclm.es/" class="card"><i>🌐</i><div class="card-content"><h3>Web Oficial</h3><p>UGT CLM Online</p></div></a>
+        </div>
+        <footer><p><strong>FeSMC UGT Castilla-La Mancha</strong><br>Unión General de Trabajadoras y Trabajadores</p></footer>
+    </div>
+
+    <div id="modalRegistra" class="modal-overlay" onclick="closeModalExterno(event, 'modalRegistra')">
+        <div class="modal-content">
+            <h2>UGT Registra</h2>
+            <p>Herramienta diseñada para que cualquier persona disponga de un método sencillo para cumplir con el registro de jornada laboral.</p>
+            <p><strong>¿Qué puedes hacer con ella?</strong></p>
+            <ul>
+                <li>Registrar tus jornadas, incluyendo los descansos.</li>
+                <li>Generar informes de las jornadas registradas.</li>
+                <li>Exportar tus datos para consultarlos cuando quieras.</li>
+                <li>Gestionar tu propia cuenta de usuario.</li>
+            </ul>
+            <div class="modal-actions">
+                <a href="#" id="link-registra-final" class="btn-modal btn-primary" target="_blank">Descargar Aplicación</a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalRegistra')" class="btn-close">Volver atrás</a>
+        </div>
+    </div>
+
+    <div id="modalAfiliado" class="modal-overlay" onclick="closeModalExterno(event, 'modalAfiliado')">
+        <div class="modal-content">
+            <h2>Acceso exclusivo a UGT App</h2>
+            <p>Esta es una herramienta exclusiva para afiliados y afiliadas a la UGT. Por seguridad (GDPR), requiere claves de acceso oficiales.</p>
+            <p>Las claves se envían al correo que consta en nuestra base de datos. Si no las has recibido, es posible que necesitemos actualizar tu contacto.</p>
+            <div class="modal-actions">
+                <a href="https://www.ugt.es/ugt-app" class="btn-modal btn-primary" target="_blank">Solicitar mis Credenciales</a>
+                <a href="#" id="link-afiliado-final" class="btn-modal btn-secondary" target="_blank">Ya tengo claves, descargar App</a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalAfiliado')" class="btn-close">Cerrar aviso</a>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active"><i>🏠</i><span>Inicio</span></a>
+        <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="nav-item"><i>💬</i><span>Canal</span></a>
+        <a href="https://www.ugtclm.es/" class="nav-item"><i>🌐</i><span>Web</span></a>
+        <a href="https://www.ugt.es/ficha-de-afiliacion" class="nav-item"><i>✍️</i><span>Afiliarse</span></a>
+    </nav>
+
+    <script>
+        function configurarEnlacesApps() {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            
+            // Botones de descarga dentro de los modales
+            const btnRegistra = document.getElementById('link-registra-final');
+            const btnAfiliado = document.getElementById('link-afiliado-final');
+
+            if (isIOS) {
+                if(btnRegistra) btnRegistra.href = "https://apps.apple.com/es/app/ugt-registra/id6737269009";
+                if(btnAfiliado) btnAfiliado.href = "https://apps.apple.com/es/app/ugt-app/id1531325029";
+            } else {
+                if(btnRegistra) btnRegistra.href = "https://play.google.com/store/apps/details?id=com.ugt.ugtregistra";
+                if(btnAfiliado) btnAfiliado.href = "https://play.google.com/store/apps/details?id=com.app.ugt";
+            }
+        }
+
+        function openModal(id) { 
+            document.getElementById(id).style.display = 'flex'; 
+            document.body.style.overflow = 'hidden'; 
+        }
+        
+        function closeModal(id) { 
+            document.getElementById(id).style.display = 'none'; 
+            document.body.style.overflow = 'auto'; 
+        }
+        
+        function closeModalExterno(e, id) { 
+            if(e.target.id === id) closeModal(id); 
+        }
+
+        window.addEventListener('load', configurarEnlacesApps);
+    </script>
+</body>
+</html>
