@@ -5,220 +5,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendario Laboral 2026 - FeSMC UGT CLM</title>
     <script src="https://unpkg.com/lucide@latest"></script>
- 
-<style>
-    /* 1. VARIABLES Y BASE */
-    :root { 
-        --ugt-red: #e30613; 
-        --bg-gray: #f8f9fa; 
-    }
+    <style>
+        :root { --ugt-red: #e30613; --bg-gray: #f4f7f6; }
+        
+        body { 
+            font-family: 'Segoe UI', system-ui, sans-serif; 
+            background-color: #dee2e6; 
+            margin: 0; padding: 0; 
+            display: flex; justify-content: center;
+        }
 
-    body { 
-        font-family: 'Segoe UI', system-ui, sans-serif; 
-        background-color: #e9ecef; /* Color de fondo para el monitor */
-        margin: 0; 
-        padding: 0; 
-        color: #333; 
-        display: flex;
-        justify-content: center; /* Centra la app en el PC */
-    }
+        .app-container { 
+            background: white;
+            width: 100%;
+            max-width: 500px; 
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-/* 2. CONTENEDOR TIPO MÓVIL (Sustituye el tuyo por este) */
-    .app-container { 
-        background: white;
-        width: 100%;
-        max-width: 500px; 
-        min-height: 100vh;
-        padding: 20px;
-        box-sizing: border-box;
-        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        .header { text-align: center; margin-bottom: 10px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--ugt-red); text-decoration: none; font-weight: bold; margin-bottom: 10px; }
 
-        /* ESTO ES LO QUE ARREGLA EL DESCUADRE */
-        display: flex;
-        flex-direction: column; 
-        gap: 10px; /* Da un poco de aire entre secciones automáticamente */
-    }
+        .section-card { 
+            background: white; 
+            border-radius: 15px; 
+            padding: 18px; 
+            border: 1px solid #eee; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            width: 100%; /* IMPORTANTE: Asegura que ocupe todo el ancho */
+            box-sizing: border-box;
+        }
 
-    /* 3. ELEMENTOS DE CABECERA */
-    .header { text-align: center; margin-bottom: 25px; }
-    .back-btn { 
-        display: inline-flex; 
-        align-items: center; 
-        gap: 8px; 
-        color: var(--ugt-red); 
-        text-decoration: none; 
-        font-weight: bold; 
-        margin-bottom: 15px; 
-    }
+        h2 { color: var(--ugt-red); font-size: 1.1rem; display: flex; align-items: center; gap: 10px; margin: 0 0 15px 0; border-bottom: 2px solid #f8f9fa; padding-bottom: 8px; }
+        
+        .date-list { list-style: none; padding: 0; margin: 0; }
+        .date-item { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 10px 0; 
+            border-bottom: 1px solid #f8f9fa; 
+            font-size: 0.95rem;
+        }
+        .date-item:last-child { border-bottom: none; }
+        
+        .past-date { text-decoration: line-through; opacity: 0.4; color: #888; }
+        .past-label { font-size: 0.7rem; font-style: italic; margin-left: 5px; text-decoration: none !important; display: inline-block; }
 
-    /* 4. TARJETAS Y LISTAS */
-    .section-card { 
-        background: white; 
-        border-radius: 15px; 
-        padding: 15px; 
-        border: 1px solid #eee; 
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        margin-bottom: 20px; 
-    }
-
-    h2 { 
-        color: var(--ugt-red); 
-        font-size: 1.1rem; 
-        display: flex; 
-        align-items: center; 
-        gap: 10px; 
-        margin-top: 0; 
-    }
-
-    .date-list { list-style: none; padding: 0; margin: 0; }
-    .date-item { 
-        display: flex; 
-        justify-content: space-between; 
-        padding: 12px 0; 
-        border-bottom: 1px solid #f5f5f5; 
-        font-size: 0.95rem;
-    }
-    .date-item:last-child { border-bottom: none; }
-
-    /* 5. LÓGICA DE TACHADO (FECHAS PASADAS) */
-    .past-date { text-decoration: line-through; opacity: 0.4; color: #888; }
-    .past-date::after { 
-        content: " (Pasado)"; 
-        font-size: 0.7rem; 
-        margin-left: 5px; 
-        text-decoration: none; 
-        display: inline-block;
-    }
-
-    /* 6. BOTONES DE ENLACE */
-    .btn-link { 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        gap: 10px; 
-        background: #f8f9fa; 
-        border: 1px solid #ddd; 
-        padding: 14px; 
-        border-radius: 12px; 
-        text-decoration: none; 
-        color: #333; 
-        font-weight: 600; 
-        margin-bottom: 12px; 
-        transition: all 0.2s;
-    }
-    .btn-link:active { background: #eee; transform: scale(0.98); }
-    .btn-main { background: var(--ugt-red); color: white; border: none; }
-</style>
-    
+        .btn-link { 
+            display: flex; align-items: center; justify-content: center; gap: 10px; 
+            background: #f8f9fa; border: 1px solid #ddd; padding: 14px; 
+            border-radius: 12px; text-decoration: none; color: #333; 
+            font-weight: 600; transition: all 0.2s;
+        }
+        .btn-main { background: var(--ugt-red); color: white; border: none; }
+    </style>
 </head>
 <body>
 
+<div class="app-container">
     <a href="index.html" class="back-btn"><i data-lucide="arrow-left"></i> Volver al Inicio</a>
 
     <div class="header">
-        <h1>Calendario 2026</h1>
-        <p>Castilla-La Mancha</p>
+        <h1 style="margin:0; font-size: 1.6rem;">Calendario 2026</h1>
+        <p style="margin:5px 0; opacity: 0.7;">Castilla-La Mancha</p>
     </div>
 
     <div class="section-card">
         <h2><i data-lucide="calendar"></i> Festivos Regionales</h2>
-        <div class="date-list" id="lista-festivos">
-            </div>
+        <div class="date-list" id="lista-festivos"></div>
     </div>
 
     <div class="section-card">
         <h2><i data-lucide="shopping-bag"></i> Aperturas Comerciales</h2>
-        <div class="date-list" id="lista-aperturas">
-            </div>
+        <div class="date-list" id="lista-aperturas"></div>
     </div>
 
-  <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px; padding-bottom: 40px;">
-        
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px; padding-bottom: 40px;">
         <a href="https://docm.jccm.es/docm/descargarArchivo.do?ruta=2025/06/26/pdf/2025_5159.pdf&tipo=rutaDocm" target="_blank" class="btn-link">
-            <i data-lucide="file-text"></i> 
-            <span>Decreto Festivos CLM 2026</span>
+            <i data-lucide="file-text"></i> Decreto Festivos CLM 2026
         </a>
-
         <a href="https://docm.jccm.es/docm/verArchivoHtml.do?ruta=2025/10/17/html/2025_7733.html&tipo=rutaDocm" target="_blank" class="btn-link">
-            <i data-lucide="file-check"></i> 
-            <span>Orden Aperturas Comercio 2026</span>
+            <i data-lucide="file-check"></i> Orden Aperturas Comercio 2026
         </a>
-
         <a href="https://e.pcloud.link/publink/show?code=XZi6BaZ1V2ESon2t8RLvbS5UgFSbXhmFEvk" target="_blank" class="btn-link btn-main">
-            <i data-lucide="download"></i> 
-            <span>Descargar Calendario PDF</span>
+            <i data-lucide="download"></i> Descargar Calendario PDF
         </a>
-
     </div>
+</div>
 
-
-    <script>
-    // LISTADO OFICIAL DOCM 2026
+<script>
     const festivos = [
         { d: "2026-01-01", n: "Año Nuevo" },
         { d: "2026-01-06", n: "Epifanía del Señor" },
         { d: "2026-04-02", n: "Jueves Santo" },
         { d: "2026-04-03", n: "Viernes Santo" },
-        { d: "2026-04-06", n: "Lunes (Sustitución San José)" },
+        { d: "2026-04-06", n: "Lunes (Sust. San José)" },
         { d: "2026-05-01", n: "Fiesta del Trabajo" },
-        { d: "2026-05-30", n: "Día de Castilla-La Mancha" },
-        { d: "2026-06-04", n: "Fiesta del Corpus Christi" },
+        { d: "2026-05-30", n: "Día de CLM" },
+        { d: "2026-06-04", n: "Corpus Christi" },
         { d: "2026-08-15", n: "Asunción de la Virgen" },
         { d: "2026-10-12", n: "Fiesta Nacional de España" },
-        { d: "2026-11-02", n: "Lunes (Día sig. Todos los Santos)" },
+        { d: "2026-11-02", n: "Lunes tras Todos los Santos" },
         { d: "2026-12-08", n: "Inmaculada Concepción" },
         { d: "2026-12-25", n: "Natividad del Señor" }
     ];
 
-    // APERTURAS COMERCIALES AUTORIZADAS 2026
     const aperturas = [
         "2026-01-04", "2026-01-11", "2026-04-02", "2026-05-14", "2026-07-05", 
         "2026-10-04", "2026-11-01", "2026-11-29", "2026-12-06", "2026-12-13", 
         "2026-12-20", "2026-12-27"
     ];
 
-    function cargarFechas() {
+    function cargarDatos() {
         const hoy = new Date();
-        hoy.setHours(0,0,0,0); // Solo comparamos días, no horas
+        hoy.setHours(0,0,0,0);
 
-        // Renderizar Festivos
+        // Festivos
         const listaF = document.getElementById('lista-festivos');
-        if(listaF) {
-            listaF.innerHTML = ""; 
-            festivos.forEach(f => {
-                const fechaF = new Date(f.d + "T00:00:00"); 
-                const isPast = fechaF < hoy;
-                const dateFormated = fechaF.toLocaleDateString('es-ES', { day: '2-digit', month: 'long' });
-                listaF.innerHTML += `
-                    <div class="date-item ${isPast ? 'past-date' : ''}">
-                        <span>${f.n}</span>
-                        <strong>${dateFormated}</strong>
-                    </div>`;
-            });
-        }
+        festivos.forEach(f => {
+            const fecha = new Date(f.d + "T00:00:00");
+            const esPasado = fecha < hoy;
+            listaF.innerHTML += `
+                <div class="date-item ${esPasado ? 'past-date' : ''}">
+                    <span>${f.n}</span>
+                    <strong>${fecha.toLocaleDateString('es-ES', {day:'2-digit', month:'short'}).replace('.','')} ${esPasado ? '<span class="past-label">(Pasado)</span>' : ''}</strong>
+                </div>`;
+        });
 
-        // Renderizar Aperturas
+        // Aperturas (Aquí quitamos lo redundante)
         const listaA = document.getElementById('lista-aperturas');
-        if(listaA) {
-            listaA.innerHTML = "";
-            aperturas.forEach(a => {
-                const fechaA = new Date(a + "T00:00:00");
-                const isPast = fechaA < hoy;
-                const dateFormated = fechaA.toLocaleDateString('es-ES', { day: '2-digit', month: 'long' });
-                listaA.innerHTML += `
-                    <div class="date-item ${isPast ? 'past-date' : ''}">
-                        <span>Apertura Comercio</span>
-                        <strong>${dateFormated}</strong>
-                    </div>`;
-            });
-        }
+        aperturas.forEach(a => {
+            const fecha = new Date(a + "T00:00:00");
+            const esPasado = fecha < hoy;
+            // Solo mostramos el nombre del día de la semana y la fecha
+            const diaSemana = fecha.toLocaleDateString('es-ES', {weekday: 'long'});
+            const diaMes = fecha.toLocaleDateString('es-ES', {day:'2-digit', month:'long'});
+            listaA.innerHTML += `
+                <div class="date-item ${esPasado ? 'past-date' : ''}">
+                    <span style="text-transform: capitalize;">${diaSemana}</span>
+                    <strong>${diaMes} ${esPasado ? '<span class="past-label">(Pasado)</span>' : ''}</strong>
+                </div>`;
+        });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        cargarFechas();
-        if(typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
+        cargarDatos();
+        lucide.createIcons();
     });
 </script>
 
