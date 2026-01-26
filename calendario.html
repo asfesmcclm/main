@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Laboral 2026 - FeSMC UGT CLM</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root { --ugt-red: #e30613; --bg-gray: #f8f9fa; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg-gray); margin: 0; padding: 20px; color: #333; }
+        .header { text-align: center; margin-bottom: 25px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--ugt-red); text-decoration: none; font-weight: bold; margin-bottom: 15px; }
+        .section-card { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        h2 { color: var(--ugt-red); font-size: 1.2rem; display: flex; align-items: center; gap: 10px; margin-top: 0; }
+        .date-list { list-style: none; padding: 0; margin: 0; }
+        .date-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .date-item:last-child { border-bottom: none; }
+        .past-date { text-decoration: line-through; opacity: 0.5; color: #888; }
+        .past-date::after { content: " (Pasado)"; font-size: 0.7rem; margin-left: 5px; }
+        .btn-link { display: flex; align-items: center; justify-content: center; gap: 10px; background: white; border: 1px solid #ddd; padding: 12px; border-radius: 10px; text-decoration: none; color: #333; font-weight: 500; margin-bottom: 10px; transition: background 0.2s; }
+        .btn-link:active { background: #eee; }
+        .btn-main { background: var(--ugt-red); color: white; border: none; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-btn"><i data-lucide="arrow-left"></i> Volver al Inicio</a>
+
+    <div class="header">
+        <h1>Calendario 2026</h1>
+        <p>Castilla-La Mancha</p>
+    </div>
+
+    <div class="section-card">
+        <h2><i data-lucide="calendar"></i> Festivos Regionales</h2>
+        <div class="date-list" id="lista-festivos">
+            </div>
+    </div>
+
+    <div class="section-card">
+        <h2><i data-lucide="shopping-bag"></i> Aperturas Comerciales</h2>
+        <div class="date-list" id="lista-aperturas">
+            </div>
+    </div>
+
+    <div style="margin-top: 30px;">
+        <a href="https://docm.jccm.es/docm/descargarArchivo.do?ruta=2025/06/26/pdf/2025_5159.pdf&tipo=rutaDocm" target="_blank" class="btn-link">
+            <i data-lucide="file-text"></i> Decreto Festivos CLM 2026
+        </a>
+        <a href="https://docm.jccm.es/docm/verArchivoHtml.do?ruta=2025/10/17/html/2025_7733.html&tipo=rutaDocm" target="_blank" class="btn-link">
+            <i data-lucide="file-check"></i> Orden Aperturas Comercio 2026
+        </a>
+        <a href="https://e.pcloud.link/publink/show?code=XZi6BaZ1V2ESon2t8RLvbS5UgFSbXhmFEvk" target="_blank" class="btn-link btn-main">
+            <i data-lucide="download"></i> Descargar Calendario PDF
+        </a>
+    </div>
+
+    <script>
+        const festivos = [
+            { d: "2026-01-01", n: "Año Nuevo" },
+            { d: "2026-01-06", n: "Epifanía (Reyes)" },
+            { d: "2026-03-19", n: "San José" },
+            { d: "2026-04-02", n: "Jueves Santo" },
+            { d: "2026-04-03", n: "Viernes Santo" },
+            { d: "2026-05-01", n: "Fiesta del Trabajo" },
+            { d: "2026-05-14", n: "Ascensión del Señor" },
+            { d: "2026-05-30", n: "Día de Castilla-La Mancha" },
+            { d: "2026-08-15", n: "Asunción de la Virgen" },
+            { d: "2026-10-12", n: "Fiesta Nacional de España" },
+            { d: "2026-11-02", n: "Lunes tras Todos los Santos" },
+            { d: "2026-12-08", n: "Inmaculada Concepción" },
+            { d: "2026-12-25", n: "Natividad del Señor" }
+        ];
+
+        const aperturas = [
+            "2026-01-04", "2026-01-11", "2026-04-02", "2026-05-14", "2026-07-05", 
+            "2026-10-04", "2026-11-01", "2026-11-29", "2026-12-06", "2026-12-13", 
+            "2026-12-20", "2026-12-27"
+        ];
+
+        function cargarFechas() {
+            const hoy = new Date();
+            hoy.setHours(0,0,0,0);
+
+            // Cargar Festivos
+            const listaF = document.getElementById('lista-festivos');
+            festivos.forEach(f => {
+                const fechaF = new Date(f.d);
+                const isPast = fechaF < hoy;
+                const dateFormated = fechaF.toLocaleDateString('es-ES', { day: '2-digit', month: 'long' });
+                listaF.innerHTML += `<div class="date-item ${isPast ? 'past-date' : ''}">
+                    <span>${f.n}</span>
+                    <strong>${dateFormated}</strong>
+                </div>`;
+            });
+
+            // Cargar Aperturas
+            const listaA = document.getElementById('lista-aperturas');
+            aperturas.forEach(a => {
+                const fechaA = new Date(a);
+                const isPast = fechaA < hoy;
+                const dateFormated = fechaA.toLocaleDateString('es-ES', { day: '2-digit', month: 'long' });
+                listaA.innerHTML += `<div class="date-item ${isPast ? 'past-date' : ''}">
+                    <span>Domingo/Festivo Autorizado</span>
+                    <strong>${dateFormated}</strong>
+                </div>`;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarFechas();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
