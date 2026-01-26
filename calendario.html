@@ -125,4 +125,62 @@
     </div>
 
     <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px; padding-bottom: 40px;">
-        <a href="
+        <a href="https://docm.jccm.es/docm/descargarArchivo.do?ruta=2025/06/26/pdf/2025_5159.pdf&tipo=rutaDocm" target="_blank" class="btn-link">
+            <i data-lucide="file-text"></i> Decreto Festivos CLM 2026
+        </a>
+        <a href="https://docm.jccm.es/docm/verArchivoHtml.do?ruta=2025/10/17/html/2025_7733.html&tipo=rutaDocm" target="_blank" class="btn-link">
+            <i data-lucide="file-check"></i> Orden Aperturas Comercio 2026
+        </a>
+        <a href="https://e.pcloud.link/publink/show?code=XZi6BaZ1V2ESon2t8RLvbS5UgFSbXhmFEvk" target="_blank" class="btn-link btn-main">
+            <i data-lucide="download"></i> Descargar Calendario PDF
+        </a>
+    </div>
+</div>
+
+<script>
+    const festivos = [
+        { d: "2026-01-01", n: "Año Nuevo" }, { d: "2026-01-06", n: "Epifanía del Señor" },
+        { d: "2026-04-02", n: "Jueves Santo" }, { d: "2026-04-03", n: "Viernes Santo" },
+        { d: "2026-04-06", n: "Lunes (Sust. San José)" }, { d: "2026-05-01", n: "Fiesta del Trabajo" },
+        { d: "2026-05-30", n: "Día de CLM" }, { d: "2026-06-04", n: "Corpus Christi" },
+        { d: "2026-08-15", n: "Asunción de la Virgen" }, { d: "2026-10-12", n: "Fiesta Nacional de España" },
+        { d: "2026-11-02", n: "Lunes tras Todos los Santos" }, { d: "2026-12-08", n: "Inmaculada Concepción" },
+        { d: "2026-12-25", n: "Natividad del Señor" }
+    ];
+
+    const aperturas = [
+        "2026-01-04", "2026-01-11", "2026-04-02", "2026-05-14", "2026-07-05", 
+        "2026-10-04", "2026-11-01", "2026-11-29", "2026-12-06", "2026-12-13", 
+        "2026-12-20", "2026-12-27"
+    ];
+
+    function cargar() {
+        const hoy = new Date(); hoy.setHours(0,0,0,0);
+        
+        const listaF = document.getElementById('lista-festivos');
+        festivos.forEach(f => {
+            const fecha = new Date(f.d + "T00:00:00");
+            const esPasado = fecha < hoy;
+            listaF.innerHTML += `
+                <div class="date-item ${esPasado ? 'past-date' : ''}">
+                    <span>${f.n}</span>
+                    <strong>${fecha.toLocaleDateString('es-ES', {day:'2-digit', month:'short'})} ${esPasado ? '<span class="past-label">(Pasado)</span>' : ''}</strong>
+                </div>`;
+        });
+
+        const listaA = document.getElementById('lista-aperturas');
+        aperturas.forEach(a => {
+            const fecha = new Date(a + "T00:00:00");
+            const esPasado = fecha < hoy;
+            listaA.innerHTML += `
+                <div class="date-item ${esPasado ? 'past-date' : ''}">
+                    <span style="text-transform: capitalize;">${fecha.toLocaleDateString('es-ES', {weekday: 'long'})}</span>
+                    <strong>${fecha.toLocaleDateString('es-ES', {day:'2-digit', month:'long'})} ${esPasado ? '<span class="past-label">(Pasado)</span>' : ''}</strong>
+                </div>`;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => { cargar(); lucide.createIcons(); });
+</script>
+</body>
+</html>
