@@ -23,7 +23,7 @@
         justify-content: center; /* Centra la app en el PC */
     }
 
-    /* 2. CONTENEDOR TIPO MÓVIL (Lo que hace que se vea estrecho en PC) */
+/* 2. CONTENEDOR TIPO MÓVIL (Sustituye el tuyo por este) */
     .app-container { 
         background: white;
         width: 100%;
@@ -32,6 +32,11 @@
         padding: 20px;
         box-sizing: border-box;
         box-shadow: 0 0 20px rgba(0,0,0,0.1);
+
+        /* ESTO ES LO QUE ARREGLA EL DESCUADRE */
+        display: flex;
+        flex-direction: column; 
+        gap: 10px; /* Da un poco de aire entre secciones automáticamente */
     }
 
     /* 3. ELEMENTOS DE CABECERA */
