@@ -3,101 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario Laboral 2026 - FeSMC UGT CLM</title>
+    <title>Calendario 2026 - UGT</title>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        :root { 
-            --ugt-red: #e30613; 
-            --bg-gray: #f4f7f6; 
-        }
+        :root { --ugt-red: #e30613; }
+        body { font-family: sans-serif; background-color: #dee2e6; margin: 0; display: flex; justify-content: center; }
         
-        body { 
-            font-family: 'Segoe UI', system-ui, sans-serif; 
-            background-color: #dee2e6; 
-            margin: 0; 
-            padding: 0; 
-            display: flex; 
-            justify-content: center;
-        }
-
+        /* Contenedor principal: Fuerza la columna única */
         .app-container { 
-            background: white;
-            width: 100%;
+            background: white; 
+            width: 100%; 
             max-width: 500px; 
-            min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column; /* Esto asegura la columna única */
-            gap: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            min-height: 100vh; 
+            padding: 20px; 
+            box-sizing: border-box; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
         }
 
-        .header { 
-            text-align: center; 
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-            margin-bottom: 10px;
-        }
-
+        .header { text-align: center; width: 100%; }
+        
         .back-btn { 
-            align-self: flex-start; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 8px; 
-            color: var(--ugt-red); 
-            text-decoration: none; 
-            font-weight: bold; 
-            margin-bottom: 15px;
-            font-size: 0.9rem;
+            display: flex; align-items: center; gap: 5px; 
+            color: var(--ugt-red); text-decoration: none; 
+            font-weight: bold; margin-bottom: 15px; 
         }
+
+        .logo-img { width: 140px; height: auto; margin: 10px auto; display: block; }
 
         .section-card { 
-            background: white; 
-            border-radius: 15px; 
-            padding: 18px; 
-            border: 1px solid #eee; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            width: 100%; 
-            box-sizing: border-box;
+            background: white; border-radius: 12px; padding: 15px; 
+            border: 1px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            width: 100%; box-sizing: border-box;
         }
 
-        h2 { 
-            color: var(--ugt-red); 
-            font-size: 1.1rem; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            margin: 0 0 15px 0; 
-            border-bottom: 2px solid #f8f9fa; 
-            padding-bottom: 8px; 
-        }
+        h2 { color: var(--ugt-red); font-size: 1.1rem; margin-top: 0; display: flex; align-items: center; gap: 8px; }
         
-        .date-list { list-style: none; padding: 0; margin: 0; }
         .date-item { 
-            display: flex; 
-            justify-content: space-between; 
-            padding: 10px 0; 
-            border-bottom: 1px solid #f8f9fa; 
-            font-size: 0.95rem;
+            display: flex; justify-content: space-between; 
+            padding: 8px 0; border-bottom: 1px solid #f5f5f5; 
+            font-size: 0.9rem;
         }
         
-        .past-date { text-decoration: line-through; opacity: 0.4; color: #888; }
-        .past-label { font-size: 0.7rem; font-style: italic; margin-left: 5px; text-decoration: none !important; }
+        .past-date { text-decoration: line-through; opacity: 0.4; }
+        .past-label { font-size: 0.7rem; color: #666; text-decoration: none !important; margin-left: 4px; }
 
         .btn-link { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px; 
-            background: #f8f9fa; 
-            border: 1px solid #ddd; 
-            padding: 14px; 
-            border-radius: 12px; 
-            text-decoration: none; 
-            color: #333; 
-            font-weight: 600; 
+            display: flex; align-items: center; justify-content: center; gap: 8px; 
+            background: #f8f9fa; border: 1px solid #ddd; padding: 12px; 
+            border-radius: 8px; text-decoration: none; color: #333; font-weight: bold;
         }
         .btn-main { background: var(--ugt-red); color: white; border: none; }
     </style>
@@ -105,13 +60,12 @@
 <body>
 
 <div class="app-container">
+    <a href="index.html" class="back-btn"><i data-lucide="arrow-left"></i> Volver al Inicio</a>
+
     <div class="header">
-        <a href="index.html" class="back-btn"><i data-lucide="arrow-left"></i> Volver al Inicio</a>
-        
-        <img src="img/logo-ugt.png" alt="Logo UGT" style="width: 140px; height: auto; margin-bottom: 10px;">
-        
-        <h1 style="margin:0; font-size: 1.6rem;">Calendario 2026</h1>
-        <p style="margin:5px 0; opacity: 0.7;">Castilla-La Mancha</p>
+        <img src="img/logo-ugt.png" alt="Logo UGT" class="logo-img">
+        <h1 style="margin:10px 0 0 0; font-size: 1.5rem;">Calendario 2026</h1>
+        <p style="margin:0; opacity: 0.6;">Castilla-La Mancha</p>
     </div>
 
     <div class="section-card">
@@ -124,63 +78,48 @@
         <div id="lista-aperturas"></div>
     </div>
 
-    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px; padding-bottom: 40px;">
-        <a href="https://docm.jccm.es/docm/descargarArchivo.do?ruta=2025/06/26/pdf/2025_5159.pdf&tipo=rutaDocm" target="_blank" class="btn-link">
-            <i data-lucide="file-text"></i> Decreto Festivos CLM 2026
+    <div style="display: flex; flex-direction: column; gap: 10px; padding-bottom: 30px;">
+        <a href="https://docm.jccm.es/..." target="_blank" class="btn-link">
+            <i data-lucide="file-text"></i> Decreto Festivos 2026
         </a>
-        <a href="https://docm.jccm.es/docm/verArchivoHtml.do?ruta=2025/10/17/html/2025_7733.html&tipo=rutaDocm" target="_blank" class="btn-link">
-            <i data-lucide="file-check"></i> Orden Aperturas Comercio 2026
-        </a>
-        <a href="https://e.pcloud.link/publink/show?code=XZi6BaZ1V2ESon2t8RLvbS5UgFSbXhmFEvk" target="_blank" class="btn-link btn-main">
-            <i data-lucide="download"></i> Descargar Calendario PDF
+        <a href="https://e.pcloud.link/..." target="_blank" class="btn-link btn-main">
+            <i data-lucide="download"></i> Descargar PDF
         </a>
     </div>
 </div>
 
 <script>
     const festivos = [
-        { d: "2026-01-01", n: "Año Nuevo" }, { d: "2026-01-06", n: "Epifanía del Señor" },
+        { d: "2026-01-01", n: "Año Nuevo" }, { d: "2026-01-06", n: "Epifanía" },
         { d: "2026-04-02", n: "Jueves Santo" }, { d: "2026-04-03", n: "Viernes Santo" },
-        { d: "2026-04-06", n: "Lunes (Sust. San José)" }, { d: "2026-05-01", n: "Fiesta del Trabajo" },
-        { d: "2026-05-30", n: "Día de CLM" }, { d: "2026-06-04", n: "Corpus Christi" },
-        { d: "2026-08-15", n: "Asunción de la Virgen" }, { d: "2026-10-12", n: "Fiesta Nacional de España" },
-        { d: "2026-11-02", n: "Lunes tras Todos los Santos" }, { d: "2026-12-08", n: "Inmaculada Concepción" },
-        { d: "2026-12-25", n: "Natividad del Señor" }
+        { d: "2026-04-06", n: "Lunes (Sust. San José)" }, { d: "2026-05-01", n: "Trabajo" },
+        { d: "2026-05-30", n: "Día CLM" }, { d: "2026-06-04", n: "Corpus Christi" },
+        { d: "2026-08-15", n: "Asunción" }, { d: "2026-10-12", n: "Fiesta Nacional" },
+        { d: "2026-11-02", n: "Lunes (Todos Santos)" }, { d: "2026-12-08", n: "Inmaculada" },
+        { d: "2026-12-25", n: "Navidad" }
     ];
 
-    const aperturas = [
-        "2026-01-04", "2026-01-11", "2026-04-02", "2026-05-14", "2026-07-05", 
-        "2026-10-04", "2026-11-01", "2026-11-29", "2026-12-06", "2026-12-13", 
-        "2026-12-20", "2026-12-27"
-    ];
+    const aperturas = ["2026-01-04", "2026-01-11", "2026-04-02", "2026-05-14", "2026-07-05", "2026-10-04", "2026-11-01", "2026-11-29", "2026-12-06", "2026-12-13", "2026-12-20", "2026-12-27"];
 
-    function cargar() {
+    function render() {
         const hoy = new Date(); hoy.setHours(0,0,0,0);
         
-        const listaF = document.getElementById('lista-festivos');
+        const fList = document.getElementById('lista-festivos');
         festivos.forEach(f => {
             const fecha = new Date(f.d + "T00:00:00");
-            const esPasado = fecha < hoy;
-            listaF.innerHTML += `
-                <div class="date-item ${esPasado ? 'past-date' : ''}">
-                    <span>${f.n}</span>
-                    <strong>${fecha.toLocaleDateString('es-ES', {day:'2-digit', month:'short'})} ${esPasado ? '<span class="past-label">(Pasado)</span>' : ''}</strong>
-                </div>`;
+            const esP = fecha < hoy;
+            fList.innerHTML += `<div class="date-item ${esP?'past-date':''}"><span>${f.n}</span><strong>${fecha.toLocaleDateString('es-ES',{day:'2-digit',month:'short'})} ${esP?'<span class="past-label">(Pasado)</span>':''}</strong></div>`;
         });
 
-        const listaA = document.getElementById('lista-aperturas');
+        const aList = document.getElementById('lista-aperturas');
         aperturas.forEach(a => {
             const fecha = new Date(a + "T00:00:00");
-            const esPasado = fecha < hoy;
-            listaA.innerHTML += `
-                <div class="date-item ${esPasado ? 'past-date' : ''}">
-                    <span style="text-transform: capitalize;">${fecha.toLocaleDateString('es-ES', {weekday: 'long'})}</span>
-                    <strong>${fecha.toLocaleDateString('es-ES', {day:'2-digit', month:'long'})} ${esPasado ? '<span class="past-label">(Pasado)</span>' : ''}</strong>
-                </div>`;
+            const esP = fecha < hoy;
+            aList.innerHTML += `<div class="date-item ${esP?'past-date':''}"><span>${fecha.toLocaleDateString('es-ES',{weekday:'long'})}</span><strong>${fecha.toLocaleDateString('es-ES',{day:'2-digit',month:'long'})} ${esP?'<span class="past-label">(Pasado)</span>':''}</strong></div>`;
         });
     }
 
-    document.addEventListener('DOMContentLoaded', () => { cargar(); lucide.createIcons(); });
+    document.addEventListener('DOMContentLoaded', () => { render(); lucide.createIcons(); });
 </script>
 </body>
 </html>
