@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeSMC UGT CLM</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root { 
+            --ugt-red: #e30613; 
+        }
+        
+        body { 
+            font-family: 'Segoe UI', system-ui, sans-serif; 
+            background-color: #dee2e6; /* Fondo gris para PC */
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            justify-content: center; /* Centra la "app" en el escritorio */
+        }
+
+        /* El contenedor que limita la anchura a tipo móvil */
+        .app-container { 
+            background-color: white;
+            width: 100%;
+            max-width: 500px; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        header {
+            text-align: center;
+            background: white;
+            width: 100%;
+        }
+
+        .red-block {
+            background-color: var(--ugt-red);
+            color: white;
+            padding: 25px 15px;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .main-content {
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Estilo de tus botones actuales */
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        
+        .nav-button:active { transform: scale(0.98); }
+        
+        .nav-button i { color: var(--ugt-red); }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <header>
+        <div style="padding: 20px 0;">
+            <img src="img/logo-ugt.png" alt="Logo UGT" style="width: 190px; height: auto;">
+        </div>
+        <div class="red-block">
+            <h1 style="margin: 0; font-size: 1.6rem; text-transform: uppercase;">FeSMC UGT CLM</h1>
+            <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 1rem;">Tu sindicato en el sector servicios</p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        
+        <a href="calendario.html" class="nav-button">
+            <i data-lucide="calendar"></i>
+            <span>Calendario Laboral 2026</span>
+        </a>
+
+        <a href="#" class="nav-button">
+            <i data-lucide="calculator"></i>
+            <span>Calculadora de Atrasos</span>
+        </a>
+
+        <a href="sedes.html" class="nav-button">
+            <i data-lucide="map-pin"></i>
+            <span>Nuestras Sedes</span>
+        </a>
+
+        <a href="#" class="nav-button">
+            <i data-lucide="phone"></i>
+            <span>Contacto Directo</span>
+        </a>
+
+    </main>
+
+    <footer style="text-align: center; padding: 20px; color: #888; font-size: 0.8rem; margin-top: auto;">
+        &copy; 2026 FeSMC UGT Castilla-La Mancha
+    </footer>
+</div>
+
+<script>
+    // Iniciar iconos
+    lucide.createIcons();
+</script>
+
+</body>
+</html>
