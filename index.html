@@ -34,29 +34,28 @@
         </div>
 
         <h2 class="section-title">Herramientas y Sedes</h2>
-        <div class="grid">
-            <div class="card" onclick="openModal('modalSedes')">
-                <i data-lucide="map-pin"></i>
-                <div class="card-content"><h3>Sedes UGT</h3><p>Contacto directo</p></div>
-            </div>
-            <div class="card" onclick="openModal('modalNovedades')" style="border-bottom: 3px solid var(--ugt-red);">
-                <i data-lucide="rss"></i>
-                <div class="card-content"><h3>Novedades</h3><p>Última hora sindical</p></div>
-            </div>
-            <div class="card" onclick="openModal('modalCalculadoras')">
-                <i data-lucide="calculator"></i>
-                <div class="card-content"><h3>Calculadoras</h3><p>Sueldos y despidos</p></div>
-            </div>
-            <div class="card" onclick="openModal('modalConvenios')">
-                <i data-lucide="book-open"></i>
-                <div class="card-content"><h3>Convenios</h3><p>Tu sector en PDF</p></div>
-            </div>
-            <div class="card" onclick="openModal('modalModelos')">
-                <i data-lucide="file-text"></i>
-                <div class="card-content"><h3>Modelos</h3><p>Escritos y modelos </p></div>
-            </div>
-        </div>
-
+        <div class="grid" style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 15px !important;">
+            <div class="card" onclick="openModal('modalSedes')">
+                <i data-lucide="map-pin"></i>
+                <div class="card-content"><h3>Sedes UGT</h3><p>Contacto directo</p></div>
+            </div>
+            <div class="card" onclick="openModal('modalNovedades')" style="border-bottom: 3px solid var(--ugt-red);">
+                <i data-lucide="rss"></i>
+                <div class="card-content"><h3>Novedades</h3><p>Última hora sindical</p></div>
+            </div>
+            <div class="card" onclick="openModal('modalCalculadoras')">
+                <i data-lucide="calculator"></i>
+                <div class="card-content"><h3>Calculadoras</h3><p>Sueldos y despidos</p></div>
+            </div>
+            <div class="card" onclick="openModal('modalConvenios')">
+                <i data-lucide="book-open"></i>
+                <div class="card-content"><h3>Convenios</h3><p>Tu sector en PDF</p></div>
+            </div>
+            <div class="card" onclick="openModal('modalModelos')">
+                <i data-lucide="file-text"></i>
+                <div class="card-content"><h3>Modelos</h3><p>Escritos y modelos</p></div>
+            </div>
+        </div>
        <h2 class="section-title">Calendario Laboral 2026</h2>
 <div class="card" onclick="window.location.href='calendario.html'" style="width: 100%; margin-bottom: 25px; display: flex; align-items: center; cursor: pointer; border-left: 5px solid var(--ugt-red);">
     <div style="padding: 20px; color: var(--ugt-red);">
