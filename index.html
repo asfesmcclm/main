@@ -1,247 +1,239 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FeSMC UGT CLM - Área de Servicio</title>
-    <link rel="icon" type="image/png" href="img/favicon.png">    
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FeSMC UGT CLM - Área de Servicio</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body style="background-color: #dee2e6; margin: 0; display: flex; justify-content: center;">
+<body>
 
-<div style="background-color: white; width: 100%; max-width: 500px; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column;">
+<header>
+    <div class="logo-container">
+        <img src="img/logo-ugt.png" alt="Logo FeSMC UGT CLM" class="main-logo">
+    </div>
+</header>
 
-    <header style="text-align: center; background: white; width: 100%;">
-        <div style="padding: 20px 0;">
-            <img src="img/logo-ugt.png" alt="Logo FeSMC UGT CLM" style="width: 190px; height: auto;">
-        </div>
-        <div style="background-color: #e30613; color: white; padding: 25px 15px; border-radius: 0 0 30px 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <h1 style="margin: 0; font-size: 1.6rem; text-transform: uppercase; font-family: 'Inter', sans-serif; font-weight: 800;">FeSMC UGT CLM</h1>
-            <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 1rem;">Tu sindicato en el móvil</p>
-        </div>
-    </header>
+    <section class="hero">
+        <h1>Tu sindicato en el móvil</h1>
+        <p>Servicios, Movilidad y Consumo en Castilla-La Mancha</p>
+        <a href="https://www.ugt.es/ficha-de-afiliacion" class="cta-button">¡AFÍLIATE AHORA!</a>
+    </section>
 
-    <section class="hero" style="padding: 20px; text-align: center;">
-        <p style="margin-bottom: 15px; font-weight: 600;">Servicios, Movilidad y Consumo en Castilla-La Mancha</p>
-        <a href="https://www.ugt.es/ficha-de-afiliacion" class="cta-button" style="display: block; text-decoration: none; background: #e30613; color: white; padding: 15px; border-radius: 12px; font-weight: 800;">¡AFÍLIATE AHORA!</a>
-    </section>
+    <div class="container">
+        <h2 class="section-title">Canales Oficiales</h2>
+        <div class="social-bar">
+            <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="social-card"><i data-lucide="message-circle"></i></a>
+            <a href="https://www.instagram.com/fesmcugtclm" class="social-card"><i data-lucide="instagram"></i></a>
+            <a href="https://www.tiktok.com/@fesmcugtclm" class="social-card"><i data-lucide="video"></i></a>
+        </div>
 
-    <div class="container" style="padding: 0 20px;">
+        <h2 class="section-title">Herramientas y Sedes</h2>
+        <div class="grid">
+            <div class="card" onclick="openModal('modalSedes')">
+                <i data-lucide="map-pin"></i>
+                <div class="card-content"><h3>Sedes UGT</h3><p>Contacto directo</p></div>
+            </div>
+            <div class="card" onclick="openModal('modalNovedades')" style="border-bottom: 3px solid var(--ugt-red);">
+                <i data-lucide="rss"></i>
+                <div class="card-content"><h3>Novedades</h3><p>Última hora sindical</p></div>
+            </div>
+            <div class="card" onclick="openModal('modalCalculadoras')">
+                <i data-lucide="calculator"></i>
+                <div class="card-content"><h3>Calculadoras</h3><p>Sueldos y despidos</p></div>
+            </div>
+            <div class="card" onclick="openModal('modalConvenios')">
+                <i data-lucide="book-open"></i>
+                <div class="card-content"><h3>Convenios</h3><p>Tu sector en PDF</p></div>
+            </div>
+            <div class="card" onclick="openModal('modalModelos')">
+                <i data-lucide="file-text"></i>
+                <div class="card-content"><h3>Modelos</h3><p>Escritos y modelos </p></div>
+            </div>
+        </div>
 
-    <div class="container">
-        <h2 class="section-title">Canales Oficiales</h2>
-        <div class="social-bar">
-            <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="social-card"><i data-lucide="message-circle"></i></a>
-            <a href="https://www.instagram.com/fesmcugtclm" class="social-card"><i data-lucide="instagram"></i></a>
-            <a href="https://www.tiktok.com/@fesmcugtclm" class="social-card"><i data-lucide="video"></i></a>
-        </div>
-
-        <h2 class="section-title">Herramientas y Sedes</h2>
-        <div class="grid">
-            <div class="card" onclick="openModal('modalSedes')">
-                <i data-lucide="map-pin"></i>
-                <div class="card-content"><h3>Sedes UGT</h3><p>Contacto directo</p></div>
-            </div>
-            <div class="card" onclick="openModal('modalNovedades')" style="border-bottom: 3px solid var(--ugt-red);">
-                <i data-lucide="rss"></i>
-                <div class="card-content"><h3>Novedades</h3><p>Última hora sindical</p></div>
-            </div>
-            <div class="card" onclick="openModal('modalCalculadoras')">
-                <i data-lucide="calculator"></i>
-                <div class="card-content"><h3>Calculadoras</h3><p>Sueldos y despidos</p></div>
-            </div>
-            <div class="card" onclick="openModal('modalConvenios')">
-                <i data-lucide="book-open"></i>
-                <div class="card-content"><h3>Convenios</h3><p>Tu sector en PDF</p></div>
-            </div>
-            <div class="card" onclick="openModal('modalModelos')">
-                <i data-lucide="file-text"></i>
-                <div class="card-content"><h3>Modelos</h3><p>Escritos y modelos </p></div>
-            </div>
-        </div>
-
-       <h2 class="section-title">Calendario Laboral 2026</h2>
+       <h2 class="section-title">Calendario Laboral 2026</h2>
 <div class="card" onclick="window.location.href='calendario.html'" style="width: 100%; margin-bottom: 25px; display: flex; align-items: center; cursor: pointer; border-left: 5px solid var(--ugt-red);">
-    <div style="padding: 20px; color: var(--ugt-red);">
-        <i data-lucide="calendar-days" style="width: 35px; height: 35px;"></i>
-    </div>
-    <div class="card-content" style="padding: 10px 0;">
-        <h3 style="margin:0; font-weight: 800;">Festivos y Aperturas 2026</h3>
-        <p style="margin:0; font-size: 0.9rem; opacity: 0.7;">Consulta los días no laborables en CLM</p>
-    </div>
+    <div style="padding: 20px; color: var(--ugt-red);">
+        <i data-lucide="calendar-days" style="width: 35px; height: 35px;"></i>
+    </div>
+    <div class="card-content" style="padding: 10px 0;">
+        <h3 style="margin:0; font-weight: 800;">Festivos y Aperturas 2026</h3>
+        <p style="margin:0; font-size: 0.9rem; opacity: 0.7;">Consulta los días no laborables en CLM</p>
+    </div>
 </div>
 
-        <h2 class="section-title">Nuestras APPs Oficiales</h2>
-        <div class="grid">
-            <div class="card" onclick="openModal('modalRegistra')" style="display: flex; flex-direction: column; align-items: center; padding: 15px;">
-                <img src="img/registra.png" alt="UGT Registra" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; border-radius: 12px;">
-                <div class="card-content" style="text-align: center;">
-                    <h3 style="font-size: 1rem; margin-bottom: 4px;">UGT Registra</h3>
-                    <p style="font-size: 0.8rem; color: #666;">Control jornada</p>
-                </div>
-            </div>
+        <h2 class="section-title">Nuestras APPs Oficiales</h2>
+        <div class="grid">
+            <div class="card" onclick="openModal('modalRegistra')" style="display: flex; flex-direction: column; align-items: center; padding: 15px;">
+                <img src="img/registra.png" alt="UGT Registra" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; border-radius: 12px;">
+                <div class="card-content" style="text-align: center;">
+                    <h3 style="font-size: 1rem; margin-bottom: 4px;">UGT Registra</h3>
+                    <p style="font-size: 0.8rem; color: #666;">Control jornada</p>
+                </div>
+            </div>
 
-            <div class="card" onclick="openModal('modalAfiliado')" style="display: flex; flex-direction: column; align-items: center; padding: 15px;">
-                <img src="img/ugtapp.png" alt="UGT App" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; border-radius: 12px;">
-                <div class="card-content" style="text-align: center;">
-                    <h3 style="font-size: 1rem; margin-bottom: 4px;">App Afiliado</h3>
-                    <p style="font-size: 0.8rem; color: #666;">Gestión personal</p>
-                </div>
-            </div>
-        </div>
+            <div class="card" onclick="openModal('modalAfiliado')" style="display: flex; flex-direction: column; align-items: center; padding: 15px;">
+                <img src="img/ugtapp.png" alt="UGT App" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; border-radius: 12px;">
+                <div class="card-content" style="text-align: center;">
+                    <h3 style="font-size: 1rem; margin-bottom: 4px;">App Afiliado</h3>
+                    <p style="font-size: 0.8rem; color: #666;">Gestión personal</p>
+                </div>
+            </div>
+        </div>
 
-        <footer><p><strong>FeSMC UGT Castilla-La Mancha</strong></p></footer>
-    </div>
+        <footer><p><strong>FeSMC UGT Castilla-La Mancha</strong></p></footer>
+    </div>
 
-    <div id="modalNovedades" class="modal-overlay" onclick="closeModalExterno(event, 'modalNovedades')">
-        <div class="modal-content">
-            <h2><i data-lucide="newspaper"></i> Actualidad Sindical</h2>
-            <div class="sector-list">
-                <a href="https://x.com/ugt_comunica" class="btn-sector" target="_blank">
-                    <i data-lucide="twitter"></i> 
-                    <div class="btn-content"><strong>UGT Comunica</strong><small>Nacional</small></div>
-                </a>
-                <a href="https://twitter.com/fesmc_ugt" class="btn-sector" target="_blank">
-                    <i data-lucide="twitter"></i> 
-                    <div class="btn-content"><strong>FeSMC UGT Federal</strong><small>Sectores</small></div>
-                </a>
-                <a href="https://www.ugtclm.es" class="btn-sector" target="_blank">
-                    <i data-lucide="globe"></i> 
-                    <div class="btn-content"><strong>UGT CLM</strong><small>Región</small></div>
-                </a>
-            </div>
-            <a href="javascript:void(0)" onclick="closeModal('modalNovedades')" class="btn-close">Cerrar</a>
-        </div>
-    </div>
+    <div id="modalNovedades" class="modal-overlay" onclick="closeModalExterno(event, 'modalNovedades')">
+        <div class="modal-content">
+            <h2><i data-lucide="newspaper"></i> Actualidad Sindical</h2>
+            <div class="sector-list">
+                <a href="https://x.com/ugt_comunica" class="btn-sector" target="_blank">
+                    <i data-lucide="twitter"></i> 
+                    <div class="btn-content"><strong>UGT Comunica</strong><small>Nacional</small></div>
+                </a>
+                <a href="https://twitter.com/fesmc_ugt" class="btn-sector" target="_blank">
+                    <i data-lucide="twitter"></i> 
+                    <div class="btn-content"><strong>FeSMC UGT Federal</strong><small>Sectores</small></div>
+                </a>
+                <a href="https://www.ugtclm.es" class="btn-sector" target="_blank">
+                    <i data-lucide="globe"></i> 
+                    <div class="btn-content"><strong>UGT CLM</strong><small>Región</small></div>
+                </a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalNovedades')" class="btn-close">Cerrar</a>
+        </div>
+    </div>
 
-    <div id="modalSedes" class="modal-overlay" onclick="closeModalExterno(event, 'modalSedes')">
-        <div class="modal-content">
-            <h2><i data-lucide="map-pin"></i> Sedes UGT CLM</h2>
-            
-            <button class="btn-provincia" onclick="toggleSedes('sedesAlbacete')">Albacete <i data-lucide="chevron-down"></i></button>
-            <div id="sedesAlbacete" class="lista-sedes">
-                <div class="sede-item" style="border-left: 4px solid #666;">
-                    <h4>UGT Unión Provincial Albacete</h4><p>C/ Luis Rosales, 7</p>
-                    <div class="sede-actions"><a href="tel:967215514" class="btn-action">967 215 514</a></div>
-                </div>
-                <div class="sede-item" style="border-left: 4px solid var(--ugt-red);">
-                    <h4 style="color:var(--ugt-red)">FeSMC UGT Albacete</h4><p>C/ Luis Rosales, 7 - Planta 1</p>
-                    <div class="sede-actions"><a href="tel:967521850" class="btn-action" style="background:var(--ugt-red);color:white">967 521 850</a></div>
-                </div>
-                <div class="sede-item"><h4>Almansa</h4><p>Plaza del Rey D. Jaime I, 7</p><div class="sede-actions"><a href="tel:967342954" class="btn-action">967 342 954</a></div></div>
-                <div class="sede-item"><h4>Hellín</h4><p>C/ Juan XXIII, 5</p><div class="sede-actions"><a href="tel:967304030" class="btn-action">967 304 030</a></div></div>
-                <div class="sede-item"><h4>Villarrobledo</h4><p>C/ Cruz Verde, 4</p><div class="sede-actions"><a href="tel:967142014" class="btn-action">967 142 014</a></div></div>
-            </div>
+    <div id="modalSedes" class="modal-overlay" onclick="closeModalExterno(event, 'modalSedes')">
+        <div class="modal-content">
+            <h2><i data-lucide="map-pin"></i> Sedes UGT CLM</h2>
+            
+            <button class="btn-provincia" onclick="toggleSedes('sedesAlbacete')">Albacete <i data-lucide="chevron-down"></i></button>
+            <div id="sedesAlbacete" class="lista-sedes">
+                <div class="sede-item" style="border-left: 4px solid #666;">
+                    <h4>UGT Unión Provincial Albacete</h4><p>C/ Luis Rosales, 7</p>
+                    <div class="sede-actions"><a href="tel:967215514" class="btn-action">967 215 514</a></div>
+                </div>
+                <div class="sede-item" style="border-left: 4px solid var(--ugt-red);">
+                    <h4 style="color:var(--ugt-red)">FeSMC UGT Albacete</h4><p>C/ Luis Rosales, 7 - Planta 1</p>
+                    <div class="sede-actions"><a href="tel:967521850" class="btn-action" style="background:var(--ugt-red);color:white">967 521 850</a></div>
+                </div>
+                <div class="sede-item"><h4>Almansa</h4><p>Plaza del Rey D. Jaime I, 7</p><div class="sede-actions"><a href="tel:967342954" class="btn-action">967 342 954</a></div></div>
+                <div class="sede-item"><h4>Hellín</h4><p>C/ Juan XXIII, 5</p><div class="sede-actions"><a href="tel:967304030" class="btn-action">967 304 030</a></div></div>
+                <div class="sede-item"><h4>Villarrobledo</h4><p>C/ Cruz Verde, 4</p><div class="sede-actions"><a href="tel:967142014" class="btn-action">967 142 014</a></div></div>
+            </div>
 
-            <button class="btn-provincia" onclick="toggleSedes('sedesCR')">Ciudad Real <i data-lucide="chevron-down"></i></button>
-            <div id="sedesCR" class="lista-sedes">
-                <div class="sede-item" style="border-left: 4px solid #666;">
-                    <h4>UGT Ciudad Real</h4><p>C/ Alarcos, 24</p>
-                    <div class="sede-actions"><a href="tel:926214945" class="btn-action">926 214 945</a></div>
-                </div>
-                <div class="sede-item" style="border-left: 4px solid var(--ugt-red);">
-                    <h4 style="color:var(--ugt-red)">FeSMC UGT Ciudad Real</h4><p>Residencial Ronda Bl. 5</p>
-                    <div class="sede-actions"><a href="tel:926253535" class="btn-action" style="background:var(--ugt-red);color:white">926 25 35 35</a></div>
-                </div>
-                <div class="sede-item"><h4>Alcázar de S. Juan</h4><p>C/ La Feria, 13</p><div class="sede-actions"><a href="tel:926546123" class="btn-action">926 546 123</a></div></div>
-                <div class="sede-item"><h4>Puertollano</h4><p>C/ Juan Bravo, 6</p><div class="sede-actions"><a href="tel:926425728" class="btn-action">926 425 728</a></div></div>
-            </div>
+            <button class="btn-provincia" onclick="toggleSedes('sedesCR')">Ciudad Real <i data-lucide="chevron-down"></i></button>
+            <div id="sedesCR" class="lista-sedes">
+                <div class="sede-item" style="border-left: 4px solid #666;">
+                    <h4>UGT Ciudad Real</h4><p>C/ Alarcos, 24</p>
+                    <div class="sede-actions"><a href="tel:926214945" class="btn-action">926 214 945</a></div>
+                </div>
+                <div class="sede-item" style="border-left: 4px solid var(--ugt-red);">
+                    <h4 style="color:var(--ugt-red)">FeSMC UGT Ciudad Real</h4><p>Residencial Ronda Bl. 5</p>
+                    <div class="sede-actions"><a href="tel:926253535" class="btn-action" style="background:var(--ugt-red);color:white">926 25 35 35</a></div>
+                </div>
+                <div class="sede-item"><h4>Alcázar de S. Juan</h4><p>C/ La Feria, 13</p><div class="sede-actions"><a href="tel:926546123" class="btn-action">926 546 123</a></div></div>
+                <div class="sede-item"><h4>Puertollano</h4><p>C/ Juan Bravo, 6</p><div class="sede-actions"><a href="tel:926425728" class="btn-action">926 425 728</a></div></div>
+            </div>
 
-            <button class="btn-provincia" onclick="toggleSedes('sedesCuenca')">Cuenca <i data-lucide="chevron-down"></i></button>
-            <div id="sedesCuenca" class="lista-sedes">
-                <div class="sede-item" style="border-left: 4px solid #666;">
-                    <h4>UGT Cuenca</h4><p>Av. Reyes Católicos, 78</p>
-                    <div class="sede-actions"><a href="tel:969211213" class="btn-action">969 211 213</a></div>
-                </div>
-            </div>
+            <button class="btn-provincia" onclick="toggleSedes('sedesCuenca')">Cuenca <i data-lucide="chevron-down"></i></button>
+            <div id="sedesCuenca" class="lista-sedes">
+                <div class="sede-item" style="border-left: 4px solid #666;">
+                    <h4>UGT Cuenca</h4><p>Av. Reyes Católicos, 78</p>
+                    <div class="sede-actions"><a href="tel:969211213" class="btn-action">969 211 213</a></div>
+                </div>
+            </div>
 
-            <button class="btn-provincia" onclick="toggleSedes('sedesGuada')">Guadalajara <i data-lucide="chevron-down"></i></button>
-            <div id="sedesGuada" class="lista-sedes">
-                <div class="sede-item" style="border-left: 4px solid #666;">
-                    <h4>UGT Guadalajara</h4><p>Plaza de España, 12</p>
-                    <div class="sede-actions"><a href="tel:949223980" class="btn-action">949 223 980</a></div>
-                </div>
-            </div>
+            <button class="btn-provincia" onclick="toggleSedes('sedesGuada')">Guadalajara <i data-lucide="chevron-down"></i></button>
+            <div id="sedesGuada" class="lista-sedes">
+                <div class="sede-item" style="border-left: 4px solid #666;">
+                    <h4>UGT Guadalajara</h4><p>Plaza de España, 12</p>
+                    <div class="sede-actions"><a href="tel:949223980" class="btn-action">949 223 980</a></div>
+                </div>
+            </div>
 
-            <button class="btn-provincia" onclick="toggleSedes('sedesToledo')">Toledo <i data-lucide="chevron-down"></i></button>
-            <div id="sedesToledo" class="lista-sedes">
-                <div class="sede-item" style="border-left: 4px solid #666;">
-                    <h4>UGT Toledo</h4><p>Cuesta de Carlos V, 1</p>
-                    <div class="sede-actions"><a href="tel:925252518" class="btn-action">925 252 518</a></div>
-                </div>
-                <div class="sede-item"><h4>Talavera</h4><p>C/ Mesones, 38</p><div class="sede-actions"><a href="tel:925813300" class="btn-action">925 813 300</a></div></div>
-            </div>
+            <button class="btn-provincia" onclick="toggleSedes('sedesToledo')">Toledo <i data-lucide="chevron-down"></i></button>
+            <div id="sedesToledo" class="lista-sedes">
+                <div class="sede-item" style="border-left: 4px solid #666;">
+                    <h4>UGT Toledo</h4><p>Cuesta de Carlos V, 1</p>
+                    <div class="sede-actions"><a href="tel:925252518" class="btn-action">925 252 518</a></div>
+                </div>
+                <div class="sede-item"><h4>Talavera</h4><p>C/ Mesones, 38</p><div class="sede-actions"><a href="tel:925813300" class="btn-action">925 813 300</a></div></div>
+            </div>
 
-            <a href="javascript:void(0)" onclick="closeModal('modalSedes')" class="btn-close">Cerrar</a>
-        </div>
-    </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalSedes')" class="btn-close">Cerrar</a>
+        </div>
+    </div>
 
-    <div id="modalCalculadoras" class="modal-overlay" onclick="closeModalExterno(event, 'modalCalculadoras')">
-        <div class="modal-content">
-            <h2><i data-lucide="calculator"></i> Calculadoras</h2>
-            <div class="legal-notice"><p>AVISO: Estos cálculos son orientativos. Contacta con tu sede.</p></div>
-            <div class="sector-list">
-                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/calculadora-vacaciones" class="btn-sector" target="_blank"><i data-lucide="calendar"></i> Vacaciones</a>
-                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/despido" class="btn-sector" target="_blank"><i data-lucide="gavel"></i> Despido</a>
-            </div>
-            <a href="javascript:void(0)" onclick="closeModal('modalCalculadoras')" class="btn-close">Volver</a>
-        </div>
-    </div>
+    <div id="modalCalculadoras" class="modal-overlay" onclick="closeModalExterno(event, 'modalCalculadoras')">
+        <div class="modal-content">
+            <h2><i data-lucide="calculator"></i> Calculadoras</h2>
+            <div class="legal-notice"><p>AVISO: Estos cálculos son orientativos. Contacta con tu sede.</p></div>
+            <div class="sector-list">
+                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/calculadora-vacaciones" class="btn-sector" target="_blank"><i data-lucide="calendar"></i> Vacaciones</a>
+                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/despido" class="btn-sector" target="_blank"><i data-lucide="gavel"></i> Despido</a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalCalculadoras')" class="btn-close">Volver</a>
+        </div>
+    </div>
 
-    <div id="modalConvenios" class="modal-overlay" onclick="closeModalExterno(event, 'modalConvenios')">
-        <div class="modal-content">
-            <h2>Convenios Colectivos</h2>
-            <div class="sector-list">
-                <div class="sector-label">Castilla-La Mancha</div>
-                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=comercio-y-grandes-almacenes" class="btn-sector" target="_blank"><i data-lucide="shopping-bag"></i> Comercio</a>
-                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=hosteleria-restauracion-social-y-turismo" class="btn-sector" target="_blank"><i data-lucide="utensils"></i> Hostelería</a>
-                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=carreteras-urbanos-y-logistica" class="btn-sector" target="_blank"><i data-lucide="truck"></i> Transportes</a>
-                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=limpieza" class="btn-sector" target="_blank"><i data-lucide="sparkles"></i> Limpieza</a>
-                <div class="sector-label">Nacional</div>
-                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=estatal" class="btn-sector" style="border-color:var(--ugt-red)" target="_blank"><i data-lucide="landmark"></i> Convenios Estatales</a>
-            </div>
-            <a href="javascript:void(0)" onclick="closeModal('modalConvenios')" class="btn-close">Cerrar</a>
-        </div>
-    </div>
+    <div id="modalConvenios" class="modal-overlay" onclick="closeModalExterno(event, 'modalConvenios')">
+        <div class="modal-content">
+            <h2>Convenios Colectivos</h2>
+            <div class="sector-list">
+                <div class="sector-label">Castilla-La Mancha</div>
+                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=comercio-y-grandes-almacenes" class="btn-sector" target="_blank"><i data-lucide="shopping-bag"></i> Comercio</a>
+                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=hosteleria-restauracion-social-y-turismo" class="btn-sector" target="_blank"><i data-lucide="utensils"></i> Hostelería</a>
+                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=carreteras-urbanos-y-logistica" class="btn-sector" target="_blank"><i data-lucide="truck"></i> Transportes</a>
+                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=limpieza" class="btn-sector" target="_blank"><i data-lucide="sparkles"></i> Limpieza</a>
+                <div class="sector-label">Nacional</div>
+                <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=estatal" class="btn-sector" style="border-color:var(--ugt-red)" target="_blank"><i data-lucide="landmark"></i> Convenios Estatales</a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalConvenios')" class="btn-close">Cerrar</a>
+        </div>
+    </div>
 
-    <div id="modalModelos" class="modal-overlay" onclick="closeModalExterno(event, 'modalModelos')">
-        <div class="modal-content">
-            <h2><i data-lucide="file-text"></i> Modelos y Escritos</h2>
-            <div class="legal-notice"><p>Plantillas orientativas. Recomendamos supervisión sindical.</p></div>
-            <div class="sector-list">
-                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos/escritos-conciliación" class="btn-sector" target="_blank"><i data-lucide="users"></i> Escritos Conciliación</a>
-                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos/cume-prestación-menor-enfermedad-grave" class="btn-sector" target="_blank"><i data-lucide="heart-pulse"></i> Prestación CUME</a>
-                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos/modelos-eess" class="btn-sector" target="_blank"><i data-lucide="vote"></i> Modelos EESS</a>
-            </div>
-            <a href="javascript:void(0)" onclick="closeModal('modalModelos')" class="btn-close">Volver</a>
-        </div>
-    </div>
+    <div id="modalModelos" class="modal-overlay" onclick="closeModalExterno(event, 'modalModelos')">
+        <div class="modal-content">
+            <h2><i data-lucide="file-text"></i> Modelos y Escritos</h2>
+            <div class="legal-notice"><p>Plantillas orientativas. Recomendamos supervisión sindical.</p></div>
+            <div class="sector-list">
+                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos/escritos-conciliación" class="btn-sector" target="_blank"><i data-lucide="users"></i> Escritos Conciliación</a>
+                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos/cume-prestación-menor-enfermedad-grave" class="btn-sector" target="_blank"><i data-lucide="heart-pulse"></i> Prestación CUME</a>
+                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos/modelos-eess" class="btn-sector" target="_blank"><i data-lucide="vote"></i> Modelos EESS</a>
+            </div>
+            <a href="javascript:void(0)" onclick="closeModal('modalModelos')" class="btn-close">Volver</a>
+        </div>
+    </div>
 
-    <div id="modalCalendario" class="modal-overlay" onclick="closeModalExterno(event, 'modalCalendario')">
-        <div class="modal-content">
-            <h2><i data-lucide="calendar-days"></i> Calendario 2026</h2>
-            <div id="lista-festivos" class="date-list"></div>
-            <div class="sector-label">Documentación</div>
-            <a href="https://e.pcloud.link/publink/show?code=XZi6BaZ1V2ESon2t8RLvbS5UgFSbXhmFEvk" class="btn-sector" style="border-color: var(--ugt-red);" target="_blank"><i data-lucide="file-down"></i> Calendario 2026 (PDF)</a>
-            <a href="javascript:void(0)" onclick="closeModal('modalCalendario')" class="btn-close">Cerrar</a>
-        </div>
-    </div>
+    <div id="modalCalendario" class="modal-overlay" onclick="closeModalExterno(event, 'modalCalendario')">
+        <div class="modal-content">
+            <h2><i data-lucide="calendar-days"></i> Calendario 2026</h2>
+            <div id="lista-festivos" class="date-list"></div>
+            <div class="sector-label">Documentación</div>
+            <a href="https://e.pcloud.link/publink/show?code=XZi6BaZ1V2ESon2t8RLvbS5UgFSbXhmFEvk" class="btn-sector" style="border-color: var(--ugt-red);" target="_blank"><i data-lucide="file-down"></i> Calendario 2026 (PDF)</a>
+            <a href="javascript:void(0)" onclick="closeModal('modalCalendario')" class="btn-close">Cerrar</a>
+        </div>
+    </div>
 
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active"><i data-lucide="home"></i><span>Inicio</span></a>
-        <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="nav-item"><i data-lucide="message-square"></i><span>Canal</span></a>
-        <a href="https://www.fesmcugt.org" class="nav-item"><i data-lucide="globe"></i><span>Web</span></a>
-        <a href="https://www.ugt.es/ficha-de-afiliacion" class="nav-item"><i data-lucide="user-plus"></i><span>Afiliación</span></a>
-    </nav>
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active"><i data-lucide="home"></i><span>Inicio</span></a>
+        <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="nav-item"><i data-lucide="message-square"></i><span>Canal</span></a>
+        <a href="https://www.fesmcugt.org" class="nav-item"><i data-lucide="globe"></i><span>Web</span></a>
+        <a href="https://www.ugt.es/ficha-de-afiliacion" class="nav-item"><i data-lucide="user-plus"></i><span>Afiliación</span></a>
+    </nav>
 
-    <script src="script.js"></script>
-    <script>lucide.createIcons();</script>
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
 
 
-    <script src="script.js"></script>
-    <script>lucide.createIcons();</script>
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>
-
