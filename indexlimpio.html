@@ -2,122 +2,146 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FeSMC UGT CLM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FeSMC UGT CLM - Área de Servicio</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        :root { 
-            --ugt-red: #e30613; 
-        }
-        
-        body { 
-            font-family: 'Segoe UI', system-ui, sans-serif; 
-            background-color: #dee2e6; /* Fondo gris para PC */
-            margin: 0; 
-            padding: 0; 
-            display: flex; 
-            justify-content: center; /* Centra la "app" en el escritorio */
-        }
-
-        /* El contenedor que limita la anchura a tipo móvil */
-        .app-container { 
-            background-color: white;
-            width: 100%;
-            max-width: 500px; 
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-
-        header {
-            text-align: center;
-            background: white;
-            width: 100%;
-        }
-
-        .red-block {
-            background-color: var(--ugt-red);
-            color: white;
-            padding: 25px 15px;
-            border-radius: 0 0 30px 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .main-content {
-            padding: 25px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        /* Estilo de tus botones actuales */
-        .nav-button {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-decoration: none;
-            color: #333;
-            font-weight: 600;
-            border: 1px solid #eee;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-        }
-        
-        .nav-button:active { transform: scale(0.98); }
-        
-        .nav-button i { color: var(--ugt-red); }
-    </style>
 </head>
-<body>
+<body style="background-color: #dee2e6; margin: 0; display: flex; justify-content: center; font-family: 'Inter', sans-serif;">
 
-<div class="app-container">
-    <header>
+<div style="background-color: white; width: 100%; max-width: 500px; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; position: relative; padding-bottom: 80px;">
+
+    <header style="text-align: center; background: white; width: 100%;">
         <div style="padding: 20px 0;">
-            <img src="img/logo-ugt.png" alt="Logo UGT" style="width: 190px; height: auto;">
+            <img src="img/logo-ugt.png" alt="Logo FeSMC UGT CLM" style="width: 190px; height: auto;">
         </div>
-        <div class="red-block">
-            <h1 style="margin: 0; font-size: 1.6rem; text-transform: uppercase;">FeSMC UGT CLM</h1>
-            <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 1rem;">Tu sindicato en el sector servicios</p>
+        <div style="background-color: #e30613; color: white; padding: 25px 15px; border-radius: 0 0 30px 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <h1 style="margin: 0; font-size: 1.6rem; text-transform: uppercase; font-weight: 800;">FeSMC UGT CLM</h1>
+            <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 1rem;">Tu sindicato en el móvil</p>
         </div>
     </header>
 
-    <main class="main-content">
-        
-        <a href="calendario.html" class="nav-button">
-            <i data-lucide="calendar"></i>
-            <span>Calendario Laboral 2026</span>
-        </a>
+    <section class="hero" style="padding: 20px; text-align: center;">
+        <p style="margin-bottom: 15px; font-weight: 600;">Servicios, Movilidad y Consumo en Castilla-La Mancha</p>
+        <a href="https://www.ugt.es/ficha-de-afiliacion" class="cta-button" style="display: block; text-decoration: none; background: #e30613; color: white; padding: 15px; border-radius: 12px; font-weight: 800; text-align: center;">¡AFÍLIATE AHORA!</a>
+    </section>
 
-        <a href="#" class="nav-button">
-            <i data-lucide="calculator"></i>
-            <span>Calculadora de Atrasos</span>
-        </a>
+    <div class="container" style="padding: 0 20px;">
+        <h2 class="section-title">Canales Oficiales</h2>
+        <div class="social-bar">
+            <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="social-card"><i data-lucide="message-circle"></i></a>
+            <a href="https://www.instagram.com/fesmcugtclm" class="social-card"><i data-lucide="instagram"></i></a>
+            <a href="https://www.tiktok.com/@fesmcugtclm" class="social-card"><i data-lucide="video"></i></a>
+        </div>
 
-        <a href="sedes.html" class="nav-button">
-            <i data-lucide="map-pin"></i>
-            <span>Nuestras Sedes</span>
-        </a>
+        <h2 class="section-title">Herramientas y Sedes</h2>
+        <div class="grid">
+            <div class="card" onclick="openModal('modalSedes')">
+                <i data-lucide="map-pin"></i>
+                <div class="card-content"><h3>Sedes UGT</h3><p>Contacto directo</p></div>
+            </div>
+            <div class="card" onclick="openModal('modalNovedades')" style="border-bottom: 3px solid #e30613;">
+                <i data-lucide="rss"></i>
+                <div class="card-content"><h3>Novedades</h3><p>Última hora sindical</p></div>
+            </div>
+            <div class="card" onclick="openModal('modalCalculadoras')">
+                <i data-lucide="calculator"></i>
+                <div class="card-content"><h3>Calculadoras</h3><p>Sueldos y despidos</p></div>
+            </div>
+            <div class="card" onclick="openModal('modalConvenios')">
+                <i data-lucide="book-open"></i>
+                <div class="card-content"><h3>Convenios</h3><p>Tu sector en PDF</p></div>
+            </div>
+            <div class="card" onclick="openModal('modalModelos')">
+                <i data-lucide="file-text"></i>
+                <div class="card-content"><h3>Modelos</h3><p>Escritos y modelos </p></div>
+            </div>
+        </div>
 
-        <a href="#" class="nav-button">
-            <i data-lucide="phone"></i>
-            <span>Contacto Directo</span>
-        </a>
+        <h2 class="section-title">Calendario Laboral 2026</h2>
+        <div class="card" onclick="window.location.href='calendario.html'" style="width: 100%; margin-bottom: 25px; display: flex; align-items: center; cursor: pointer; border-left: 5px solid #e30613;">
+            <div style="padding: 20px; color: #e30613;">
+                <i data-lucide="calendar-days" style="width: 35px; height: 35px;"></i>
+            </div>
+            <div class="card-content" style="padding: 10px 0;">
+                <h3 style="margin:0; font-weight: 800;">Festivos y Aperturas 2026</h3>
+                <p style="margin:0; font-size: 0.9rem; opacity: 0.7;">Consulta los días no laborables en CLM</p>
+            </div>
+        </div>
 
-    </main>
+        <h2 class="section-title">Nuestras APPs Oficiales</h2>
+        <div class="grid">
+            <div class="card" onclick="openModal('modalRegistra')" style="display: flex; flex-direction: column; align-items: center; padding: 15px;">
+                <img src="img/registra.png" alt="UGT Registra" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; border-radius: 12px;">
+                <div class="card-content" style="text-align: center;">
+                    <h3 style="font-size: 1rem; margin-bottom: 4px;">UGT Registra</h3>
+                    <p style="font-size: 0.8rem; color: #666;">Control jornada</p>
+                </div>
+            </div>
 
-    <footer style="text-align: center; padding: 20px; color: #888; font-size: 0.8rem; margin-top: auto;">
-        &copy; 2026 FeSMC UGT Castilla-La Mancha
-    </footer>
+            <div class="card" onclick="openModal('modalAfiliado')" style="display: flex; flex-direction: column; align-items: center; padding: 15px;">
+                <img src="img/ugtapp.png" alt="UGT App" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; border-radius: 12px;">
+                <div class="card-content" style="text-align: center;">
+                    <h3 style="font-size: 1rem; margin-bottom: 4px;">App Afiliado</h3>
+                    <p style="font-size: 0.8rem; color: #666;">Gestión personal</p>
+                </div>
+            </div>
+        </div>
+
+        <footer style="margin-top: 40px; text-align: center; padding-bottom: 40px;">
+            <p><strong>FeSMC UGT Castilla-La Mancha</strong></p>
+        </footer>
+    </div>
+
+    <nav class="bottom-nav" style="max-width: 500px; left: 50%; transform: translateX(-50%);">
+        <a href="#" class="nav-item active"><i data-lucide="home"></i><span>Inicio</span></a>
+        <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="nav-item"><i data-lucide="message-square"></i><span>Canal</span></a>
+        <a href="https://www.fesmcugt.org" class="nav-item"><i data-lucide="globe"></i><span>Web</span></a>
+        <a href="https://www.ugt.es/ficha-de-afiliacion" class="nav-item"><i data-lucide="user-plus"></i><span>Afiliación</span></a>
+    </nav>
+
+</div> <div id="modalNovedades" class="modal-overlay" onclick="closeModalExterno(event, 'modalNovedades')">
+    <div class="modal-content">
+        <h2><i data-lucide="newspaper"></i> Actualidad Sindical</h2>
+        <div class="sector-list">
+            <a href="https://x.com/ugt_comunica" class="btn-sector" target="_blank">
+                <i data-lucide="twitter"></i> 
+                <div class="btn-content"><strong>UGT Comunica</strong><small>Nacional</small></div>
+            </a>
+            <a href="https://twitter.com/fesmc_ugt" class="btn-sector" target="_blank">
+                <i data-lucide="twitter"></i> 
+                <div class="btn-content"><strong>FeSMC UGT Federal</strong><small>Sectores</small></div>
+            </a>
+            <a href="https://www.ugtclm.es" class="btn-sector" target="_blank">
+                <i data-lucide="globe"></i> 
+                <div class="btn-content"><strong>UGT CLM</strong><small>Región</small></div>
+            </a>
+        </div>
+        <a href="javascript:void(0)" onclick="closeModal('modalNovedades')" class="btn-close">Cerrar</a>
+    </div>
 </div>
 
-<script>
-    // Iniciar iconos
-    lucide.createIcons();
-</script>
+<div id="modalSedes" class="modal-overlay" onclick="closeModalExterno(event, 'modalSedes')">
+    <div class="modal-content">
+        <h2><i data-lucide="map-pin"></i> Sedes UGT CLM</h2>
+        <button class="btn-provincia" onclick="toggleSedes('sedesAlbacete')">Albacete <i data-lucide="chevron-down"></i></button>
+        <div id="sedesAlbacete" class="lista-sedes">
+            <div class="sede-item" style="border-left: 4px solid #666;">
+                <h4>UGT Unión Provincial Albacete</h4><p>C/ Luis Rosales, 7</p>
+                <div class="sede-actions"><a href="tel:967215514" class="btn-action">967 215 514</a></div>
+            </div>
+            <div class="sede-item" style="border-left: 4px solid #e30613;">
+                <h4 style="color:#e30613">FeSMC UGT Albacete</h4><p>C/ Luis Rosales, 7 - Planta 1</p>
+                <div class="sede-actions"><a href="tel:967521850" class="btn-action" style="background:#e30613;color:white">967 521 850</a></div>
+            </div>
+        </div>
+        <a href="javascript:void(0)" onclick="closeModal('modalSedes')" class="btn-close">Cerrar</a>
+    </div>
+</div>
 
+<script src="script.js"></script>
+<script>lucide.createIcons();</script>
 </body>
 </html>
