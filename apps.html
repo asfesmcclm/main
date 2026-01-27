@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Apps Oficiales - UGT</title>
+    <title>Apps Oficiales - FeSMC UGT CLM</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -11,40 +12,55 @@
 <body style="background-color: #dee2e6; margin: 0; display: flex; justify-content: center; font-family: 'Inter', sans-serif;">
 
 <div style="background-color: white; width: 100%; max-width: 500px; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column;">
-    
-    <div style="padding: 20px; text-align: center; border-bottom: 1px solid #eee;">
-        <h1 style="margin: 0; font-size: 1.4rem; color: #e30613;">Apps Oficiales</h1>
+
+    <div style="text-align: center; background: white; padding: 20px 0;">
+        <img src="img/logo-ugt.png" alt="Logo FeSMC UGT CLM" style="width: 190px; height: auto; display: block; margin: 0 auto;">
     </div>
 
-    <div class="container" style="padding: 20px 15px;">
+    <div style="background-color: #e30613; color: white; text-align: center; padding: 30px 20px; border-radius: 0 0 40px 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin-bottom: 25px; position: relative;">
+        <a href="index.html" style="position: absolute; left: 20px; top: 35px; color: white; text-decoration: none; opacity: 0.8;">
+            <i data-lucide="chevron-left" style="width: 30px; height: 30px;"></i>
+        </a>
+        <h1 style="margin: 0; font-size: 1.6rem; font-weight: 800; line-height: 1.2;">Área Digital</h1>
+        <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 0.95rem;">Descarga nuestras Apps Oficiales</p>
+    </div>
+
+    <div class="container" style="padding: 0 15px 100px 15px;">
         
-        <div class="card" onclick="openModal('modalRegistra')" style="display: flex; align-items: center; margin-bottom: 15px; cursor: pointer;">
-            <img src="img/registra.png" style="width: 60px; height: 60px; border-radius: 12px; margin-right: 15px;">
+        <div class="card" onclick="openModal('modalRegistra')" style="display: flex; align-items: center; margin-bottom: 15px; cursor: pointer; padding: 20px;">
+            <img src="img/registra.png" style="width: 65px; height: 65px; border-radius: 14px; margin-right: 15px; object-fit: cover;">
             <div class="card-content">
-                <h3 style="margin:0;">UGT Registra</h3>
-                <p style="margin:0; font-size: 0.85rem; color: #666;">Control de jornada y horario laboral</p>
+                <h3 style="margin:0; font-size: 1.1rem;">UGT Registra</h3>
+                <p style="margin:4px 0 0; font-size: 0.85rem; color: #666;">Control de jornada y horario laboral obligatorio.</p>
             </div>
         </div>
 
-        <div class="card" onclick="openModal('modalAfiliado')" style="display: flex; align-items: center; margin-bottom: 25px; cursor: pointer;">
-            <img src="img/ugtapp.png" style="width: 60px; height: 60px; border-radius: 12px; margin-right: 15px;">
+        <div class="card" onclick="openModal('modalAfiliado')" style="display: flex; align-items: center; margin-bottom: 25px; cursor: pointer; padding: 20px;">
+            <img src="img/ugtapp.png" style="width: 65px; height: 65px; border-radius: 14px; margin-right: 15px; object-fit: cover;">
             <div class="card-content">
-                <h3 style="margin:0;">App del Afiliado</h3>
-                <p style="margin:0; font-size: 0.85rem; color: #666;">Carnet digital, servicios y gestiones</p>
+                <h3 style="margin:0; font-size: 1.1rem;">App del Afiliado</h3>
+                <p style="margin:4px 0 0; font-size: 0.85rem; color: #666;">Carnet digital y gestión de datos sindicales.</p>
             </div>
         </div>
 
-        <a href="index.html" style="display: block; text-align: center; padding: 15px; background: #666; color: white; border-radius: 12px; text-decoration: none; font-weight: bold;">Volver al Inicio</a>
+        <a href="index.html" style="display: block; text-align: center; padding: 15px; color: #666; text-decoration: none; font-size: 0.9rem; font-weight: 600;">
+            <i data-lucide="arrow-left" style="width: 16px; vertical-align: middle;"></i> Volver al Inicio
+        </a>
     </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item"><i data-lucide="home"></i><span>Inicio</span></a>
+        <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="nav-item"><i data-lucide="message-square"></i><span>Canal</span></a>
+        <a href="https://www.fesmcugt.org" class="nav-item"><i data-lucide="globe"></i><span>Web</span></a>
+    </nav>
 
     <div id="modalRegistra" class="modal-overlay" onclick="closeModalExterno(event, 'modalRegistra')">
         <div class="modal-content">
             <img src="img/registra.png" style="width: 70px; margin: 0 auto 15px; display: block; border-radius: 15px;">
             <h2>UGT Registra</h2>
-            <p>Descarga la aplicación oficial para el registro de jornada:</p>
             <div class="sector-list">
-                <a href="https://play.google.com/store/apps/details?id=com.ugt.registra" class="btn-sector" target="_blank"><i data-lucide="play"></i> Android (Google Play)</a>
-                <a href="https://apps.apple.com/es/app/ugt-registra/id1473634563" class="btn-sector" target="_blank"><i data-lucide="apple"></i> iOS (App Store)</a>
+                <a href="https://play.google.com/store/search?q=ugt%20registra&c=apps" class="btn-sector" target="_blank"><i data-lucide="play"></i> Android (Google Play)</a>
+                <a href="https://apps.apple.com/es/app/ugt-registra/id6737269009" class="btn-sector" target="_blank"><i data-lucide="apple"></i> iOS (iPhone)</a>
             </div>
             <a href="javascript:void(0)" onclick="closeModal('modalRegistra')" class="btn-close">Cerrar</a>
         </div>
@@ -54,27 +70,26 @@
         <div class="modal-content">
             <img src="img/ugtapp.png" style="width: 70px; margin: 0 auto 15px; display: block; border-radius: 15px;">
             <h2>App del Afiliado</h2>
+            <div style="background-color: #f8f9fa; border-left: 4px solid #e30613; padding: 12px; margin: 15px 0; text-align: left;">
+                <p style="margin: 0; font-size: 0.8rem; color: #333; line-height: 1.4;">
+                    <strong>Credenciales:</strong> App exclusiva para la afiliación. Si no tienes tus claves, pulsa el botón rojo para solicitarlas.
+                </p>
+            </div>
             <div class="sector-list">
-                <a href="https://play.google.com/store/apps/details?id=org.ugt.app" class="btn-sector" target="_blank"><i data-lucide="play"></i> Descargar para Android</a>
-                <a href="https://apps.apple.com/es/app/ugt-app/id1450125892" class="btn-sector" target="_blank"><i data-lucide="apple"></i> Descargar para iPhone</a>
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
-                <a href="https://miau.ugt.org/solicitud-credenciales" class="btn-sector" style="border-color: #e30613; color: #e30613;" target="_blank">
-                    <i data-lucide="key"></i> Solicitar Credenciales
+                <a href="https://play.google.com/store/apps/details?id=com.app.ugt" class="btn-sector" target="_blank"><i data-lucide="play"></i> Descargar para Android</a>
+                <a href="https://apps.apple.com/es/app/ugt-app/id1531325029" class="btn-sector" target="_blank"><i data-lucide="apple"></i> Descargar para iPhone</a>
+                <div style="margin: 8px 0;"></div>
+                <a href="https://www.ugt.es/ugt-app" class="btn-sector" style="border-color: #e30613; color: #e30613; background: #fff5f5; font-weight: 800;" target="_blank">
+                    <i data-lucide="form-input"></i> SOLICITAR CLAVES AQUÍ
                 </a>
             </div>
             <a href="javascript:void(0)" onclick="closeModal('modalAfiliado')" class="btn-close">Volver</a>
         </div>
     </div>
 
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-item"><i data-lucide="home"></i><span>Inicio</span></a>
-        <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="nav-item"><i data-lucide="message-square"></i><span>Canal</span></a>
-        <a href="https://www.fesmcugt.org" class="nav-item"><i data-lucide="globe"></i><span>Web</span></a>
-    </nav>
 </div>
 
 <script>
-    // Funciones básicas para los modales
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
     function closeModalExterno(e, id) { if (e.target.id === id) closeModal(id); }
