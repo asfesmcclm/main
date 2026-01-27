@@ -33,57 +33,76 @@
             <a href="https://www.tiktok.com/@fesmcugtclm" class="social-card"><i data-lucide="video"></i></a>
         </div>
 
-        <h2 class="section-title">Herramientas y Sedes</h2>
-        <div class="grid" style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 15px !important;">
+       <h2 class="section-title">Herramientas y Gestión</h2>
+        <div class="grid" style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 15px !important; margin-bottom: 25px;">
             <div class="card" onclick="openModal('modalSedes')">
                 <i data-lucide="map-pin"></i>
                 <div class="card-content"><h3>Sedes UGT</h3><p>Contacto directo</p></div>
             </div>
-            <div class="card" onclick="openModal('modalNovedades')" style="border-bottom: 3px solid var(--ugt-red);">
+            <div class="card" onclick="openModal('modalNovedades')" style="border-bottom: 3px solid #e30613;">
                 <i data-lucide="rss"></i>
-                <div class="card-content"><h3>Novedades</h3><p>Última hora sindical</p></div>
+                <div class="card-content"><h3>Novedades</h3><p>Última hora</p></div>
             </div>
             <div class="card" onclick="openModal('modalCalculadoras')">
                 <i data-lucide="calculator"></i>
-                <div class="card-content"><h3>Calculadoras</h3><p>Sueldos y despidos</p></div>
+                <div class="card-content"><h3>Calculadoras</h3><p>Sueldos y despido</p></div>
             </div>
             <div class="card" onclick="openModal('modalConvenios')">
                 <i data-lucide="book-open"></i>
                 <div class="card-content"><h3>Convenios</h3><p>Tu sector en PDF</p></div>
             </div>
-            <div class="card" onclick="openModal('modalModelos')">
-                <i data-lucide="file-text"></i>
-                <div class="card-content"><h3>Modelos</h3><p>Escritos y modelos</p></div>
+            <div class="card" onclick="openModal('modalGuias')">
+                <i data-lucide="library"></i>
+                <div class="card-content"><h3>Guías UGT</h3><p>Derechos y ayudas</p></div>
+            </div>
+            <div class="card" onclick="window.location.href='apps.html'" style="background: #fff5f5; border: 1px solid #e30613;">
+                <i data-lucide="smartphone" style="color: #e30613;"></i>
+                <div class="card-content"><h3 style="color: #e30613;">Apps UGT</h3><p>Descarga directa</p></div>
             </div>
         </div>
-       <h2 class="section-title">Calendario Laboral 2026</h2>
-<div class="card" onclick="window.location.href='calendario.html'" style="width: 100%; margin-bottom: 25px; display: flex; align-items: center; cursor: pointer; border-left: 5px solid var(--ugt-red);">
-    <div style="padding: 20px; color: var(--ugt-red);">
-        <i data-lucide="calendar-days" style="width: 35px; height: 35px;"></i>
-    </div>
-    <div class="card-content" style="padding: 10px 0;">
-        <h3 style="margin:0; font-weight: 800;">Festivos y Aperturas 2026</h3>
-        <p style="margin:0; font-size: 0.9rem; opacity: 0.7;">Consulta los días no laborables en CLM</p>
-    </div>
-</div>
 
- <h2 class="section-title">Servicios Digitales</h2>
-<div class="card" onclick="window.location.href='apps.html'" style="width: 100%; margin-bottom: 25px; display: flex; align-items: center; cursor: pointer; border-left: 5px solid #e30613; background: #fff; overflow: hidden;">
-    <div style="display: flex; padding: 15px; gap: 8px;">
-        <img src="img/registra.png" style="width: 45px; height: 45px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-        <img src="img/ugtapp.png" style="width: 45px; height: 45px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-    </div>
-    <div class="card-content" style="padding: 10px 0;">
-        <h3 style="margin:0; font-weight: 800;">Nuestras APPs Oficiales</h3>
-        <p style="margin:0; font-size: 0.85rem; opacity: 0.7;">Instala UGT Registra y App del Afiliado</p>
-    </div>
-    <div style="margin-left: auto; padding-right: 15px; color: #ccc;">
-        <i data-lucide="chevron-right"></i>
-    </div>
-</div>
-    <footer style="text-align: center; padding: 20px 0; margin-top: auto;">
-        <p style="font-size: 0.9rem; color: #666;"><strong>FeSMC UGT Castilla-La Mancha</strong></p>
-    </footer>
+        <h2 class="section-title">Calendario Laboral 2026</h2>
+        <div class="card" onclick="window.location.href='calendario.html'" style="width: 100%; margin-bottom: 35px; display: flex; align-items: center; cursor: pointer; border-left: 5px solid #e30613;">
+            <div style="padding: 20px; color: #e30613;">
+                <i data-lucide="calendar-days" style="width: 35px; height: 35px;"></i>
+            </div>
+            <div class="card-content" style="padding: 10px 0;">
+                <h3 style="margin:0; font-weight: 800;">Festivos y Aperturas 2026</h3>
+                <p style="margin:0; font-size: 0.9rem; opacity: 0.7;">Consulta los días no laborables en CLM</p>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 20px 0; border-top: 1px solid #eee; margin-top: 20px;">
+            <p style="font-size: 0.9rem; color: #666;"><strong>FeSMC UGT Castilla-La Mancha</strong></p>
+        </footer>
+
+<div id="modalGuias" class="modal-overlay" onclick="closeModalExterno(event, 'modalGuias')">
+        <div class="modal-content">
+            <h2 style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <i data-lucide="library"></i> Guías Laborales
+            </h2>
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">
+                Manuales prácticos para resolver tus dudas sobre derechos y normativa:
+            </p>
+            
+            <div class="sector-list">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; text-align: left;">
+                    <div style="font-size: 0.8rem; color: #444;"><i data-lucide="check" style="width:14px; color:#e30613; vertical-align:middle;"></i> Permisos</div>
+                    <div style="font-size: 0.8rem; color: #444;"><i data-lucide="check" style="width:14px; color:#e30613; vertical-align:middle;"></i> Salud Laboral</div>
+                    <div style="font-size: 0.8rem; color: #444;"><i data-lucide="check" style="width:14px; color:#e30613; vertical-align:middle;"></i> Horas Extra</div>
+                    <div style="font-size: 0.8rem; color: #444;"><i data-lucide="check" style="width:14px; color:#e30613; vertical-align:middle;"></i> Excedencias</div>
+                    <div style="font-size: 0.8rem; color: #444;"><i data-lucide="check" style="width:14px; color:#e30613; vertical-align:middle;"></i> Conciliación</div>
+                    <div style="font-size: 0.8rem; color: #444;"><i data-lucide="check" style="width:14px; color:#e30613; vertical-align:middle;"></i> Igualdad</div>
+                </div>
+
+                <a href="https://www.fesmcugt.org/libreria/guias" class="btn-sector" style="border-color: #e30613; background: #fff5f5; font-weight: 700;" target="_blank">
+                    <i data-lucide="external-link"></i> ACCEDER A LIBRERÍA
+                </a>
+            </div>
+            
+            <a href="javascript:void(0)" onclick="closeModal('modalGuias')" class="btn-close" style="margin-top: 15px;">Volver</a>
+        </div>
+    </div>        
 
     <div id="modalNovedades" class="modal-overlay" onclick="closeModalExterno(event, 'modalNovedades')">
         <div class="modal-content">
