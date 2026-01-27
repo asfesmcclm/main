@@ -11,24 +11,21 @@
 </head>
 <body style="background-color: #dee2e6; margin: 0; display: flex; justify-content: center; font-family: 'Inter', sans-serif;">
 
-<div style="background-color: white; width: 100%; max-width: 500px; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; position: relative; padding-bottom: 80px;">
+<div style="background-color: white; width: 100%; max-width: 500px; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column;">
 
-    <header style="text-align: center; background: white; width: 100%;">
-        <div style="padding: 20px 0;">
-            <img src="img/logo-ugt.png" alt="Logo FeSMC UGT CLM" style="width: 190px; height: auto;">
-        </div>
-        <div style="background-color: #e30613; color: white; padding: 25px 15px; border-radius: 0 0 30px 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <h1 style="margin: 0; font-size: 1.6rem; text-transform: uppercase; font-weight: 800;">FeSMC UGT CLM</h1>
-            <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 1rem;">Tu sindicato en el móvil</p>
-        </div>
-    </header>
+    <div style="text-align: center; background: white; padding: 20px 0;">
+        <img src="img/logo-ugt.png" alt="Logo FeSMC UGT CLM" style="width: 190px; height: auto; display: block; margin: 0 auto;">
+    </div>
 
-    <section class="hero" style="padding: 20px; text-align: center;">
-        <p style="margin-bottom: 15px; font-weight: 600;">Servicios, Movilidad y Consumo en Castilla-La Mancha</p>
-        <a href="https://www.ugt.es/ficha-de-afiliacion" class="cta-button" style="display: block; text-decoration: none; background: #e30613; color: white; padding: 15px; border-radius: 12px; font-weight: 800; text-align: center;">¡AFÍLIATE AHORA!</a>
-    </section>
+    <div style="background-color: #e30613; color: white; text-align: center; padding: 35px 20px; border-radius: 0 0 40px 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin-bottom: 25px;">
+        <h1 style="margin: 0; font-size: 1.8rem; font-weight: 800; line-height: 1.2;">Tu sindicato en el móvil</h1>
+        <p style="margin: 10px 0 25px 0; opacity: 0.95; font-size: 1rem;">Servicios, Movilidad y Consumo en Castilla-La Mancha</p>
+        <a href="https://www.ugt.es/ficha-de-afiliacion" style="display: inline-block; background: white; color: #e30613; text-decoration: none; padding: 14px 35px; border-radius: 50px; font-weight: 800; text-transform: uppercase; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+            ¡AFÍLIATE AHORA!
+        </a>
+    </div>
 
-    <div class="container" style="padding: 0 20px;">
+    <div class="container" style="padding: 0 15px;">
         <h2 class="section-title">Canales Oficiales</h2>
         <div class="social-bar">
             <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="social-card"><i data-lucide="message-circle"></i></a>
@@ -37,7 +34,7 @@
         </div>
 
         <h2 class="section-title">Herramientas y Sedes</h2>
-        <div class="grid">
+        <div class="grid" style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 15px !important;">
             <div class="card" onclick="openModal('modalSedes')">
                 <i data-lucide="map-pin"></i>
                 <div class="card-content"><h3>Sedes UGT</h3><p>Contacto directo</p></div>
@@ -56,7 +53,7 @@
             </div>
             <div class="card" onclick="openModal('modalModelos')">
                 <i data-lucide="file-text"></i>
-                <div class="card-content"><h3>Modelos</h3><p>Escritos y modelos </p></div>
+                <div class="card-content"><h3>Modelos</h3><p>Escritos y modelos</p></div>
             </div>
         </div>
 
@@ -65,79 +62,44 @@
             <div style="padding: 20px; color: #e30613;">
                 <i data-lucide="calendar-days" style="width: 35px; height: 35px;"></i>
             </div>
-            <div class="card-content" style="padding: 10px 0;">
+            <div class="card-content">
                 <h3 style="margin:0; font-weight: 800;">Festivos y Aperturas 2026</h3>
                 <p style="margin:0; font-size: 0.9rem; opacity: 0.7;">Consulta los días no laborables en CLM</p>
             </div>
         </div>
 
         <h2 class="section-title">Nuestras APPs Oficiales</h2>
-        <div class="grid">
-            <div class="card" onclick="openModal('modalRegistra')" style="display: flex; flex-direction: column; align-items: center; padding: 15px;">
-                <img src="img/registra.png" alt="UGT Registra" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; border-radius: 12px;">
-                <div class="card-content" style="text-align: center;">
-                    <h3 style="font-size: 1rem; margin-bottom: 4px;">UGT Registra</h3>
-                    <p style="font-size: 0.8rem; color: #666;">Control jornada</p>
-                </div>
+        <div class="grid" style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 15px !important; margin-bottom: 40px;">
+            <div class="card" onclick="openModal('modalRegistra')" style="display: flex; flex-direction: column; align-items: center; padding: 15px; text-align: center;">
+                <img src="img/registra.png" alt="UGT Registra" style="width: 60px; height: 60px; border-radius: 12px; margin-bottom: 10px;">
+                <div class="card-content"><h3>UGT Registra</h3><p>Control jornada</p></div>
             </div>
-
-            <div class="card" onclick="openModal('modalAfiliado')" style="display: flex; flex-direction: column; align-items: center; padding: 15px;">
-                <img src="img/ugtapp.png" alt="UGT App" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; border-radius: 12px;">
-                <div class="card-content" style="text-align: center;">
-                    <h3 style="font-size: 1rem; margin-bottom: 4px;">App Afiliado</h3>
-                    <p style="font-size: 0.8rem; color: #666;">Gestión personal</p>
-                </div>
+            <div class="card" onclick="openModal('modalAfiliado')" style="display: flex; flex-direction: column; align-items: center; padding: 15px; text-align: center;">
+                <img src="img/ugtapp.png" alt="UGT App" style="width: 60px; height: 60px; border-radius: 12px; margin-bottom: 10px;">
+                <div class="card-content"><h3>App Afiliado</h3><p>Gestión personal</p></div>
             </div>
         </div>
 
-        <footer style="margin-top: 40px; text-align: center; padding-bottom: 40px;">
-            <p><strong>FeSMC UGT Castilla-La Mancha</strong></p>
+        <footer style="text-align: center; padding: 30px 0; border-top: 1px solid #eee;">
+            <p style="font-size: 0.9rem; color: #666; margin: 0;"><strong>FeSMC UGT Castilla-La Mancha</strong></p>
         </footer>
-    </div>
-
-    <nav class="bottom-nav" style="max-width: 500px; left: 50%; transform: translateX(-50%);">
+    </div> <nav class="bottom-nav">
         <a href="#" class="nav-item active"><i data-lucide="home"></i><span>Inicio</span></a>
         <a href="https://whatsapp.com/channel/0029VaCnv8ZLdQeVv1rBV83E" class="nav-item"><i data-lucide="message-square"></i><span>Canal</span></a>
         <a href="https://www.fesmcugt.org" class="nav-item"><i data-lucide="globe"></i><span>Web</span></a>
         <a href="https://www.ugt.es/ficha-de-afiliacion" class="nav-item"><i data-lucide="user-plus"></i><span>Afiliación</span></a>
     </nav>
+</div>
 
-</div> <div id="modalNovedades" class="modal-overlay" onclick="closeModalExterno(event, 'modalNovedades')">
+<div id="modalNovedades" class="modal-overlay" onclick="closeModalExterno(event, 'modalNovedades')">
     <div class="modal-content">
         <h2><i data-lucide="newspaper"></i> Actualidad Sindical</h2>
         <div class="sector-list">
-            <a href="https://x.com/ugt_comunica" class="btn-sector" target="_blank">
-                <i data-lucide="twitter"></i> 
-                <div class="btn-content"><strong>UGT Comunica</strong><small>Nacional</small></div>
-            </a>
-            <a href="https://twitter.com/fesmc_ugt" class="btn-sector" target="_blank">
-                <i data-lucide="twitter"></i> 
-                <div class="btn-content"><strong>FeSMC UGT Federal</strong><small>Sectores</small></div>
-            </a>
-            <a href="https://www.ugtclm.es" class="btn-sector" target="_blank">
-                <i data-lucide="globe"></i> 
-                <div class="btn-content"><strong>UGT CLM</strong><small>Región</small></div>
-            </a>
+            <a href="https://x.com/ugt_comunica" class="btn-sector" target="_blank">UGT Comunica</a>
+            <a href="https://twitter.com/fesmc_ugt" class="btn-sector" target="_blank">FeSMC UGT Federal</a>
+            <a href="https://www.ugtclm.es" class="btn-sector" target="_blank">UGT CLM</a>
         </div>
         <a href="javascript:void(0)" onclick="closeModal('modalNovedades')" class="btn-close">Cerrar</a>
-    </div>
-</div>
-
-<div id="modalSedes" class="modal-overlay" onclick="closeModalExterno(event, 'modalSedes')">
-    <div class="modal-content">
-        <h2><i data-lucide="map-pin"></i> Sedes UGT CLM</h2>
-        <button class="btn-provincia" onclick="toggleSedes('sedesAlbacete')">Albacete <i data-lucide="chevron-down"></i></button>
-        <div id="sedesAlbacete" class="lista-sedes">
-            <div class="sede-item" style="border-left: 4px solid #666;">
-                <h4>UGT Unión Provincial Albacete</h4><p>C/ Luis Rosales, 7</p>
-                <div class="sede-actions"><a href="tel:967215514" class="btn-action">967 215 514</a></div>
-            </div>
-            <div class="sede-item" style="border-left: 4px solid #e30613;">
-                <h4 style="color:#e30613">FeSMC UGT Albacete</h4><p>C/ Luis Rosales, 7 - Planta 1</p>
-                <div class="sede-actions"><a href="tel:967521850" class="btn-action" style="background:#e30613;color:white">967 521 850</a></div>
-            </div>
-        </div>
-        <a href="javascript:void(0)" onclick="closeModal('modalSedes')" class="btn-close">Cerrar</a>
     </div>
 </div>
 
