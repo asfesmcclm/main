@@ -77,12 +77,19 @@ header {
 
 .card {
     background: white;
-    padding: 20px 10px;
-    border-radius: 20px;
+    padding: 25px 15px; /* Más aire interno */
+    border-radius: 24px; /* Un poco más redondeadas */
     text-align: center;
     text-decoration: none;
-    color: #1d1d1b;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    color: #1a1a1a;
+    border: none; /* Sin bordes */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03); /* Sombra muy sutil y amplia */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:active {
+    transform: scale(0.96); /* Efecto de pulsación táctil */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .card i {
