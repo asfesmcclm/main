@@ -223,18 +223,19 @@ header {
    7. MENÚ INFERIOR Y EXTRAS
    ========================================= */
 .bottom-nav {
-    position: fixed;
+    position: fixed; /* Esto lo mantiene fijo abajo */
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); /* Lo centra perfectamente */
     width: 100%;
-    max-width: 500px;
+    max-width: 500px; /* Importante para que no se estire en PC */
     background: white;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     padding: 12px 0 25px 0;
     border-top: 1px solid #eee;
-    z-index: 1000;
+    z-index: 9999; /* Valor muy alto para que nada pase por encima */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.05); /* Sombra hacia arriba para estilo premium */
 }
 
 .nav-item { text-align: center; text-decoration: none; color: #999; }
