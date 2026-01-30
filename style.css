@@ -80,14 +80,22 @@ header {
 
 .card {
     background: white;
-    padding: 25px 15px; /* Más aire interno */
-    border-radius: 24px; /* Un poco más redondeadas */
+    padding: 20px 10px; 
+    border-radius: 24px;
     text-align: center;
     text-decoration: none;
     color: #1a1a1a;
-    border: none; /* Sin bordes */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.03); /* Sombra muy sutil y amplia */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    /* ESTO ES LO QUE ARREGLA EL MARGEN DERECHO */
+    width: 100%; 
+    box-sizing: border-box; /* Fuerza a que el padding no ensanche la tarjeta */
+    
+    border: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+    transition: transform 0.2s ease;
+    
+    /* Evita que el texto largo empuje la tarjeta */
+    overflow: hidden; 
 }
 
 .card:active {
