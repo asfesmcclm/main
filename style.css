@@ -8,9 +8,9 @@
 
 body {
     background-color: var(--bg-light);
-    color: #1a1a1a; /* Negro más profundo */
-    padding-bottom: 100px;
-    -webkit-font-smoothing: antialiased; /* Suaviza la letra en iPhone */
+    color: #1a1a1a;
+    padding-bottom: 120px !important; /* El !important obliga a respetar el espacio */
+    overflow-x: hidden; /* Evita que la página baile de izquierda a derecha */
 }
 
 .container {
@@ -223,19 +223,20 @@ header {
    7. MENÚ INFERIOR Y EXTRAS
    ========================================= */
 .bottom-nav {
-    position: fixed; /* Esto lo mantiene fijo abajo */
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%); /* Lo centra perfectamente */
-    width: 100%;
-    max-width: 500px; /* Importante para que no se estire en PC */
-    background: white;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding: 12px 0 25px 0;
-    border-top: 1px solid #eee;
-    z-index: 9999; /* Valor muy alto para que nada pase por encima */
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.05); /* Sombra hacia arriba para estilo premium */
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 100% !important;
+    max-width: 500px !important;
+    height: 75px; /* Altura fija para que no varíe */
+    background: white !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    padding: 10px 0 20px 0 !important;
+    border-top: 1px solid #eee !important;
+    z-index: 99999 !important; /* Máxima prioridad sobre cualquier animación */
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.1) !important;
 }
 
 .nav-item { text-align: center; text-decoration: none; color: #999; }
