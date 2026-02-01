@@ -111,15 +111,28 @@ Fdo: _________________________
         </div>
     </main>
 </div>
-
 <script>
     lucide.createIcons();
+
     function showTab(tabId) {
+        // 1. Quitar estado activo de todas las pestañas y contenidos
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        
+        // 2. Activar la elegida
         document.getElementById(tabId).classList.add('active');
-        event.currentTarget.classList.add('active');
+        
+        // 3. Marcar el botón como activo (buscamos por el texto o posición)
+        const btnIndex = (tabId === 'guia') ? 0 : 1;
+        document.querySelectorAll('.tab-btn')[btnIndex].classList.add('active');
     }
+
+    // LÓGICA AL CARGAR: Si la URL termina en #modelo, saltamos de pestaña automáticamente
+    window.addEventListener('DOMContentLoaded', () => {
+        if (window.location.hash === '#modelo') {
+            showTab('modelo');
+        }
+    });
 </script>
 </body>
 </html>
