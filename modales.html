@@ -129,14 +129,43 @@
 </div>
 
 <div id="modalConvenios" class="modal-overlay" onclick="closeModalExterno(event, 'modalConvenios')">
-    <div class="modal-content">
+    <div class="modal-content" style="max-height: 85vh; overflow-y: auto;">
         <h2>Convenios Colectivos</h2>
+        
         <div class="sector-list">
-            <div class="sector-label">Castilla-La Mancha</div>
-            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha" class="btn-sector" target="_blank"><i data-lucide="book"></i> Buscador CLM</a>
-            <div class="sector-label">Nacional</div>
-            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=estatal" class="btn-sector" style="border-color:#e30613" target="_blank"><i data-lucide="landmark"></i> Convenios Estatales</a>
+            <div class="sector-label">Buscadores Generales</div>
+            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha" class="btn-sector" target="_blank" style="background: #f8f9fa;">
+                <i data-lucide="search"></i> Todo Castilla-La Mancha
+            </a>
+            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=estatal" class="btn-sector" style="border-color:#e30613; background: #f8f9fa;" target="_blank">
+                <i data-lucide="landmark"></i> Todo Estatal (Nacional)
+            </a>
+
+            <div class="sector-divider" style="margin: 20px 0; border-top: 1px solid #eee;"></div>
+
+            <div class="sector-label">Sectores Castilla-La Mancha</div>
+            
+            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=carreteras-urbanos-y-logistica" class="btn-sector" target="_blank">
+                <i data-lucide="truck"></i> Carreteras, Urbanos y Logística
+            </a>
+
+            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=comercio-y-grandes-almacenes" class="btn-sector" target="_blank">
+                <i data-lucide="shopping-cart"></i> Comercio y G. Almacenes
+            </a>
+
+            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=hosteleria-restauracion-social-y-turismo" class="btn-sector" target="_blank">
+                <i data-lucide="utensils"></i> Hostelería y Turismo
+            </a>
+
+            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_sector_cat=limpieza&documento_territorio_cat=castilla-la-mancha" class="btn-sector" target="_blank">
+                <i data-lucide="sparkles"></i> Limpieza
+            </a>
+
+            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha&documento_sector_cat=comunicaciones-y-cultura" class="btn-sector" target="_blank">
+                <i data-lucide="clapperboard"></i> Comunicaciones y Cultura
+            </a>
         </div>
-        <a href="javascript:void(0)" onclick="closeModal('modalConvenios')" class="btn-close">Cerrar</a>
+        
+        <a href="javascript:void(0)" onclick="closeModal('modalConvenios')" class="btn-close" style="margin-top: 20px;">Cerrar</a>
     </div>
 </div>
