@@ -174,39 +174,63 @@
             </p>
         </div>
 
+<div id="modalModelos" class="modal-overlay" onclick="closeModalExterno(event, 'modalModelos')">
+    <div class="modal-content" style="max-height: 85vh; overflow-y: auto;">
+        <h2><i data-lucide="file-pen"></i> Modelos y Escritos</h2>
+        
+        <div style="background: #fff5f5; border-left: 4px solid #e30613; padding: 15px; margin-bottom: 20px; border-radius: 4px; text-align: left;">
+            <p style="font-size: 0.85rem; color: #cc0000; margin: 0; font-weight: 700;">
+                <i data-lucide="alert-triangle" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;"></i> IMPORTANTE:
+            </p>
+            <p style="font-size: 0.82rem; color: #444; margin: 5px 0 0 0; line-height: 1.4;">
+                Estos modelos son orientativos. Antes de entregarlos, <strong>consulta con tu delegado/a o acude a tu sede de UGT más cercana</strong> para asegurar su correcta aplicación.
+            </p>
+        </div>
+
         <div class="sector-list">
-            <div class="sector-label">DOCUMENTOS DESTACADOS</div>
-            
+            <div class="sector-label">CONCILIACIÓN VIDA LABORAL</div>
             <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos/escritos-conciliaci%C3%B3n" 
                class="btn-sector" target="_blank" 
                style="border: 2px solid #e30613; background: #fff; font-weight: 700; color: #e30613; margin-bottom: 8px;">
-                <i data-lucide="users"></i> Conciliación Vida Laboral
+                <i data-lucide="users"></i> Acceder a Modelos de Conciliación
             </a>
 
-            <div style="background: #fdfdfd; border: 1px solid #eee; padding: 10px; border-radius: 8px; margin-bottom: 15px;">
-                <p style="font-size: 0.75rem; color: #777; margin: 0 0 5px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Encontrarás modelos para:</p>
-                <ul style="margin: 0; padding-left: 18px; font-size: 0.75rem; color: #555; line-height: 1.5;">
+            <div style="background: #fdfdfd; border: 1px solid #eee; padding: 10px; border-radius: 8px; margin-bottom: 20px;">
+                <p style="font-size: 0.72rem; color: #777; margin: 0 0 5px 0; font-weight: 600; text-transform: uppercase;">Contenido destacado:</p>
+                <ul style="margin: 0; padding-left: 18px; font-size: 0.72rem; color: #555; line-height: 1.4;">
                     <li>Permiso Parental (8 semanas) - Art. 48.bis ET</li>
-                    <li>Adaptación de jornada (34.8)</li>
-                    <li>Permiso por lactancia y acumulación</li>
-                    <li>Reducción de jornada por guarda legal, etc...</li>
+                    <li>Adaptación de jornada (34.8 ET)</li>
+                    <li>Lactancia (Acumulación y Retorno)</li>
+                    <li>Reducción de jornada por Guarda Legal, etc...</li>
                 </ul>
             </div>
 
-            <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos/cume-prestaci%C3%B3n-menor-enfermedad-grave" 
-               class="btn-sector" target="_blank" 
-               style="border: 1px solid #ddd; background: #fff; font-weight: 600; color: #444;">
-                <i data-lucide="heart-pulse" style="color: #e30613;"></i> CUME - Menores con enfermedad grave
-            </a>
+            <div class="sector-label">CUME - ENFERMEDAD GRAVE MENORES</div>
+            <div style="display: flex; flex-direction: column; gap: 8px; background: #f8f9fa; padding: 10px; border-radius: 8px; border: 1px solid #e9ecef;">
+                
+                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos/cume-prestaci%C3%B3n-menor-enfermedad-grave" 
+                   class="btn-sector" target="_blank" 
+                   style="background: #fff; margin: 0; font-size: 0.85rem; border: 1px solid #dee2e6;">
+                    <i data-lucide="info" style="color: #0056b3;"></i> Descripción y Requisitos CUME
+                </a>
 
-            <div class="sector-divider" style="margin: 20px 0; border-top: 1px solid #eee;"></div>
+                <a href="https://sites.google.com/view/borradordocumentosfesmcclm/documentos/cume-prestaci%C3%B3n-menor-enfermedad-grave/modelo-solicitud" 
+                   class="btn-sector" target="_blank" 
+                   style="background: #fff; margin: 0; font-size: 0.85rem; border: 1px solid #dee2e6; color: #b3050f; font-weight: 700;">
+                    <i data-lucide="file-text" style="color: #e30613;"></i> Modelo de Solicitud (Borrador)
+                </a>
+            </div>
 
-            <!--- ACCEDER AL REPOSITORIO COMPLETO 
-            <a href="https://sites.google.com/view/borradordocumentosfesmcclm/inicio" class="btn-sector" target="_blank" style="background: #f8f9fa; border-style: dashed; font-size: 0.85rem;">
-                <i data-lucide="external-link"></i> Acceder al Repositorio Completo
+            <div class="sector-divider" style="margin: 25px 0 15px 0; border-top: 1px solid #eee;"></div>
+
+            <a href="https://sites.google.com/view/borradordocumentosfesmcclm/inicio" class="btn-sector" target="_blank" style="background: #fff; border: 1px dashed #ccc; font-size: 0.8rem; color: #666;">
+                <i data-lucide="external-link"></i> Repositorio Completo de Documentos
             </a>
-            -->
         </div>
+
+        <a href="javascript:void(0)" onclick="closeModal('modalModelos')" class="btn-close" style="margin-top: 25px;">Cerrar</a>
+    </div>
+</div>
 
         <a href="javascript:void(0)" onclick="closeModal('modalModelos')" class="btn-close" style="margin-top: 25px;">Cerrar</a>
     </div>
