@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FeSMC UGT CLM</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* CSS CRÍTICO PARA EL DISEÑO FIJO */
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #dee2e6;
+            height: 100vh;
+            overflow: hidden; /* Evita el scroll doble */
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            height: 100vh;
+        }
+
+        /* Bloque Superior Fijo */
+        header {
+            height: 70px;
+            border-bottom: 2px solid #e30613;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            z-index: 100;
+        }
+
+        /* Bloque Inferior Fijo */
+        nav.bottom-nav {
+            height: 70px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: white;
+            z-index: 100;
+        }
+
+        /* CONTENIDO DESLIZABLE (Aquí va todo lo demás) */
+        .scrollable-content {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 40px;
+            -webkit-overflow-scrolling: touch; /* Scroll suave en iPhone */
+        }
+        
+        .nav-item { text-decoration: none; color: #666; display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; }
+        .nav-item.active { color: #e30613; }
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+
+    <header>
+        <img src="img/logo-ugt.png" alt="Logo" style="width: 150px; height: auto;">
+    </header>
+
+    <div class="scrollable-content">
+        
+        <div style="background-color: #e30613; color: white; text-align: center; padding: 30px 20px; border-radius: 0 0 30px 30px;">
+            <h1 style="margin: 0; font-size: 1.5rem;">Tu sindicato en el móvil</h1>
+            <p>Servicios, Movilidad y Consumo CLM</p>
+        </div>
+
+        <div class="container" style="padding: 20px;">
+            </div>
+
+        <footer style="text-align: center; padding: 40px 0;">
+            <p style="font-size: 0.9rem; color: #666;"><strong>FeSMC UGT Castilla-La Mancha</strong></p>
+        </footer>
+        </div>
+
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active"><i data-lucide="home"></i><span>Inicio</span></a>
+        <a href="https://whatsapp.com/channel/..." class="nav-item"><i data-lucide="message-square"></i><span>Canal</span></a>
+        <a href="https://www.fesmcugt.org" class="nav-item"><i data-lucide="globe"></i><span>Web</span></a>
+        <a href="https://www.ugt.es/ficha-de-afiliacion" class="nav-item"><i data-lucide="user-plus"></i><span>Afiliación</span></a>
+    </nav>
+
+</div>
+
+<script src="script.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>
