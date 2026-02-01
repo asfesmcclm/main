@@ -22,14 +22,14 @@ body {
 }
 
 /* =========================================
-   2. CABECERA Y HERO
+   2. CABECERA Y HERO (VERSION COMPACTA)
    ========================================= */
 header {
-    background: rgba(255, 255, 255, 0.8); /* Efecto cristal traslúcido */
-    backdrop-filter: blur(10px); /* Desenfoque de fondo premium */
+    background: rgba(255, 255, 255, 0.95); /* Menos transparencia para mejor lectura */
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.05); /* Borde casi imperceptible */
+    padding: 8px 0; /* Reducido de 15px a 8px */
+    border-bottom: 2px solid var(--ugt-red); /* Borde más corporativo */
     display: flex;
     justify-content: center;
     position: sticky;
@@ -37,29 +37,42 @@ header {
     z-index: 1000;
 }
 
-.main-logo { height: 42px; width: auto; }
+.main-logo { 
+    height: 32px; /* Reducido de 42px a 32px para ganar espacio */
+    width: auto; 
+}
 
 .hero {
     background: linear-gradient(135deg, var(--ugt-red) 0%, #b3050f 100%);
     color: white;
-    padding: 25px 20px;
+    padding: 15px 20px; /* Reducido de 25px a 15px */
     text-align: center;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Menos separación con los botones */
+}
+
+.hero h1 {
+    font-size: 1.3rem; /* Tamaño más ajustado para móvil */
+    margin: 0;
+}
+
+.hero p {
+    font-size: 0.9rem;
+    margin: 5px 0;
 }
 
 .cta-button {
     display: inline-block;
     background: white;
     color: var(--ugt-red) !important;
-    padding: 10px 20px;
+    padding: 6px 18px; /* Botón más estilizado y menos alto */
     border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
-    margin-top: 15px;
+    margin-top: 10px;
+    font-size: 0.85rem;
 }
-
 /* =========================================
    3. GRID Y TARJETAS PRINCIPALES
    ========================================= */
