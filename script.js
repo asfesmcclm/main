@@ -1,5 +1,25 @@
-// 1. INICIALIZAR ICONOS
-lucide.createIcons();
+// 1. CARGA DINÁMICA DE MODALES (Mantiene el index.html limpio)
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('modales.html')
+        .then(response => {
+            if (!response.ok) throw new Error('No se encontró modales.html');
+            return response.text();
+        })
+        .then(data => {
+            const container = document.getElementById('modal-container');
+            if (container) {
+                container.innerHTML = data;
+                // Re-inicializa iconos y enlaces después de cargar el HTML
+                if (window.lucide) lucide.createIcons();
+                setupAppLinks();
+            }
+        })
+        .catch(err => console.warn('Aviso: Ejecutando en local o modales.html ausente.'));
+    
+    // Inicialización general
+    setupAppLinks();
+    if(window.lucide) lucide.createIcons();
+});
 
 // 2. DATOS (FESTIVOS Y APERTURAS 2026)
 const festivosCLM = [
@@ -36,8 +56,10 @@ function openModal(id) {
     const modal = document.getElementById(id);
     if (modal) {
         modal.style.display = 'flex';
-        setTimeout(() => modal.classList.add('active'), 10);
-        // IMPORTANTE: Si es el calendario, dibujamos las fechas
+        // Bloqueamos scroll del fondo
+        document.body.style.overflow = 'hidden';
+        
+        // Si es el calendario, dibujamos las fechas
         if (id === 'modalCalendario') {
             renderCalendarios();
         }
@@ -47,8 +69,8 @@ function openModal(id) {
 function closeModal(id) {
     const modal = document.getElementById(id);
     if (modal) {
-        modal.classList.remove('active');
-        setTimeout(() => modal.style.display = 'none', 300);
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
 }
 
@@ -69,11 +91,16 @@ function renderCalendarios() {
         datos.forEach(item => {
             const fechaItem = new Date(item.fecha);
             const esPasado = fechaItem < hoy;
-            // Resaltar si es en los próximos 31 días
             const esProximo = !esPasado && (fechaItem - hoy) / (1000 * 60 * 60 * 24) <= 31;
             
             const div = document.createElement('div');
             div.className = `date-item ${esPasado ? 'date-past' : ''} ${esProximo ? 'date-highlight' : ''}`;
+            div.style.display = "flex";
+            div.style.justifyContent = "space-between";
+            div.style.padding = "8px 0";
+            div.style.borderBottom = "1px solid #eee";
+            div.style.opacity = esPasado ? "0.5" : "1";
+            if(esPasado) div.style.textDecoration = "line-through";
             
             const opciones = { day: '2-digit', month: 'short' };
             const fechaFormateada = fechaItem.toLocaleDateString('es-ES', opciones);
@@ -91,6 +118,7 @@ function renderCalendarios() {
 function toggleSedes(id) {
     const lista = document.getElementById(id);
     const todas = document.querySelectorAll('.lista-sedes');
+    
     todas.forEach(s => { 
         if (s.id !== id) { 
             s.style.display = 'none'; 
@@ -98,19 +126,21 @@ function toggleSedes(id) {
         } 
     });
     
-    if (lista.style.display === 'block') {
-        lista.style.display = 'none';
-        lista.classList.remove('active');
-    } else {
-        lista.style.display = 'block';
-        lista.classList.add('active');
+    if (lista) {
+        if (lista.style.display === 'block') {
+            lista.style.display = 'none';
+            lista.classList.remove('active');
+        } else {
+            lista.style.display = 'block';
+            lista.classList.add('active');
+        }
     }
 }
 
+// 6. DETECCIÓN DE SISTEMA OPERATIVO (IOS/ANDROID)
 function setupAppLinks() {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     
-    // Enlaces de Registra
     const linkRegistra = document.getElementById('link-registra-final');
     if(linkRegistra) {
         linkRegistra.href = isIOS 
@@ -118,7 +148,6 @@ function setupAppLinks() {
             : "https://play.google.com/store/apps/details?id=org.ugt.ugtregistra";
     }
     
-    // Enlaces de App Afiliado
     const linkAfiliado = document.getElementById('link-afiliado-final');
     if(linkAfiliado) {
         linkAfiliado.href = isIOS 
@@ -126,12 +155,3 @@ function setupAppLinks() {
             : "https://play.google.com/store/apps/details?id=com.ugt.afiliados";
     }
 }
-
-// IMPORTANTE: Llama a la función cuando cargue el documento
-document.addEventListener('DOMContentLoaded', () => {
-    setupAppLinks();
-    if(window.lucide) lucide.createIcons();
-});
-
-// EJECUCIÓN AL CARGAR
-window.onload = setupAppLinks;
