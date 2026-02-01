@@ -1,0 +1,99 @@
+<div id="modalGuias" class="modal-overlay" onclick="closeModalExterno(event, 'modalGuias')">
+    <div class="modal-content">
+        <h2 style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <i data-lucide="library"></i> Guías Laborales
+        </h2>
+        <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">
+            Manuales prácticos: planes de igualdad, acoso, jornada, permisos, salud laboral y herramientas de negociación.
+        </p>
+        <div class="sector-list">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; text-align: left;">
+                <div style="font-size: 0.8rem; color: #444;"><i data-lucide="check" style="width:14px; color:#e30613; vertical-align:middle;"></i> Permisos</div>
+                <div style="font-size: 0.8rem; color: #444;"><i data-lucide="check" style="width:14px; color:#e30613; vertical-align:middle;"></i> Salud Laboral</div>
+                <div style="font-size: 0.8rem; color: #444;"><i data-lucide="check" style="width:14px; color:#e30613; vertical-align:middle;"></i> Horas Extra</div>
+                <div style="font-size: 0.8rem; color: #444;"><i data-lucide="check" style="width:14px; color:#e30613; vertical-align:middle;"></i> Igualdad</div>
+            </div>
+            <a href="https://www.fesmcugt.org/libreria/guias" class="btn-sector" style="border-color: #e30613; background: #fff5f5; font-weight: 700;" target="_blank">
+                <i data-lucide="external-link"></i> ACCEDER A LIBRERÍA
+            </a>
+        </div>
+        <a href="javascript:void(0)" onclick="closeModal('modalGuias')" class="btn-close" style="margin-top: 15px;">Volver</a>
+    </div>
+</div>
+
+<div id="modalNovedades" class="modal-overlay" onclick="closeModalExterno(event, 'modalNovedades')">
+    <div class="modal-content">
+        <h2><i data-lucide="newspaper"></i> Actualidad Sindical</h2>
+        <div class="sector-list">
+            <a href="https://x.com/ugt_comunica" class="btn-sector" target="_blank">
+                <i data-lucide="twitter"></i> 
+                <div class="btn-content"><strong>UGT Comunica</strong><small>Nacional</small></div>
+            </a>
+            <a href="https://twitter.com/fesmc_ugt" class="btn-sector" target="_blank">
+                <i data-lucide="twitter"></i> 
+                <div class="btn-content"><strong>FeSMC UGT Federal</strong><small>Sectores</small></div>
+            </a>
+            <a href="https://www.ugtclm.es" class="btn-sector" target="_blank">
+                <i data-lucide="globe"></i> 
+                <div class="btn-content"><strong>UGT CLM</strong><small>Región</small></div>
+            </a>
+        </div>
+        <a href="javascript:void(0)" onclick="closeModal('modalNovedades')" class="btn-close">Cerrar</a>
+    </div>
+</div>
+
+<div id="modalSedes" class="modal-overlay" onclick="closeModalExterno(event, 'modalSedes')">
+    <div class="modal-content">
+        <h2><i data-lucide="map-pin"></i> Sedes UGT CLM</h2>
+        
+        <button class="btn-provincia" onclick="toggleSedes('sedesAlbacete')">Albacete <i data-lucide="chevron-down"></i></button>
+        <div id="sedesAlbacete" class="lista-sedes">
+            <div class="sede-item" style="border-left: 4px solid #e30613;">
+                <h4 style="color:#e30613">FeSMC UGT Albacete</h4><p>C/ Luis Rosales, 7 - Pl. 1</p>
+                <div class="sede-actions"><a href="tel:967521850" class="btn-action" style="background:#e30613;color:white">967 521 850</a></div>
+            </div>
+            <div class="sede-item"><h4>Almansa</h4><p>Plaza del Rey D. Jaime I, 7</p><div class="sede-actions"><a href="tel:967342954" class="btn-action">967 342 954</a></div></div>
+        </div>
+
+        <button class="btn-provincia" onclick="toggleSedes('sedesCR')">Ciudad Real <i data-lucide="chevron-down"></i></button>
+        <div id="sedesCR" class="lista-sedes">
+            <div class="sede-item" style="border-left: 4px solid #e30613;">
+                <h4 style="color:#e30613">FeSMC UGT Ciudad Real</h4><p>Residencial Ronda Bl. 5</p>
+                <div class="sede-actions"><a href="tel:926253535" class="btn-action" style="background:#e30613;color:white">926 25 35 35</a></div>
+            </div>
+        </div>
+
+        <button class="btn-provincia" onclick="toggleSedes('sedesToledo')">Toledo / Talavera <i data-lucide="chevron-down"></i></button>
+        <div id="sedesToledo" class="lista-sedes">
+            <div class="sede-item"><h4>Toledo</h4><p>Cuesta de Carlos V, 1</p><div class="sede-actions"><a href="tel:925252518" class="btn-action">925 252 518</a></div></div>
+            <div class="sede-item"><h4>Talavera</h4><p>C/ Mesones, 38</p><div class="sede-actions"><a href="tel:925813300" class="btn-action">925 813 300</a></div></div>
+        </div>
+
+        <a href="javascript:void(0)" onclick="closeModal('modalSedes')" class="btn-close">Cerrar</a>
+    </div>
+</div>
+
+<div id="modalCalculadoras" class="modal-overlay" onclick="closeModalExterno(event, 'modalCalculadoras')">
+    <div class="modal-content">
+        <h2><i data-lucide="calculator"></i> Calculadoras</h2>
+        <div class="legal-notice"><p>AVISO: Cálculos orientativos. Consulta con tu delegado/a.</p></div>
+        <div class="sector-list">
+            <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/calculadora-vacaciones" class="btn-sector" target="_blank"><i data-lucide="calendar"></i> Vacaciones</a>
+            <a href="https://sites.google.com/view/borradordocumentosfesmcclm/calculadoras/despido" class="btn-sector" target="_blank"><i data-lucide="gavel"></i> Despido</a>
+        </div>
+        <a href="javascript:void(0)" onclick="closeModal('modalCalculadoras')" class="btn-close">Volver</a>
+    </div>
+</div>
+
+<div id="modalConvenios" class="modal-overlay" onclick="closeModalExterno(event, 'modalConvenios')">
+    <div class="modal-content">
+        <h2>Convenios Colectivos</h2>
+        <div class="sector-list">
+            <div class="sector-label">Castilla-La Mancha</div>
+            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=castilla-la-mancha" class="btn-sector" target="_blank"><i data-lucide="book"></i> Buscador CLM</a>
+            <div class="sector-label">Nacional</div>
+            <a href="https://www.fesmcugt.org/libreria/convenios-colectivos?documento_territorio_cat=estatal" class="btn-sector" style="border-color:#e30613" target="_blank"><i data-lucide="landmark"></i> Convenios Estatales</a>
+        </div>
+        <a href="javascript:void(0)" onclick="closeModal('modalConvenios')" class="btn-close">Cerrar</a>
+    </div>
+</div>
