@@ -1,1 +1,125 @@
-cume cume
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>CUME - FeSMC UGT CLM</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { margin: 0; background-color: #dee2e6; font-family: 'Inter', sans-serif; display: flex; justify-content: center; height: 100vh; overflow: hidden; }
+        .app-container { width: 100%; max-width: 500px; background-color: white; display: flex; flex-direction: column; position: relative; }
+        
+        /* Cabecera */
+        .header { height: 60px; display: flex; align-items: center; padding: 0 15px; border-bottom: 2px solid #e30613; background: white; gap: 10px; }
+        .btn-back { background: none; border: none; color: #e30613; cursor: pointer; padding: 5px; display: flex; align-items: center; text-decoration: none; }
+
+        /* Sistema de Pestañas */
+        .tabs { display: flex; background: #f8f9fa; padding: 5px; gap: 5px; }
+        .tab-btn { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; color: #666; background: none; transition: 0.3s; }
+        .tab-btn.active { background: white; color: #e30613; shadow: 0 2px 5px rgba(0,0,0,0.1); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+        .content-area { flex: 1; overflow-y: auto; padding: 20px; -webkit-overflow-scrolling: touch; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Estilos de Contenido */
+        .info-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 15px; margin-bottom: 15px; }
+        .info-card h3 { margin: 0 0 10px 0; color: #e30613; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+        .badge { background: #fff5f5; color: #e30613; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; margin-bottom: 10px; display: inline-block; }
+        
+        .modelo-box { background: #f1f3f5; border: 1px dashed #adb5bd; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; line-height: 1.5; color: #333; white-space: pre-wrap; }
+        .copy-notice { background: #e7f5ff; color: #0056b3; padding: 10px; border-radius: 8px; font-size: 0.8rem; margin-bottom: 15px; display: flex; gap: 8px; align-items: center; }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <header class="header">
+        <a href="index.html" class="btn-back"><i data-lucide="chevron-left"></i></a>
+        <h2 style="font-size: 1.1rem; margin: 0; font-weight: 800;">Prestación CUME</h2>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('guia')">GUÍA RÁPIDA</button>
+        <button class="tab-btn" onclick="showTab('modelo')">MODELO SOLICITUD</button>
+    </div>
+
+    <main class="content-area">
+        
+        <div id="guia" class="tab-content active">
+            <div class="badge">RD 1148/2011</div>
+            <div class="info-card">
+                <h3><i data-lucide="help-circle"></i> ¿Qué es?</h3>
+                <p style="font-size: 0.9rem; color: #444; margin: 0;">Es un subsidio de <strong>pago directo de la Mutua</strong> que compensa los ingresos que pierdes al reducir tu jornada para cuidar a un menor con enfermedad grave.</p>
+            </div>
+
+            <div class="info-card">
+                <h3><i data-lucide="check-circle"></i> Requisitos</h3>
+                <ul style="font-size: 0.85rem; color: #444; padding-left: 20px;">
+                    <li><strong>Reducción:</strong> Mínimo del 50% de la jornada.</li>
+                    <li><strong>Actividad:</strong> Ambos progenitores deben estar trabajando.</li>
+                    <li><strong>El Menor:</strong> Menor de 18 años (ampliable a 23/26 según caso).</li>
+                    <li><strong>Situación:</strong> Cuidado directo y permanente tras ingreso.</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3><i data-lucide="clipboard-list"></i> Pasos a seguir</h3>
+                <ol style="font-size: 0.85rem; color: #444; padding-left: 20px;">
+                    <li>Obtener Informe Médico del Servicio Público de Salud.</li>
+                    <li>Solicitar por escrito a la empresa la reducción de jornada.</li>
+                    <li>Tramitar la prestación ante la Mutua de la empresa.</li>
+                </ol>
+            </div>
+
+            <a href="https://www.boe.es/boe/dias/2019/02/08/pdfs/BOE-A-2019-1691.pdf" target="_blank" style="display: flex; align-items: center; gap: 10px; background: #343a40; color: white; text-decoration: none; padding: 12px; border-radius: 8px; justify-content: center; font-size: 0.85rem; font-weight: 600;">
+                <i data-lucide="external-link"></i> Ver catálogo de enfermedades (BOE)
+            </a>
+        </div>
+
+        <div id="modelo" class="tab-content">
+            <div class="copy-notice">
+                <i data-lucide="info" style="flex-shrink:0"></i>
+                <span>Copia este texto y adáptalo con tus datos. Presenta 2 copias para que te sellen una.</span>
+            </div>
+
+            <div class="modelo-box">
+A/A: RR.HH. DE [NOMBRE EMPRESA]
+En [CIUDAD], a [DÍA] de [MES] de 202[X].
+
+ASUNTO: Solicitud reducción jornada CUME (RD 1148/2011).
+
+D./Dña. [TU NOMBRE Y APELLIDOS], con DNI [DNI], trabajador/a en [DEPARTAMENTO], EXPONE:
+
+Que bajo el RD 1148/2011 y el art. 37.6 del ET, solicito reducir mi jornada en un [50%-99%] para el cuidado directo y permanente de mi hijo/a menor afectado por enfermedad grave (cat. [ONCOLOGÍA/ETC]).
+
+Inicio: [FECHA]
+Horario propuesto: [HORARIO]
+
+SOLICITO:
+1. Aceptación de la reducción.
+2. Certificado de Empresa para la Mutua.
+
+Fdo: _________________________
+            </div>
+            
+            <div style="margin-top: 15px; padding: 10px; background: #fff5f5; border-radius: 8px; font-size: 0.8rem; color: #b3050f;">
+                <strong>Nota:</strong> Este periodo goza de protección especial frente al despido.
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    lucide.createIcons();
+    function showTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+</script>
+</body>
+</html>
