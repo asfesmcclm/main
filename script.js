@@ -28,7 +28,6 @@ const festivosCLM = [
     { fecha: "2026-04-02", nombre: "Jueves Santo" },
     { fecha: "2026-04-03", nombre: "Viernes Santo" },
     { fecha: "2026-05-01", nombre: "Fiesta del Trabajo" },
-    { fecha: "2026-05-31", nombre: "Día de la Región" },
     { fecha: "2026-06-04", nombre: "Corpus Christi" },
     { fecha: "2026-08-15", nombre: "Asunción de la Virgen" },
     { fecha: "2026-10-12", nombre: "Fiesta Nacional" },
