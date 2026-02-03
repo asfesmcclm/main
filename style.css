@@ -596,3 +596,78 @@ header {
     width: 20px;
     height: 20px;
 }
+/* --- NUEVOS MÓDULOS DE TRÁMITES --- */
+.modulos-grid {
+    display: grid;
+    grid-template-columns: 1-fr 1-fr; /* Dos columnas iguales */
+    gap: 15px;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+}
+
+.card-modulo {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: 1px solid #eee;
+}
+
+.card-modulo:active {
+    transform: scale(0.95); /* Efecto de pulsación en el móvil */
+}
+
+.card-icon {
+    font-size: 24px;
+    color: var(--ugt-red); /* Usa tu variable de color rojo */
+    margin-bottom: 10px;
+}
+
+.card-modulo h3 {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #333;
+}
+
+.card-modulo p {
+    font-size: 11px;
+    color: #777;
+    line-height: 1.2;
+}
+
+/* --- ESTILO DE LAS TARJETAS DENTRO DEL MODAL --- */
+.enlace-tramite {
+    background: #fdfdfd;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    border-left: 5px solid var(--ugt-red);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.enlace-tramite strong {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.enlace-tramite p {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.boton-enlace {
+    display: inline-block;
+    padding: 8px 15px;
+    background: var(--ugt-red);
+    color: white !important;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
