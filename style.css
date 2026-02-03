@@ -596,102 +596,75 @@ header {
     width: 20px;
     height: 20px;
 }
-/* --- NUEVOS MÓDULOS DE TRÁMITES --- */
+/* =========================================
+   8. SECCIÓN DE TRÁMITES Y GESTIÓN
+   ========================================= */
+
 .modulos-grid {
     display: grid;
-    grid-template-columns: 1-fr 1-fr; /* Dos columnas iguales */
+    grid-template-columns: 1fr 1fr; /* Corregido: sin guion */
     gap: 15px;
-    padding: 10px 20px;
+    padding: 0 5px;
     margin-bottom: 30px;
 }
 
-.card-modulo {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 20px;
+/* Reutilizamos el estilo de tus tarjetas principales para que sean iguales */
+.card-tramite {
+    background: white;
+    padding: 20px 10px; 
+    border-radius: 24px;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-decoration: none;
+    color: #1a1a1a;
+    width: 100%; 
+    box-sizing: border-box;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+    transition: transform 0.2s ease;
     cursor: pointer;
-    transition: transform 0.2s;
-    border: 1px solid #eee;
 }
 
-.card-modulo:active {
-    transform: scale(0.95); /* Efecto de pulsación en el móvil */
+.card-tramite:active {
+    transform: scale(0.96);
 }
 
-.card-icon {
-    font-size: 24px;
-    color: var(--ugt-red); /* Usa tu variable de color rojo */
+.card-tramite i, .card-icon {
+    font-size: 26px;
+    color: var(--ugt-red);
     margin-bottom: 10px;
+    display: block;
 }
 
-.card-modulo h3 {
-    font-size: 14px;
+.card-tramite h3 {
+    font-size: 0.9rem;
     margin: 5px 0;
-    color: #333;
 }
 
-.card-modulo p {
-    font-size: 11px;
+.card-tramite p {
+    font-size: 0.75rem;
     color: #777;
     line-height: 1.2;
 }
 
-/* --- ESTILO DE LAS TARJETAS DENTRO DEL MODAL --- */
-.enlace-tramite {
-    background: #fdfdfd;
-    padding: 15px;
-    border-radius: 15px;
-    margin-bottom: 15px;
-    border-left: 5px solid var(--ugt-red);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.enlace-tramite strong {
-    display: block;
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-.enlace-tramite p {
-    font-size: 13px;
-    color: #666;
-    margin-bottom: 10px;
-}
-
-.boton-enlace {
-    display: inline-block;
-    padding: 8px 15px;
-    background: var(--ugt-red);
-    color: white !important;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: bold;
-}
 /* =========================================
-   REPARACIÓN GLOBAL DE MODALES (TRÁMITES, APPS, SEDES)
+   9. REPARACIÓN GLOBAL DE MODALES
    ========================================= */
 
-/* Este es el fondo oscuro. Lo ocultamos por defecto con display: none */
+/* Fondo oscuro: oculto por defecto con display: none */
 .modal, .modal-overlay {
     display: none !important; 
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.75); /* Un poco más oscuro para que resalte el blanco */
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    z-index: 100000; /* Por encima de TODO */
+    z-index: 100000;
     justify-content: center;
     align-items: center;
 }
 
-/* La caja blanca donde va la info */
+/* Caja blanca del modal */
 .modal-content {
     background: white;
     width: 90%;
@@ -700,21 +673,44 @@ header {
     padding: 25px;
     position: relative;
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
-/* El botón de cerrar (la X) */
-.close-btn, .close-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 24px;
-    color: #999;
-    cursor: pointer;
+/* Elementos inyectados por el JSON */
+.tramite-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    text-align: left;
+    border-left: 4px solid var(--ugt-red);
 }
-.modulos-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Esto las pone en pareja */
-    gap: 15px;
-    padding: 0 15px;
+
+.tramite-item strong {
+    display: block;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.btn-directo {
+    display: block;
+    background: var(--ugt-red) !important;
+    color: white !important;
+    text-align: center;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
     margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    color: #bbb;
+    cursor: pointer;
 }
