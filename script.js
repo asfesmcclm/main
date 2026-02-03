@@ -196,3 +196,45 @@ async function abrirModal(tipo) {
         alert("Lo sentimos, no se pudo cargar la información en este momento.");
     }
 }
+/* --- FUNCIÓN PARA CARGAR TRÁMITES DESDE JSON --- */
+async function abrirModal(tipo) {
+    try {
+        // 1. Buscamos el archivo JSON
+        const respuesta = await fetch('tramites.json');
+        
+        // Si el archivo no existe o falla, lanzamos error
+        if (!respuesta.ok) throw new Error('No se pudo cargar el archivo de trámites');
+        
+        const datos = await respuesta.json();
+        
+        // 2. Obtenemos la sección correspondiente (seguridadSocial o hacienda)
+        const seccion = datos[tipo];
+        
+        // 3. Referencias a los elementos del modal (ajusta los IDs si son distintos)
+        const modal = document.getElementById("modalInfo");
+        const titulo = document.getElementById("modalTitulo");
+        const cuerpo = document.getElementById("modalCuerpo");
+
+        // 4. Limpiamos y rellenamos el título
+        titulo.innerText = tipo === 'seguridadSocial' ? 'Seguridad Social' : 'Hacienda (AEAT)';
+        
+        // 5. Construimos la lista de trámites
+        let htmlContenido = "";
+        seccion.forEach(item => {
+            htmlContenido += `
+                <div class="tramite-item">
+                    <strong>${item.nombre}</strong>
+                    <p>${item.descripcion}</p>
+                    <a href="${item.url}" target="_blank" class="btn-directo">Acceder al trámite</a>
+                </div>`;
+        });
+
+        // 6. Inyectamos el HTML y mostramos el modal
+        cuerpo.innerHTML = htmlContenido;
+        modal.style.display = "block";
+
+    } catch (error) {
+        console.error("Error al cargar los trámites:", error);
+        alert("Lo sentimos, no se pudo cargar la información en este momento.");
+    }
+}
