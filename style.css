@@ -580,13 +580,12 @@ header {
 
 .modulos-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Corregido: sin guion */
+    grid-template-columns: 1fr 1fr;
     gap: 15px;
     padding: 0 5px;
     margin-bottom: 30px;
 }
 
-/* Reutilizamos el estilo de tus tarjetas principales para que sean iguales */
 .card-tramite {
     background: white;
     padding: 20px 10px; 
@@ -625,41 +624,43 @@ header {
 }
 
 /* =========================================
-   REPARACIÓN DEFINITIVA: UNIFICACIÓN DE MODALES
+   9. REPARACIÓN FINAL DE MODALES (Sedes, Apps y Trámites)
    ========================================= */
 
-/* 1. El fondo oscuro (Hidden por defecto) */
-.modal, .modal-overlay, #modalInfo, #modalApps {
-    display: none !important; 
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background: rgba(0, 0, 0, 0.8) !important;
+/* Estado inicial: oculto (sin !important para que JS pueda abrirlo) */
+.modal, .modal-overlay {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     z-index: 100000;
-    justify-content: center !important;
-    align-items: center !important; /* Centrado total */
+    justify-content: center;
+    align-items: center;
 }
 
-/* 2. La caja blanca (Válida para Sedes, Apps y Trámites) */
+/* Fuerza el centrado solo cuando el modal está activo (detecta el estilo flex de JS) */
+.modal[style*="display: flex"] {
+    display: flex !important;
+}
+
 .modal-content {
     background: white !important;
-    width: 90% !important;
-    max-width: 420px !important;
-    border-radius: 28px !important; 
-    padding: 30px 20px !important;
-    position: relative !important;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.4) !important;
+    width: 90%;
+    max-width: 420px;
+    border-radius: 28px;
+    padding: 30px 20px;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
     max-height: 85vh;
     overflow-y: auto;
     margin: auto;
-    border: none !important;
 }
 
-/* 3. Botón cerrar (X) */
 .close-btn, .btn-close-modal {
     position: absolute;
     top: 15px;
@@ -667,32 +668,26 @@ header {
     font-size: 28px;
     color: #bbb;
     cursor: pointer;
-    background: none;
-    border: none;
 }
 
-/* 4. Estilos recuperados para SEDES (Lo que borraste del 6) */
-.btn-provincia {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
+/* Estilos para los elementos dentro de los modales */
+.tramite-item, .sede-item {
     background: #f8f9fa;
-    border: 1px solid #eee;
+    padding: 15px;
     border-radius: 15px;
     margin-bottom: 12px;
-    font-weight: 700;
-    color: #333;
-    cursor: pointer;
+    text-align: left;
+    border: 1px solid #eee;
 }
 
-.sede-item {
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #eee;
-    text-align: left;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+.btn-directo {
+    display: block;
+    background: var(--ugt-red);
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
 }
