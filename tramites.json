@@ -1,0 +1,21 @@
+{
+  "seguridadSocial": [
+    {
+      "nombre": "Vida Laboral",
+      "descripcion": "Descarga tu informe completo con altas y bajas.",
+      "url": "https://portal.seg-social.gob.es/..."
+    },
+    {
+      "nombre": "Simulador Jubilación",
+      "descripcion": "Calcula tu futura pensión según tu vida laboral.",
+      "url": "https://prestaciones.seg-social.es/..."
+    }
+  ],
+  "hacienda": [
+    {
+      "nombre": "Modelo 145",
+      "descripcion": "Descarga el formulario para retenciones.",
+      "url": "https://www.agenciatributaria.es/..."
+    }
+  ]
+}
