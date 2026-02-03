@@ -711,3 +711,10 @@ header {
     color: #999;
     cursor: pointer;
 }
+.modulos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Esto las pone en pareja */
+    gap: 15px;
+    padding: 0 15px;
+    margin-top: 10px;
+}
