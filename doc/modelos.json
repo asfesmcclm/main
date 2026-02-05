@@ -1,27 +1,99 @@
 {
-  "modelo-1": {
-    "titulo": "1. Permiso Parental (8 Semanas) - Art. 48.bis ET",
+  "m1": {
+    "titulo": "1. Permiso Parental (8 semanas) - Art. 48.bis ET",
     "campos": [
-      { "id": "empresa", "label": "Nombre de la Empresa" },
-      { "id": "localidad", "label": "Localidad" },
-      { "id": "fecha", "label": "Fecha", "tipo": "date" },
-      { "id": "nombre", "label": "Tu Nombre Completo" },
-      { "id": "dni", "label": "DNI/NIE" },
-      { "id": "nacimiento_hijo", "label": "F. Nacimiento Hijo/a", "tipo": "date" },
-      { "id": "inicio_permiso1", "label": "Inicio 1º Periodo", "tipo": "date" },
-      { "id": "fin_permiso1", "label": "Fin 1º Periodo", "tipo": "date" },
-      { "id": "n_semanas1", "label": "Nº Semanas", "tipo": "number" }
+      {"id": "emp", "label": "Empresa"}, {"id": "loc", "label": "Localidad"}, {"id": "f_com", "label": "Fecha hoy", "tipo": "date"},
+      {"id": "nom", "label": "Nombre"}, {"id": "dni", "label": "DNI"}, {"id": "nac", "label": "F. Nacimiento Hijo", "tipo": "date"},
+      {"id": "i1", "label": "Inicio Periodo", "tipo": "date"}, {"id": "f1", "label": "Fin Periodo", "tipo": "date"}, {"id": "sem", "label": "Semanas"}
     ],
-    "plantilla": "A la Dirección de la empresa: ${empresa}\nEn ${localidad}, a ${fecha}\n\nAsunto: Comunicación de disfrute de Permiso Parental (Art. 48.bis ET)\n\nEstimados Sres.:\n\nDña./D. ${nombre} con DNI ${dni}, como trabajador/a de la empresa, les comunico que, en virtud de lo dispuesto en el art. 48.bis del Estatuto de los Trabajadores, disfrutaré del permiso parental para el cuidado de mi hijo/a nacido/a el ${nacimiento_hijo}.\n\nPeriodo: Del ${inicio_permiso1} al ${fin_permiso1} (Total: ${n_semanas1} semanas).\n\nAtentamente,\nFdo: ${nombre}"
+    "plantilla": "A la Dirección de la empresa: ${emp}\nEn ${loc}, a ${f_com}\n\nAsunto: Comunicación de disfrute de Permiso Parental (Art. 48.bis ET)\n\nEstimados Sres.:\n\nDña./D. ${nom} con DNI ${dni}, como trabajador/a de esta empresa, les comunico mi intención de disfrutar del permiso parental para el cuidado de hijo, hija o menor acogido por tiempo superior a un año, en virtud del artículo 48.bis del Estatuto de los Trabajadores.\n\nDicho permiso se solicita para el cuidado de mi hijo/a nacido/a el ${nac}.\n\nLos periodos de disfrute serán:\n* Del día ${i1} al día ${f1}, ambos inclusive (Total: ${sem} semanas).\n\nEsta comunicación se realiza con la antelación mínima legal de diez días. El permiso se disfrutará a tiempo completo.\n\nFdo: ${nom}"
   },
-  "modelo-13": {
-    "titulo": "13. Permiso por Nacimiento (19 semanas) - Art. 48.4 ET",
+  "m2": {
+    "titulo": "2. Adaptación de Puesto (Art. 25 LPRL)",
     "campos": [
-      { "id": "empresa", "label": "Empresa" },
-      { "id": "nombre", "label": "Tu Nombre" },
-      { "id": "dni", "label": "DNI" },
-      { "id": "nacimiento", "label": "F. Nacimiento", "tipo": "date" }
+      {"id": "emp", "label": "Empresa"}, {"id": "nom", "label": "Nombre"}, {"id": "dni", "label": "DNI"}
     ],
-    "plantilla": "A la Dirección de RRHH de ${empresa}\n\nAsunto: Solicitud Permiso Nacimiento (19 semanas)\n\nD./Dña. ${nombre} con DNI ${dni} comunica el nacimiento de su hijo/a en fecha ${nacimiento} y solicita el permiso de 19 semanas según Art. 48.4 ET...\n\nFdo: ${nombre}"
+    "plantilla": "A LA DIRECCIÓN DE RRHH DE LA EMPRESA: ${emp}\n\nAsunto: Solicitud de Adaptación de Puesto por Especial Sensibilidad\n\nD./Dña.: ${nom} con DNI: ${dni}\n\nEn coherencia con el artículo 25.1 de la Ley 31/1995 de Prevención de Riesgos Laborales, sobre protección de trabajadores especialmente sensibles a determinados riesgos, considero que mi puesto actual puede afectar negativamente a mi salud. SOLICITO la reevaluación de mi situación y la adaptación de las condiciones de mi puesto.\n\nFdo: ${nom}"
+  },
+  "m3": {
+    "titulo": "3. Hospitalización Recién Nacido (Art. 37.4 ET)",
+    "campos": [
+      {"id": "emp", "label": "Empresa"}, {"id": "nom", "label": "Nombre"}, {"id": "hora", "label": "Horario de ausencia"}
+    ],
+    "plantilla": "A la Dirección de RRHH de ${emp}\n\nAsunto: Comunicación de Ausencia por Hospitalización de Recién Nacido (Art. 37.4 ET)\n\nD./Dña. ${nom} comunica que, encontrándose su hijo/a hospitalizado/a a continuación del parto, hace uso del derecho a ausentarse del trabajo durante una hora diaria: ${hora}.\n\nFdo: ${nom}"
+  },
+  "m4": {
+    "titulo": "4. Exámenes Prenatales (Art. 37.3.f ET)",
+    "campos": [
+      {"id": "emp", "label": "Empresa"}, {"id": "f_cita", "label": "Fecha Cita", "tipo": "date"}, {"id": "nom", "label": "Nombre"}
+    ],
+    "plantilla": "A la Dirección de RRHH de ${emp}\n\nAsunto: Comunicación de Ausencia Retribuida por Exámenes Prenatales\n\nDoña ${nom} comunica que el día ${f_cita}, según el Art. 37.3.f del Estatuto de los Trabajadores, se ausentará de su puesto por el tiempo indispensable para la realización de exámenes prenatales y técnicas de preparación al parto.\n\nFdo: ${nom}"
+  },
+  "m5": {
+    "titulo": "5. Excedencia Voluntaria (Art. 46.2 ET)",
+    "campos": [
+      {"id": "emp", "label": "Empresa"}, {"id": "nom", "label": "Nombre"}, {"id": "i", "label": "Inicio", "tipo": "date"}, {"id": "f", "label": "Fin", "tipo": "date"}
+    ],
+    "plantilla": "A LA EMPRESA: ${emp}\n\nAsunto: Solicitud de Excedencia Voluntaria (Art. 46.2 ET)\n\nYo ${nom} solicito mi paso a situación de EXCEDENCIA VOLUNTARIA por un periodo de ${i} a ${f}.\n\nFdo: ${nom}"
+  },
+  "m6": {
+    "titulo": "6. Formación (20 Horas) - Art. 23.3 ET",
+    "campos": [
+      {"id": "emp", "label": "Empresa"}, {"id": "curso", "label": "Nombre Curso"}, {"id": "nom", "label": "Nombre"}
+    ],
+    "plantilla": "A RRHH DE ${emp}\n\nAsunto: Solicitud de Permiso Retribuido para Formación (Art. 23.3 ET)\n\nD./Dña. ${nom} solicita el disfrute de 20 horas de formación anuales acumulables para realizar el curso: ${curso}.\n\nFdo: ${nom}"
+  },
+  "m7": {
+    "titulo": "7. Fin Lactancia y Retorno",
+    "campos": [
+      {"id": "emp", "label": "Empresa"}, {"id": "f_ret", "label": "Fecha Retorno", "tipo": "date"}, {"id": "nom", "label": "Nombre"}
+    ],
+    "plantilla": "A la Dirección de RRHH de ${emp}\n\nAsunto: Preaviso de Finalización de Permiso de Lactancia\n\nD./Dña. ${nom} comunica que el próximo ${f_ret} finalizará su permiso y se reincorporará a su jornada ordinaria.\n\nFdo: ${nom}"
+  },
+  "m8": {
+    "titulo": "8. Lactancia Acumulada (Art. 37.4 ET)",
+    "campos": [
+      {"id": "emp", "label": "Empresa"}, {"id": "dias", "label": "Nº Días Totales"}, {"id": "nom", "label": "Nombre"}
+    ],
+    "plantilla": "A la Dirección de RRHH de ${emp}\n\nAsunto: Comunicación de Acumulación de Permiso de Lactancia\n\nD./Dña. ${nom} comunica su voluntad de acumular el permiso por cuidado del lactante en jornadas completas, lo que supone un total de ${dias} días.\n\nFdo: ${nom}"
+  },
+  "m9": {
+    "titulo": "9. Adaptación de Jornada (Art. 34.8 ET)",
+    "campos": [
+      {"id": "emp", "label": "Empresa"}, {"id": "det", "label": "Propuesta Jornada"}, {"id": "nom", "label": "Nombre"}
+    ],
+    "plantilla": "A la Dirección de RRHH de ${emp}\n\nAsunto: Solicitud de Adaptación de Jornada (Art. 34.8 ET) - Conciliación\n\nD./Dña. ${nom} solicita acogerse al derecho de conciliación de la vida familiar y laboral proponiendo la siguiente jornada: ${det}.\n\nFdo: ${nom}"
+  },
+  "m10": {
+    "titulo": "10. Excedencia Cuidado Hijo (Art. 46.3 ET)",
+    "campos": [
+      {"id": "nom", "label": "Nombre"}, {"id": "nac", "label": "Nacimiento", "tipo": "date"}, {"id": "i", "label": "Inicio", "tipo": "date"}
+    ],
+    "plantilla": "Asunto: Solicitud de Excedencia por Cuidado de Hijo (Art. 46.3 ET)\n\nD./Dña. ${nom} solicita excedencia por cuidado de hijo/a nacido el ${nac}, con efectos desde el día ${i}. El periodo de reserva de puesto será el establecido legalmente.\n\nFdo: ${nom}"
+  },
+  "m11": {
+    "titulo": "11. Prórroga Excedencia Familiar",
+    "campos": [
+      {"id": "nom", "label": "Nombre"}, {"id": "f_nueva", "label": "Nueva Fecha Fin", "tipo": "date"}
+    ],
+    "plantilla": "D./Dña. ${nom} comunica su decisión de prorrogar la excedencia familiar que viene disfrutando hasta el día ${f_nueva}.\n\nFdo: ${nom}"
+  },
+  "m12": {
+    "titulo": "12. Reducción Jornada Guarda (Art. 37.6 ET)",
+    "campos": [
+      {"id": "emp", "label": "Empresa"}, {"id": "hor", "label": "Horario Solicitado"}, {"id": "nom", "label": "Nombre"}
+    ],
+    "plantilla": "A la Dirección de RRHH de ${emp}\n\nAsunto: Solicitud de Reducción de Jornada por Guarda Legal (Art. 37.6 ET)\n\nD./Dña. ${nom} solicita una reducción de jornada por cuidado de menor con el siguiente horario: ${hor}.\n\nFdo: ${nom}"
+  },
+  "m13": {
+    "titulo": "13. Nacimiento y Cuidado (19 semanas) - Art. 48.4 ET",
+    "campos": [
+      {"id": "emp", "label": "Empresa"}, {"id": "loc", "label": "Localidad"}, {"id": "f_com", "label": "Fecha hoy", "tipo": "date"},
+      {"id": "nom", "label": "Nombre"}, {"id": "dni", "label": "DNI"}, {"id": "nac", "label": "F. Nacimiento", "tipo": "date"},
+      {"id": "i_o1", "label": "Inicio Op. 1", "tipo": "date"}, {"id": "f_o1", "label": "Fin Op. 1", "tipo": "date"},
+      {"id": "i_o2", "label": "Inicio 6 sem Oblig.", "tipo": "date"}, {"id": "f_o2", "label": "Fin 6 sem Oblig.", "tipo": "date"},
+      {"id": "vol", "label": "11 sem Voluntarias"}, {"id": "i_fl", "label": "Inicio 2 sem Flexibles", "tipo": "date"}, {"id": "f_fl", "label": "Fin 2 sem Flexibles", "tipo": "date"}
+    ],
+    "plantilla": "A la Dirección de RRHH de la empresa ${emp}\nEn ${loc}, a ${f_com}\n\nAsunto: Solicitud de Permiso por Nacimiento y Cuidado del Menor (19 Semanas) - Art. 48.4 ET\n\nD./Dña. ${nom}, con DNI ${dni}, comunico que en fecha ${nac} tuvo lugar el nacimiento/adopción de mi hijo/a.\n\nDe acuerdo con el artículo 48.4 del Estatuto de los Trabajadores, el permiso es de 19 semanas para cada progenitor, intransferibles, y solicito su disfrute de la siguiente manera:\n\nØ Opción 1: Disfrute Ininterrumpido de 19 semanas\n* Fecha de inicio: ${i_o1}\n* Fecha de finalización: ${f_o1}\n\nØ Opción 2: Disfrute Discontinuo (19 semanas)\n* 6 semanas obligatorias e ininterrumpidas: Del ${i_o2} al ${f_o2}\n* 11 semanas restantes Voluntarias:\n    * ${vol}\n* 2 semanas Adicionales Flexibles (hasta los 8 años):\n    * Del ${i_fl} al ${f_fl}\n\nFdo: ${nom}"
   }
 }
