@@ -9,7 +9,7 @@
       "nombre": "Informe de Vida Laboral",
       "descripcion": "Obtén al instante tu informe de altas y bajas.",
       "url": "https://portal.seg-social.gob.es/wps/portal/importass/importass/Categorias/Vida+laboral+e+informes/Informes+sobre+tu+situacion+laboral/Informe+de+tu+vida+laboral"
-    }
+    },
     {
       "nombre": "Tarjeta Sanitaria Europea (TSE)",
       "descripcion": "Solicita o renueva tu cobertura médica para viajes por Europa.",
@@ -19,7 +19,7 @@
       "nombre": "Nacimiento y Cuidado (Baja)",
       "descripcion": "Gestiona tu prestación por maternidad, paternidad o adopción.",
       "url": "https://prestaciones.seg-social.es/servicio/prestacion-nacimiento-adopcion-cuidado-menor.html?categoria=nacimiento-adopcion-embarazo"
-    },
+    }
   ],
   "hacienda": [
     {
