@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Generador de Permisos - FeSMC UGT CLM</title>
+    <style>
+        :root{
+            --color-principal: #e30613; 
+            --color-secundario: #f8f9fa;
+            --color-texto: #2d3436;
+            --color-acento: #c40511;
+            --color-campo-rellenar-form: #ffffff;
+            --color-campo-rellenar-output: #fff3cd;
+            --color-exito: #28a745;
+            --max-width: 1300px;
+        }
+        *,*::before,*::after{box-sizing:border-box}
+        body{
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin:0; padding:0; color:var(--color-texto);
+            background:var(--color-secundario);
+        }
+        .btn-volver {
+            display: inline-flex; align-items: center; padding: 10px 18px;
+            background: #636e72; color: white; text-decoration: none;
+            border-radius: 8px; font-size: 0.9rem; margin-bottom: 20px; font-weight: 600;
+        }
+        .container{
+            max-width:var(--max-width); margin:20px auto; padding:25px;
+            background:#fff; border-radius:15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display:flex; flex-direction:column;
+        }
+        header{ text-align:center; border-bottom:4px solid var(--color-principal); padding-bottom:20px; margin-bottom:20px; }
+        header h1{ color:var(--color-principal); font-size:clamp(1.4rem,3vw,2.2rem); margin:0; text-transform: uppercase;}
+        
+        #aviso-legal-importante{
+            background:#fff8f8; color:#b02a37; border:1px solid #f5c2c7;
+            border-left:5px solid var(--color-principal); padding:15px; border-radius:10px; margin-bottom:20px; font-size: 0.9rem;
+        }
+        .main-content-wrapper{ display:flex; flex-wrap:wrap; gap:25px; }
+        #indice-panel{ flex:0 0 320px; }
+        #action-form-panel{ flex:1; min-width:300px; }
+        #right-panel{ flex:2; min-width:350px; }
+
+        #indice{ background:#fff; padding:15px; border-radius:12px; border: 1px solid #eee; }
+        #indice ul{ list-style:none; padding:0; }
+        #indice li{ margin-bottom:8px; }
+        #indice a{ 
+            text-decoration:none; color:var(--color-texto); display:block; padding:10px; 
+            border-radius:8px; transition: 0.2s; cursor:pointer; border: 1px solid transparent;
+        }
+        #indice a:hover{ background:#fff0f0; color:var(--color-principal); border-color: #f5c2c7; }
+
+        .flow-button{
+            width: 100%; margin-bottom: 10px; padding:14px; border-radius:10px; border:none; 
+            cursor:pointer; font-weight:700; transition: 0.2s;
+        }
+        .primary-button{ background:var(--color-principal); color:#fff; }
+        .secondary-button{ background:#636e72; color:#fff; }
+        
+        .form-group{ margin-bottom:15px; }
+        .form-group label{ display:block; font-weight:600; margin-bottom:8px; font-size:0.9rem; }
+        .form-group input{ width:100%; padding:12px; border-radius:8px; border:1px solid #dfe6e9; }
+
+        #code-output-container{ border:2px solid #eee; border-radius:12px; background:#fffef9; margin-top: 10px;}
+        #code-output{ white-space:pre-wrap; padding:25px; font-family: 'Georgia', serif; line-height:1.7; }
+        .dato-relleno{ color:var(--color-principal); font-weight:800; text-decoration: underline; }
+        .hidden{ display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="btn-volver">← Volver al Panel</a>
+        <header>
+            <h1>GENERADOR DE MODELOS UGT</h1>
+        </header>
+        
+        <div id="aviso-legal-importante">
+            <p><strong>🚨 IMPORTANTE:</strong> Plantillas de referencia. Consulta con <strong>FeSMC UGT CLM</strong> para confirmar plazos según tu convenio.</p>
+        </div>
+
+        <main class="main-content-wrapper">
+            <section id="indice-panel">
+                <nav id="indice">
+                    <ul id="indice-lista"></ul>
+                </nav>
+            </section>
+
+            <section id="action-form-panel">
+                <div id="action-flow-container" class="hidden">
+                    <h3 id="action-title" style="color:var(--color-principal);"></h3>
+                    <div id="selection-buttons">
+                        <button id="btn-show-form" class="flow-button primary-button">Rellenar datos</button>
+                        <button id="btn-generate-blank" class="flow-button secondary-button">Ver en blanco</button>
+                    </div>
+                    <div id="dynamic-form-wrapper" class="hidden">
+                        <form id="dynamic-form"></form>
+                        <button id="btn-generar" class="flow-button primary-button">Generar Texto</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="right-panel">
+                <div id="code-output-container">
+                    <div id="code-output">Selecciona un modelo para comenzar...</div>
+                </div>
+                <div id="final-actions" class="hidden">
+                    <button id="btn-copiar" class="flow-button primary-button" style="margin-top:15px;">Copiar Texto</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function formatDateToSpanish(dateString){
+            if(!dateString) return "";
+            const [y,m,d] = dateString.split('-');
+            return d ? `${d}/${m}/${y}` : dateString;
+        }
+
+        const ModelosData = {
+            'm1': { titulo: '1. Permiso Parental (8 semanas)', campos: [{id:'empresa', label:'Empresa'}, {id:'nombre', label:'Nombre'}, {id:'dni', label:'DNI'}, {id:'hijo', label:'F. Nacimiento Hijo', tipo:'date'}, {id:'inicio', label:'F. Inicio', tipo:'date'}], plantilla: (d)=>`A la empresa ${d.empresa}\nYo, ${d.nombre} con DNI ${d.dni}, comunico mi intención de disfrutar del permiso parental (Art. 48.bis ET) por mi hijo/a nacido el ${formatDateToSpanish(d.hijo)}, comenzando el ${formatDateToSpanish(d.inicio)}.` },
+            'm2': { titulo: '2. Adaptación Puesto (Art. 25 LPRL)', campos: [{id:'empresa', label:'Empresa'}, {id:'nombre', label:'Nombre'}, {id:'dni', label:'DNI'}], plantilla: (d)=>`A la dirección de ${d.empresa}\n${d.nombre} con DNI ${d.dni} solicita reevaluación y adaptación de puesto por especial sensibilidad según Art. 25 LPRL.` },
+            'm3': { titulo: '3. Hospitalización Recién Nacido', campos: [{id:'empresa', label:'Empresa'}, {id:'nombre', label:'Nombre'}, {id:'dni', label:'DNI'}, {id:'hora', label:'Hora de ausencia'}], plantilla: (d)=>`A ${d.empresa}\n${d.nombre} con DNI ${d.dni} comunica ausencia de 1 hora diaria (${d.hora}) por hospitalización de hijo/a recién nacido (Art. 37.4 ET).` },
+            'm4': { titulo: '4. Exámenes Prenatales', campos: [{id:'empresa', label:'Empresa'}, {id:'nombre', label:'Nombre'}, {id:'cita', label:'Tipo de Cita'}, {id:'fecha', label:'Fecha', tipo:'date'}], plantilla: (d)=>`A ${d.empresa}\n${d.nombre} comunica ausencia retribuida el día ${formatDateToSpanish(d.fecha)} para asistir a ${d.cita} (Art. 37.3.f ET).` },
+            'm5': { titulo: '5. Excedencia Voluntaria', campos: [{id:'empresa', label:'Empresa'}, {id:'nombre', label:'Nombre'}, {id:'inicio', label:'Fecha Inicio', tipo:'date'}, {id:'fin', label:'Fecha Fin', tipo:'date'}], plantilla: (d)=>`A la empresa ${d.empresa}\n${d.nombre} solicita excedencia voluntaria (Art. 46.2 ET) desde el ${formatDateToSpanish(d.inicio)} hasta el ${formatDateToSpanish(d.fin)}.` },
+            'm6': { titulo: '6. Permiso Formación (20h)', campos: [{id:'empresa', label:'Empresa'}, {id:'nombre', label:'Nombre'}, {id:'curso', label:'Nombre del Curso'}], plantilla: (d)=>`A ${d.empresa}\n${d.nombre} solicita permiso retribuido de 20h para formación (Art. 23.3 ET) para el curso: ${d.curso}.` },
+            'm7': { titulo: '7. Fin Lactancia (Retorno)', campos: [{id:'empresa', label:'Empresa'}, {id:'nombre', label:'Nombre'}, {id:'fecha', label:'Fecha Retorno', tipo:'date'}], plantilla: (d)=>`A ${d.empresa}\n${d.nombre} comunica que el ${formatDateToSpanish(d.fecha)} finalizará su permiso de lactancia y retornará a su jornada ordinaria.` },
+            'm8': { titulo: '8. Lactancia Acumulada', campos: [{id:'empresa', label:'Empresa'}, {id:'nombre', label:'Nombre'}, {id:'dias', label:'Nº Días Acumulados'}], plantilla: (d)=>`A ${d.empresa}\n${d.nombre} comunica su decisión de acumular el permiso de lactancia en jornadas completas (${d.dias} días) según Art. 37.4 ET.` },
+            'm9': { titulo: '9. Adaptación Jornada (34.8)', campos: [{id:'empresa', label:'Empresa'}, {id:'nombre', label:'Nombre'}, {id:'detalle', label:'Nueva jornada deseada'}], plantilla: (d)=>`A ${d.empresa}\n${d.nombre} solicita adaptación de jornada según Art. 34.8 ET: ${d.detalle}.` },
+            'm10': { titulo: '10. Excedencia Cuidado Hijo', campos: [{id:'nombre', label:'Nombre'}, {id:'dni', label:'DNI'}, {id:'inicio', label:'Fecha Inicio', tipo:'date'}], plantilla: (d)=>`Yo, ${d.nombre} con DNI ${d.dni} solicito excedencia por cuidado de hijo (Art. 46.3 ET) a partir del ${formatDateToSpanish(d.inicio)}.` },
+            'm11': { titulo: '11. Prórroga Excedencia Familiar', campos: [{id:'nombre', label:'Nombre'}, {id:'familiar', label:'Parentesco'}, {id:'inicio', label:'Nueva fecha inicio', tipo:'date'}], plantilla: (d)=>`D./Dña. ${d.nombre} solicita prórroga de excedencia por cuidado de su ${d.familiar} a partir del ${formatDateToSpanish(d.inicio)}.` },
+            'm12': { titulo: '12. Reducción Jornada Guarda', campos: [{id:'empresa', label:'Empresa'}, {id:'nombre', label:'Nombre'}, {id:'horario', label:'Nuevo horario'}], plantilla: (d)=>`A ${d.empresa}\n${d.nombre} solicita reducción de jornada por guarda legal (Art. 37.6 ET). Horario propuesto: ${d.horario}.` },
+            'm13': { titulo: '13. Nacimiento (19 semanas)', campos: [{id:'empresa', label:'Empresa'}, {id:'nombre', label:'Nombre'}, {id:'nacimiento', label:'Fecha Nacimiento', tipo:'date'}], plantilla: (d)=>`A ${d.empresa}\n${d.nombre} comunica el nacimiento de su hijo/a el ${formatDateToSpanish(d.nacimiento)} y el inicio del permiso de 19 semanas (Art. 48.4 ET).` }
+        };
+
+        const lista = document.getElementById('indice-lista');
+        const output = document.getElementById('code-output');
+        let sel = null;
+
+        Object.keys(ModelosData).forEach(id => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a onclick="cargar('${id}')">${ModelosData[id].titulo}</a>`;
+            lista.appendChild(li);
+        });
+
+        function cargar(id) {
+            sel = id;
+            document.getElementById('action-flow-container').classList.remove('hidden');
+            document.getElementById('action-title').innerText = ModelosData[id].titulo;
+            document.getElementById('dynamic-form-wrapper').classList.add('hidden');
+            document.getElementById('selection-buttons').classList.remove('hidden');
+            output.innerText = "Selecciona 'Rellenar' o 'Ver en blanco'...";
+        }
+
+        document.getElementById('btn-show-form').onclick = () => {
+            document.getElementById('selection-buttons').classList.add('hidden');
+            document.getElementById('dynamic-form-wrapper').classList.remove('hidden');
+            const f = document.getElementById('dynamic-form');
+            f.innerHTML = '';
+            ModelosData[sel].campos.forEach(c => {
+                f.innerHTML += `<div class="form-group"><label>${c.label}</label><input type="${c.tipo||'text'}" id="i-${c.id}"></div>`;
+            });
+        };
+
+        document.getElementById('btn-generate-blank').onclick = () => {
+            const d = {};
+            ModelosData[sel].campos.forEach(c => d[c.id] = `[${c.label.toUpperCase()}]`);
+            output.innerText = ModelosData[sel].plantilla(d);
+            document.getElementById('final-actions').classList.remove('hidden');
+        };
+
+        document.getElementById('btn-generar').onclick = () => {
+            const d = {};
+            ModelosData[sel].campos.forEach(c => {
+                const v = document.getElementById(`i-${c.id}`).value;
+                d[c.id] = v ? v : `[${c.label}]`;
+            });
+            output.innerText = ModelosData[sel].plantilla(d);
+            document.getElementById('final-actions').classList.remove('hidden');
+        };
+
+        document.getElementById('btn-copiar').onclick = () => {
+            navigator.clipboard.writeText(output.innerText);
+            alert("¡Copiado al portapapeles!");
+        };
+    </script>
+</body>
+</html>
