@@ -258,7 +258,17 @@
         <a href="javascript:void(0)" onclick="closeModal('modalModelos')" class="btn-close" style="margin-top: 25px;">Cerrar</a>
     </div>
 </div>
-   <!--- MODAL CALENDARIO INNECESARIO AHORA VAMOS A UNA HTML INDEPENDIENTE
+
+<div id="modalInfo" class="modal-overlay" onclick="closeModalExterno(event, 'modalInfo')" style="display:none;">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('modalInfo')">&times;</span>
+        <h2 id="modalTitulo" style="text-align: center; color: #e30613;"></h2>
+        <div id="modalCuerpo">
+            </div>
+    </div>
+</div>   
+
+<!--- MODAL CALENDARIO INNECESARIO AHORA VAMOS A UNA HTML INDEPENDIENTE
 <div id="modalCalendario" class="modal-overlay" onclick="closeModalExterno(event, 'modalCalendario')">
     <div class="modal-content" style="max-height: 85vh; overflow-y: auto;">
         <h2><i data-lucide="calendar-days"></i> Calendario 2026</h2>
