@@ -3,56 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador UGT</title>
+    <title>Generador UGT - Móvil</title>
     <style>
         :root { --red-ugt: #e30613; --dark: #2d3436; --gray: #f4f4f4; }
-        body { font-family: sans-serif; background: var(--gray); margin: 0; padding: 15px; }
-        .header { text-align: center; padding: 20px; border-bottom: 4px solid var(--red-ugt); background: white; border-radius: 12px; margin-bottom: 20px; }
-        .header h1 { margin: 0; font-size: 1.2rem; color: var(--red-ugt); }
+        body { font-family: -apple-system, system-ui, sans-serif; background: var(--gray); margin: 0; padding: 15px; }
+        
+        .header { text-align: center; padding: 15px; background: white; border-radius: 12px; margin-bottom: 20px; border-bottom: 4px solid var(--red-ugt); }
+        .header h1 { margin: 0; font-size: 1.1rem; color: var(--red-ugt); }
+
         .lista-permisos { display: grid; gap: 10px; }
-        .card-permiso { background: white; padding: 18px; border-radius: 10px; display: flex; justify-content: space-between; cursor: pointer; border-left: 6px solid var(--red-ugt); font-weight: bold; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: flex-end; z-index: 1000; }
-        .modal-content { background: white; width: 100%; max-width: 550px; border-radius: 20px 20px 0 0; padding: 25px; max-height: 90vh; overflow: hidden; display: flex; flex-direction: column; }
-        .close-x { align-self: flex-end; background: #eee; border: none; border-radius: 50%; width: 35px; height: 35px; cursor: pointer; }
-        .btn-ugt { background: var(--red-ugt); color: white; border: none; padding: 16px; width: 100%; border-radius: 12px; font-weight: bold; margin-top: 10px; cursor: pointer; }
-        .btn-sec { background: #636e72; }
-        .scroll-area { overflow-y: auto; flex-grow: 1; margin-top: 15px; }
+        .card-permiso { background: white; padding: 18px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border-left: 6px solid var(--red-ugt); box-shadow: 0 2px 5px rgba(0,0,0,0.05); font-weight: 600; font-size: 0.9rem; }
+
+        /* MODAL */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: flex-end; z-index: 1000; backdrop-filter: blur(2px); }
+        .modal-content { background: white; width: 100%; max-width: 550px; border-radius: 20px 20px 0 0; max-height: 90vh; display: flex; flex-direction: column; animation: slideUp 0.3s ease-out; }
+        
+        /* Cabecera Fija del Modal */
+        .modal-header { padding: 15px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        #modal-titulo-fijo { font-size: 1rem; color: var(--red-ugt); font-weight: bold; margin: 0; padding-right: 10px; }
+        
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+        .close-x { background: #eee; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-weight: bold; flex-shrink: 0; }
+        
+        /* Área de contenido con Scroll */
+        .modal-body { padding: 20px; overflow-y: auto; flex-grow: 1; }
+
+        .btn-ugt { background: var(--red-ugt); color: white; border: none; padding: 16px; width: 100%; border-radius: 12px; font-weight: bold; font-size: 1rem; margin-top: 10px; cursor: pointer; }
+        .btn-sec { background: #636e72; margin-bottom: 20px; }
+
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; }
-        .form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        #output-text { background: #fffdf2; border: 1px solid #e6db55; padding: 15px; border-radius: 10px; white-space: pre-wrap; font-family: serif; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #555; }
+        .form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 1rem; }
+
+        #output-text { background: #fffdf2; border: 1px solid #e6db55; padding: 15px; border-radius: 10px; white-space: pre-wrap; font-family: serif; line-height: 1.6; }
     </style>
 </head>
 <body>
 
-    <div class="header"><h1>MODELOS OFICIALES UGT</h1></div>
+    <div class="header"><h1>MODELOS DE ESCRITOS</h1></div>
     <div id="indice-lista" class="lista-permisos"></div>
 
     <div id="modal-ugt" class="modal-overlay">
         <div class="modal-content">
-            <button class="close-x" onclick="cerrarModal()">✕</button>
-            <div id="modal-body" class="scroll-area"></div>
+            <div class="modal-header">
+                <p id="modal-titulo-fijo"></p>
+                <button class="close-x" onclick="cerrarModal()">✕</button>
+            </div>
+            <div id="modal-body" class="modal-body"></div>
         </div>
     </div>
 
     <script>
-        // DATOS INTEGRADOS (Evitamos errores de carga de archivos externos)
         const modelos = {
-            "m1": {
-                "titulo": "1. Permiso Parental (8 semanas) - Art. 48.bis ET",
-                "campos": [
-                    {"id": "emp", "label": "Empresa"}, {"id": "nom", "label": "Nombre"}, {"id": "dni", "label": "DNI"}, {"id": "nac", "label": "F. Nacimiento Hijo", "tipo": "date"}
-                ],
-                "plantilla": "A la empresa ${emp}\n\nYo, ${nom} con DNI ${dni}, solicito el permiso parental (Art. 48.bis ET) por mi hijo/a nacido/a el ${nac}.\n\nFdo: ${nom}"
-            },
-            "m13": {
-                "titulo": "13. Nacimiento y Cuidado (19 semanas) - Art. 48.4 ET",
-                "campos": [
-                    {"id": "emp", "label": "Empresa"}, {"id": "nom", "label": "Nombre"}, {"id": "dni", "label": "DNI"}
-                ],
-                "plantilla": "A la empresa ${emp}\n\nYo, ${nom} con DNI ${dni}, comunico el nacimiento de mi hijo/a y solicito las 19 semanas de permiso según el Art. 48.4 ET.\n\nFdo: ${nom}"
-            }
-            // Puedes añadir aquí el resto de modelos siguiendo el formato
+            "m1": { "titulo": "1. Permiso Parental (8 semanas)", "campos": [{"id": "emp", "label": "Empresa"}, {"id": "nom", "label": "Nombre"}, {"id": "dni", "label": "DNI"}, {"id": "nac", "label": "F. Nacimiento Hijo", "tipo":"date"}], "plantilla": "A la empresa ${emp}\n\nYo, ${nom} con DNI ${dni}, comunico mi intención de disfrutar del permiso parental (Art. 48.bis ET) por mi hijo/a nacido el ${nac}.\n\nAtentamente,\nFdo: ${nom}" },
+            "m2": { "titulo": "2. Adaptación de Puesto", "campos": [{"id": "emp", "label": "Empresa"}, {"id": "nom", "label": "Nombre"}], "plantilla": "A la dirección de ${emp}\n\nYo, ${nom}, solicito la adaptación de mi puesto según el Art. 25 LPRL.\n\nFdo: ${nom}" },
+            "m3": { "titulo": "3. Hospitalización Recién Nacido", "campos": [{"id": "emp", "label": "Empresa"}, {"id": "nom", "label": "Nombre"}, {"id": "hora", "label": "Hora de ausencia"}], "plantilla": "A la dirección de ${emp}\n\nComunico mi ausencia de una hora diaria (${hora}) por hospitalización de recién nacido (Art. 37.4 ET).\n\nFdo: ${nom}" },
+            "m4": { "titulo": "4. Exámenes Prenatales", "campos": [{"id": "f", "label": "Fecha Cita", "tipo":"date"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Comunico mi ausencia el día ${f} para exámenes prenatales (Art. 37.3.f ET).\n\nFdo: ${nom}" },
+            "m5": { "titulo": "5. Excedencia Voluntaria", "campos": [{"id": "emp", "label": "Empresa"}, {"id": "nom", "label": "Nombre"}, {"id": "i", "label": "Inicio", "tipo":"date"}, {"id": "f", "label": "Fin", "tipo":"date"}], "plantilla": "Solicito excedencia voluntaria del ${i} al ${f}.\n\nFdo: ${nom}" },
+            "m6": { "titulo": "6. Formación (20 Horas)", "campos": [{"id": "curso", "label": "Curso"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito 20 horas para el curso ${curso} (Art. 23.3 ET).\n\nFdo: ${nom}" },
+            "m7": { "titulo": "7. Fin Lactancia y Retorno", "campos": [{"id": "f", "label": "Fecha retorno", "tipo":"date"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Comunico mi retorno el día ${f} tras finalizar lactancia.\n\nFdo: ${nom}" },
+            "m8": { "titulo": "8. Lactancia Acumulada", "campos": [{"id": "dias", "label": "Días totales"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito acumular el permiso de lactancia en ${dias} días.\n\nFdo: ${nom}" },
+            "m9": { "titulo": "9. Adaptación de Jornada", "campos": [{"id": "det", "label": "Nueva Jornada"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito adaptación de jornada: ${det} (Art. 34.8 ET).\n\nFdo: ${nom}" },
+            "m10": { "titulo": "10. Excedencia Cuidado Hijo", "campos": [{"id": "nac", "label": "Nacimiento", "tipo":"date"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito excedencia por cuidado de hijo nacido el ${nac}.\n\nFdo: ${nom}" },
+            "m11": { "titulo": "11. Prórroga Excedencia", "campos": [{"id": "f", "label": "Nueva fecha fin", "tipo":"date"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito prórroga de excedencia hasta el ${f}.\n\nFdo: ${nom}" },
+            "m12": { "titulo": "12. Reducción Jornada", "campos": [{"id": "hor", "label": "Horario"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito reducción de jornada en horario ${hor}.\n\nFdo: ${nom}" },
+            "m13": { "titulo": "13. Nacimiento (19 semanas)", "campos": [{"id": "nac", "label": "Nacimiento", "tipo":"date"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito el permiso de 19 semanas por nacimiento el día ${nac}.\n\nFdo: ${nom}" }
         };
 
         let selKey = "";
@@ -71,12 +87,15 @@
 
         function abrirPaso1(key) {
             selKey = key;
+            const m = modelos[key];
+            document.getElementById('modal-titulo-fijo').innerText = m.titulo;
             document.getElementById('modal-body').innerHTML = `
-                <h2 style="color:var(--red-ugt); margin-top:0;">${modelos[key].titulo}</h2>
-                <button class="btn-ugt" onclick="abrirPaso2()">Rellenar mis datos</button>
+                <p>¿Qué desea hacer?</p>
+                <button class="btn-ugt" onclick="abrirPaso2()">Rellenar con mis datos</button>
                 <button class="btn-ugt btn-sec" onclick="generar(true)">Ver en blanco</button>
             `;
             document.getElementById('modal-ugt').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
         function abrirPaso2() {
@@ -84,10 +103,15 @@
             const camposHtml = m.campos.map(c => `
                 <div class="form-group">
                     <label>${c.label}</label>
-                    <input type="${c.tipo || 'text'}" id="inp-${c.id}">
+                    <input type="${c.tipo || 'text'}" id="inp-${c.id}" placeholder="Escriba aquí...">
                 </div>
             `).join('');
-            document.getElementById('modal-body').innerHTML = `<h3>Datos</h3>${camposHtml}<button class="btn-ugt" onclick="generar(false)">Generar</button>`;
+
+            document.getElementById('modal-body').innerHTML = `
+                ${camposHtml}
+                <button class="btn-ugt" onclick="generar(false)">Generar Escrito</button>
+                <button class="btn-ugt btn-sec" onclick="abrirPaso1(selKey)">Volver</button>
+            `;
         }
 
         function generar(blanco) {
@@ -96,18 +120,27 @@
             m.campos.forEach(c => {
                 let val = blanco ? `[${c.label.toUpperCase()}]` : document.getElementById(`inp-${c.id}`).value;
                 if(!val) val = `[${c.label.toUpperCase()}]`;
+                if(!blanco && document.getElementById(`inp-${c.id}`).type === 'date' && val.includes('-')) val = val.split('-').reverse().join('/');
                 texto = texto.split(`\${${c.id}}`).join(val);
             });
-            document.getElementById('modal-body').innerHTML = `<div id="output-text">${texto}</div><button class="btn-ugt" onclick="copiar()">Copiar</button>`;
+
+            document.getElementById('modal-body').innerHTML = `
+                <div id="output-text">${texto}</div>
+                <button class="btn-ugt" onclick="copiar()">Copiar texto</button>
+                <button class="btn-ugt btn-sec" onclick="cerrarModal()">Finalizar</button>
+            `;
         }
 
         function copiar() {
             const txt = document.getElementById('output-text').innerText;
             navigator.clipboard.writeText(txt);
-            alert("Copiado");
+            alert("Copiado al portapapeles");
         }
 
-        function cerrarModal() { document.getElementById('modal-ugt').style.display = 'none'; }
+        function cerrarModal() {
+            document.getElementById('modal-ugt').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
         renderIndice();
     </script>
