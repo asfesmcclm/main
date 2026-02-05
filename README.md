@@ -1,55 +1,57 @@
 # 🚩 Herramientas Laborales - FeSMC UGT Castilla-La Mancha
 
-Aplicación web ligera y optimizada para dispositivos móviles, diseñada para facilitar el acceso a información laboral, convenios colectivos y trámites oficiales para delegados y afiliados de la región.
+Aplicación web optimizada para dispositivos móviles diseñada para facilitar el acceso a información laboral, convenios y trámites oficiales para delegados y afiliados de la región.
 
 ## 📱 Descripción del Proyecto
-Esta herramienta centraliza los recursos más consultados en la acción sindical diaria, eliminando la necesidad de buscar enlaces complejos en Google. Está construida con HTML5, CSS3 y JavaScript puro (Vanilla JS), sin dependencias externas pesadas.
+Esta herramienta centraliza los recursos más consultados en la acción sindical diaria. Utiliza una arquitectura modular para ser rápida, ligera y fácil de mantener.
 
 ---
 
-## 🏗️ Estructura del Código (Recordatorio)
+## 📂 Organización y Rutas de Archivos
 
-Para mantener el proyecto limpio, hemos dividido la aplicación en varios archivos clave:
-
-1.  **`index.html`**: Es el esqueleto. Contiene los botones principales de la pantalla de inicio.
-2.  **`modales.html`**: Contiene el contenido de todas las ventanas emergentes (Convenios, Sedes, Calculadoras, etc.). Se carga dinámicamente para no sobrecargar el inicio.
-3.  **`tramites.json`**: La "base de datos". Aquí es donde se añaden o quitan los enlaces de Seguridad Social y Hacienda.
-4.  **`script.js`**: El cerebro. Gestiona la apertura de modales, la lectura del JSON y la carga de iconos de Lucide.
-5.  **`style.css`**: Define la estética (colores corporativos #e30613, tarjetas blancas y diseño móvil).
-
----
-
-## 🛠️ Cómo realizar cambios comunes
-
-### 1. Añadir o cambiar un enlace de Hacienda/Seguridad Social
-No toques el HTML. Ve directamente a `tramites.json`.
-* **Regla de oro**: Cada bloque `{ }` debe ir separado por una coma `,`, EXCEPTO el último de la lista.
-* **Campos**: `nombre`, `descripcion` y `url`.
-
-### 2. Modificar un Convenio o una Sede
-Estos cambios se hacen en `modales.html`.
-* Busca el `id` correspondiente (ej: `id="modalConvenios"` o `id="modalSedes"`).
-* Si añades un botón de convenio, asegúrate de que tenga la clase `class="btn-sector"` para que mantenga el diseño.
-
-### 3. Arreglar Iconos
-Usamos la librería **Lucide**. Para poner un icono nuevo:
-1. Busca el nombre en [lucide.dev](https://lucide.dev/icons).
-2. Usa el formato: `<i data-lucide="nombre-del-icono"></i>`.
+| Archivo / Carpeta | Función | ¿Cuándo editarlo? |
+| :--- | :--- | :--- |
+| `index.html` | Estructura principal | Para cambiar los botones del menú de inicio. |
+| `script.js` | El "Cerebro" | Para cambiar la lógica de apertura o carga de datos. |
+| `style.css` | Diseño y Colores | Para ajustar tamaños, márgenes o el color rojo (#e30613). |
+| `modales.html` | Ventanas emergentes | Para actualizar Convenios, Sedes o Calculadoras. |
+| `tramites.json` | Base de Datos | Para añadir/quitar enlaces de Hacienda o Seguridad Social. |
+| **📁 doc/** | Documentación externa | Carpeta para guías largas (ej: CUME). |
+| `doc/cume.html` | Guía CUME | Para actualizar la normativa sobre cuidado de menores. |
 
 ---
 
-## 🚀 Despliegue (GitHub Pages)
-El proyecto está configurado para actualizarse automáticamente:
-1. Subes los cambios a la rama `main`.
-2. En 1-2 minutos, los cambios son visibles en la URL de GitHub Pages.
-3. **Nota**: Si no ves los cambios, refresca el navegador del móvil deslizando hacia abajo para limpiar la caché.
+## 🛠️ Guía de Mantenimiento Rápido
+
+### 1. Gestión de Trámites Dinámicos (`tramites.json`)
+Los botones de **Seguridad Social** y **Hacienda** leen este archivo.
+* **Formato**: Cada bloque `{...}` es un trámite. 
+* **Importante**: Todos los bloques llevan coma al final exceptuando el último. 
+* Si el modal no abre, lo primero es revisar que el JSON no tenga errores de sintaxis (comas mal puestas).
+
+### 2. Edición de Modales (`modales.html`)
+El contenido de los botones "fijos" está aquí.
+* **Convenios**: Hemos dejado solo los sectores regionales (Transporte, Comercio, Hostelería y Limpieza).
+* **Sedes**: Están organizadas por provincias con botones desplegables.
+* **Modelos**: El enlace al CUME apunta a `doc/cume.html`.
+
+### 3. Iconos (Lucide)
+Usamos la librería de iconos Lucide. 
+* Formato: `<i data-lucide="nombre-del-icono"></i>`
+* Los iconos se cargan mediante el script al final del `index.html`.
 
 ---
 
-## 📌 Notas de Mantenimiento (CLM)
-* **Sectores Activos**: Transporte y Logística, Comercio, Hostelería y Limpieza.
-* **Sedes**: Incluye las 5 provincias con especial detalle en la Sede Regional de Guadalajara.
-* **Aviso Legal**: Se ha incluido un aviso en las calculadoras indicando que los resultados son orientativos.
+## 🚀 Despliegue y Caché
+La web se sirve a través de **GitHub Pages**. 
+1. Al subir cambios a la rama `main`, la web se actualiza en 1-2 minutos.
+2. **Si no ves los cambios**: El navegador del móvil suele guardar la versión vieja. Desliza hacia abajo para forzar la actualización o abre la web en modo incógnito.
 
 ---
-*Desarrollado para mejorar la eficiencia de la acción sindical en Castilla-La Mancha.*
+
+## 📌 Notas para el futuro
+- Los archivos en la carpeta `doc/` son independientes para evitar que el modal principal sea demasiado pesado.
+- El botón **VOLVER** de los trámites dinámicos se genera automáticamente por el script, no hace falta añadirlo manualmente en el HTML.
+
+---
+*Organizado por y para los trabajadores. FeSMC UGT CLM.*
