@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador UGT - Móvil</title>
+    <title>Generador de Escritos UGT</title>
     <style>
         :root { --red-ugt: #e30613; --dark: #2d3436; --gray: #f4f4f4; }
         body { font-family: -apple-system, system-ui, sans-serif; background: var(--gray); margin: 0; padding: 15px; }
@@ -16,32 +16,32 @@
 
         /* MODAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: flex-end; z-index: 1000; backdrop-filter: blur(2px); }
-        .modal-content { background: white; width: 100%; max-width: 550px; border-radius: 20px 20px 0 0; max-height: 90vh; display: flex; flex-direction: column; animation: slideUp 0.3s ease-out; }
+        .modal-content { background: white; width: 100%; max-width: 550px; border-radius: 20px 20px 0 0; max-height: 95vh; display: flex; flex-direction: column; animation: slideUp 0.3s ease-out; }
         
         /* Cabecera Fija del Modal */
-        .modal-header { padding: 15px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-        #modal-titulo-fijo { font-size: 1rem; color: var(--red-ugt); font-weight: bold; margin: 0; padding-right: 10px; }
+        .modal-header { padding: 15px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; background: #fff; border-radius: 20px 20px 0 0; }
+        #modal-titulo-fijo { font-size: 0.95rem; color: var(--red-ugt); font-weight: bold; margin: 0; padding-right: 10px; line-height: 1.2; }
         
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
         .close-x { background: #eee; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-weight: bold; flex-shrink: 0; }
         
         /* Área de contenido con Scroll */
-        .modal-body { padding: 20px; overflow-y: auto; flex-grow: 1; }
+        .modal-body { padding: 20px; overflow-y: auto; flex-grow: 1; -webkit-overflow-scrolling: touch; }
 
         .btn-ugt { background: var(--red-ugt); color: white; border: none; padding: 16px; width: 100%; border-radius: 12px; font-weight: bold; font-size: 1rem; margin-top: 10px; cursor: pointer; }
         .btn-sec { background: #636e72; margin-bottom: 20px; }
 
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #555; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #555; text-transform: uppercase; }
         .form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 1rem; }
 
-        #output-text { background: #fffdf2; border: 1px solid #e6db55; padding: 15px; border-radius: 10px; white-space: pre-wrap; font-family: serif; line-height: 1.6; }
+        #output-text { background: #fffdf2; border: 1px solid #e6db55; padding: 15px; border-radius: 10px; white-space: pre-wrap; font-family: serif; line-height: 1.6; font-size: 0.95rem; color: #1a1a1a; }
     </style>
 </head>
 <body>
 
-    <div class="header"><h1>MODELOS DE ESCRITOS</h1></div>
+    <div class="header"><h1>MODELOS DE ESCRITOS OFICIALES</h1></div>
     <div id="indice-lista" class="lista-permisos"></div>
 
     <div id="modal-ugt" class="modal-overlay">
@@ -56,19 +56,81 @@
 
     <script>
         const modelos = {
-            "m1": { "titulo": "1. Permiso Parental (8 semanas)", "campos": [{"id": "emp", "label": "Empresa"}, {"id": "nom", "label": "Nombre"}, {"id": "dni", "label": "DNI"}, {"id": "nac", "label": "F. Nacimiento Hijo", "tipo":"date"}], "plantilla": "A la empresa ${emp}\n\nYo, ${nom} con DNI ${dni}, comunico mi intención de disfrutar del permiso parental (Art. 48.bis ET) por mi hijo/a nacido el ${nac}.\n\nAtentamente,\nFdo: ${nom}" },
-            "m2": { "titulo": "2. Adaptación de Puesto", "campos": [{"id": "emp", "label": "Empresa"}, {"id": "nom", "label": "Nombre"}], "plantilla": "A la dirección de ${emp}\n\nYo, ${nom}, solicito la adaptación de mi puesto según el Art. 25 LPRL.\n\nFdo: ${nom}" },
-            "m3": { "titulo": "3. Hospitalización Recién Nacido", "campos": [{"id": "emp", "label": "Empresa"}, {"id": "nom", "label": "Nombre"}, {"id": "hora", "label": "Hora de ausencia"}], "plantilla": "A la dirección de ${emp}\n\nComunico mi ausencia de una hora diaria (${hora}) por hospitalización de recién nacido (Art. 37.4 ET).\n\nFdo: ${nom}" },
-            "m4": { "titulo": "4. Exámenes Prenatales", "campos": [{"id": "f", "label": "Fecha Cita", "tipo":"date"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Comunico mi ausencia el día ${f} para exámenes prenatales (Art. 37.3.f ET).\n\nFdo: ${nom}" },
-            "m5": { "titulo": "5. Excedencia Voluntaria", "campos": [{"id": "emp", "label": "Empresa"}, {"id": "nom", "label": "Nombre"}, {"id": "i", "label": "Inicio", "tipo":"date"}, {"id": "f", "label": "Fin", "tipo":"date"}], "plantilla": "Solicito excedencia voluntaria del ${i} al ${f}.\n\nFdo: ${nom}" },
-            "m6": { "titulo": "6. Formación (20 Horas)", "campos": [{"id": "curso", "label": "Curso"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito 20 horas para el curso ${curso} (Art. 23.3 ET).\n\nFdo: ${nom}" },
-            "m7": { "titulo": "7. Fin Lactancia y Retorno", "campos": [{"id": "f", "label": "Fecha retorno", "tipo":"date"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Comunico mi retorno el día ${f} tras finalizar lactancia.\n\nFdo: ${nom}" },
-            "m8": { "titulo": "8. Lactancia Acumulada", "campos": [{"id": "dias", "label": "Días totales"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito acumular el permiso de lactancia en ${dias} días.\n\nFdo: ${nom}" },
-            "m9": { "titulo": "9. Adaptación de Jornada", "campos": [{"id": "det", "label": "Nueva Jornada"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito adaptación de jornada: ${det} (Art. 34.8 ET).\n\nFdo: ${nom}" },
-            "m10": { "titulo": "10. Excedencia Cuidado Hijo", "campos": [{"id": "nac", "label": "Nacimiento", "tipo":"date"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito excedencia por cuidado de hijo nacido el ${nac}.\n\nFdo: ${nom}" },
-            "m11": { "titulo": "11. Prórroga Excedencia", "campos": [{"id": "f", "label": "Nueva fecha fin", "tipo":"date"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito prórroga de excedencia hasta el ${f}.\n\nFdo: ${nom}" },
-            "m12": { "titulo": "12. Reducción Jornada", "campos": [{"id": "hor", "label": "Horario"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito reducción de jornada en horario ${hor}.\n\nFdo: ${nom}" },
-            "m13": { "titulo": "13. Nacimiento (19 semanas)", "campos": [{"id": "nac", "label": "Nacimiento", "tipo":"date"}, {"id": "nom", "label": "Nombre"}], "plantilla": "Solicito el permiso de 19 semanas por nacimiento el día ${nac}.\n\nFdo: ${nom}" }
+            "m1": {
+                "titulo": "1. Permiso Parental (8 semanas) - Art. 48.bis ET",
+                "campos": [
+                    {"id": "empresa", "label": "Empresa"}, {"id": "localidad", "label": "Localidad"}, {"id": "fecha_com", "label": "Fecha hoy", "tipo": "date"},
+                    {"id": "nombre", "label": "Tu Nombre"}, {"id": "dni", "label": "DNI/NIE"}, {"id": "hijo", "label": "F. Nacimiento Hijo", "tipo": "date"},
+                    {"id": "inicio", "label": "Fecha Inicio", "tipo": "date"}, {"id": "fin", "label": "Fecha Fin", "tipo": "date"}, {"id": "semanas", "label": "Nº de Semanas"}
+                ],
+                "plantilla": "A la Dirección de la empresa: ${empresa}\nEn ${localidad}, a ${fecha_com}\n\nAsunto: Comunicación de disfrute de Permiso Parental (Art. 48.bis ET)\n\nEstimados Sres.:\n\nDña./D. ${nombre} con DNI ${dni}, en mi condición de trabajador/a de esta empresa, les comunico mediante el presente escrito mi intención de disfrutar del permiso parental para el cuidado de hijo, hija o menor acogido por tiempo superior a un año, en virtud de lo dispuesto en el artículo 48.bis del Estatuto de los Trabajadores.\n\nDicho permiso se solicita para el cuidado de mi hijo/a nacido/a el ${hijo}.\n\nLos periodos de disfrute serán:\n* Del día ${inicio} al día ${fin}, ambos inclusive (Total: ${semanas} semanas).\n\nLes informo que esta comunicación se realiza con la antelación mínima legal de diez días. El permiso se disfrutará a tiempo completo.\n\nAtentamente,\nFdo: ${nombre}"
+            },
+            "m2": {
+                "titulo": "2. Adaptación de Puesto (Art. 25 LPRL)",
+                "campos": [{"id": "empresa", "label": "Empresa"}, {"id": "nombre", "label": "Nombre"}, {"id": "dni", "label": "DNI"}],
+                "plantilla": "A LA DIRECCIÓN DE RRHH DE LA EMPRESA: ${empresa}\n\nAsunto: Solicitud de Adaptación de Puesto por Especial Sensibilidad\n\nEstimados señores:\n\nD./Dña.: ${nombre} con DNI: ${dni}\n\nEn coherencia con el artículo 25.1 de la Ley 31/1995 de Prevención de Riesgos Laborales, considero que mi puesto actual puede afectar negativamente a mi salud. Por ello SOLICITO la reevaluación de mi situación personal y la adaptación de las condiciones de mi puesto.\n\nAtentamente,\nFdo: ${nombre}"
+            },
+            "m3": {
+                "titulo": "3. Hospitalización Recién Nacido (Art. 37.4 ET)",
+                "campos": [{"id": "empresa", "label": "Empresa"}, {"id": "nombre", "label": "Nombre"}, {"id": "hora", "label": "Hora de ausencia"}],
+                "plantilla": "A la Dirección de RRHH de ${empresa}\n\nAsunto: Comunicación de Ausencia por Hospitalización de Recién Nacido (Art. 37.4 ET)\n\nD./Dña. ${nombre}, les comunico que, encontrándose mi hijo/a hospitalizado/a tras el parto, me ausentaré del puesto durante una hora cada día en horario de ${hora}.\n\nAtentamente,\nFdo: ${nombre}"
+            },
+            "m4": {
+                "titulo": "4. Exámenes Prenatales (Art. 37.3.f ET)",
+                "campos": [{"id": "empresa", "label": "Empresa"}, {"id": "fecha", "label": "Fecha Cita", "tipo": "date"}, {"id": "nombre", "label": "Nombre"}],
+                "plantilla": "A la Dirección de RRHH de ${empresa}\n\nAsunto: Comunicación de Ausencia Retribuida por Exámenes Prenatales\n\nDoña ${nombre} comunica que según el Art. 37.3.f del ET, me ausentaré el día ${fecha} para asistir a exámenes prenatales y técnicas de preparación al parto.\n\nAtentamente,\nFdo: ${nombre}"
+            },
+            "m5": {
+                "titulo": "5. Excedencia Voluntaria (Art. 46.2 ET)",
+                "campos": [{"id": "empresa", "label": "Empresa"}, {"id": "nombre", "label": "Nombre"}, {"id": "inicio", "label": "Fecha Inicio", "tipo": "date"}, {"id": "fin", "label": "Fecha Fin", "tipo": "date"}],
+                "plantilla": "A LA EMPRESA: ${empresa}\n\nAsunto: Solicitud de Excedencia Voluntaria (Art. 46.2 ET)\n\nYo ${nombre} solicito mi paso a situación de EXCEDENCIA VOLUNTARIA desde el ${inicio} hasta el ${fin}.\n\nAtentamente,\nFdo: ${nombre}"
+            },
+            "m6": {
+                "titulo": "6. Formación (20 Horas) - Art. 23.3 ET",
+                "campos": [{"id": "empresa", "label": "Empresa"}, {"id": "curso", "label": "Nombre del Curso"}, {"id": "nombre", "label": "Nombre"}],
+                "plantilla": "A RRHH DE ${empresa}\n\nAsunto: Solicitud de Permiso Retribuido para Formación (Art. 23.3 ET)\n\nD./Dña. ${nombre} solicita el disfrute de 20 horas para realizar el curso ${curso}.\n\nAtentamente,\nFdo: ${nombre}"
+            },
+            "m7": {
+                "titulo": "7. Fin Lactancia y Retorno",
+                "campos": [{"id": "empresa", "label": "Empresa"}, {"id": "fecha", "label": "Fecha Retorno", "tipo": "date"}, {"id": "nombre", "label": "Nombre"}],
+                "plantilla": "A la Dirección de RRHH de ${empresa}\n\nAsunto: Preaviso de Finalización de Permiso de Lactancia\n\nD./Dña. ${nombre} comunica que el ${fecha} finalizará su permiso de lactancia y se reincorporará a su jornada ordinaria.\n\nAtentamente,\nFdo: ${nombre}"
+            },
+            "m8": {
+                "titulo": "8. Lactancia Acumulada (Art. 37.4 ET)",
+                "campos": [{"id": "empresa", "label": "Empresa"}, {"id": "dias", "label": "Días totales"}, {"id": "nombre", "label": "Nombre"}],
+                "plantilla": "A la Dirección de RRHH de ${empresa}\n\nAsunto: Comunicación de Acumulación de Permiso de Lactancia\n\nD./Dña. ${nombre} comunica su intención de acumular el permiso por cuidado de lactante en jornadas completas (${dias} días).\n\nAtentamente,\nFdo: ${nombre}"
+            },
+            "m9": {
+                "titulo": "9. Adaptación de Jornada (Art. 34.8 ET)",
+                "campos": [{"id": "empresa", "label": "Empresa"}, {"id": "detalle", "label": "Nueva Jornada Propuesta"}, {"id": "nombre", "label": "Nombre"}],
+                "plantilla": "A la Dirección de RRHH de ${empresa}\n\nAsunto: Solicitud de Adaptación de Jornada (Art. 34.8 ET)\n\nD./Dña. ${nombre} solicita la adaptación de su jornada: ${detalle}.\n\nAtentamente,\nFdo: ${nombre}"
+            },
+            "m10": {
+                "titulo": "10. Excedencia Cuidado Hijo (Art. 46.3 ET)",
+                "campos": [{"id": "nombre", "label": "Nombre"}, {"id": "nacimiento", "label": "F. Nacimiento", "tipo": "date"}, {"id": "inicio", "label": "Fecha Inicio", "tipo": "date"}],
+                "plantilla": "Asunto: Solicitud de Excedencia por Cuidado de Hijo (Art. 46.3 ET)\n\nD./Dña. ${nombre} solicita excedencia por cuidado de hijo/a nacido el ${nacimiento}, a partir del día ${inicio}.\n\nAtentamente,\nFdo: ${nombre}"
+            },
+            "m11": {
+                "titulo": "11. Prórroga Excedencia Familiar",
+                "campos": [{"id": "nombre", "label": "Nombre"}, {"id": "inicio", "label": "Nueva Fecha Fin", "tipo": "date"}],
+                "plantilla": "D./Dña. ${nombre} solicita la prórroga de su excedencia familiar hasta el ${inicio}.\n\nAtentamente,\nFdo: ${nombre}"
+            },
+            "m12": {
+                "titulo": "12. Reducción Jornada Guarda (Art. 37.6 ET)",
+                "campos": [{"id": "empresa", "label": "Empresa"}, {"id": "horario", "label": "Horario Propuesto"}, {"id": "nombre", "label": "Nombre"}],
+                "plantilla": "A la Dirección de RRHH de ${empresa}\n\nAsunto: Solicitud de Reducción de Jornada por Guarda Legal (Art. 37.6 ET)\n\nD./Dña. ${nombre} solicita reducción de jornada en horario: ${horario}.\n\nAtentamente,\nFdo: ${nombre}"
+            },
+            "m13": {
+                "titulo": "13. Nacimiento y Cuidado (19 semanas) - Art. 48.4 ET",
+                "campos": [
+                    {"id": "empresa", "label": "Empresa"}, {"id": "localidad", "label": "Localidad"}, {"id": "fecha_com", "label": "Fecha hoy", "tipo": "date"},
+                    {"id": "nombre", "label": "Tu Nombre"}, {"id": "dni", "label": "DNI/NIE"}, {"id": "nacimiento", "label": "Fecha Nacimiento Hijo/a", "tipo": "date"},
+                    {"id": "i_op1", "label": "Inicio Opción 1", "tipo": "date"}, {"id": "f_op1", "label": "Fin Opción 1", "tipo": "date"},
+                    {"id": "i_op2_6", "label": "Inicio 6 sem. Oblig.", "tipo": "date"}, {"id": "f_op2_6", "label": "Fin 6 sem. Oblig.", "tipo": "date"},
+                    {"id": "voluntarias", "label": "Periodos 11 sem. voluntarias"}, {"id": "i_flex", "label": "Inicio 2 sem. Flex", "tipo": "date"}, {"id": "f_flex", "label": "Fin 2 sem. Flex", "tipo": "date"}
+                ],
+                "plantilla": "A la Dirección de RRHH de la empresa ${empresa}\nEn ${localidad}, a ${fecha_com}\n\nAsunto: Solicitud de Permiso por Nacimiento y Cuidado del Menor (19 Semanas) - Art. 48.4 ET\n\nD./Dña. ${nombre}, con DNI ${dni}, comunico que en fecha ${nacimiento} tuvo lugar el nacimiento/adopción de mi hijo/a.\n\nDe acuerdo con el artículo 48.4 del Estatuto de los Trabajadores, el permiso es de 19 semanas para cada progenitor, intransferibles, y solicito su disfrute de la siguiente manera:\n\nØ Opción 1: Disfrute Ininterrumpido de 19 semanas\n* Fecha de inicio: ${i_op1}\n* Fecha de finalización: ${f_op1}\n\nØ Opción 2: Disfrute Discontinuo (19 semanas)\n* 6 semanas obligatorias: Del ${i_op2_6} al ${f_op2_6}\n* 11 semanas restantes Voluntarias:\n    * ${voluntarias}\n* 2 semanas Adicionales Flexibles (hasta los 8 años):\n    * Del ${i_flex} al ${f_flex}\n\nAtentamente,\nFdo: ${nombre}"
+            }
         };
 
         let selKey = "";
@@ -90,9 +152,9 @@
             const m = modelos[key];
             document.getElementById('modal-titulo-fijo').innerText = m.titulo;
             document.getElementById('modal-body').innerHTML = `
-                <p>¿Qué desea hacer?</p>
-                <button class="btn-ugt" onclick="abrirPaso2()">Rellenar con mis datos</button>
-                <button class="btn-ugt btn-sec" onclick="generar(true)">Ver en blanco</button>
+                <p style="color:#666;">Seleccione una opción para este escrito oficial:</p>
+                <button class="btn-ugt" onclick="abrirPaso2()">Rellenar mis datos</button>
+                <button class="btn-ugt btn-sec" onclick="generar(true)">Ver modelo en blanco</button>
             `;
             document.getElementById('modal-ugt').style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -103,13 +165,13 @@
             const camposHtml = m.campos.map(c => `
                 <div class="form-group">
                     <label>${c.label}</label>
-                    <input type="${c.tipo || 'text'}" id="inp-${c.id}" placeholder="Escriba aquí...">
+                    <input type="${c.tipo || 'text'}" id="inp-${c.id}" placeholder="Introduzca dato...">
                 </div>
             `).join('');
 
             document.getElementById('modal-body').innerHTML = `
-                ${camposHtml}
-                <button class="btn-ugt" onclick="generar(false)">Generar Escrito</button>
+                <div style="margin-bottom:15px;">${camposHtml}</div>
+                <button class="btn-ugt" onclick="generar(false)">Generar Escrito Final</button>
                 <button class="btn-ugt btn-sec" onclick="abrirPaso1(selKey)">Volver</button>
             `;
         }
@@ -126,7 +188,7 @@
 
             document.getElementById('modal-body').innerHTML = `
                 <div id="output-text">${texto}</div>
-                <button class="btn-ugt" onclick="copiar()">Copiar texto</button>
+                <button class="btn-ugt" onclick="copiar()">Copiar al portapapeles</button>
                 <button class="btn-ugt btn-sec" onclick="cerrarModal()">Finalizar</button>
             `;
         }
@@ -134,7 +196,7 @@
         function copiar() {
             const txt = document.getElementById('output-text').innerText;
             navigator.clipboard.writeText(txt);
-            alert("Copiado al portapapeles");
+            alert("Texto copiado correctamente.");
         }
 
         function cerrarModal() {
