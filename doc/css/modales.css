@@ -1,0 +1,141 @@
+/* doc/css/modales.css */
+
+/* 1. Fondo del Modal - Oscurece lo que hay detrás */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px); /* Difumina el fondo */
+    display: none; /* Se activa con JS */
+    justify-content: center;
+    align-items: flex-end; /* En móvil sale de abajo */
+    z-index: 10000;
+}
+
+/* 2. Cuerpo del Modal */
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 25px 25px 0 0; /* Solo redondeado arriba en móvil */
+    padding: 20px;
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -5px 25px rgba(0,0,0,0.2);
+    animation: slideUp 0.3s ease-out;
+}
+
+/* Animación de entrada */
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+/* 3. Botón de cerrar (la X) */
+.close-x {
+    align-self: flex-end;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 4. Área con scroll para formularios con muchos campos */
+.scroll-area {
+    overflow-y: auto;
+    padding: 5px 10px 20px 0;
+    margin-bottom: 15px;
+}
+
+/* 5. Estilo de los campos (Inputs) */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #444;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #e30613; /* Rojo UGT */
+    background: #fffafa;
+    outline: none;
+}
+
+/* 6. Vista del texto legal generado */
+.output-final {
+    background: #fffdf2;
+    border: 1px solid #ffe58f;
+    padding: 20px;
+    border-radius: 12px;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    max-height: 350px;
+    overflow-y: auto;
+    color: #1a1a1a;
+}
+
+/* 7. Botones estilo UGT */
+.btn-ugt {
+    background: #e30613;
+    color: white;
+    border: none;
+    padding: 16px;
+    width: 100%;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: transform 0.1s, background 0.2s;
+}
+
+.btn-ugt:active {
+    background: #b3050f;
+    transform: scale(0.98);
+}
+
+.btn-sec {
+    background: #636e72;
+}
+
+/* 8. Adaptación para PC (Pantallas grandes) */
+@media (min-width: 768px) {
+    .modal-overlay {
+        align-items: center; /* Se centra en medio de la pantalla */
+    }
+    .modal-content {
+        border-radius: 20px; /* Redondeado por todos lados */
+        width: 90%;
+        margin-bottom: 0;
+    }
+}
