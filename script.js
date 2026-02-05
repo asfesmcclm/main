@@ -59,6 +59,8 @@ function closeModalExterno(event, id) {
     if (event.target.id === id) closeModal(id);
 }
 
+
+
 // 4. CARGAR TRÁMITES (HACIENDA Y SEGURIDAD SOCIAL)
 async function abrirModal(tipo) {
     try {
@@ -76,18 +78,25 @@ async function abrirModal(tipo) {
         let htmlContenido = "";
         seccion.forEach(item => {
             htmlContenido += `
-                <div class="tramite-item">
-                    <strong>${item.nombre}</strong>
-                    <p>${item.descripcion}</p>
-                    <a href="${item.url}" target="_blank" class="btn-directo">Acceder al trámite</a>
+                <div class="tramite-item" style="margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 10px; background: #fafafa; text-align: left;">
+                    <strong style="color: #333; font-size: 1.05rem; display: block;">${item.nombre}</strong>
+                    <p style="font-size: 0.85rem; color: #666; margin: 8px 0 12px 0;">${item.descripcion}</p>
+                    <a href="${item.url}" target="_blank" class="btn-directo" 
+                       style="display: block; text-align: center; background: #fff; color: #e30613; border: 1px solid #e30613; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">
+                        ACCEDER AL TRÁMITE
+                    </a>
                 </div>`;
         });
 
-        // AÑADIMOS EL BOTÓN DE VOLVER QUE FALTABA
-        htmlContenido += `<button onclick="closeModal('modalInfo')" class="btn-close" style="margin-top:20px; width:100%;">Volver</button>`;
+        // BOTÓN VOLVER ROJO CORPORATIVO (Sustituye a la X)
+        htmlContenido += `
+            <button onclick="closeModal('modalInfo')" 
+                    style="margin-top:10px; width:100%; padding: 15px; background: #e30613; color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1rem;">
+                VOLVER
+            </button>`;
 
         cuerpo.innerHTML = htmlContenido;
-        modal.style.display = "flex"; // Cambiado a flex para centrar como los demás
+        modal.style.display = "flex"; 
         document.body.style.overflow = 'hidden';
 
     } catch (error) {
