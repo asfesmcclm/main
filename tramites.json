@@ -1,21 +1,26 @@
 {
   "seguridadSocial": [
     {
-      "nombre": "Vida Laboral",
-      "descripcion": "Descarga tu informe completo con altas y bajas.",
-      "url": "https://portal.seg-social.gob.es/..."
+      "nombre": "Bases de Cotización",
+      "descripcion": "Consulta las bases sobre las que cotizas cada mes.",
+      "url": "https://portal.seg-social.gob.es/wps/portal/importass/importass/Categorias/Vida+laboral+e+informes/Informes+de+tus+cotizaciones/Informe+de+bases+de+cotizacion"
     },
     {
-      "nombre": "Simulador Jubilación",
-      "descripcion": "Calcula tu futura pensión según tu vida laboral.",
-      "url": "https://prestaciones.seg-social.es/..."
+      "nombre": "Informe de Vida Laboral",
+      "descripcion": "Obtén al instante tu informe de altas y bajas.",
+      "url": "https://portal.seg-social.gob.es/wps/portal/importass/importass/Categorias/Vida+laboral+e+informes/Informes+sobre+tu+situacion+laboral/Informe+de+tu+vida+laboral"
     }
   ],
   "hacienda": [
     {
+      "nombre": "Cálculo Retenciones IRPF",
+      "descripcion": "Calculadora oficial para saber cuánto te deben retener.",
+      "url": "https://www2.agenciatributaria.gob.es/wlpl/PRET-R200/R260/index.zul"
+    },
+    {
       "nombre": "Modelo 145",
-      "descripcion": "Descarga el formulario para retenciones.",
-      "url": "https://www.agenciatributaria.es/..."
+      "descripcion": "Formulario para comunicar datos personales a la empresa.",
+      "url": "https://sede.agenciatributaria.gob.es/static_files/Sede/Procedimiento_ayuda/G603/mod145_es_es.pdf"
     }
   ]
 }
