@@ -47,102 +47,18 @@
 
 <div id="modalSedes" class="modal-overlay" onclick="closeModalExterno(event, 'modalSedes')">
     <div class="modal-content" style="max-height: 85vh; overflow-y: auto;">
+        <span class="close-modal" onclick="closeModal('modalSedes')" style="position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; font-weight: bold; color: #666;">&times;</span>
+        
         <h2><i data-lucide="map-pin"></i> Sedes UGT CLM</h2>
         
-        <button class="btn-provincia" onclick="toggleSedes('sedesAlbacete')">Albacete <i data-lucide="chevron-down"></i></button>
-        <div id="sedesAlbacete" class="lista-sedes">
-            <div class="sede-item" style="border-left: 4px solid #e30613; padding: 10px; background: #fff5f5; margin-bottom: 8px; border-radius: 8px;">
-                <h4 style="color:#e30613; margin:0; font-size:0.9rem;">Albacete (Sede Provincial)</h4>
-                <p style="margin: 3px 0; font-size: 0.8rem;">C/ Luis Rosales, 7 | 967 215 514</p>
-                <p style="margin: 0; font-size: 0.75rem; color: #666;">ugt@albacete.ugt.org</p>
-            </div>
-            <div class="sede-item" style="border-left: 2px solid #666; padding: 5px 10px; font-size: 0.8rem;">
-                <strong>Almansa:</strong> Plaza del Rey D. Jaime I, 7 | 967 342 954
-            </div>
-            <div class="sede-item" style="border-left: 2px solid #666; padding: 5px 10px; font-size: 0.8rem;">
-                <strong>Hellín:</strong> C/ Juan XXIII, 5 | 967 304 030
-            </div>
-            <div class="sede-item" style="border-left: 2px solid #666; padding: 5px 10px; font-size: 0.8rem;">
-                <strong>Villarrobledo:</strong> C/ Cruz Verde, 4 | 967 142 014
-            </div>
-        </div>
-
-        <button class="btn-provincia" onclick="toggleSedes('sedesCR')">Ciudad Real <i data-lucide="chevron-down"></i></button>
-        <div id="sedesCR" class="lista-sedes">
-            <div class="sede-item" style="border-left: 4px solid #e30613; padding: 10px; background: #fff5f5; margin-bottom: 8px; border-radius: 8px;">
-                <h4 style="color:#e30613; margin:0; font-size:0.9rem;">Ciudad Real (Sede Provincial)</h4>
-                <p style="margin: 3px 0; font-size: 0.8rem;">C/ Alarcos, 24 | 926 214 945</p>
-                <p style="margin: 0; font-size: 0.75rem; color: #666;">ugt@ciudadreal.ugt.org</p>
-            </div>
-            <div class="sede-item" style="border-left: 2px solid #666; padding: 5px 10px; font-size: 0.8rem;">
-                <strong>Alcázar de S. Juan:</strong> C/ La Feria, 13 | 926 546 123
-            </div>
-            <div class="sede-item" style="border-left: 2px solid #666; padding: 5px 10px; font-size: 0.8rem;">
-                <strong>Manzanares:</strong> C/ Molinos de Viento, 1 | 926 611 762
-            </div>
-            <div class="sede-item" style="border-left: 2px solid #666; padding: 5px 10px; font-size: 0.8rem;">
-                <strong>Puertollano:</strong> C/ Juan Bravo, 6 | 926 425 728
-            </div>
-            <div class="sede-item" style="border-left: 2px solid #666; padding: 5px 10px; font-size: 0.8rem;">
-                <strong>Socuéllamos:</strong> C/ de la Feria, 10
-            </div>
-            <div class="sede-item" style="border-left: 2px solid #666; padding: 5px 10px; font-size: 0.8rem;">
-                <strong>Tomelloso:</strong> C/ Socuéllamos, 98 | 667 767 769
-            </div>
-            <div class="sede-item" style="border-left: 2px solid #666; padding: 5px 10px; font-size: 0.8rem;">
-                <strong>Valdepeñas:</strong> C/ Unión 33, primero
-            </div>
-        </div>
-
-        <button class="btn-provincia" onclick="toggleSedes('sedesCuenca')">Cuenca <i data-lucide="chevron-down"></i></button>
-        <div id="sedesCuenca" class="lista-sedes">
-            <div class="sede-item" style="border-left: 4px solid #e30613; padding: 10px; background: #fff5f5; margin-bottom: 8px; border-radius: 8px;">
-                <h4 style="color:#e30613; margin:0; font-size:0.9rem;">Cuenca (Sede Provincial)</h4>
-                <p style="margin: 3px 0; font-size: 0.8rem;">Avda. Reyes Católicos, 78 | 969 211 213</p>
-                <p style="margin: 0; font-size: 0.75rem; color: #666;">ugt@cuenca.ugt.org</p>
-            </div>
-            <div class="sede-item" style="border-left: 2px solid #666; padding: 5px 10px; font-size: 0.8rem;">
-                <strong>Tarancón:</strong> C/ Garcilaso de la Vega, local 4 | 969 322 063
-            </div>
-        </div>
-
-       <!--- <button class="btn-provincia" onclick="toggleSedes('sedesGuada')">Guadalajara <i data-lucide="chevron-down"></i></button>
-        <div id="sedesGuada" class="lista-sedes">
-            <div class="sede-item" style="border-left: 4px solid #e30613; padding: 10px; background: #fff5f5; border-radius: 8px;">
-                <h4 style="color:#e30613; margin:0; font-size:0.9rem;">Guadalajara (Sede Provincial)</h4>
-                <p style="margin: 3px 0; font-size: 0.8rem;">Plaza de España, 12 | 949 223 980</p>
-                <p style="margin: 0; font-size: 0.75rem; color: #666;">ugt@guadalajara.ugt.org</p>
-            </div>
-        </div>
---->
-
-        <button class="btn-provincia" onclick="toggleSedes('sedesGuada')">Guadalajara <i data-lucide="chevron-down"></i></button>
-<div id="sedesGuada" class="lista-sedes">
-    <div class="sede-item" style="border-left: 4px solid #e30613; padding: 10px; background: #fff5f5; border-radius: 8px;">
-        <h4 style="color:#e30613; margin:0; font-size:0.9rem;">FeSMC UGT Guadalajara y Sede Regional</h4>
-        <p style="margin: 3px 0; font-size: 0.8rem;">Plaza de España, 12 | 949 223 980</p>
-        <p style="margin: 3px 0; font-size: 0.75rem; color: #666;"><i data-lucide="mail" style="width:12px; vertical-align:middle;"></i> guadalajara@fesmcugt.org</p>
-        <p style="margin: 3px 0; font-size: 0.75rem; color: #666;"><i data-lucide="mail" style="width:12px; vertical-align:middle;"></i> castillalamancha@fesmcugt.org</p>
-    </div>
-</div>        
-        <button class="btn-provincia" onclick="toggleSedes('sedesToledo')">Toledo <i data-lucide="chevron-down"></i></button>
-        <div id="sedesToledo" class="lista-sedes">
-            <div class="sede-item" style="border-left: 4px solid #e30613; padding: 10px; background: #fff5f5; margin-bottom: 8px; border-radius: 8px;">
-                <h4 style="color:#e30613; margin:0; font-size:0.9rem;">Toledo (Sede Provincial)</h4>
-                <p style="margin: 3px 0; font-size: 0.8rem;">Cuesta de Carlos V, 1 | 925 252 518</p>
-                <p style="margin: 0; font-size: 0.75rem; color: #666;">ugt@clmancha.ugt.org</p>
-            </div>
-            <div class="sede-item" style="border-left: 2px solid #666; padding: 5px 10px; font-size: 0.8rem;">
-                <strong>Talavera de la Reina:</strong> C/ Mesones, 38 | 925 813 300
-            </div>
-            <div class="sede-item" style="border-left: 2px solid #666; padding: 5px 10px; font-size: 0.8rem;">
-                <strong>Ocaña:</strong> C/ La Mata, 5
-            </div>
+        <div id="contenedor-sedes-dinamico">
+            <p style="text-align:center; color:#999; padding:20px;">Cargando sedes...</p>
         </div>
 
         <a href="javascript:void(0)" onclick="closeModal('modalSedes')" class="btn-close" style="margin-top: 20px;">Cerrar</a>
     </div>
 </div>
+
 <!--- MODAL CALCULADORAS--->
 
 <div id="modalCalculadoras" class="modal-overlay" onclick="closeModalExterno(event, 'modalCalculadoras')">
