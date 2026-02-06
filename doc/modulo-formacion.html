@@ -1,31 +1,41 @@
 <style>
     .seccion-card { 
         margin-bottom: 20px; 
-        padding: 20px; 
-        border: 1px solid #e0e0e0; 
-        border-radius: 12px; 
-        background: #f9f9f9; 
+        padding: 22px; 
+        border: 1px solid #efefef; 
+        border-radius: 14px; 
+        background: #ffffff; 
+        box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     }
-    .titulo-rojo { color: #e30613; font-weight: bold; margin-bottom: 12px; font-size: 1.1rem; }
+    .titulo-rojo { 
+        color: #e30613; 
+        font-weight: 800; 
+        margin-bottom: 15px; 
+        font-size: 1.05rem; 
+        letter-spacing: -0.02em;
+    }
     .lista-resumen { 
-        margin: 0 0 20px 0; 
+        margin: 0 0 22px 0; 
         padding: 0; 
         list-style: none; 
     }
     .lista-resumen li { 
-        font-size: 0.9rem; 
-        color: #555; 
-        margin-bottom: 8px; 
+        font-size: 0.82rem; /* Tamaño más pequeño y sutil */
+        color: #777;        /* Gris suave */
+        margin-bottom: 6px; 
         display: flex; 
-        align-items: flex-start;
+        align-items: center;
+        line-height: 1.3;
     }
     .lista-resumen li::before { 
-        content: "•"; 
-        color: #e30613; 
-        font-weight: bold; 
+        content: ""; 
+        width: 4px;
+        height: 4px;
+        background-color: #e30613; 
+        border-radius: 50%;
         display: inline-block; 
-        width: 15px; 
-        margin-right: 5px;
+        margin-right: 10px;
+        flex-shrink: 0;
     }
     .btn-enlace { 
         display: block; 
@@ -36,7 +46,8 @@
         border-radius: 10px; 
         text-decoration: none; 
         font-weight: bold; 
-        font-size: 0.95rem;
+        font-size: 0.9rem;
+        transition: opacity 0.2s;
     }
 </style>
 
@@ -45,16 +56,15 @@
         <div class="titulo-rojo">RECURSOS PARA EL EMPLEO</div>
         
         <ul class="lista-resumen">
-            <li>Boletín de Ofertas de Empleo por provincias (Público y Privado).</li>
-            <li>Guía de Herramientas de IA para la búsqueda de trabajo.</li>
-            <li>Guías específicas: Mujer, Jóvenes, Discapacidad y Emprendimiento.</li>
-            <li>Asesoramiento sobre Prestaciones, Subsidios y Contratos.</li>
-            <li>Información sobre Búsqueda Activa y Autoempleo.</li>
+            <li>Boletín de Ofertas por provincias (público y privado)</li>
+            <li>Guía de herramientas de IA para la búsqueda de empleo</li>
+            <li>Guías específicas: Mujer, Jóvenes y Discapacidad</li>
+            <li>Asesoramiento en prestaciones, subsidios y contratos</li>
+            <li>Recursos para emprendimiento y búsqueda activa</li>
         </ul>
 
         <a href="https://www.ugtclm.es/empleo-2/" target="_blank" class="btn-enlace">
-            ACCEDER A TODAS LAS GUÍAS
+            ACCEDER A LOS RECURSOS
         </a>
     </div>
-
-    </div>
+</div>
