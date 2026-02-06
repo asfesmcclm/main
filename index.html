@@ -145,28 +145,42 @@
 <h2 class="section-title">GESTIÓN Y TRÁMITES</h2>
 <div class="modulos-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
     
-    <div class="card-tramite card-ancho-total" onclick="gestionarContenidoModal('formacionEmpleo')" 
-         style="grid-column: span 2; display: flex; align-items: center; gap: 20px; padding: 25px; border-left: 5px solid #e30613;">
-        <div class="card-icon" style="font-size: 2.5rem;">🎓</div>
+   <h2 class="section-title">GESTIÓN Y TRÁMITES</h2>
+<div class="modulos-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+    
+    <div class="card-tramite" onclick="gestionarContenidoModal('formacionEmpleo')" 
+         style="grid-column: span 2; display: flex; align-items: center; gap: 20px; padding: 25px; border-left: 5px solid #e30613; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); cursor: pointer;">
+        
+        <div style="color: #e30613; flex-shrink: 0;">
+            <i data-lucide="graduation-cap" style="width: 40px; height: 40px;"></i>
+        </div>
+        
         <div style="text-align: left;">
-            <h3 style="margin: 0; font-size: 1.2rem;">Formación y Empleo</h3>
-            <p style="margin: 5px 0 0 0; opacity: 0.8;">Cursos gratuitos y buscador de ayudas</p>
+            <h3 style="margin: 0; font-size: 1.15rem; color: #333; font-weight: 800;">Formación y Empleo</h3>
+            <p style="margin: 4px 0 0 0; font-size: 0.9rem; color: #666; line-height: 1.2;">Cursos gratuitos, ayudas y acreditaciones</p>
         </div>
     </div>
 
-    <div class="card-tramite" onclick="gestionarContenidoModal('seguridadSocial')">
-        <div class="card-icon">🏛️</div>
-        <h3>Seguridad Social</h3>
-        <p>Vida laboral</p>
+    <div class="card-tramite" onclick="gestionarContenidoModal('seguridadSocial')" 
+         style="background: white; padding: 20px; border-radius: 12px; text-align: center; border: 1px solid #eee;">
+        <div style="color: #444; margin-bottom: 10px;">
+            <i data-lucide="landmark" style="width: 28px; height: 28px;"></i>
+        </div>
+        <h3 style="margin: 0; font-size: 0.95rem; font-weight: 700;">Seguridad Social</h3>
+        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #777;">Vida laboral</p>
     </div>
     
-    <div class="card-tramite" onclick="gestionarContenidoModal('hacienda')">
-        <div class="card-icon">📄</div>
-        <h3>Hacienda (AEAT)</h3>
-        <p>IRPF y Modelo 145</p>
+    <div class="card-tramite" onclick="gestionarContenidoModal('hacienda')" 
+         style="background: white; padding: 20px; border-radius: 12px; text-align: center; border: 1px solid #eee;">
+        <div style="color: #444; margin-bottom: 10px;">
+            <i data-lucide="file-text" style="width: 28px; height: 28px;"></i>
+        </div>
+        <h3 style="margin: 0; font-size: 0.95rem; font-weight: 700;">Hacienda (AEAT)</h3>
+        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #777;">IRPF y Modelo 145</p>
     </div>
-</div>
-                <h2 class="section-title">Calendario Laboral 2026</h2>
+</div>                
+    
+    <h2 class="section-title">Calendario Laboral 2026</h2>
                 <a href="calendario_nuevo.html" class="card" style="text-decoration: none; color: inherit; width: 100%; margin-bottom: 20px; display: flex; align-items: center; border-left: 5px solid #e30613;">
                     <div style="padding: 20px; color: #e30613;"><i data-lucide="calendar-days" style="width: 35px; height: 35px;"></i></div>
                     <div class="card-content"><h3 style="margin:0; font-weight: 800;">Festivos y Aperturas</h3><p style="margin:0; font-size: 0.9rem; opacity: 0.7;">Consulta los días no laborables</p></div>
