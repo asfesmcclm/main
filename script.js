@@ -3,6 +3,7 @@ const sedesData = [
         id: "Albacete",
         nombre: "Albacete",
         federal: { nombre: "FeSMC UGT Albacete", direccion: "C/ Luis Rosales, 7 - 1ª planta, 02003", telefono: "967 521 850", email: "albacete@fesmcugt.org" },
+        union: { nombre: "UGT Unión Provincial", direccion: "C/ Luis Rosales, 7", telefono: "967 215 514" },
         municipios: [
             { pueblo: "Almansa", direccion: "Plaza del Rey D. Jaime I, 7", telefono: "967 342 954" },
             { pueblo: "Hellín", direccion: "C/ Juan XXIII, 5", telefono: "967 304 030" },
@@ -12,8 +13,8 @@ const sedesData = [
     {
         id: "CR",
         nombre: "Ciudad Real",
-        federal: { nombre: "FeSMC UGT Ciudad Real (Residencial)", direccion: "Residencial Ronda, C/ de la Solana, s/n, 13004", telefono: "926 251 828", email: "ciudadreal@fesmcugt.org" },
-        union: { nombre: "UGT Unión Provincial (Alarcos)", direccion: "C/ Alarcos, 24, 13001", telefono: "926 214 945" },
+        federal: { nombre: "FeSMC UGT Ciudad Real (Sede Federal)", direccion: "Residencial Ronda, C/ de la Solana, s/n, 13004", telefono: "926 251 828", email: "ciudadreal@fesmcugt.org" },
+        union: { nombre: "UGT Unión Provincial", direccion: "C/ Alarcos, 24, 13001", telefono: "926 214 945" },
         municipios: [
             { pueblo: "Alcázar de S. Juan", direccion: "C/ La Feria, 13", telefono: "926 546 123" },
             { pueblo: "Puertollano", direccion: "C/ Juan Bravo, 6", telefono: "926 425 728" },
@@ -25,24 +26,26 @@ const sedesData = [
         id: "Guada",
         nombre: "Guadalajara",
         federal: { nombre: "FeSMC UGT Guadalajara y SEDE REGIONAL", direccion: "Plaza de España, 12, 19001", telefono: "949 223 980", email: "guadalajara@fesmcugt.org | castillalamancha@fesmcugt.org" },
+        union: { nombre: "UGT Unión Provincial", direccion: "Plaza de España, 12", telefono: "949 223 980" },
         municipios: []
     },
     {
         id: "Cuenca",
         nombre: "Cuenca",
         federal: { nombre: "FeSMC UGT Cuenca", direccion: "Avda. Reyes Católicos, 78, 16003", telefono: "969 211 213", email: "cuenca@fesmcugt.org" },
+        union: { nombre: "UGT Unión Provincial", direccion: "Avda. Reyes Católicos, 78", telefono: "969 211 213" },
         municipios: [{ pueblo: "Tarancón", direccion: "C/ Garcilaso de la Vega, local 4", telefono: "969 322 063" }]
     },
     {
         id: "Toledo",
         nombre: "Toledo",
         federal: { nombre: "FeSMC UGT Toledo", direccion: "Cuesta de Carlos V, 1, 45001", telefono: "925 252 518", email: "toledo@fesmcugt.org" },
+        union: { nombre: "UGT Unión Provincial", direccion: "Cuesta de Carlos V, 1", telefono: "925 252 518" },
         municipios: [{ pueblo: "Talavera de la Reina", direccion: "C/ Mesones, 38", telefono: "925 813 300" }]
     }
 ];
 
-
-// 1. CARGA DINÁMICA DE MODALES Y SEDES
+// 1. CARGA DINÁMICA DE MODALES
 document.addEventListener('DOMContentLoaded', () => {
     fetch('modales.html')
         .then(response => {
@@ -55,8 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.innerHTML = data;
                 if (window.lucide) lucide.createIcons();
                 setupAppLinks();
-                // Cargamos las sedes desde el JSON una vez el HTML base está listo
-                cargarSedes();
+                pintarSedes(); // Cambiamos cargarSedes() por pintarSedes()
             }
         })
         .catch(err => console.warn('Aviso: Ejecutando en local o modales.html ausente.'));
@@ -136,7 +138,6 @@ async function gestionarContenidoModal(tipo) {
             cuerpo.innerHTML = htmlContenido;
         }
 
-        // Botón VOLVER común a todos al final
         cuerpo.innerHTML += `
             <button onclick="closeModal('modalInfo')" 
                     style="margin-top:10px; width:100%; padding: 15px; background: #e30613; color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1rem;">
@@ -149,55 +150,50 @@ async function gestionarContenidoModal(tipo) {
     }
 }
 
-// 5. CARGA DE SEDES DESDE JSON
-async function cargarSedes() {
-    try {
-        const response = await fetch('sedes.json');
-        const data = await response.json();
-        const contenedor = document.getElementById('contenedor-sedes-dinamico');
-        if (!contenedor) return;
+// 5. FUNCIÓN PINTAR SEDES (Usa sedesData directo, sin fetch)
+function pintarSedes() {
+    const contenedor = document.getElementById('contenedor-sedes-dinamico');
+    if (!contenedor) return;
 
-        let html = '';
-        data.provincias.forEach(prov => {
-            html += `
-            <button class="btn-provincia" onclick="toggleSedes('lista-${prov.id}')">
-                ${prov.nombre} <i data-lucide="chevron-down"></i>
-            </button>
-            <div id="lista-${prov.id}" class="lista-sedes" style="display:none; padding:10px;">
-                
-                <div class="sede-item" style="border-left: 4px solid #444; background: #f8f9fa; padding:12px; margin-bottom:10px; border-radius:12px; border:1px solid #eee;">
-                    <h4 style="margin:0; color:#333; font-size:0.95rem; font-weight:800;">${prov.federal.nombre}</h4>
-                    <p style="font-size:0.85rem; margin:5px 0; color:#666;">${prov.federal.direccion}</p>
-                    <a href="tel:${prov.federal.telefono.replace(/\s/g, '')}" style="color:#e30613; font-weight:bold; text-decoration:none;">
-                        <i data-lucide="phone" style="width:14px; vertical-align:middle;"></i> ${prov.federal.telefono}
-                    </a>
-                    ${prov.federal.telefono2 ? ` | <a href="tel:${prov.federal.telefono2.replace(/\s/g, '')}" style="color:#e30613; font-weight:bold; text-decoration:none;">${prov.federal.telefono2}</a>` : ''}
-                    <a href="mailto:${prov.federal.email}" style="display:block; margin-top:5px; color:#666; font-size:0.8rem; text-decoration:none;">
-                        <i data-lucide="mail" style="width:14px; vertical-align:middle;"></i> ${prov.federal.email}
-                    </a>
-                </div>
+    let html = '';
+    sedesData.forEach(prov => {
+        html += `
+        <button class="btn-provincia" onclick="toggleSedes('lista-${prov.id}')">
+            ${prov.nombre} <i data-lucide="chevron-down"></i>
+        </button>
+        <div id="lista-${prov.id}" class="lista-sedes" style="display:none; padding:10px;">
+            
+            <div class="sede-item" style="border-left: 4px solid #444; background: #f8f9fa; padding:12px; margin-bottom:10px; border-radius:12px; border:1px solid #eee;">
+                <h4 style="margin:0; color:#333; font-size:0.95rem; font-weight:800;">${prov.federal.nombre}</h4>
+                <p style="font-size:0.85rem; margin:5px 0; color:#666;">${prov.federal.direccion}</p>
+                <a href="tel:${prov.federal.telefono.replace(/\s/g, '')}" style="color:#e30613; font-weight:bold; text-decoration:none;">
+                    <i data-lucide="phone" style="width:14px; vertical-align:middle;"></i> ${prov.federal.telefono}
+                </a>
+                <a href="mailto:${prov.federal.email}" style="display:block; margin-top:5px; color:#666; font-size:0.8rem; text-decoration:none;">
+                    <i data-lucide="mail" style="width:14px; vertical-align:middle;"></i> ${prov.federal.email}
+                </a>
+            </div>
 
-                <div class="sede-item" style="border-left: 4px solid #e30613; background: #fff5f5; padding:12px; margin-bottom:10px; border-radius:12px; border:1px solid #ffebeb;">
-                    <h4 style="margin:0; color:#e30613; font-size:0.95rem; font-weight:800;">${prov.union.nombre}</h4>
-                    <p style="font-size:0.85rem; margin:5px 0;">${prov.union.direccion}</p>
-                    <a href="tel:${prov.union.telefono.replace(/\s/g, '')}" style="color:#e30613; font-weight:bold; text-decoration:none;">
-                        <i data-lucide="phone" style="width:14px; vertical-align:middle;"></i> ${prov.union.telefono}
-                    </a>
-                </div>
+            <div class="sede-item" style="border-left: 4px solid #e30613; background: #fff5f5; padding:12px; margin-bottom:10px; border-radius:12px; border:1px solid #ffebeb;">
+                <h4 style="margin:0; color:#e30613; font-size:0.95rem; font-weight:800;">${prov.union.nombre}</h4>
+                <p style="font-size:0.85rem; margin:5px 0;">${prov.union.direccion}</p>
+                <a href="tel:${prov.union.telefono.replace(/\s/g, '')}" style="color:#e30613; font-weight:bold; text-decoration:none;">
+                    <i data-lucide="phone" style="width:14px; vertical-align:middle;"></i> ${prov.union.telefono}
+                </a>
+            </div>
 
-                <div style="margin-top:10px;">
-                    ${prov.municipios.map(m => `
-                        <div style="font-size:0.85rem; padding: 10px 0; border-top:1px solid #eee;">
-                            <strong>${m.pueblo}:</strong> ${m.direccion} 
-                            ${m.telefono ? `<br><a href="tel:${m.telefono.replace(/\s/g, '')}" style="color:#e30613; text-decoration:none; font-weight:bold;">${m.telefono}</a>` : ''}
-                        </div>
-                    `).join('')}
-                </div>
-            </div>`;
-        });
-        contenedor.innerHTML = html;
-        if (window.lucide) lucide.createIcons();
-    } catch (e) { console.error("Error cargando sedes:", e); }
+            <div style="margin-top:10px;">
+                ${prov.municipios.map(m => `
+                    <div style="font-size:0.85rem; padding: 10px 0; border-top:1px solid #eee;">
+                        <strong>${m.pueblo}:</strong> ${m.direccion} 
+                        ${m.telefono ? `<br><a href="tel:${m.telefono.replace(/\s/g, '')}" style="color:#e30613; text-decoration:none; font-weight:bold;">${m.telefono}</a>` : ''}
+                    </div>
+                `).join('')}
+            </div>
+        </div>`;
+    });
+    contenedor.innerHTML = html;
+    if (window.lucide) lucide.createIcons();
 }
 
 // 6. LÓGICA DEL CALENDARIO
