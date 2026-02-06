@@ -60,24 +60,20 @@ function closeModalExterno(event, id) {
 }
 
 
-// 4. CARGA DINÁMICA DE CONTENIDO (Hacienda, SS y Formación)
+// 4. GESTIÓN DE CONTENIDO DINÁMICO (Hacienda, SS y Formación)
 async function gestionarContenidoModal(tipo) {
-    const modal = document.getElementById("modalInfo");
     const titulo = document.getElementById("modalTitulo");
     const cuerpo = document.getElementById("modalCuerpo");
 
     try {
         if (tipo === 'formacionEmpleo') {
-            // CASO A: Cargar fragmento HTML desde carpeta doc
             titulo.innerText = 'Formación y Empleo';
             const res = await fetch('doc/modulo-formacion.html');
-            if (!res.ok) throw new Error('No se encontró doc/modulo-formacion.html');
-            const html = await res.text();
-            cuerpo.innerHTML = html;
+            if (!res.ok) throw new Error('No se encontró el archivo de formación');
+            cuerpo.innerHTML = await res.text();
         } else {
-            // CASO B: Cargar trámites desde JSON (Hacienda / SS)
+            // Carga desde trámites.json
             const respuesta = await fetch('tramites.json');
-            if (!respuesta.ok) throw new Error('No se pudo cargar tramites.json');
             const datos = await respuesta.json();
             const seccion = datos[tipo];
             
@@ -97,115 +93,71 @@ async function gestionarContenidoModal(tipo) {
             cuerpo.innerHTML = htmlContenido;
         }
 
-        // Añadimos el botón VOLVER común a todos al final
+        // Botón VOLVER único al final del contenido inyectado
         cuerpo.innerHTML += `
             <button onclick="closeModal('modalInfo')" 
                     style="margin-top:10px; width:100%; padding: 15px; background: #e30613; color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1rem;">
                 VOLVER
             </button>`;
 
-        // Abrimos el modal con el sistema unificado
         openModal('modalInfo');
-
     } catch (error) {
         console.error("Error al cargar contenido:", error);
     }
 }
 
-// 5. LÓGICA DEL CALENDARIO
-function renderCalendarios() {
-    const hoy = new Date();
-    hoy.setHours(0,0,0,0);
-    const pintarLista = (datos, containerId) => {
-        const contenedor = document.getElementById(containerId);
+// 5. CARGA DE SEDES DESDE JSON (Integración Final)
+async function cargarSedes() {
+    try {
+        const response = await fetch('sedes.json');
+        const data = await response.json();
+        const contenedor = document.getElementById('contenedor-sedes-dinamico');
         if (!contenedor) return;
-        contenedor.innerHTML = "";
-        datos.forEach(item => {
-            const fechaItem = new Date(item.fecha);
-            const esPasado = fechaItem < hoy;
-            const div = document.createElement('div');
-            div.className = `date-item ${esPasado ? 'date-past' : ''}`;
-            div.style.display = "flex";
-            div.style.justifyContent = "space-between";
-            div.style.padding = "8px 0";
-            div.style.borderBottom = "1px solid #eee";
-            if(esPasado) { div.style.opacity = "0.5"; div.style.textDecoration = "line-through"; }
-            const fechaFormateada = fechaItem.toLocaleDateString('es-ES', { day: '2-digit', month: 'short' });
-            div.innerHTML = `<span>${fechaFormateada}</span> <strong>${item.nombre}</strong>`;
-            contenedor.appendChild(div);
+
+        let html = '';
+        data.provincias.forEach(prov => {
+            html += `
+            <button class="btn-provincia" onclick="toggleSedes('lista-${prov.id}')">
+                ${prov.nombre} <i data-lucide="chevron-down"></i>
+            </button>
+            <div id="lista-${prov.id}" class="lista-sedes" style="display:none; padding:10px;">
+                
+                <div class="sede-item" style="border-left: 4px solid #444; background: #f8f9fa; padding:12px; margin-bottom:10px; border-radius:12px; border:1px solid #eee;">
+                    <h4 style="margin:0; color:#333; font-size:0.95rem; font-weight:800;">${prov.federal.nombre}</h4>
+                    <p style="font-size:0.85rem; margin:5px 0; color:#666;">${prov.federal.direccion}</p>
+                    <a href="tel:${prov.federal.telefono.replace(/\s/g, '')}" style="color:#e30613; font-weight:bold; text-decoration:none;">
+                        <i data-lucide="phone" style="width:14px; vertical-align:middle;"></i> ${prov.federal.telefono}
+                    </a>
+                    ${prov.federal.telefono2 ? ` | <a href="tel:${prov.federal.telefono2.replace(/\s/g, '')}" style="color:#e30613; font-weight:bold; text-decoration:none;">${prov.federal.telefono2}</a>` : ''}
+                    <a href="mailto:${prov.federal.email}" style="display:block; margin-top:5px; color:#666; font-size:0.8rem;">
+                        <i data-lucide="mail" style="width:14px; vertical-align:middle;"></i> ${prov.federal.email}
+                    </a>
+                </div>
+
+                <div class="sede-item" style="border-left: 4px solid #e30613; background: #fff5f5; padding:12px; margin-bottom:10px; border-radius:12px; border:1px solid #ffebeb;">
+                    <h4 style="margin:0; color:#e30613; font-size:0.95rem; font-weight:800;">${prov.union.nombre}</h4>
+                    <p style="font-size:0.85rem; margin:5px 0;">${prov.union.direccion}</p>
+                    <a href="tel:${prov.union.telefono.replace(/\s/g, '')}" style="color:#e30613; font-weight:bold; text-decoration:none;">
+                        <i data-lucide="phone" style="width:14px; vertical-align:middle;"></i> ${prov.union.telefono}
+                    </a>
+                </div>
+
+                <div style="margin-top:10px;">
+                    ${prov.municipios.map(m => `
+                        <div style="font-size:0.85rem; padding: 10px 0; border-top:1px solid #eee;">
+                            <strong>${m.pueblo}:</strong> ${m.direccion} 
+                            ${m.telefono ? `<br><a href="tel:${m.telefono.replace(/\s/g, '')}" style="color:#e30613; text-decoration:none; font-weight:bold;">${m.telefono}</a>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            </div>`;
         });
-    };
-    pintarLista(festivosCLM, "lista-festivos");
-    pintarLista(aperturasComercio, "lista-comercio");
+        contenedor.innerHTML = html;
+        if (window.lucide) lucide.createIcons();
+    } catch (e) { console.error("Error cargando sedes:", e); }
 }
 
-// 6. OTROS
-function toggleSedes(id) {
-    const todas = document.querySelectorAll('.lista-sedes');
-    todas.forEach(s => { if (s.id !== id) s.style.display = 'none'; });
-    const lista = document.getElementById(id);
-    if (lista) lista.style.display = (lista.style.display === 'block') ? 'none' : 'block';
-}
-
-function setupAppLinks() {
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    const l1 = document.getElementById('link-registra-final');
-    if(l1) l1.href = isIOS ? "https://apps.apple.com/es/app/ugt-registra/id6737269009" : "https://play.google.com/store/apps/details?id=org.ugt.ugtregistra";
-    const l2 = document.getElementById('link-afiliado-final');
-    if(l2) l2.href = isIOS ? "https://apps.apple.com/es/app/ugt-app/id1531325029" : "https://play.google.com/store/apps/details?id=com.ugt.afiliados";
-}
-
-/**
- * FUNCIONES DE NAVEGACIÓN INTERNA PARA EL MODAL DE FORMACIÓN
- */
-
-// 1. Cambia el contenido del modal con un efecto de transición suave
-function cambiarContenidoModal(htmlContenido, nuevoTitulo) {
-    const cuerpo = document.getElementById("modalCuerpo");
-    const titulo = document.getElementById("modalTitulo");
-    
-    if (!cuerpo || !titulo) return;
-
-    cuerpo.style.opacity = 0;
-    
-    setTimeout(() => {
-        if (nuevoTitulo) titulo.innerText = nuevoTitulo;
-        cuerpo.innerHTML = htmlContenido;
-        cuerpo.style.opacity = 1;
-    }, 150);
-}
-
-// 2. Genera la vista de opciones de Formación (Regional vs Sectorial)
-function mostrarOpcionesFormacion() {
-    const htmlOpciones = `
-        <div class="seccion-card" style="border-left: 5px solid #e30613; padding:20px; background:#fff; border-radius:12px; margin-bottom:15px; border: 1px solid #eee; border-left: 5px solid #e30613;">
-            <div style="color:#e30613; font-weight:800; margin-bottom:10px; font-size:1rem;">FORMACIÓN UGT CLM</div>
-            <p style="font-size:0.82rem; color:#777; margin-bottom:15px; line-height:1.3;">Cursos subvencionados y formación para el empleo en la región.</p>
-            <a href="https://www.ugtclm.es/formacion/" target="_blank" style="display:block; text-align:center; background:#e30613; color:white; padding:12px; border-radius:10px; text-decoration:none; font-weight:bold; font-size:0.85rem;">IR A PÁGINA REGIONAL</a>
-        </div>
-        
-        <div class="seccion-card" style="border-left: 5px solid #444; padding:20px; background:#fff; border-radius:12px; margin-bottom:15px; border: 1px solid #eee; border-left: 5px solid #444;">
-            <div style="color:#444; font-weight:800; margin-bottom:10px; font-size:1rem;">FORMACIÓN FeSMC UGT</div>
-            <p style="font-size:0.82rem; color:#777; margin-bottom:15px; line-height:1.3;">Oferta específica para sectores de servicios, comercio y transportes.</p>
-            <a href="https://www.fesmcugt.org/formacion/" target="_blank" style="display:block; text-align:center; background:#444; color:white; padding:12px; border-radius:10px; text-decoration:none; font-weight:bold; font-size:0.85rem;">IR A PÁGINA FeSMC</a>
-        </div>
-        
-        <button onclick="gestionarContenidoModal('formacionEmpleo')" 
-                style="margin-top:10px; width:100%; padding:15px; background:none; color:#e30613; border:1px solid #e30613; border-radius:12px; cursor:pointer; font-weight:800; font-size:0.9rem;">
-            VOLVER ATRÁS
-        </button>
-    `;
-    
-    cambiarContenidoModal(htmlOpciones, "Opciones de Formación");
-}
-// ... (Tus funciones de Sedes, Calendario, etc.) ...
-
-// ... (Función gestionarContenidoModal que ya pusimos antes) ...
-
-// ---------------------------------------------------------
-// PÉGALO AQUÍ (AL FINAL):
-// ---------------------------------------------------------
-
+// 6. FUNCIONES DE APOYO (Transiciones y Vistas)
 function cambiarContenidoModal(htmlContenido, nuevoTitulo) {
     const cuerpo = document.getElementById("modalCuerpo");
     const titulo = document.getElementById("modalTitulo");
@@ -222,31 +174,15 @@ function mostrarOpcionesFormacion() {
     const htmlOpciones = `
         <div class="seccion-card" style="border-left: 5px solid #e30613; padding:20px; background:#fff; border-radius:12px; margin-bottom:15px; border: 1px solid #eee; border-left: 5px solid #e30613;">
             <div style="color:#e30613; font-weight:800; margin-bottom:10px; font-size:1rem;">UGT CASTILLA-LA MANCHA</div>
-            <p style="font-size:0.82rem; color:#777; margin-bottom:12px; line-height:1.4;">Formación integral en la región:</p>
-            <ul style="margin:0 0 15px 0; padding:0; list-style:none; font-size:0.8rem; color:#555;">
-                <li style="margin-bottom:4px;">• Cursos gratuitos por provincias</li>
-                <li style="margin-bottom:4px;">• Formación Profesional Dual</li>
-                <li style="margin-bottom:4px;">• ACREDITA y Oposiciones</li>
-            </ul>
+            <p style="font-size:0.82rem; color:#777; margin-bottom:15px;">Cursos gratuitos, FP Dual y Oposiciones en la región.</p>
             <a href="https://www.ugtclm.es/formacion/" target="_blank" style="display:block; text-align:center; background:#e30613; color:white; padding:12px; border-radius:10px; text-decoration:none; font-weight:bold; font-size:0.85rem;">VER FORMACIÓN REGIONAL</a>
         </div>
-        
         <div class="seccion-card" style="border-left: 5px solid #444; padding:20px; background:#fff; border-radius:12px; margin-bottom:15px; border: 1px solid #eee; border-left: 5px solid #444;">
             <div style="color:#444; font-weight:800; margin-bottom:10px; font-size:1rem;">FeSMC UGT (Sectorial)</div>
-            <p style="font-size:0.82rem; color:#777; margin-bottom:12px; line-height:1.4;">Especialización técnica y OPE:</p>
-            <ul style="margin:0 0 15px 0; padding:0; list-style:none; font-size:0.8rem; color:#555;">
-                <li style="margin-bottom:4px;">• <strong>Comercio y Marketing:</strong> E-commerce e IA.</li>
-                <li style="margin-bottom:4px;">• <strong>Logística y Finanzas:</strong> Stock y Contabilidad.</li>
-                <li style="margin-bottom:4px;">• <strong>Hostelería y Salud:</strong> Alérgenos y Sanidad.</li>
-                <li style="margin-bottom:4px;">• <strong>Oposiciones:</strong> Cursos OPE ADIF.</li>
-            </ul>
+            <p style="font-size:0.82rem; color:#777; margin-bottom:15px;">Especialización en Comercio, Hostelería, Logística y OPE ADIF.</p>
             <a href="https://www.fesmcugt.org/formacion/cursos" target="_blank" style="display:block; text-align:center; background:#444; color:white; padding:12px; border-radius:10px; text-decoration:none; font-weight:bold; font-size:0.85rem;">VER CURSOS SECTORIALES</a>
         </div>
-        
-        <button onclick="gestionarContenidoModal('formacionEmpleo')" 
-                style="margin-top:10px; width:100%; padding:15px; background:none; color:#e30613; border:1px solid #e30613; border-radius:12px; cursor:pointer; font-weight:800; font-size:0.9rem;">
-            VOLVER ATRÁS
-        </button>
+        <button onclick="gestionarContenidoModal('formacionEmpleo')" style="width:100%; padding:15px; background:none; color:#e30613; border:1px solid #e30613; border-radius:12px; font-weight:800;">VOLVER ATRÁS</button>
     `;
     cambiarContenidoModal(htmlOpciones, "Opciones de Formación");
 }
