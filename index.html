@@ -142,24 +142,30 @@
                     </div>
                 </div>
 
-                <h2 class="section-title">GESTIÓN Y TRÁMITES</h2>
-<div class="modulos-grid">
+<h2 class="section-title">GESTIÓN Y TRÁMITES</h2>
+<div class="modulos-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+    
+    <div class="card-tramite card-ancho-total" onclick="gestionarContenidoModal('formacionEmpleo')" 
+         style="grid-column: span 2; display: flex; align-items: center; gap: 20px; padding: 25px; border-left: 5px solid #e30613;">
+        <div class="card-icon" style="font-size: 2.5rem;">🎓</div>
+        <div style="text-align: left;">
+            <h3 style="margin: 0; font-size: 1.2rem;">Formación y Empleo</h3>
+            <p style="margin: 5px 0 0 0; opacity: 0.8;">Cursos gratuitos y buscador de ayudas</p>
+        </div>
+    </div>
+
     <div class="card-tramite" onclick="gestionarContenidoModal('seguridadSocial')">
         <div class="card-icon">🏛️</div>
         <h3>Seguridad Social</h3>
-        <p>Vida laboral y bases</p>
+        <p>Vida laboral</p>
     </div>
+    
     <div class="card-tramite" onclick="gestionarContenidoModal('hacienda')">
         <div class="card-icon">📄</div>
         <h3>Hacienda (AEAT)</h3>
         <p>IRPF y Modelo 145</p>
     </div>
-    <div class="card-tramite" onclick="gestionarContenidoModal('formacionEmpleo')" style="border-top: 2px solid #e30613;">
-        <div class="card-icon">🎓</div>
-        <h3>Formación</h3>
-        <p>Cursos y Ayudas</p>
-    </div>
-</div>                
+</div>
                 <h2 class="section-title">Calendario Laboral 2026</h2>
                 <a href="calendario_nuevo.html" class="card" style="text-decoration: none; color: inherit; width: 100%; margin-bottom: 20px; display: flex; align-items: center; border-left: 5px solid #e30613;">
                     <div style="padding: 20px; color: #e30613;"><i data-lucide="calendar-days" style="width: 35px; height: 35px;"></i></div>
