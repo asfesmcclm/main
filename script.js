@@ -60,47 +60,55 @@ function closeModalExterno(event, id) {
 }
 
 
+// 4. CARGA DINÁMICA DE CONTENIDO (Hacienda, SS y Formación)
+async function gestionarContenidoModal(tipo) {
+    const modal = document.getElementById("modalInfo");
+    const titulo = document.getElementById("modalTitulo");
+    const cuerpo = document.getElementById("modalCuerpo");
 
-// 4. CARGAR TRÁMITES (HACIENDA Y SEGURIDAD SOCIAL)
-async function abrirModal(tipo) {
     try {
-        const respuesta = await fetch('tramites.json');
-        if (!respuesta.ok) throw new Error('No se pudo cargar tramites.json');
-        const datos = await respuesta.json();
-        const seccion = datos[tipo];
-        
-        const modal = document.getElementById("modalInfo");
-        const titulo = document.getElementById("modalTitulo");
-        const cuerpo = document.getElementById("modalCuerpo");
+        if (tipo === 'formacionEmpleo') {
+            // CASO A: Cargar fragmento HTML desde carpeta doc
+            titulo.innerText = 'Formación y Empleo';
+            const res = await fetch('doc/modulo-formacion.html');
+            if (!res.ok) throw new Error('No se encontró doc/modulo-formacion.html');
+            const html = await res.text();
+            cuerpo.innerHTML = html;
+        } else {
+            // CASO B: Cargar trámites desde JSON (Hacienda / SS)
+            const respuesta = await fetch('tramites.json');
+            if (!respuesta.ok) throw new Error('No se pudo cargar tramites.json');
+            const datos = await respuesta.json();
+            const seccion = datos[tipo];
+            
+            titulo.innerText = tipo === 'seguridadSocial' ? 'Seguridad Social' : 'Hacienda (AEAT)';
+            
+            let htmlContenido = "";
+            seccion.forEach(item => {
+                htmlContenido += `
+                    <div style="margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 10px; background: #fafafa; text-align: left;">
+                        <strong style="color: #333; font-size: 1.05rem; display: block;">${item.nombre}</strong>
+                        <p style="font-size: 0.85rem; color: #666; margin: 8px 0 12px 0;">${item.descripcion}</p>
+                        <a href="${item.url}" target="_blank" style="display: block; text-align: center; background: #fff; color: #e30613; border: 1px solid #e30613; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">
+                            ACCEDER AL TRÁMITE
+                        </a>
+                    </div>`;
+            });
+            cuerpo.innerHTML = htmlContenido;
+        }
 
-        titulo.innerText = tipo === 'seguridadSocial' ? 'Seguridad Social' : 'Hacienda (AEAT)';
-        
-        let htmlContenido = "";
-        seccion.forEach(item => {
-            htmlContenido += `
-                <div class="tramite-item" style="margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 10px; background: #fafafa; text-align: left;">
-                    <strong style="color: #333; font-size: 1.05rem; display: block;">${item.nombre}</strong>
-                    <p style="font-size: 0.85rem; color: #666; margin: 8px 0 12px 0;">${item.descripcion}</p>
-                    <a href="${item.url}" target="_blank" class="btn-directo" 
-                       style="display: block; text-align: center; background: #fff; color: #e30613; border: 1px solid #e30613; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">
-                        ACCEDER AL TRÁMITE
-                    </a>
-                </div>`;
-        });
-
-        // BOTÓN VOLVER ROJO CORPORATIVO (Sustituye a la X)
-        htmlContenido += `
+        // Añadimos el botón VOLVER común a todos al final
+        cuerpo.innerHTML += `
             <button onclick="closeModal('modalInfo')" 
                     style="margin-top:10px; width:100%; padding: 15px; background: #e30613; color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1rem;">
                 VOLVER
             </button>`;
 
-        cuerpo.innerHTML = htmlContenido;
-        modal.style.display = "flex"; 
-        document.body.style.overflow = 'hidden';
+        // Abrimos el modal con el sistema unificado
+        openModal('modalInfo');
 
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error al cargar contenido:", error);
     }
 }
 
