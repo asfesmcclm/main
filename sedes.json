@@ -1,0 +1,67 @@
+{
+  "provincias": [
+    {
+      "id": "albacete",
+      "nombre": "Albacete",
+      "federal": {
+        "nombre": "FeSMC UGT Albacete",
+        "direccion": "C/ Luis Rosales, 7 - 1ª planta",
+        "telefono": "967 521 850",
+        "email": "albacete@fesmcugt.org"
+      },
+      "union": {
+        "nombre": "UGT Albacete",
+        "direccion": "C/ Luis Rosales, 7",
+        "telefono": "967 215 514",
+        "email": "ugt@albacete.ugt.org"
+      },
+      "municipios": [
+        {"pueblo": "Almansa", "direccion": "Plaza del Rey D. Jaime I, 7", "telefono": "967 342 954"},
+        {"pueblo": "Hellín", "direccion": "C/ Juan XXIII, 5", "telefono": "967 304 030"},
+        {"pueblo": "Villarrobledo", "direccion": "C/ Cruz Verde, 4", "telefono": "967 142 014"}
+      ]
+    },
+    {
+      "id": "ciudadreal",
+      "nombre": "Ciudad Real",
+      "federal": {
+        "nombre": "FeSMC UGT Ciudad Real",
+        "direccion": "Residencial Ronda, Bloque 5 - Semisótano (13004)",
+        "telefono": "926 253 535",
+        "telefono2": "926 253 544",
+        "email": "ciudadreal@fesmcugt.org"
+      },
+      "union": {
+        "nombre": "UGT Ciudad Real",
+        "direccion": "C/ Alarcos, 24",
+        "telefono": "926 214 945",
+        "email": "ugt@ciudadreal.ugt.org"
+      },
+      "municipios": [
+        {"pueblo": "Alcázar de San Juan", "direccion": "C/ La Feria, 13", "telefono": "926 546 123"},
+        {"pueblo": "Manzanares", "direccion": "C/ Molinos de Viento, 1", "telefono": "926 611 762"},
+        {"pueblo": "Puertollano", "direccion": "C/ Juan Bravo, 6", "telefono": "926 425 728"},
+        {"pueblo": "Socuéllamos", "direccion": "C/ de la Feria, 10", "telefono": ""},
+        {"pueblo": "Tomelloso", "direccion": "C/ Socuéllamos, 98", "telefono": "667 767 769"},
+        {"pueblo": "Valdepeñas", "direccion": "C/ Unión 33, primero", "telefono": ""}
+      ]
+    },
+    {
+      "id": "guadalajara",
+      "nombre": "Guadalajara",
+      "federal": {
+        "nombre": "FeSMC UGT CLM (Sede Regional) y Guadalajara",
+        "direccion": "Plaza de España, 12 - 2ª planta (19001)",
+        "telefono": "949 223 980",
+        "email": "castillalamancha@fesmcugt.org"
+      },
+      "union": {
+        "nombre": "UGT Guadalajara",
+        "direccion": "Plaza de España, 12",
+        "telefono": "949 223 980",
+        "email": "ugt@guadalajara.ugt.org"
+      },
+      "municipios": []
+    }
+  ]
+}
