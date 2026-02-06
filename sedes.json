@@ -1,67 +1,71 @@
 {
   "provincias": [
     {
-      "id": "albacete",
+      "id": "Albacete",
       "nombre": "Albacete",
       "federal": {
         "nombre": "FeSMC UGT Albacete",
-        "direccion": "C/ Luis Rosales, 7 - 1ª planta",
+        "direccion": "C/ Luis Rosales, 7 - 1ª planta, 02003",
         "telefono": "967 521 850",
         "email": "albacete@fesmcugt.org"
       },
-      "union": {
-        "nombre": "UGT Albacete",
-        "direccion": "C/ Luis Rosales, 7",
-        "telefono": "967 215 514",
-        "email": "ugt@albacete.ugt.org"
-      },
       "municipios": [
-        {"pueblo": "Almansa", "direccion": "Plaza del Rey D. Jaime I, 7", "telefono": "967 342 954"},
-        {"pueblo": "Hellín", "direccion": "C/ Juan XXIII, 5", "telefono": "967 304 030"},
-        {"pueblo": "Villarrobledo", "direccion": "C/ Cruz Verde, 4", "telefono": "967 142 014"}
+        { "pueblo": "Almansa", "direccion": "Plaza del Rey D. Jaime I, 7", "telefono": "967 342 954" },
+        { "pueblo": "Hellín", "direccion": "C/ Juan XXIII, 5", "telefono": "967 304 030" },
+        { "pueblo": "Villarrobledo", "direccion": "C/ Cruz Verde, 4", "telefono": "967 142 014" }
       ]
     },
     {
-      "id": "ciudadreal",
+      "id": "CR",
       "nombre": "Ciudad Real",
       "federal": {
         "nombre": "FeSMC UGT Ciudad Real",
-        "direccion": "Residencial Ronda, Bloque 5 - Semisótano (13004)",
-        "telefono": "926 253 535",
-        "telefono2": "926 253 544",
+        "direccion": "C/ Pozo Dulce, 16, 13001",
+        "telefono": "926 251 828",
         "email": "ciudadreal@fesmcugt.org"
       },
-      "union": {
-        "nombre": "UGT Ciudad Real",
-        "direccion": "C/ Alarcos, 24",
-        "telefono": "926 214 945",
-        "email": "ugt@ciudadreal.ugt.org"
-      },
       "municipios": [
-        {"pueblo": "Alcázar de San Juan", "direccion": "C/ La Feria, 13", "telefono": "926 546 123"},
-        {"pueblo": "Manzanares", "direccion": "C/ Molinos de Viento, 1", "telefono": "926 611 762"},
-        {"pueblo": "Puertollano", "direccion": "C/ Juan Bravo, 6", "telefono": "926 425 728"},
-        {"pueblo": "Socuéllamos", "direccion": "C/ de la Feria, 10", "telefono": ""},
-        {"pueblo": "Tomelloso", "direccion": "C/ Socuéllamos, 98", "telefono": "667 767 769"},
-        {"pueblo": "Valdepeñas", "direccion": "C/ Unión 33, primero", "telefono": ""}
+        { "pueblo": "Alcázar de S. Juan", "direccion": "C/ La Feria, 13", "telefono": "926 546 123" },
+        { "pueblo": "Puertollano", "direccion": "C/ Juan Bravo, 6", "telefono": "926 425 728" },
+        { "pueblo": "Tomelloso", "direccion": "C/ Socuéllamos, 98", "telefono": "667 767 769" }
       ]
     },
     {
-      "id": "guadalajara",
+      "id": "Guada",
       "nombre": "Guadalajara",
       "federal": {
-        "nombre": "FeSMC UGT CLM (Sede Regional) y Guadalajara",
-        "direccion": "Plaza de España, 12 - 2ª planta (19001)",
+        "nombre": "FeSMC UGT Guadalajara y SEDE REGIONAL",
+        "direccion": "Plaza de España, 12, 19001",
         "telefono": "949 223 980",
-        "email": "castillalamancha@fesmcugt.org"
-      },
-      "union": {
-        "nombre": "UGT Guadalajara",
-        "direccion": "Plaza de España, 12",
-        "telefono": "949 223 980",
-        "email": "ugt@guadalajara.ugt.org"
+        "email": "guadalajara@fesmcugt.org | castillalamancha@fesmcugt.org"
       },
       "municipios": []
+    },
+    {
+      "id": "Cuenca",
+      "nombre": "Cuenca",
+      "federal": {
+        "nombre": "FeSMC UGT Cuenca",
+        "direccion": "Avda. Reyes Católicos, 78, 16003",
+        "telefono": "969 211 213",
+        "email": "cuenca@fesmcugt.org"
+      },
+      "municipios": [
+        { "pueblo": "Tarancón", "direccion": "C/ Garcilaso de la Vega, local 4", "telefono": "969 322 063" }
+      ]
+    },
+    {
+      "id": "Toledo",
+      "nombre": "Toledo",
+      "federal": {
+        "nombre": "FeSMC UGT Toledo",
+        "direccion": "Cuesta de Carlos V, 1, 45001",
+        "telefono": "925 252 518",
+        "email": "toledo@fesmcugt.org"
+      },
+      "municipios": [
+        { "pueblo": "Talavera de la Reina", "direccion": "C/ Mesones, 38", "telefono": "925 813 300" }
+      ]
     }
   ]
 }
