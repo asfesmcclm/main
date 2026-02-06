@@ -56,6 +56,7 @@
         }
 
         /* Footer Fijo con ajuste para iPhone */
+  /* Footer Fijo Corregido y Alineado */
         .fixed-footer-nav {
             height: 75px;
             background: white;
@@ -65,8 +66,15 @@
             align-items: center;
             z-index: 1000;
             padding-bottom: env(safe-area-inset-bottom, 0);
-        }
 
+            /* CAMBIOS PARA QUE NO SE ESTIRE EN PC */
+            position: absolute; 
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
         .nav-item {
             text-decoration: none;
             color: #666;
