@@ -1,70 +1,30 @@
 <style>
-    .seccion-card { 
-        margin-bottom: 20px; 
-        padding: 22px; 
-        border: 1px solid #efefef; 
-        border-radius: 14px; 
-        background: #ffffff; 
-        box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-    }
-    .titulo-rojo { 
-        color: #e30613; 
-        font-weight: 800; 
-        margin-bottom: 15px; 
-        font-size: 1.05rem; 
-        letter-spacing: -0.02em;
-    }
-    .lista-resumen { 
-        margin: 0 0 18px 0; 
-        padding: 0; 
-        list-style: none; 
-    }
-    .lista-resumen li { 
-        font-size: 0.82rem; /* Tamaño más pequeño y sutil */
-        color: #777;        /* Gris suave */
-        margin-bottom: 6px; 
-        display: flex; 
-        align-items: center;
-        line-height: 1.3;
-    }
-    .lista-resumen li::before { 
-        content: ""; 
-        width: 4px;
-        height: 4px;
-        background-color: #e30613; 
-        border-radius: 50%;
-        display: inline-block; 
-        margin-right: 10px;
-        flex-shrink: 0;
-    }
-    .btn-enlace { 
-        display: block; 
-        text-align: center; 
-        background: #e30613; 
-        color: white; 
-        padding: 14px; 
-        border-radius: 10px; 
-        text-decoration: none; 
-        font-weight: bold; 
-        font-size: 0.9rem;
-        transition: opacity 0.2s;
-    }
+    .seccion-card { margin-bottom: 20px; padding: 22px; border: 1px solid #efefef; border-radius: 14px; background: #fff; }
+    .titulo-rojo { color: #e30613; font-weight: 800; margin-bottom: 12px; font-size: 1.05rem; }
+    .lista-resumen { margin: 0 0 20px 0; padding: 0; list-style: none; }
+    .lista-resumen li { font-size: 0.82rem; color: #777; margin-bottom: 6px; display: flex; align-items: center; }
+    .lista-resumen li::before { content: ""; width: 4px; height: 4px; background: #e30613; border-radius: 50%; margin-right: 10px; flex-shrink: 0; }
+    .btn-enlace { display: block; text-align: center; background: #e30613; color: white; padding: 14px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border:none; width:100%; cursor:pointer; }
+    .sub-texto { font-size: 0.82rem; color: #777; margin-bottom: 15px; line-height: 1.4; }
 </style>
 
 <div class="modulo-contenedor">
     <div class="seccion-card">
         <div class="titulo-rojo">RECURSOS PARA EL EMPLEO</div>
-        
         <ul class="lista-resumen">
-            <li>Boletín Ofertas Empleo (por provincias,público y privado)</li>
-            <li>Herramientas IA (búsqueda de empleo)</li>
+            <li>Boletín de Ofertas por provincias (Público y Privado)</li>
+            <li>Guía de herramientas de IA para la búsqueda de empleo</li>
             <li>Guías específicas: Mujer, Jóvenes y Discapacidad</li>
-            <li>Asesoramiento (prestaciones, subsidios y contratos)</li>
-            <li>Emprendimiento y búsqueda activa</li>
         </ul>
+        <a href="https://www.ugtclm.es/empleo-2/" target="_blank" class="btn-enlace">ACCEDER A RECURSOS</a>
+    </div>
 
-        <a href="https://www.ugtclm.es/empleo-2/" target="_blank" class="btn-enlace">
-            ACCEDER A LOS RECURSOS
-        </a>
+    <div class="seccion-card">
+        <div class="titulo-rojo">FORMACIÓN</div>
+        <p class="sub-texto">Consulta la oferta formativa regional de UGT Castilla-La Mancha y la específica sectorial de FeSMC.</p>
+        
+        <button class="btn-enlace" onclick="mostrarOpcionesFormacion()">
+            VER OPCIONES DE FORMACIÓN
+        </button>
     </div>
 </div>
