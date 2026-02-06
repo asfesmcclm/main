@@ -154,3 +154,47 @@ function setupAppLinks() {
     const l2 = document.getElementById('link-afiliado-final');
     if(l2) l2.href = isIOS ? "https://apps.apple.com/es/app/ugt-app/id1531325029" : "https://play.google.com/store/apps/details?id=com.ugt.afiliados";
 }
+
+/**
+ * FUNCIONES DE NAVEGACIÓN INTERNA PARA EL MODAL DE FORMACIÓN
+ */
+
+// 1. Cambia el contenido del modal con un efecto de transición suave
+function cambiarContenidoModal(htmlContenido, nuevoTitulo) {
+    const cuerpo = document.getElementById("modalCuerpo");
+    const titulo = document.getElementById("modalTitulo");
+    
+    if (!cuerpo || !titulo) return;
+
+    cuerpo.style.opacity = 0;
+    
+    setTimeout(() => {
+        if (nuevoTitulo) titulo.innerText = nuevoTitulo;
+        cuerpo.innerHTML = htmlContenido;
+        cuerpo.style.opacity = 1;
+    }, 150);
+}
+
+// 2. Genera la vista de opciones de Formación (Regional vs Sectorial)
+function mostrarOpcionesFormacion() {
+    const htmlOpciones = `
+        <div class="seccion-card" style="border-left: 5px solid #e30613; padding:20px; background:#fff; border-radius:12px; margin-bottom:15px; border: 1px solid #eee; border-left: 5px solid #e30613;">
+            <div style="color:#e30613; font-weight:800; margin-bottom:10px; font-size:1rem;">FORMACIÓN UGT CLM</div>
+            <p style="font-size:0.82rem; color:#777; margin-bottom:15px; line-height:1.3;">Cursos subvencionados y formación para el empleo en la región.</p>
+            <a href="https://www.ugtclm.es/formacion/" target="_blank" style="display:block; text-align:center; background:#e30613; color:white; padding:12px; border-radius:10px; text-decoration:none; font-weight:bold; font-size:0.85rem;">IR A PÁGINA REGIONAL</a>
+        </div>
+        
+        <div class="seccion-card" style="border-left: 5px solid #444; padding:20px; background:#fff; border-radius:12px; margin-bottom:15px; border: 1px solid #eee; border-left: 5px solid #444;">
+            <div style="color:#444; font-weight:800; margin-bottom:10px; font-size:1rem;">FORMACIÓN FeSMC UGT</div>
+            <p style="font-size:0.82rem; color:#777; margin-bottom:15px; line-height:1.3;">Oferta específica para sectores de servicios, comercio y transportes.</p>
+            <a href="https://www.fesmcugt.org/formacion/" target="_blank" style="display:block; text-align:center; background:#444; color:white; padding:12px; border-radius:10px; text-decoration:none; font-weight:bold; font-size:0.85rem;">IR A PÁGINA FeSMC</a>
+        </div>
+        
+        <button onclick="gestionarContenidoModal('formacionEmpleo')" 
+                style="margin-top:10px; width:100%; padding:15px; background:none; color:#e30613; border:1px solid #e30613; border-radius:12px; cursor:pointer; font-weight:800; font-size:0.9rem;">
+            VOLVER ATRÁS
+        </button>
+    `;
+    
+    cambiarContenidoModal(htmlOpciones, "Opciones de Formación");
+}
