@@ -198,3 +198,55 @@ function mostrarOpcionesFormacion() {
     
     cambiarContenidoModal(htmlOpciones, "Opciones de Formación");
 }
+// ... (Tus funciones de Sedes, Calendario, etc.) ...
+
+// ... (Función gestionarContenidoModal que ya pusimos antes) ...
+
+// ---------------------------------------------------------
+// PÉGALO AQUÍ (AL FINAL):
+// ---------------------------------------------------------
+
+function cambiarContenidoModal(htmlContenido, nuevoTitulo) {
+    const cuerpo = document.getElementById("modalCuerpo");
+    const titulo = document.getElementById("modalTitulo");
+    if (!cuerpo || !titulo) return;
+    cuerpo.style.opacity = 0;
+    setTimeout(() => {
+        if (nuevoTitulo) titulo.innerText = nuevoTitulo;
+        cuerpo.innerHTML = htmlContenido;
+        cuerpo.style.opacity = 1;
+    }, 150);
+}
+
+function mostrarOpcionesFormacion() {
+    const htmlOpciones = `
+        <div class="seccion-card" style="border-left: 5px solid #e30613; padding:20px; background:#fff; border-radius:12px; margin-bottom:15px; border: 1px solid #eee; border-left: 5px solid #e30613;">
+            <div style="color:#e30613; font-weight:800; margin-bottom:10px; font-size:1rem;">UGT CASTILLA-LA MANCHA</div>
+            <p style="font-size:0.82rem; color:#777; margin-bottom:12px; line-height:1.4;">Formación integral en la región:</p>
+            <ul style="margin:0 0 15px 0; padding:0; list-style:none; font-size:0.8rem; color:#555;">
+                <li style="margin-bottom:4px;">• Cursos gratuitos por provincias</li>
+                <li style="margin-bottom:4px;">• Formación Profesional Dual</li>
+                <li style="margin-bottom:4px;">• ACREDITA y Oposiciones</li>
+            </ul>
+            <a href="https://www.ugtclm.es/formacion/" target="_blank" style="display:block; text-align:center; background:#e30613; color:white; padding:12px; border-radius:10px; text-decoration:none; font-weight:bold; font-size:0.85rem;">VER FORMACIÓN REGIONAL</a>
+        </div>
+        
+        <div class="seccion-card" style="border-left: 5px solid #444; padding:20px; background:#fff; border-radius:12px; margin-bottom:15px; border: 1px solid #eee; border-left: 5px solid #444;">
+            <div style="color:#444; font-weight:800; margin-bottom:10px; font-size:1rem;">FeSMC UGT (Sectorial)</div>
+            <p style="font-size:0.82rem; color:#777; margin-bottom:12px; line-height:1.4;">Especialización técnica y OPE:</p>
+            <ul style="margin:0 0 15px 0; padding:0; list-style:none; font-size:0.8rem; color:#555;">
+                <li style="margin-bottom:4px;">• <strong>Comercio y Marketing:</strong> E-commerce e IA.</li>
+                <li style="margin-bottom:4px;">• <strong>Logística y Finanzas:</strong> Stock y Contabilidad.</li>
+                <li style="margin-bottom:4px;">• <strong>Hostelería y Salud:</strong> Alérgenos y Sanidad.</li>
+                <li style="margin-bottom:4px;">• <strong>Oposiciones:</strong> Cursos OPE ADIF.</li>
+            </ul>
+            <a href="https://www.fesmcugt.org/formacion/cursos" target="_blank" style="display:block; text-align:center; background:#444; color:white; padding:12px; border-radius:10px; text-decoration:none; font-weight:bold; font-size:0.85rem;">VER CURSOS SECTORIALES</a>
+        </div>
+        
+        <button onclick="gestionarContenidoModal('formacionEmpleo')" 
+                style="margin-top:10px; width:100%; padding:15px; background:none; color:#e30613; border:1px solid #e30613; border-radius:12px; cursor:pointer; font-weight:800; font-size:0.9rem;">
+            VOLVER ATRÁS
+        </button>
+    `;
+    cambiarContenidoModal(htmlOpciones, "Opciones de Formación");
+}
