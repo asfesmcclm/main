@@ -1,35 +1,60 @@
 <style>
-   .modulo-contenedor { padding: 10px; }
-   .seccion-card { 
-       margin-bottom: 20px; 
-       padding: 20px; 
-       border: 1px solid #e0e0e0; 
-       border-radius: 12px; 
-       background: #f9f9f9; 
-   }
-   .titulo-rojo { color: #e30613; font-weight: bold; margin-bottom: 10px; }
-   .btn-enlace { 
-       display: block; 
-       text-align: center; 
-       background: #e30613; 
-       color: white; 
-       padding: 12px; 
-       border-radius: 8px; 
-       text-decoration: none; 
-       font-weight: bold; 
-   }
+    .seccion-card { 
+        margin-bottom: 20px; 
+        padding: 20px; 
+        border: 1px solid #e0e0e0; 
+        border-radius: 12px; 
+        background: #f9f9f9; 
+    }
+    .titulo-rojo { color: #e30613; font-weight: bold; margin-bottom: 12px; font-size: 1.1rem; }
+    .lista-resumen { 
+        margin: 0 0 20px 0; 
+        padding: 0; 
+        list-style: none; 
+    }
+    .lista-resumen li { 
+        font-size: 0.9rem; 
+        color: #555; 
+        margin-bottom: 8px; 
+        display: flex; 
+        align-items: flex-start;
+    }
+    .lista-resumen li::before { 
+        content: "•"; 
+        color: #e30613; 
+        font-weight: bold; 
+        display: inline-block; 
+        width: 15px; 
+        margin-right: 5px;
+    }
+    .btn-enlace { 
+        display: block; 
+        text-align: center; 
+        background: #e30613; 
+        color: white; 
+        padding: 14px; 
+        border-radius: 10px; 
+        text-decoration: none; 
+        font-weight: bold; 
+        font-size: 0.95rem;
+    }
 </style>
 
 <div class="modulo-contenedor">
-   <div class="seccion-card">
-       <div class="titulo-rojo">CURSOS GRATUITOS UGT</div>
-       <p>Acceso a la plataforma de formación subvencionada para trabajadores y desempleados.</p>
-       <a href="https://www.ugt.es/formacion" target="_blank" class="btn-enlace">Ver Cursos</a>
-   </div>
+    <div class="seccion-card">
+        <div class="titulo-rojo">RECURSOS PARA EL EMPLEO</div>
+        
+        <ul class="lista-resumen">
+            <li>Boletín de Ofertas de Empleo por provincias (Público y Privado).</li>
+            <li>Guía de Herramientas de IA para la búsqueda de trabajo.</li>
+            <li>Guías específicas: Mujer, Jóvenes, Discapacidad y Emprendimiento.</li>
+            <li>Asesoramiento sobre Prestaciones, Subsidios y Contratos.</li>
+            <li>Información sobre Búsqueda Activa y Autoempleo.</li>
+        </ul>
 
-   <div class="seccion-card">
-       <div class="titulo-rojo">ACREDITACIÓN DE COMPETENCIAS</div>
-       <p>Consigue tu título oficial basado en tu experiencia laboral de años.</p>
-       <a href="#" class="btn-enlace">Información Acredita</a>
-   </div>
-</div>
+        <a href="https://www.ugtclm.es/empleo-2/" target="_blank" class="btn-enlace">
+            ACCEDER A TODAS LAS GUÍAS
+        </a>
+    </div>
+
+    </div>
