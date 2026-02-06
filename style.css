@@ -211,7 +211,7 @@ header {
 }
 
 /* =========================================
-   7. MENÚ INFERIOR Y EXTRAS
+   7. MENÚ INFERIOR (AJUSTADO)
    ========================================= */
 .bottom-nav {
     position: fixed !important;
@@ -219,15 +219,16 @@ header {
     left: 50% !important;
     transform: translateX(-50%) !important;
     width: 100% !important;
-    max-width: 500px !important;
-    height: 75px; /* Altura fija para que no varíe */
+    max-width: 500px !important; /* Alineado con .container */
+    height: 75px; 
     background: white !important;
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
     padding: 10px 0 20px 0 !important;
     border-top: 1px solid #eee !important;
-    z-index: 99999 !important; /* Máxima prioridad sobre cualquier animación */
+    z-index: 99999 !important; 
     box-shadow: 0 -5px 20px rgba(0,0,0,0.1) !important;
+    box-sizing: border-box !important;
 }
 
 .nav-item { text-align: center; text-decoration: none; color: #999; }
