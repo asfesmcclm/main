@@ -1,0 +1,78 @@
+<style>
+    .modulo-contenedor { padding: 10px; }
+    .seccion-card { 
+        margin-bottom: 20px; 
+        padding: 20px; 
+        border: 1px solid #e0e0e0; 
+        border-radius: 12px;
+        background-color: #f9f9f9;
+    }
+    .titulo-rojo { color: #d32f2f; margin-bottom: 10px; font-weight: bold; }
+    .btn-container { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+    
+    .btn-enlace { 
+        display: block; 
+        text-align: center;
+        background: #d32f2f; 
+        color: white !important; 
+        padding: 12px; 
+        text-decoration: none; 
+        border-radius: 6px; 
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+    .btn-enlace:hover { background: #b71c1c; }
+    .btn-secundario { background: #555; }
+    .btn-secundario:hover { background: #333; }
+
+    .footer-modal { 
+        margin-top: 20px; 
+        text-align: center; 
+        display: flex; 
+        justify-content: center; 
+        gap: 15px;
+    }
+    .btn-salir { 
+        background: none; 
+        border: 1px solid #999; 
+        color: #666; 
+        padding: 8px 16px; 
+        cursor: pointer; 
+        border-radius: 4px;
+    }
+</style>
+
+<div class="modulo-contenedor">
+    <h2 style="text-align: center; color: #333;">Formación y Empleo</h2>
+    <hr>
+
+    <div class="seccion-card">
+        <h3 class="titulo-rojo">Buscador de Ayudas y Empleo</h3>
+        <p>Encuentra prestaciones y programas personalizados según tu situación laboral. Privado y sin registro.</p>
+        <a href="https://www.ugtclm.es/aplicacion-web-empleo/" target="_blank" rel="noopener" class="btn-enlace">
+            Consultar Ayudas
+        </a>
+    </div>
+
+    <div class="seccion-card">
+        <h3 class="titulo-rojo">Oferta Formativa</h3>
+        <p>Mejora tu cualificación con nuestros cursos y guías:</p>
+        <div class="btn-container">
+            <a href="https://www.ugtclm.es/formacion/" target="_blank" rel="noopener" class="btn-enlace">
+                Formación UGT Castilla-La Mancha
+            </a>
+            <a href="https://www.fesmcugt.org/formacion/cursos" target="_blank" rel="noopener" class="btn-enlace btn-secundario">
+                Cursos por Sectores (FeSMC)
+            </a>
+        </div>
+    </div>
+
+    <div class="footer-modal">
+        <button type="button" class="btn-salir" onclick="document.getElementById('tu-id-de-modal').style.display='none'">
+            Cerrar Ventana
+        </button>
+        <button type="button" class="btn-salir" onclick="window.location.href='index.html'">
+            Volver al Inicio
+        </button>
+    </div>
+</div>
