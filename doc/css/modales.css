@@ -200,3 +200,36 @@ body {
 #indice-lista {
     padding-bottom: 80px; 
 }
+
+/* 10. Aviso Legal y Advertencias */
+.aviso-legal {
+    background: #ffffff;
+    border: 1px solid #eee;
+    border-left: 5px solid #e30613; /* Resalte en rojo UGT */
+    padding: 15px;
+    margin: 20px;
+    border-radius: 8px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.aviso-legal-icon {
+    color: #e30613;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.aviso-legal-texto {
+    font-size: 0.75rem;
+    color: #555;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.aviso-legal-texto strong {
+    color: #000;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+}
