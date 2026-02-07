@@ -156,3 +156,47 @@ body {
         margin-bottom: 0;
     }
 }
+
+/* 9. Navegación Inferior (Barra Fija) */
+.nav-inferior {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px; /* Se ajusta a tu ancho de App */
+    background: white;
+    padding: 12px 20px;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: center;
+    z-index: 999; /* Por debajo del modal pero encima de la lista */
+    box-sizing: border-box;
+    border-top: 1px solid #eee;
+}
+
+.btn-volver-inicio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: #444; /* Color neutro para no competir con el rojo UGT */
+    color: white !important;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.btn-volver-inicio:active {
+    background: #222;
+}
+
+/* Margen extra al final de la lista para que el último modelo 
+   no quede tapado por la barra de navegación */
+#indice-lista {
+    padding-bottom: 80px; 
+}
