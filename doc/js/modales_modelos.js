@@ -33,7 +33,7 @@ const ModalesUGT = {
             <h2 style="color:#e30613; font-size:1.2rem; margin-top:0;">${m.titulo}</h2>
             <p style="font-size:0.9rem; color:#666;">Seleccione una opción para continuar:</p>
             <button class="btn-ugt" onclick="ModalesUGT.abrirPaso2()">Rellenar mis datos personales</button>
-            <button class="btn-ugt btn-sec" onclick="ModalesUGT.generar(true)">Ver modelo oficial en blanco</button>
+            <button class="btn-ugt btn-sec" onclick="ModalesUGT.generar(true)">Ver borrador en blanco</button>
         `;
         this.mostrarModal(contenido);
     },
