@@ -85,24 +85,38 @@ const ModalesUGT = {
     if(window.lucide) lucide.createIcons(); // Para que dibuje el icono dentro del modal
 },
     // 4. PASO 2: Formulario dinámico basado en los campos del JSON
-    abrirPaso2: function() {
-        const m = this.modelos[this.selKey];
-        const camposHtml = m.campos.map(c => `
-            <div class="form-group">
-                <label>${c.label}</label>
-                <input type="${c.tipo || 'text'}" id="val-${c.id}" placeholder="Introduzca dato...">
+  abrirPaso2: function() {
+    const m = this.modelos[this.selKey];
+    
+    // Generamos los inputs automáticamente recorriendo el array de variables
+    const camposHtml = m.variables.map(v => {
+        // Buscamos el nombre "bonito" en el diccionario, si no existe, usamos la variable
+        const labelBonito = etiquetasCampos[v] || v;
+        
+        return `
+            <div class="form-group" style="margin-bottom: 15px; text-align: left;">
+                <label style="display:block; font-weight:bold; font-size:0.8rem; margin-bottom:5px; color:#444;">
+                    ${labelBonito}
+                </label>
+                <input type="text" id="val-${v}" class="input-ugt" placeholder="Introduzca ${labelBonito}..." 
+                       style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;">
             </div>
-        `).join('');
-
-        const contenido = `
-            <h3 style="margin-top:0;">Personalizar Escrito</h3>
-            <div class="scroll-area">${camposHtml}</div>
-            <button class="btn-ugt" onclick="ModalesUGT.generar(false)">Generar Documento Final</button>
-            <button class="btn-ugt btn-sec" onclick="ModalesUGT.abrirPaso1('${this.selKey}')">Volver atrás</button>
         `;
-        this.mostrarModal(contenido);
-    },
+    }).join('');
 
+    const contenido = `
+        <h3 style="margin-top:0; color:#e30613;">Personalizar Escrito</h3>
+        <p style="font-size:0.8rem; color:#666; margin-bottom:15px;">Complete los datos para el borrador:</p>
+        <div class="scroll-area" style="max-height: 50vh; overflow-y: auto; padding-right:10px;">
+            ${camposHtml}
+        </div>
+        <div style="margin-top:20px;">
+            <button class="btn-ugt" onclick="ModalesUGT.generar(false)">GENERAR DOCUMENTO FINAL</button>
+            <button class="btn-ugt btn-sec" style="margin-top:10px;" onclick="ModalesUGT.abrirPaso1('${this.selKey}')">VOLVER ATRÁS</button>
+        </div>
+    `;
+    this.mostrarModal(contenido);
+},
     // 5. PASO 3: Generación del texto legal y previsualización
     generar: function(blanco) {
         const m = this.modelos[this.selKey];
