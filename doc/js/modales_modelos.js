@@ -1,3 +1,35 @@
+// DICCIONARIO DE ETIQUETAS PARA EL FORMULARIO
+const etiquetasCampos = {
+    "empresa": "Nombre de la Empresa",
+    "localidad": "Localidad (donde firmas)",
+    "fecha": "Fecha de hoy",
+    "nombre": "Tu Nombre y Apellidos",
+    "dni": "DNI o NIE",
+    "email": "Tu Correo electrónico",
+    "telefono": "Tu Teléfono",
+    "fecha_nacimiento": "Fecha nacimiento del menor",
+    "semanas": "Nº de semanas solicitadas",
+    "monoparental": "Familia monoparental (Sí/No)",
+    "modalidad": "Modalidad (Completa/Parcial)",
+    "fecha_inicio": "Fecha de inicio del permiso",
+    "fecha_fin": "Fecha de finalización",
+    "motivo": "Motivo o aclaraciones",
+    "puesto": "Tu Puesto de trabajo",
+    "departamento": "Departamento / Sección",
+    "parentesco": "Grado de parentesco",
+    "convenio": "Convenio Colectivo aplicable",
+    "hijos_menores": "Nº de hijos menores de 12 años",
+    "reduccion": "Porcentaje o concreción horaria",
+    "parto_multiple": "Nº de hijos en este parto"
+};
+
+
+
+
+
+
+
+
 /* doc/js/modales_modelos.js */
 
 const ModalesUGT = {
