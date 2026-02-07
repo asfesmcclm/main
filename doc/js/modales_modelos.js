@@ -26,18 +26,32 @@ const ModalesUGT = {
     },
 
     // 3. PASO 1: Modal de elección (Datos vs Blanco)
-    abrirPaso1: function(key) {
-        this.selKey = key;
-        const m = this.modelos[key];
-        const contenido = `
-            <h2 style="color:#e30613; font-size:1.2rem; margin-top:0;">${m.titulo}</h2>
-            <p style="font-size:0.9rem; color:#666;">Seleccione una opción para continuar:</p>
-            <button class="btn-ugt" onclick="ModalesUGT.abrirPaso2()">Rellenar mis datos personales</button>
-            <button class="btn-ugt btn-sec" onclick="ModalesUGT.generar(true)">Ver borrador en blanco</button>
-        `;
-        this.mostrarModal(contenido);
-    },
 
+    abrirPaso1: function(key) {
+    this.selKey = key;
+    const m = this.modelos[key];
+    const contenido = `
+        <h2 style="color:#e30613; font-size:1.2rem; margin-top:0;">${m.titulo}</h2>
+        <p style="font-size:0.9rem; color:#666; margin-bottom:20px;">¿Cómo desea preparar su solicitud?</p>
+        
+        <button class="btn-ugt" onclick="ModalesUGT.abrirPaso2()">
+            PERSONALIZAR CON MIS DATOS
+        </button>
+        
+        <button class="btn-ugt btn-sec" onclick="ModalesUGT.generar(true)">
+            VER BORRADOR EN BLANCO
+        </button>
+
+        <div class="alerta-legal-modal">
+            <i data-lucide="alert-circle" class="alerta-icon"></i>
+            <p class="alerta-texto">
+                <b>AVISO IMPORTANTE:</b> Estos borradores son solo una herramienta orientativa. La normativa y los plazos pueden variar según tu <b>Convenio Colectivo</b>. Recomendamos consultar con <b>UGT</b> antes de su presentación.
+            </p>
+        </div>
+    `;
+    this.mostrarModal(contenido);
+    if(window.lucide) lucide.createIcons(); // Para que dibuje el icono dentro del modal
+},
     // 4. PASO 2: Formulario dinámico basado en los campos del JSON
     abrirPaso2: function() {
         const m = this.modelos[this.selKey];
