@@ -1,4 +1,6 @@
-// DICCIONARIO DE ETIQUETAS PARA EL FORMULARIO
+/* doc/js/modales_modelos.js */
+
+// 1. DICCIONARIO DE ETIQUETAS
 const etiquetasCampos = {
     "empresa": "Nombre de la Empresa",
     "localidad": "Localidad (donde firmas)",
@@ -20,34 +22,23 @@ const etiquetasCampos = {
     "convenio": "Convenio Colectivo aplicable",
     "hijos_menores": "Nº de hijos menores de 12 años",
     "reduccion": "Porcentaje o concreción horaria",
-    "parto_multiple": "Nº de hijos en este parto"
+    "parto_multiple": "Nº de hijos en este parto",
+    "discapacidad": "¿Existe discapacidad? (Sí/No)"
 };
-
-
-
-
-
-
-
-
-/* doc/js/modales_modelos.js */
 
 const ModalesUGT = {
     modelos: {},
     selKey: "",
 
-    // 1. Inicializar la aplicación con los datos del JSON
     init: function(data) {
         this.modelos = data;
         this.renderIndice();
     },
 
-    // 2. Dibujar la lista de permisos en la pantalla principal
     renderIndice: function() {
         const lista = document.getElementById('indice-lista');
         if (!lista) return;
         lista.innerHTML = "";
-        
         Object.keys(this.modelos).forEach(key => {
             const li = document.createElement('div');
             li.className = 'card-permiso';
@@ -57,102 +48,96 @@ const ModalesUGT = {
         });
     },
 
-    // 3. PASO 1: Modal de elección (Datos vs Blanco)
-
+    // PASO 1: Elección e Información
     abrirPaso1: function(key) {
-    this.selKey = key;
-    const m = this.modelos[key];
-    const contenido = `
-        <h2 style="color:#e30613; font-size:1.2rem; margin-top:0;">${m.titulo}</h2>
-        <p style="font-size:0.9rem; color:#666; margin-bottom:20px;">¿Cómo desea preparar su solicitud?</p>
-        
-        <button class="btn-ugt" onclick="ModalesUGT.abrirPaso2()">
-            PERSONALIZAR CON MIS DATOS
-        </button>
-        
-        <button class="btn-ugt btn-sec" onclick="ModalesUGT.generar(true)">
-            VER BORRADOR EN BLANCO
-        </button>
-
-        <div class="alerta-legal-modal">
-            <i data-lucide="alert-circle" class="alerta-icon"></i>
-            <p class="alerta-texto">
-                <b>AVISO IMPORTANTE:</b> Estos borradores son solo una herramienta orientativa. La normativa y los plazos pueden variar según tu <b>Convenio Colectivo</b>. Recomendamos consultar con <b>UGT</b> antes de su presentación.
-            </p>
-        </div>
-    `;
-    this.mostrarModal(contenido);
-    if(window.lucide) lucide.createIcons(); // Para que dibuje el icono dentro del modal
-},
-    // 4. PASO 2: Formulario dinámico basado en los campos del JSON
-  abrirPaso2: function() {
-    const m = this.modelos[this.selKey];
-    
-    // Generamos los inputs automáticamente recorriendo el array de variables
-    const camposHtml = m.variables.map(v => {
-        // Buscamos el nombre "bonito" en el diccionario, si no existe, usamos la variable
-        const labelBonito = etiquetasCampos[v] || v;
-        
-        return `
-            <div class="form-group" style="margin-bottom: 15px; text-align: left;">
-                <label style="display:block; font-weight:bold; font-size:0.8rem; margin-bottom:5px; color:#444;">
-                    ${labelBonito}
-                </label>
-                <input type="text" id="val-${v}" class="input-ugt" placeholder="Introduzca ${labelBonito}..." 
-                       style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;">
-            </div>
-        `;
-    }).join('');
-
-    const contenido = `
-        <h3 style="margin-top:0; color:#e30613;">Personalizar Escrito</h3>
-        <p style="font-size:0.8rem; color:#666; margin-bottom:15px;">Complete los datos para el borrador:</p>
-        <div class="scroll-area" style="max-height: 50vh; overflow-y: auto; padding-right:10px;">
-            ${camposHtml}
-        </div>
-        <div style="margin-top:20px;">
-            <button class="btn-ugt" onclick="ModalesUGT.generar(false)">GENERAR DOCUMENTO FINAL</button>
-            <button class="btn-ugt btn-sec" style="margin-top:10px;" onclick="ModalesUGT.abrirPaso1('${this.selKey}')">VOLVER ATRÁS</button>
-        </div>
-    `;
-    this.mostrarModal(contenido);
-},
-    // 5. PASO 3: Generación del texto legal y previsualización
-    generar: function(blanco) {
-        const m = this.modelos[this.selKey];
-        let texto = m.plantilla;
-
-        m.campos.forEach(c => {
-            let valor = blanco ? `[${c.label.toUpperCase()}]` : document.getElementById(`val-${c.id}`).value;
-            
-            // Si el campo está vacío, ponemos el nombre del campo entre corchetes
-            if (!valor) valor = `[${c.label.toUpperCase()}]`;
-            
-            // Formatear fechas de YYYY-MM-DD a DD/MM/YYYY para España
-            if (!blanco && document.getElementById(`val-${c.id}`).type === 'date' && valor.includes('-')) {
-                valor = valor.split('-').reverse().join('/');
-            }
-            
-            // Reemplazar la variable ${id} en la plantilla
-            texto = texto.split(`\${${c.id}}`).join(valor);
-        });
-
+        this.selKey = key;
+        const m = this.modelos[key];
         const contenido = `
-            <h3 style="margin-top:0;">Escrito Listo</h3>
-            <div id="output-text-final" class="output-final">${texto}</div>
-            <button class="btn-ugt" onclick="ModalesUGT.copiar()">Copiar al Portapapeles</button>
-            <button class="btn-ugt btn-sec" onclick="ModalesUGT.cerrar()">Finalizar y Cerrar</button>
+            <h2 style="color:#e30613; font-size:1.2rem; margin-top:0;">${m.titulo}</h2>
+            
+            <div style="background: #f0f7ff; border-left: 4px solid #0056b3; padding: 12px; margin-bottom: 20px; border-radius: 4px; text-align: left;">
+                <p style="font-size: 0.85rem; color: #003a7a; margin: 0; line-height: 1.4;">
+                    <strong>INFORMACIÓN:</strong> ${m.uso || 'Consulte los detalles del permiso.'}
+                </p>
+            </div>
+
+            <p style="font-size:0.9rem; color:#666; margin-bottom:15px;">¿Cómo desea preparar su solicitud?</p>
+            <button class="btn-ugt" onclick="ModalesUGT.abrirPaso2()">PERSONALIZAR CON MIS DATOS</button>
+            <button class="btn-ugt btn-sec" style="margin-top:10px;" onclick="ModalesUGT.generar(true)">VER BORRADOR EN BLANCO</button>
         `;
         this.mostrarModal(contenido);
     },
 
-    // 6. Funciones de utilidad (Cerrar, Abrir y Copiar)
+    // PASO 2: Formulario dinámico corregido
+    abrirPaso2: function() {
+        const m = this.modelos[this.selKey];
+        if (!m.variables) return;
+
+        const camposHtml = m.variables.map(v => {
+            const labelBonito = etiquetasCampos[v] || v;
+            return `
+                <div class="form-group" style="margin-bottom: 15px; text-align: left;">
+                    <label style="display:block; font-weight:bold; font-size:0.8rem; margin-bottom:5px; color:#444;">${labelBonito}</label>
+                    <input type="text" id="val-${v}" class="input-ugt" placeholder="Escriba aquí..." 
+                           style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
+                </div>
+            `;
+        }).join('');
+
+        const contenido = `
+            <h3 style="margin-top:0; color:#e30613;">Personalizar Escrito</h3>
+            <div class="scroll-area" style="max-height: 45vh; overflow-y: auto; padding-right:10px;">
+                ${camposHtml}
+            </div>
+            <div style="margin-top:20px;">
+                <button class="btn-ugt" onclick="ModalesUGT.generar(false)">GENERAR DOCUMENTO</button>
+                <button class="btn-ugt btn-sec" style="margin-top:10px;" onclick="ModalesUGT.abrirPaso1('${this.selKey}')">VOLVER</button>
+            </div>
+        `;
+        this.mostrarModal(contenido);
+    },
+
+    // PASO 3: Generación final corregida (Usa 'variables' y llaves {})
+    generar: function(blanco) {
+        const m = this.modelos[this.selKey];
+        let texto = m.plantilla;
+
+        if (!m.variables) return;
+
+        m.variables.forEach(v => {
+            const inputEl = document.getElementById(`val-${v}`);
+            const etiqueta = etiquetasCampos[v] || v;
+            let valor = "";
+
+            if (blanco) {
+                valor = `[${etiqueta.toUpperCase()}]`;
+            } else {
+                valor = inputEl ? inputEl.value.trim() : "";
+                if (!valor) valor = `[${etiqueta.toUpperCase()}]`;
+            }
+            
+            // Busca {variable} en la plantilla y la reemplaza
+            const regex = new RegExp(`{${v}}`, 'g');
+            texto = texto.replace(regex, valor);
+        });
+
+        const contenido = `
+            <h3 style="margin-top:0; color:#e30613;">Escrito Listo</h3>
+            <div id="output-text-final" class="output-final" style="white-space: pre-wrap; text-align: left; background: #f9f9f9; padding: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.85rem; max-height: 50vh; overflow-y: auto;">${texto}</div>
+            <div style="margin-top:20px;">
+                <button class="btn-ugt" onclick="ModalesUGT.copiar()">Copiar al Portapapeles</button>
+                <button class="btn-ugt btn-sec" style="margin-top:10px;" onclick="ModalesUGT.cerrar()">Cerrar</button>
+            </div>
+        `;
+        this.mostrarModal(contenido);
+    },
+
     mostrarModal: function(html) {
         const inner = document.getElementById('modal-content-inner');
         if (inner) {
             inner.innerHTML = html;
             document.getElementById('modal-overlay').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Evita scroll de fondo
+            document.body.style.overflow = 'hidden'; 
         }
     },
 
@@ -164,9 +149,7 @@ const ModalesUGT = {
     copiar: function() {
         const txt = document.getElementById('output-text-final').innerText;
         navigator.clipboard.writeText(txt).then(() => {
-            alert("¡Texto copiado! Ya puedes pegarlo en tu correo o documento.");
-        }).catch(err => {
-            console.error("Error al copiar: ", err);
+            alert("¡Texto copiado!");
         });
     }
 };
