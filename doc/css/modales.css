@@ -1,49 +1,50 @@
 /* doc/css/modales.css */
 
-/* 0. Configuración de Contenedor App (Simulador de Móvil en PC) */
+/* 0. Configuración del Contenedor App (Simulador de Móvil) */
 html {
     background-color: #e0e0e0; /* Color gris de fondo para el monitor del PC */
 }
 
 body {
-    max-width: 500px;    /* Limitamos el ancho a un tamaño estándar de móvil */
-    margin: 0 auto;      /* Centra la App en el monitor */
-    min-height: 100vh;   /* Asegura que cubra todo el alto de la pantalla */
-    background: #f4f4f4; /* El fondo real de tu App */
-    position: relative;
-    box-shadow: 0 0 30px rgba(0,0,0,0.2); /* Sombra lateral para efecto de profundidad */
+    max-width: 500px;          /* Ancho máximo de la App */
+    margin: 0 auto;            /* Centra la App en la pantalla del PC */
+    min-height: 100vh;
+    background: #f4f4f4;       /* Fondo gris clarito de la App */
+    position: relative;        /* Necesario para cálculos de posición */
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
     overflow-x: hidden;
 }
 
-/* 1. Fondo del Modal - Oscurece lo que hay detrás */
+/* 1. Fondo del Modal - Ajustado para que no se salga de la App */
 .modal-overlay {
     position: fixed;
     top: 0;
-    left: 50%;           /* Alineamos al centro */
-    transform: translateX(-50%); /* Ajuste perfecto para que el modal no se salga del body */
+    left: 50%;                 /* Lo movemos al centro de la pantalla */
+    transform: translateX(-50%); /* Lo centramos respecto a sus propios 500px */
     width: 100%;
-    max-width: 500px;    /* Importante: el fondo oscuro también se limita al ancho de la app */
+    max-width: 500px;          /* Limitamos el fondo negro al ancho de la App */
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(4px);
-    display: none;
+    display: none;             /* Se activa con JS */
     justify-content: center;
-    align-items: flex-end;
+    align-items: flex-end;     /* En móvil sale de abajo hacia arriba */
     z-index: 10000;
 }
 
-/* ... (el resto de tus puntos del 2 al 8 siguen igual) ... *//* 2. Cuerpo del Modal */
+/* 2. Cuerpo del Modal */
 .modal-content {
     background: white;
     width: 100%;
-    max-width: 600px;
-    border-radius: 25px 25px 0 0; /* Solo redondeado arriba en móvil */
+    max-width: 500px;          /* Mismo ancho que el overlay y el body */
+    border-radius: 25px 25px 0 0; /* Redondeado solo arriba para efecto App */
     padding: 20px;
     max-height: 92vh;
     display: flex;
     flex-direction: column;
     box-shadow: 0 -5px 25px rgba(0,0,0,0.2);
     animation: slideUp 0.3s ease-out;
+    box-sizing: border-box;    /* Importante para que el padding no ensanche el modal */
 }
 
 /* Animación de entrada */
@@ -51,7 +52,6 @@ body {
     from { transform: translateY(100%); }
     to { transform: translateY(0); }
 }
-
 /* 3. Botón de cerrar (la X) */
 .close-x {
     align-self: flex-end;
