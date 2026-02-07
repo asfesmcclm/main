@@ -1,6 +1,6 @@
 /* doc/js/modales_modelos.js */
 
-// 1. DICCIONARIO DE ETIQUETAS
+// 1. DICCIONARIO DE ETIQUETAS (Traductor para el formulario)
 const etiquetasCampos = {
     "empresa": "Nombre de la Empresa",
     "localidad": "Localidad (donde firmas)",
@@ -48,7 +48,7 @@ const ModalesUGT = {
         });
     },
 
-    // PASO 1: Elección e Información
+    // PASO 1: Información de uso y selección
     abrirPaso1: function(key) {
         this.selKey = key;
         const m = this.modelos[key];
@@ -68,17 +68,20 @@ const ModalesUGT = {
         this.mostrarModal(contenido);
     },
 
-    // PASO 2: Formulario dinámico corregido
+    // PASO 2: Formulario dinámico con CALENDARIO automático
     abrirPaso2: function() {
         const m = this.modelos[this.selKey];
         if (!m.variables) return;
 
         const camposHtml = m.variables.map(v => {
             const labelBonito = etiquetasCampos[v] || v;
+            // Si la variable contiene "fecha", activamos el input de calendario
+            const tipoInput = v.toLowerCase().includes('fecha') ? 'date' : 'text';
+            
             return `
                 <div class="form-group" style="margin-bottom: 15px; text-align: left;">
                     <label style="display:block; font-weight:bold; font-size:0.8rem; margin-bottom:5px; color:#444;">${labelBonito}</label>
-                    <input type="text" id="val-${v}" class="input-ugt" placeholder="Escriba aquí..." 
+                    <input type="${tipoInput}" id="val-${v}" class="input-ugt" 
                            style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; box-sizing: border-box;">
                 </div>
             `;
@@ -97,11 +100,10 @@ const ModalesUGT = {
         this.mostrarModal(contenido);
     },
 
-    // PASO 3: Generación final corregida (Usa 'variables' y llaves {})
+    // PASO 3: Generación final con conversión de formato de fecha
     generar: function(blanco) {
         const m = this.modelos[this.selKey];
         let texto = m.plantilla;
-
         if (!m.variables) return;
 
         m.variables.forEach(v => {
@@ -113,10 +115,15 @@ const ModalesUGT = {
                 valor = `[${etiqueta.toUpperCase()}]`;
             } else {
                 valor = inputEl ? inputEl.value.trim() : "";
+                
+                // Conversión de fecha de YYYY-MM-DD a DD/MM/YYYY
+                if (v.toLowerCase().includes('fecha') && valor.includes('-')) {
+                    valor = valor.split('-').reverse().join('/');
+                }
+
                 if (!valor) valor = `[${etiqueta.toUpperCase()}]`;
             }
             
-            // Busca {variable} en la plantilla y la reemplaza
             const regex = new RegExp(`{${v}}`, 'g');
             texto = texto.replace(regex, valor);
         });
