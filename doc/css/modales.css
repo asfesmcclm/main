@@ -1,21 +1,38 @@
 /* doc/css/modales.css */
 
+/* 0. Configuración de Contenedor App (Simulador de Móvil en PC) */
+html {
+    background-color: #e0e0e0; /* Color gris de fondo para el monitor del PC */
+}
+
+body {
+    max-width: 500px;    /* Limitamos el ancho a un tamaño estándar de móvil */
+    margin: 0 auto;      /* Centra la App en el monitor */
+    min-height: 100vh;   /* Asegura que cubra todo el alto de la pantalla */
+    background: #f4f4f4; /* El fondo real de tu App */
+    position: relative;
+    box-shadow: 0 0 30px rgba(0,0,0,0.2); /* Sombra lateral para efecto de profundidad */
+    overflow-x: hidden;
+}
+
 /* 1. Fondo del Modal - Oscurece lo que hay detrás */
 .modal-overlay {
     position: fixed;
     top: 0;
-    left: 0;
+    left: 50%;           /* Alineamos al centro */
+    transform: translateX(-50%); /* Ajuste perfecto para que el modal no se salga del body */
     width: 100%;
+    max-width: 500px;    /* Importante: el fondo oscuro también se limita al ancho de la app */
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px); /* Difumina el fondo */
-    display: none; /* Se activa con JS */
+    backdrop-filter: blur(4px);
+    display: none;
     justify-content: center;
-    align-items: flex-end; /* En móvil sale de abajo */
+    align-items: flex-end;
     z-index: 10000;
 }
 
-/* 2. Cuerpo del Modal */
+/* ... (el resto de tus puntos del 2 al 8 siguen igual) ... *//* 2. Cuerpo del Modal */
 .modal-content {
     background: white;
     width: 100%;
