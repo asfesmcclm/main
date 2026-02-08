@@ -126,7 +126,7 @@
         if (fFinInput) fFinInput.value = hoy;
         if (fIniInput) fIniInput.max = hoy;
         
-        // 2. Inyección de textos iniciales desde ui.js
+        // 2. Inyección de textos iniciales
         try {
             if (typeof UI !== 'undefined') {
                 document.getElementById('ayuda_salario').innerHTML = UI.textos.ayudaSalario;
@@ -139,15 +139,11 @@
                 const pSeguro = document.querySelector('#seccion_seguro p');
                 if (pSeguro) pSeguro.innerHTML = UI.textos.ssInfo;
             }
-        } catch (e) {
-            console.error("Error al cargar textos de UI:", e);
-        }
+        } catch (e) { console.error(e); }
 
-        // 3. VALIDACIÓN INICIAL DE LÍMITES (SMI)
-        // Esto hace que si ya hay un valor, la alerta aparezca al cargar
         validarLimitesSalariales();
 
-        // 4. Vigilante de antigüedad automático
+        // 3. Vigilante de antigüedad
         document.querySelectorAll('#f_inicio, #f_fin').forEach(el => {
             el.addEventListener('change', () => {
                 const f1Val = document.getElementById('f_inicio').value;
@@ -164,11 +160,12 @@
         });
     };
 
-    // FUNCIÓN: Valida SMI y Salario Alto en tiempo real
+    // FUNCIÓN ACTUALIZADA: Ahora muestra el Salario Bruto Anual calculado
     function validarLimitesSalariales() {
         const input = document.getElementById('s_importe');
         const alertSmi = document.getElementById('alert_smi');
         const alertHigh = document.getElementById('alert_high');
+        const infoSalario = document.getElementById('info_salario_calculado'); // Asegúrate de tener este ID en tu HTML
         
         if (!input || !alertSmi || typeof CONFIG_LEGAL === 'undefined') return;
 
@@ -181,27 +178,24 @@
         else if (tipo === 'mensual') anual = val * 12;
         else anual = val;
 
-        // Mostrar/Ocultar alertas según límites de config.js
-        if (anual > 0 && anual < CONFIG_LEGAL.parametros_legales.smi_anual_2026) {
-            alertSmi.style.display = 'block';
-        } else {
-            alertSmi.style.display = 'none';
+        // Mostramos el cálculo al usuario para que sepa qué estamos procesando
+        if (infoSalario && anual > 0) {
+            infoSalario.innerHTML = `Según tus datos, tu salario bruto anual es de <strong>${UI.formatEuro(anual)}</strong>.`;
+            infoSalario.style.display = 'block';
+        } else if (infoSalario) {
+            infoSalario.style.display = 'none';
         }
 
-        if (anual > CONFIG_LEGAL.parametros_legales.umbral_salario_alto) {
-            alertHigh.style.display = 'block';
-        } else {
-            alertHigh.style.display = 'none';
-        }
+        // Alertas de límites
+        alertSmi.style.display = (anual > 0 && anual < CONFIG_LEGAL.parametros_legales.smi_anual_2026) ? 'block' : 'none';
+        alertHigh.style.display = (anual > CONFIG_LEGAL.parametros_legales.umbral_salario_alto) ? 'block' : 'none';
     }
 
-    // Escuchadores para cambios en el salario
     document.getElementById('s_importe').addEventListener('input', validarLimitesSalariales);
     document.querySelectorAll('input[name="tipo_s"]').forEach(r => {
         r.addEventListener('change', validarLimitesSalariales);
     });
 
-    // FUNCIÓN: Ejecuta el cálculo al pulsar el botón
     function ejecutarCalculo() {
         const fIniVal = document.getElementById('f_inicio').value;
         const fFinVal = document.getElementById('f_fin').value;
@@ -216,7 +210,6 @@
         const fIni = new Date(fIniVal);
         const fFin = new Date(fFinVal);
         const tipo = radioChecked ? radioChecked.value : 'mensual';
-
         let anual = parseFloat(impRaw);
         if (tipo === 'diario') anual *= 365;
         if (tipo === 'mensual') anual *= 12;
@@ -225,17 +218,19 @@
             fInicio: fIni,
             fFin: fFin,
             sDia: anual / 365,
-            sMes: anual / 12
+            sMes: anual / 12,
+            sAnual: anual // Guardamos el anual para el resumen
         };
 
         if (typeof MotorCalculo !== 'undefined') {
             const informe = MotorCalculo.generarInformeCompleto(CONFIG_LEGAL, datos);
-            renderizarTodo(informe);
+            const anti = MotorCalculo.obtenerAntiguedadDetallada(fIni, fFin);
+            renderizarTodo(informe, datos, anti);
         }
     }
 
-    // FUNCIÓN: Dibuja los resultados en pantalla
-    function renderizarTodo(informe) {
+    // FUNCIÓN ACTUALIZADA: Ahora incluye un resumen previo con todos los datos
+    function renderizarTodo(informe, datos, anti) {
         // 1. Mostrar Bloque de Exclusiones
         const avisoEx = document.getElementById('aviso_exclusiones');
         const textoEx = document.getElementById('texto_exclusiones');
@@ -244,10 +239,23 @@
             avisoEx.style.display = 'block';
         }
 
-        // 2. Renderizar lista de indemnizaciones
-        let html = "";
+        // 2. Crear Resumen de Datos de Cálculo
+        let htmlResumen = `
+            <div style="background: #e9ecef; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid var(--ugt-red);">
+                <h4 style="margin-top:0; color:#333; font-size: 0.9rem; text-transform: uppercase;">Resumen de datos aplicados:</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem;">
+                    <div>Antigüedad: <strong>${anti.dias} días</strong> (${anti.anios.replace('.', ',')} años)</div>
+                    <div>Salario Diario: <strong>${UI.formatEuro(datos.sDia)}</strong></div>
+                    <div>Salario Mensual: <strong>${UI.formatEuro(datos.sMes)}</strong></div>
+                    <div>Salario Anual: <strong>${UI.formatEuro(datos.sAnual)}</strong></div>
+                </div>
+            </div>
+        `;
+
+        // 3. Renderizar lista de indemnizaciones
+        let htmlLista = "";
         informe.forEach(item => {
-            html += `
+            htmlLista += `
                 <div class="res-item">
                     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                         <span style="font-weight:bold; font-size:0.9rem; max-width:70%;">${item.nombre}</span>
@@ -262,11 +270,12 @@
         const listaDiv = document.getElementById('lista_indemnizaciones');
         const resDiv = document.getElementById('resultado');
         if (listaDiv && resDiv) {
-            listaDiv.innerHTML = html;
+            // Unimos el resumen y la lista
+            listaDiv.innerHTML = htmlResumen + htmlLista;
             resDiv.style.display = 'block';
             avisoEx.scrollIntoView({ behavior: 'smooth' });
         }
     }
-</script>    
+</script>
 </body>
 </html>
