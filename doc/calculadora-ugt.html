@@ -3,282 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Despido Profesional - UGT</title>
+    <title>Calculadora de Finiquito Profesional - UGT</title>
+    <link rel="stylesheet" href="css/estilos.css">
     <style>
-        /* ESTILOS DE MARCA UGT */
-        :root { --ugt-red: #e30613; --text: #333; --bg: #f4f4f4; --blue-info: #17a2b8; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); padding: 20px; line-height: 1.5; }
+        :root { --ugt-red: #e30613; --ugt-green: #28a745; --bg: #f4f4f4; --text: #333; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
         .container { max-width: 650px; margin: auto; }
-        
-        /* TARJETAS Y SECCIONES */
         .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; position: relative; }
         h2, h3 { color: var(--ugt-red); margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        
-        /* BOTÓN DE CIERRE (X) */
-        .btn-close { position: absolute; top: 15px; right: 15px; background: #eee; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; font-weight: bold; color: #666; font-size: 12px; line-height: 25px; text-align: center; }
-        .btn-close:hover { background: #ddd; color: #000; }
-
-        /* FORMULARIO */
         .form-group { margin-bottom: 15px; }
         label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
-        input[type="date"], input[type="text"] { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 1rem; }
-        .radio-group { display: flex; gap: 15px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #eee; }
-        
-        /* ALERTAS */
-        .alert { padding: 12px; border-radius: 6px; margin-top: 10px; font-size: 0.85rem; display: none; }
-        .alert-warning { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
-        .alert-info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
-
-        /* BOTÓN CALCULAR */
-        .btn-main { background: var(--ugt-red); color: white; border: none; width: 100%; padding: 18px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
-        .btn-main:hover { background: #b3050f; transform: translateY(-2px); }
-
-        /* RESULTADOS */
-        #resultado { display: none; padding: 0; overflow: hidden; }
-        .res-item { background: white; border-bottom: 1px solid #eee; padding: 15px; transition: background 0.2s; }
-        .res-item:hover { background: #fffafb; }
-        .res-item:last-child { border-bottom: none; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 1rem; }
+        .btn-main { background: var(--ugt-green); color: white; border: none; width: 100%; padding: 18px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-main:hover { background: #218838; transform: translateY(-2px); }
+        .alert-smi { background: #fff3cd; color: #856404; padding: 12px; border-radius: 6px; border-left: 5px solid #ffeeba; margin-top: 10px; font-size: 0.85rem; }
+        .res-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .total-box { background: #333; color: white; padding: 15px; border-radius: 8px; margin-top: 20px; display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: bold; }
+        .btn-close { position: absolute; top: 15px; right: 15px; background: #eee; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; }
+        small { color: #666; font-size: 0.75rem; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div style="text-align: center; margin-bottom: 25px;">
-        <h2 style="margin-bottom: 5px; border:none;">Calculadora de Indemnizaciones</h2>
-        <p style="font-size: 0.9rem; color: #666;">Basada en la normativa vigente 2026</p>
+        <h2 style="border:none; margin-bottom: 5px;">Cálculo de Finiquito</h2>
+        <p style="color:#666; font-size:0.9rem;">Liquidación técnica de haberes (Normativa 2026)</p>
     </div>
 
     <div class="card">
-        <h3>1. Cronología Laboral</h3>
+        <h3>1. Datos Salariales</h3>
         <div class="form-group">
-            <label>Fecha de inicio del contrato</label>
-            <input type="date" id="f_inicio">
-        </div>
-        <div class="form-group">
-            <label>Fecha de cese o despido</label>
-            <input type="date" id="f_fin">
-        </div>
-        
-        <div id="info_antiguedad" class="alert alert-info" style="border-left: 4px solid var(--blue-info);">
-            <span id="val_antiguedad"></span>
-        </div>
-    </div>
-
-    <div class="card">
-        <h3>2. Salario y Jornada</h3>
-        <p id="ayuda_salario" style="font-size: 0.8rem; background: #f0f7ff; padding: 12px; border-radius: 6px; border-left: 4px solid #007bff; margin-bottom: 20px;"></p>
-        
-        <div class="form-group">
-            <label>Periodicidad del importe bruto</label>
-            <div class="radio-group">
-                <label><input type="radio" name="tipo_s" value="diario"> Diario</label>
-                <label><input type="radio" name="tipo_s" value="mensual" checked> Mensual</label>
-                <label><input type="radio" name="tipo_s" value="anual"> Anual</label>
+            <label>Importe Bruto (€)</label>
+            <input type="number" id="f_s_importe" placeholder="Ej: 1500" oninput="validarSMIFiniquito()">
+            <div id="info_anual" style="font-size:0.8rem; color:#666; margin-top:5px; font-style:italic;"></div>
+            <div id="alert_smi" class="alert-smi" style="display:none;">
+                ⚠️ El salario anual es inferior al SMI 2026 (17.094 €).
             </div>
         </div>
-
         <div class="form-group">
-    <label>Importe Bruto (€)</label>
-    <input type="text" id="s_importe" class="form-control" placeholder="Ej: 1800">
-    
-    <div id="info_salario_calculado" style="display:none; font-size:0.85rem; color:#555; margin-top:8px; padding: 5px; background: #f8f9fa; border-radius: 4px; border-left: 3px solid #ccc; font-style:italic;">
-    </div>
-</div>
-
-        <div id="alert_smi" class="alert alert-warning"></div>
-        <div id="alert_high" class="alert alert-info"></div>
-    </div>
-
-    <button class="btn-main" onclick="ejecutarCalculo()">GENERAR INFORME DETALLADO</button>
-
-    <div id="aviso_exclusiones" class="card" style="display:none; border-left: 4px solid #666; background: #f9f9f9; margin-top: 30px;">
-        <button class="btn-close" onclick="UI.cerrarSeccion('aviso_exclusiones')">X</button>
-        <div id="texto_exclusiones" style="font-size: 0.85rem; color: #444;"></div>
-    </div>
-
-    <div id="resultado" class="card" style="padding: 0; overflow: hidden; margin-top: 10px;">
-        <div style="background: #333; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 0.9rem;">
-            CUANTÍAS ESTIMADAS POR TIPO DE EXTINCIÓN
+            <label>Periodicidad</label>
+            <select id="f_s_tipo" onchange="validarSMIFiniquito()">
+                <option value="mensual">Mensual</option>
+                <option value="anual">Anual</option>
+                <option value="diario">Diario</option>
+            </select>
         </div>
-        <div id="lista_indemnizaciones"></div>
     </div>
 
-    <div id="seccion_hacienda" class="card" style="margin-top: 40px; border-top: 4px solid #ffc107;">
-        <button class="btn-close" onclick="UI.cerrarSeccion('seccion_hacienda')">X</button>
-        <h3 style="color: #856404; font-size: 1rem;">Tributación (I.R.P.F.)</h3>
-        <p style="font-size: 0.85rem; color: #555;"></p>
+    <div class="card">
+        <h3>2. Periodo a Liquidar</h3>
+        <div class="form-group">
+            <label>Inicio del periodo de devengo</label>
+            <input type="date" id="f_inicio_devengo">
+            <small>Normalmente el 1 de enero del año actual o tu fecha de alta.</small>
+        </div>
+        <div class="form-group">
+            <label>Fecha del último día trabajado</label>
+            <input type="date" id="f_cese">
+            <small>Fecha efectiva del fin de la relación laboral.</small>
+        </div>
     </div>
 
-    <div id="seccion_seguro" class="card" style="border-top: 4px solid #28a745;">
-        <button class="btn-close" onclick="UI.cerrarSeccion('seccion_seguro')">X</button>
-        <h3 style="color: #155724; font-size: 1rem;">Cotización a la S.S.</h3>
-        <p style="font-size: 0.85rem; color: #555;"></p>
+    <div class="card">
+        <h3>3. Vacaciones y Pagas (Convenio)</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+                <label>Vacaciones/año</label>
+                <input type="number" id="f_vac_convenio" value="30">
+            </div>
+            <div class="form-group">
+                <label>Días ya disfrutados</label>
+                <input type="number" id="f_vac_disfrutadas" value="0">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Número de pagas extras totales al año</label>
+            <input type="number" id="f_num_pagas" value="2">
+            <small>Ej: Navidad, Verano y Beneficios = 3 pagas.</small>
+        </div>
+        <div class="form-group">
+            <label>¿Pagas ya prorrateadas mes a mes?</label>
+            <select id="f_pagas_pro">
+                <option value="no">No (Se cobran en fechas específicas)</option>
+                <option value="si">Sí (Ya incluidas en la nómina mensual)</option>
+            </select>
+        </div>
+    </div>
+
+    <button class="btn-main" onclick="ejecutarCalculoFiniquito()">GENERAR LIQUIDACIÓN DETALLADA</button>
+
+    <div id="f_resultado_area" class="card" style="display:none; margin-top: 30px; padding:0; overflow:hidden;">
+        <div style="background:var(--ugt-green); color:white; padding:15px; text-align:center; font-weight:bold;">
+            RESULTADO DE LA LIQUIDACIÓN (BRUTO)
+        </div>
+        <div style="padding:20px;">
+            <div id="f_detalle_lista"></div>
+            <div class="total-box">
+                <span>TOTAL A PERCIBIR:</span>
+                <span id="f_total_final"></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="seccion_hacienda" class="card" style="margin-top:20px; background:#fff9f9;">
+        <button class="btn-close" onclick="this.parentElement.style.display='none'">x</button>
+        <h3 style="font-size:1rem;">Información Fiscal</h3>
+        <p id="txt_hacienda" style="font-size:0.85rem; color:#555;"></p>
     </div>
 </div>
 
-<script src="js-calculadora/config.js"></script>
-<script src="js-calculadora/logic.js"></script>
 <script src="js-calculadora/ui.js"></script>
-
 <script>
+    // Inicialización de textos legales
     window.onload = function() {
-        // 1. Configuración de fechas por defecto
+        if (typeof UI !== 'undefined') {
+            document.getElementById('txt_hacienda').innerHTML = UI.textos.haciendaInfo;
+        }
+        // Fechas por defecto: 1 de enero al día de hoy
         const hoy = new Date().toISOString().split('T')[0];
-        const fFinInput = document.getElementById('f_fin');
-        const fIniInput = document.getElementById('f_inicio');
-        if (fFinInput) fFinInput.value = hoy;
-        if (fIniInput) fIniInput.max = hoy;
-        
-        // 2. Inyección de textos iniciales
-        try {
-            if (typeof UI !== 'undefined') {
-                document.getElementById('ayuda_salario').innerHTML = UI.textos.ayudaSalario;
-                document.getElementById('alert_smi').innerText = UI.textos.smiAviso;
-                document.getElementById('alert_high').innerText = UI.textos.altoAviso;
-                
-                const pHacienda = document.querySelector('#seccion_hacienda p');
-                if (pHacienda) pHacienda.innerHTML = UI.textos.haciendaInfo;
-                
-                const pSeguro = document.querySelector('#seccion_seguro p');
-                if (pSeguro) pSeguro.innerHTML = UI.textos.ssInfo;
-            }
-        } catch (e) { console.error(e); }
-
-        validarLimitesSalariales();
-
-        // 3. Vigilante de antigüedad
-        document.querySelectorAll('#f_inicio, #f_fin').forEach(el => {
-            el.addEventListener('change', () => {
-                const f1Val = document.getElementById('f_inicio').value;
-                const f2Val = document.getElementById('f_fin').value;
-                if (f1Val && f2Val && typeof MotorCalculo !== 'undefined') {
-                    const f1 = new Date(f1Val);
-                    const f2 = new Date(f2Val);
-                    if (f1 <= f2) {
-                        const antiguedad = MotorCalculo.obtenerAntiguedadDetallada(f1, f2);
-                        UI.mostrarAntiguedad(antiguedad);
-                    }
-                }
-            });
-        });
+        const inicioAnio = new Date(new Date().getFullYear(), 0, 1).toISOString().split('T')[0];
+        document.getElementById('f_inicio_devengo').value = inicioAnio;
+        document.getElementById('f_cese').value = hoy;
     };
 
-    // FUNCIÓN ACTUALIZADA: Ahora muestra el Salario Bruto Anual calculado
-    function validarLimitesSalariales() {
-        const input = document.getElementById('s_importe');
+    function validarSMIFiniquito() {
+        const imp = parseFloat(document.getElementById('f_s_importe').value) || 0;
+        const tipo = document.getElementById('f_s_tipo').value;
+        let anual = imp;
+        if(tipo === 'mensual') anual = imp * 12;
+        if(tipo === 'diario') anual = imp * 365;
+
+        const info = document.getElementById('info_anual');
         const alertSmi = document.getElementById('alert_smi');
-        const alertHigh = document.getElementById('alert_high');
-        const infoSalario = document.getElementById('info_salario_calculado'); // Asegúrate de tener este ID en tu HTML
         
-        if (!input || !alertSmi || typeof CONFIG_LEGAL === 'undefined') return;
-
-        const val = parseFloat(input.value.replace(',', '.')) || 0;
-        const radio = document.querySelector('input[name="tipo_s"]:checked');
-        const tipo = radio ? radio.value : 'mensual';
-        
-        let anual = 0;
-        if (tipo === 'diario') anual = val * 365;
-        else if (tipo === 'mensual') anual = val * 12;
-        else anual = val;
-
-        // Mostramos el cálculo al usuario para que sepa qué estamos procesando
-        if (infoSalario && anual > 0) {
-            infoSalario.innerHTML = `Según tus datos, tu salario bruto anual es de <strong>${UI.formatEuro(anual)}</strong>.`;
-            infoSalario.style.display = 'block';
-        } else if (infoSalario) {
-            infoSalario.style.display = 'none';
+        if (anual > 0) {
+            info.innerText = "Salario bruto anual: " + anual.toLocaleString('de-DE') + " €";
+            alertSmi.style.display = (anual < 17094) ? 'block' : 'none';
+        } else {
+            info.innerText = "";
+            alertSmi.style.display = 'none';
         }
-
-        // Alertas de límites
-        alertSmi.style.display = (anual > 0 && anual < CONFIG_LEGAL.parametros_legales.smi_anual_2026) ? 'block' : 'none';
-        alertHigh.style.display = (anual > CONFIG_LEGAL.parametros_legales.umbral_salario_alto) ? 'block' : 'none';
+        return { anual, sDia: anual/365, sMes: anual/12 };
     }
 
-    document.getElementById('s_importe').addEventListener('input', validarLimitesSalariales);
-    document.querySelectorAll('input[name="tipo_s"]').forEach(r => {
-        r.addEventListener('change', validarLimitesSalariales);
-    });
-
-    function ejecutarCalculo() {
-        const fIniVal = document.getElementById('f_inicio').value;
-        const fFinVal = document.getElementById('f_fin').value;
-        const impRaw = document.getElementById('s_importe').value.replace(',', '.');
-        const radioChecked = document.querySelector('input[name="tipo_s"]:checked');
-
-        if (!fIniVal || !fFinVal || !impRaw || isNaN(impRaw)) {
-            alert("Por favor, introduce una fecha válida y un salario bruto correcto.");
-            return;
+    function ejecutarCalculoFiniquito() {
+        const salarios = validarSMIFiniquito();
+        const f1 = new Date(document.getElementById('f_inicio_devengo').value);
+        const f2 = new Date(document.getElementById('f_cese').value);
+        
+        if (isNaN(f1) || isNaN(f2) || f1 > f2) {
+            alert("Por favor, revisa las fechas."); return;
         }
 
-        const fIni = new Date(fIniVal);
-        const fFin = new Date(fFinVal);
-        const tipo = radioChecked ? radioChecked.value : 'mensual';
-        let anual = parseFloat(impRaw);
-        if (tipo === 'diario') anual *= 365;
-        if (tipo === 'mensual') anual *= 12;
+        // 1. Días de devengo
+        const diasDevengo = Math.floor((f2 - f1) / (1000*60*60*24)) + 1;
 
-        const datos = {
-            fInicio: fIni,
-            fFin: fFin,
-            sDia: anual / 365,
-            sMes: anual / 12,
-            sAnual: anual // Guardamos el anual para el resumen
-        };
+        // 2. Cálculo Vacaciones
+        const vacConvenio = parseFloat(document.getElementById('f_vac_convenio').value) || 30;
+        const vacGozadas = parseFloat(document.getElementById('f_vac_disfrutadas').value) || 0;
+        const diasDerecho = (vacConvenio / 365) * diasDevengo;
+        const diasAPagar = diasDerecho - vacGozadas;
+        const impVac = diasAPagar * salarios.sDia;
 
-        if (typeof MotorCalculo !== 'undefined') {
-            const informe = MotorCalculo.generarInformeCompleto(CONFIG_LEGAL, datos);
-            const anti = MotorCalculo.obtenerAntiguedadDetallada(fIni, fFin);
-            renderizarTodo(informe, datos, anti);
-        }
-    }
-
-    // FUNCIÓN ACTUALIZADA: Ahora incluye un resumen previo con todos los datos
-    function renderizarTodo(informe, datos, anti) {
-        // 1. Mostrar Bloque de Exclusiones
-        const avisoEx = document.getElementById('aviso_exclusiones');
-        const textoEx = document.getElementById('texto_exclusiones');
-        if (avisoEx && textoEx) {
-            textoEx.innerHTML = UI.textos.exclusionIndemnizacion;
-            avisoEx.style.display = 'block';
+        // 3. Cálculo Pagas Extras
+        let impExtras = 0;
+        const nPagas = parseFloat(document.getElementById('f_num_pagas').value) || 2;
+        if (document.getElementById('f_pagas_pro').value === 'no') {
+            // El valor de una paga extra suele ser el salario base (estimamos un mes)
+            // Se asume devengo semestral (182 días)
+            const valorPaga = salarios.sAnual / (12 + nPagas);
+            impExtras = (valorPaga / 182) * (diasDevengo % 182); 
         }
 
-        // 2. Crear Resumen de Datos de Cálculo
-        let htmlResumen = `
-            <div style="background: #e9ecef; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid var(--ugt-red);">
-                <h4 style="margin-top:0; color:#333; font-size: 0.9rem; text-transform: uppercase;">Resumen de datos aplicados:</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem;">
-                    <div>Antigüedad: <strong>${anti.dias} días</strong> (${anti.anios.replace('.', ',')} años)</div>
-                    <div>Salario Diario: <strong>${UI.formatEuro(datos.sDia)}</strong></div>
-                    <div>Salario Mensual: <strong>${UI.formatEuro(datos.sMes)}</strong></div>
-                    <div>Salario Anual: <strong>${UI.formatEuro(datos.sAnual)}</strong></div>
-                </div>
-            </div>
+        // 4. Salario mes actual (días sueltos)
+        const diaDelMes = f2.getDate();
+        const impMes = salarios.sDia * diaDelMes;
+
+        // Renderizar
+        const lista = document.getElementById('f_detalle_lista');
+        lista.innerHTML = `
+            <div class="res-item"><span>Días trabajados mes cese (${diaDelMes} días):</span> <strong>${impMes.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>
+            <div class="res-item"><span>Vacaciones pendientes (${diasAPagar.toFixed(2)} días):</span> <strong>${impVac.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>
+            ${impExtras > 0 ? `<div class="res-item"><span>Parte proporcional Pagas Extras:</span> <strong>${impExtras.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>` : ''}
         `;
-
-        // 3. Renderizar lista de indemnizaciones
-        let htmlLista = "";
-        informe.forEach(item => {
-            htmlLista += `
-                <div class="res-item">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                        <span style="font-weight:bold; font-size:0.9rem; max-width:70%;">${item.nombre}</span>
-                        <span style="color:var(--ugt-red); font-weight:800; font-size:1rem;">${UI.formatEuro(item.importe)}</span>
-                    </div>
-                    <div style="font-size:0.75rem; color:#666; margin-top:4px;">${item.descripcion}</div>
-                    <div style="font-size:0.7rem; color:#0056b3; font-style:italic;">Fórmula: ${item.formula_aplicada}</div>
-                    ${item.alerta ? `<div style="color:#d94141; font-weight:bold; font-size:0.75rem; margin-top:6px;">${item.alerta}</div>` : ''}
-                </div>`;
-        });
         
-        const listaDiv = document.getElementById('lista_indemnizaciones');
-        const resDiv = document.getElementById('resultado');
-        if (listaDiv && resDiv) {
-            // Unimos el resumen y la lista
-            listaDiv.innerHTML = htmlResumen + htmlLista;
-            resDiv.style.display = 'block';
-            avisoEx.scrollIntoView({ behavior: 'smooth' });
-        }
+        const total = impMes + impVac + impExtras;
+        document.getElementById('f_total_final').innerText = total.toLocaleString('de-DE', {minimumFractionDigits:2}) + " €";
+        document.getElementById('f_resultado_area').style.display = 'block';
+        document.getElementById('f_resultado_area').scrollIntoView({ behavior: 'smooth' });
     }
 </script>
+
 </body>
 </html>
