@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Indemnizaciones - UGT</title>
+    <style>
+        /* Estilos generales para mantener la estética UGT */
+        :root { --ugt-red: #e30613; --text: #333; --bg: #f4f4f4; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
+        .container { max-width: 650px; margin: auto; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h2, h3 { color: var(--ugt-red); margin-top: 0; }
+        
+        /* Formulario */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
+        input[type="date"], input[type="text"], select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        
+        .radio-group { display: flex; gap: 15px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #eee; }
+        
+        /* Alertas */
+        .alert { padding: 12px; border-radius: 6px; margin-top: 10px; font-size: 0.85rem; display: none; }
+        .alert-warning { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+        .alert-info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+
+        /* Botón Principal */
+        .btn-main { background: var(--ugt-red); color: white; border: none; width: 100%; padding: 18px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-main:hover { background: #b3050f; transform: translateY(-2px); }
+
+        /* Resultados */
+        #resultado { display: none; }
+        .res-item { background: white; border-bottom: 1px solid #eee; padding: 15px; }
+        .res-item:last-child { border-bottom: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h2 style="margin-bottom: 5px;">Calculadora de Despido</h2>
+        <p style="font-size: 0.9rem; color: #666;">Herramienta oficial para el cálculo de indemnizaciones</p>
+    </div>
+
+    <div class="card">
+        <h3>1. Periodo de Trabajo</h3>
+        <div class="form-group">
+            <label>Fecha de inicio del contrato</label>
+            <input type="date" id="f_inicio">
+        </div>
+        <div class="form-group">
+            <label>Fecha de finalización</label>
+            <input type="date" id="f_fin">
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>2. Salario Bruto</h3>
+        <p id="ayuda_salario" style="font-size: 0.8rem; background: #f0f7ff; padding: 10px; border-left: 4px solid #007bff;"></p>
+        
+        <div class="form-group">
+            <label>¿Cómo vas a introducir tu salario?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="tipo_s" value="diario"> Diario</label>
+                <label><input type="radio" name="tipo_s" value="mensual" checked> Mensual</label>
+                <label><input type="radio" name="tipo_s" value="anual"> Anual</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Importe Bruto (€)</label>
+            <input type="text" id="s_importe" placeholder="Ej: 1800.50">
+        </div>
+
+        <div id="alert_smi" class="alert alert-warning"></div>
+        <div id="alert_high" class="alert alert-info"></div>
+    </div>
+
+    <button class="btn-main" onclick="ejecutarCalculo()">CALCULAR INDEMNIZACIONES</button>
+
+    <div id="resultado" class="card" style="padding: 0; overflow: hidden; margin-top: 30px;">
+        <div style="background: #333; color: white; padding: 15px; text-align: center; font-weight: bold;">
+            INFORME DE CUANTÍAS ESTIMADAS
+        </div>
+        <div id="lista_indemnizaciones">
+            </div>
+    </div>
+</div>
+
+<script src="js-calculadora/config.js"></script>
+<script src="js-calculadora/logic.js"></script>
+<script src="js-calculadora/ui.js"></script>
+
+<script>
+    // Al cargar la página, configuramos valores por defecto
+    window.onload = function() {
+        const hoy = new Date().toISOString().split('T')[0];
+        document.getElementById('f_fin').value = hoy;
+        document.getElementById('f_inicio').max = hoy;
+        
+        // Ponemos el texto de ayuda que definimos en la UI
+        document.getElementById('ayuda_salario').innerHTML = UI.textos.ayudaSalario;
+        
+        // Configuramos los textos de las alertas
+        document.getElementById('alert_smi').innerText = UI.textos.smiAviso;
+        document.getElementById('alert_high').innerText = UI.textos.altoAviso;
+    };
+
+    // Función que se activa al pulsar el botón rojo
+    function ejecutarCalculo() {
+        const fIni = document.getElementById('f_inicio').value;
+        const fFin = document.getElementById('f_fin').value;
+        const imp = document.getElementById('s_importe').value.replace(',', '.');
+        const tipo = document.querySelector('input[name="tipo_s"]:checked').value;
+
+        if (!fIni || !fFin || !imp) {
+            alert("Completa todos los campos para continuar.");
+            return;
+        }
+
+        // Convertimos a salario anual para normalizar el cálculo
+        let anual = parseFloat(imp);
+        if (tipo === 'diario') anual *= 365;
+        if (tipo === 'mensual') anual *= 12;
+
+        const datos = {
+            fInicio: new Date(fIni),
+            fFin: new Date(fFin),
+            sDia: anual / 365,
+            sMes: anual / 12
+        };
+
+        // Pedimos el informe al motor (logic.js) usando la configuración (config.js)
+        const informe = MotorCalculo.generarInformeCompleto(CONFIG_LEGAL, datos);
+        
+        // Dibujamos el informe
+        renderizar(informe);
+    }
+
+    function renderizar(informe) {
+        let html = "";
+        informe.forEach(item => {
+            html += `
+                <div class="res-item">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-weight:bold; font-size:0.9rem;">${item.nombre}</span>
+                        <span style="color:var(--ugt-red); font-weight:800; font-size:1.1rem;">${UI.formatEuro(item.importe)}</span>
+                    </div>
+                    <div style="font-size:0.75rem; color:#666; margin-top:3px;">${item.descripcion}</div>
+                    <div style="font-size:0.7rem; color:#0056b3; font-style:italic;">${item.formula_aplicada}</div>
+                    ${item.alerta ? `<div style="color:red; font-weight:bold; font-size:0.7rem; margin-top:5px;">${item.alerta}</div>` : ''}
+                </div>`;
+        });
+        document.getElementById('lista_indemnizaciones').innerHTML = html;
+        document.getElementById('resultado').style.display = 'block';
+        document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Listener para alertas de salario en tiempo real
+    document.getElementById('s_importe').addEventListener('input', function() {
+        const val = parseFloat(this.value.replace(',', '.')) || 0;
+        const tipo = document.querySelector('input[name="tipo_s"]:checked').value;
+        let anual = val;
+        if (tipo === 'diario') anual *= 365;
+        if (tipo === 'mensual') anual *= 12;
+
+        document.getElementById('alert_smi').style.display = (anual > 0 && anual < CONFIG_LEGAL.parametros_legales.smi_anual_2026) ? 'block' : 'none';
+        document.getElementById('alert_high').style.display = (anual > CONFIG_LEGAL.parametros_legales.umbral_salario_alto) ? 'block' : 'none';
+    });
+</script>
+
+</body>
+</html>
