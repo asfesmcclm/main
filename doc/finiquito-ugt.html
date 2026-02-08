@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Finiquito - UGT</title>
+    <link rel="stylesheet" href="css/estilos.css"> <style>
+        :root { --ugt-green: #28a745; --ugt-red: #e30613; }
+        .card-finiquito { border-top: 5px solid var(--ugt-green); }
+        .resumen-final { background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px; border: 1px solid #ddd; }
+        .dato-linea { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px dashed #ccc; pb: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card card-finiquito">
+            <h2>Cálculo de Finiquito (Liquidación)</h2>
+            <p>Usa esta herramienta para calcular las cantidades pendientes al finalizar tu contrato.</p>
+
+            <div class="form-group">
+                <label>Salario Bruto Mensual (sin prorratear)</label>
+                <input type="number" id="f_salario_mes" class="form-control" placeholder="Ej: 1500">
+            </div>
+
+            <div class="form-group">
+                <label>Días trabajados en el mes de salida</label>
+                <input type="number" id="f_dias_mes" class="form-control" placeholder="Ej: 12">
+                <small>Si te vas el día 12 del mes, pon 12.</small>
+            </div>
+
+            <div class="form-group">
+                <label>Días de vacaciones pendientes de disfrutar</label>
+                <input type="number" id="f_vac_dias" class="form-control" placeholder="Ej: 4.5">
+            </div>
+
+            <div class="form-group">
+                <label>¿Tienes las pagas extras prorrateadas?</label>
+                <select id="f_pagas_tipo" class="form-control" onchange="togglePagasExtra()">
+                    <option value="si">Sí, las cobro cada mes</option>
+                    <option value="no">No, cobro 2 pagas aparte (Navidad/Verano)</option>
+                </select>
+            </div>
+
+            <div id="f_bloque_pagas" style="display:none; background: #fff5f5; padding: 15px; border-radius: 8px;">
+                <label>Meses acumulados para la próxima paga extra</label>
+                <input type="number" id="f_meses_paga" class="form-control" placeholder="Ej: 3">
+                <small>Tiempo desde la última vez que cobraste la extra (máximo 6 meses).</small>
+            </div>
+
+            <button onclick="calcularFiniquitoSolo()" class="btn-primary" style="background: var(--ugt-green); width: 100%; margin-top: 20px;">
+                CALCULAR LIQUIDACIÓN
+            </button>
+        </div>
+
+        <div id="f_resultado" class="card" style="display:none;">
+            <h3>Resumen de Liquidación</h3>
+            <div id="f_lista"></div>
+            
+            <div class="resumen-final">
+                <div class="dato-linea"><span>Total Bruto Finiquito:</span> <strong id="f_total" style="font-size: 1.2rem; color: var(--ugt-green);"></strong></div>
+            </div>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 15px;">
+                Nota: Estas cantidades están sujetas a cotización y retención de IRPF.
+            </p>
+        </div>
+    </div>
+
+    <script src="js-calculadora/ui.js"></script>
+    <script>
+        function togglePagasExtra() {
+            const tipo = document.getElementById('f_pagas_tipo').value;
+            document.getElementById('f_bloque_pagas').style.display = (tipo === 'no') ? 'block' : 'none';
+        }
+
+        function calcularFiniquitoSolo() {
+            const sMes = parseFloat(document.getElementById('f_salario_mes').value) || 0;
+            const diasMes = parseFloat(document.getElementById('f_dias_mes').value) || 0;
+            const vacDias = parseFloat(document.getElementById('f_vac_dias').value) || 0;
+            const mesesPaga = parseFloat(document.getElementById('f_meses_paga').value) || 0;
+            const sDia = sMes / 30;
+
+            const importeDias = sDia * diasMes;
+            const importeVac = sDia * vacDias;
+            const importeExtra = (sMes / 6) * mesesPaga; // Cálculo semestral estándar
+
+            const total = importeDias + importeVac + importeExtra;
+
+            let html = `
+                <div class="dato-linea"><span>Días trabajados mes actual:</span> <span>${UI.formatEuro(importeDias)}</span></div>
+                <div class="dato-linea"><span>Vacaciones no disfrutadas:</span> <span>${UI.formatEuro(importeVac)}</span></div>
+            `;
+            
+            if (document.getElementById('f_pagas_tipo').value === 'no') {
+                html += `<div class="dato-linea"><span>Parte proporcional Pagas Extras:</span> <span>${UI.formatEuro(importeExtra)}</span></div>`;
+            }
+
+            document.getElementById('f_lista').innerHTML = html;
+            document.getElementById('f_total').innerText = UI.formatEuro(total);
+            document.getElementById('f_resultado').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
