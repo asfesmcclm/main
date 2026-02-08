@@ -3,124 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Orientativa UGT - Sandbox</title>
+    <title>Calculadora Orientativa UGT - Sandbox v2</title>
     <style>
         :root { 
             --ugt-red: #e30613; 
             --ugt-green: #166534;
             --bg-green: #f0fdf4;
             --bg-gray: #f8f9fa; 
+            --warning-orange: #856404;
+            --bg-warning: #fff3cd;
         }
         
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #e9ecef; 
-            padding: 15px; 
-            color: #333; 
-        }
-
+        body { font-family: 'Segoe UI', sans-serif; background: #e9ecef; padding: 15px; color: #333; }
         .container { max-width: 550px; margin: auto; }
-
-        .card { 
-            background: white; 
-            padding: 22px; 
-            border-radius: 15px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
-            margin-bottom: 20px; 
-        }
-
-        h3 { 
-            color: var(--ugt-red); 
-            margin-top: 0; 
-            font-size: 1.2rem; 
-            border-bottom: 2px solid #eee; 
-            padding-bottom: 10px; 
-        }
-
+        .card { background: white; padding: 22px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h3 { color: var(--ugt-red); margin-top: 0; font-size: 1.2rem; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .form-group { margin-bottom: 18px; }
+        label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 1rem; }
 
-        label { 
-            display: block; 
-            font-weight: 700; 
-            margin-bottom: 8px; 
-            font-size: 0.9rem; 
-        }
+        .radio-group { display: flex; gap: 15px; background: var(--bg-gray); padding: 10px; border-radius: 8px; margin-bottom: 15px; }
+        .radio-group label { font-weight: normal; display: flex; align-items: center; gap: 5px; cursor: pointer; margin-bottom: 0; }
 
-        input[type="date"], 
-        input[type="number"], 
-        select { 
-            width: 100%; 
-            padding: 12px; 
-            border: 1px solid #ccc; 
-            border-radius: 8px; 
-            box-sizing: border-box; 
-            font-size: 1rem; 
-        }
+        .info-box { background: #fdf2f2; border-left: 4px solid var(--ugt-red); padding: 12px; border-radius: 4px; font-size: 0.85rem; color: #b91c1c; line-height: 1.4; margin-top:10px; }
+        .info-live { margin-top: 10px; padding: 10px; background: var(--bg-green); border: 1px dashed #bbf7d0; border-radius: 8px; font-size: 0.9rem; color: var(--ugt-green); display: none; }
+        
+        /* Estilos Avisos Dinámicos */
+        .alert-smi { background: var(--bg-warning); color: var(--warning-orange); border: 1px solid #ffeeba; padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 0.85rem; display: none; }
+        .alert-high { background: #eef6ff; color: #004085; border: 1px solid #b8daff; padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 0.85rem; display: none; }
 
-        /* Estilo para Radio Buttons */
-        .radio-group { 
-            display: flex; 
-            gap: 15px; 
-            background: var(--bg-gray); 
-            padding: 10px; 
-            border-radius: 8px; 
-            margin-bottom: 15px; 
-        }
-
-        .radio-group label { 
-            font-weight: normal; 
-            display: flex; 
-            align-items: center; 
-            gap: 5px; 
-            cursor: pointer; 
-            margin-bottom: 0; 
-        }
-
-        /* Alertas y Feedback en vivo */
-        .info-box { 
-            background: #fdf2f2; 
-            border-left: 4px solid var(--ugt-red); 
-            padding: 12px; 
-            border-radius: 4px; 
-            font-size: 0.85rem; 
-            color: #b91c1c; 
-            line-height: 1.4; 
-        }
-
-        .info-live { 
-            margin-top: 10px; 
-            padding: 10px; 
-            background: var(--bg-green); 
-            border: 1px dashed #bbf7d0; 
-            border-radius: 8px; 
-            font-size: 0.9rem; 
-            color: var(--ugt-green); 
-            display: none; 
-        }
-
-        button { 
-            background: var(--ugt-red); 
-            color: white; 
-            border: none; 
-            width: 100%; 
-            padding: 16px; 
-            border-radius: 10px; 
-            font-weight: bold; 
-            font-size: 1.1rem; 
-            cursor: pointer; 
-            box-shadow: 0 4px 6px rgba(227, 6, 19, 0.2); 
-        }
-
-        button:hover { background: #b3050f; }
-
-        #resultado { 
-            display: none; 
-            margin-top: 25px; 
-            padding: 20px; 
-            background: #343a40; 
-            color: white; 
-            border-radius: 12px; 
-        }
+        button { background: var(--ugt-red); color: white; border: none; width: 100%; padding: 16px; border-radius: 10px; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
+        #resultado { display: none; margin-top: 25px; padding: 20px; background: #343a40; color: white; border-radius: 12px; }
     </style>
 </head>
 <body>
@@ -143,28 +56,31 @@
 
     <div class="card">
         <h3>2. Percepciones Salariales</h3>
-        
-        <label>Tipo de salario bruto introducido:</label>
+        <label>Tipo de salario bruto:</label>
         <div class="radio-group">
-            <label><input type="radio" name="tipo_s" value="diario" onchange="actualizarSalario()"> Diario</label>
-            <label><input type="radio" name="tipo_s" value="mensual" checked onchange="actualizarSalario()"> Mensual</label>
-            <label><input type="radio" name="tipo_s" value="anual" onchange="actualizarSalario()"> Anual</label>
+            <label><input type="radio" name="tipo_s" value="diario"> Diario</label>
+            <label><input type="radio" name="tipo_s" value="mensual" checked> Mensual</label>
+            <label><input type="radio" name="tipo_s" value="anual"> Anual</label>
         </div>
 
         <div class="form-group">
             <label>Importe Bruto (€)</label>
-            <input type="number" id="s_importe" placeholder="Ej: 1850.50" oninput="actualizarSalario()">
+            <input type="text" id="s_importe" placeholder="Ej: 1850,50">
         </div>
 
-        <div id="info_salario_anual" class="info-live" style="margin-bottom: 15px;">
+        <div id="info_salario_anual" class="info-live">
             Salario bruto anual estimado: <strong id="val_salario_anual">---</strong>
         </div>
 
+        <div id="alert_smi" class="alert-smi">
+            ⚠️ <strong>Aviso SMI:</strong> El salario detectado está por debajo del SMI 2026 (17.094 €). Si tu contrato es a jornada completa, revisa tu nómina o consulta con el sindicato.
+        </div>
+        <div id="alert_high" class="alert-high">
+            ℹ️ <strong>Verificación:</strong> El salario anual supera los 80.000 €. ¿Es correcta la cantidad o necesitas revisarla antes de seguir?
+        </div>
+
         <div class="info-box">
-            <strong>Rigurosidad en el cálculo:</strong><br>
-            El importe debe ser el <strong>total antes de impuestos</strong> (IRPF y SS). Incluye salario base y todos los complementos salariales. 
-            <br><br>
-            Si tus pagas extras NO están prorrateadas, asegúrate de sumar su parte proporcional al total anual para una indemnización correcta.
+            Recuerda incluir todas las percepciones salariales y el prorrateo de pagas extra para un cálculo riguroso.
         </div>
     </div>
 
@@ -173,14 +89,25 @@
     <div id="resultado">
         <h4 style="margin-top:0">Resultados Preliminares</h4>
         <div id="res_data"></div>
-        <p style="font-size: 0.8rem; color: #ccc; margin-top: 15px;">
-            Este cálculo es una ayuda técnica. Las particularidades de tu Convenio Colectivo pueden variar estas cifras. Acude a tu sede de UGT para un cálculo vinculante.
-        </p>
     </div>
 </div>
 
 <script>
-    // 1. Lógica de Antigüedad "en vivo"
+    // Configuración inicial al cargar
+    window.onload = function() {
+        // Fecha de hoy por defecto en Fecha de Fin
+        const hoy = new Date().toISOString().split('T')[0];
+        document.getElementById('f_fin').value = hoy;
+        
+        // Listeners para actualizaciones en vivo
+        document.getElementById('f_inicio').addEventListener('change', actualizarAntiguedad);
+        document.getElementById('f_fin').addEventListener('change', actualizarAntiguedad);
+        document.getElementById('s_importe').addEventListener('input', actualizarSalario);
+        document.querySelectorAll('input[name="tipo_s"]').forEach(r => {
+            r.addEventListener('change', actualizarSalario);
+        });
+    };
+
     function actualizarAntiguedad() {
         const fi = new Date(document.getElementById('f_inicio').value);
         const ff = new Date(document.getElementById('f_fin').value);
@@ -189,23 +116,24 @@
         if (fi.getTime() && ff.getTime()) {
             const diff = ff - fi;
             if (diff < 0) {
-                document.getElementById('val_antiguedad').innerText = "Revisa las fechas.";
+                document.getElementById('val_antiguedad').innerText = "La fecha de fin debe ser posterior a la de inicio.";
                 return;
             }
             const diasTotales = Math.floor(diff / (1000 * 60 * 60 * 24));
             const anios = Math.floor(diasTotales / 365);
             const diasResto = diasTotales % 365;
-            
             document.getElementById('val_antiguedad').innerText = `${anios} años y ${diasResto} días`;
             display.style.display = 'block';
         }
     }
 
-    // 2. Lógica de Salario "en vivo"
     function actualizarSalario() {
-        const importe = parseFloat(document.getElementById('s_importe').value.replace(',', '.')) || 0;
+        let rawValue = document.getElementById('s_importe').value.replace(',', '.');
+        const importe = parseFloat(rawValue) || 0;
         const tipo = document.querySelector('input[name="tipo_s"]:checked').value;
         const display = document.getElementById('info_salario_anual');
+        const alertSmi = document.getElementById('alert_smi');
+        const alertHigh = document.getElementById('alert_high');
         
         let anual = 0;
         if (importe > 0) {
@@ -215,21 +143,29 @@
 
             document.getElementById('val_salario_anual').innerText = anual.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' });
             display.style.display = 'block';
+
+            // Lógica de avisos condicionales
+            alertSmi.style.display = (anual < 17094) ? 'block' : 'none';
+            alertHigh.style.display = (anual > 80000) ? 'block' : 'none';
+        } else {
+            display.style.display = 'none';
+            alertSmi.style.display = 'none';
+            alertHigh.style.display = 'none';
         }
     }
 
-    // 3. Procesar Informe
     function mostrarCalculos() {
         const fi = new Date(document.getElementById('f_inicio').value);
         const ff = new Date(document.getElementById('f_fin').value);
-        const importe = parseFloat(document.getElementById('s_importe').value.replace(',', '.')) || 0;
-        const tipo = document.querySelector('input[name="tipo_s"]:checked').value;
+        let rawValue = document.getElementById('s_importe').value.replace(',', '.');
+        const importe = parseFloat(rawValue) || 0;
 
         if (!fi.getTime() || !ff.getTime() || importe <= 0) {
-            alert("Por favor, completa los datos mínimos.");
+            alert("Por favor, completa las fechas e importe salarial.");
             return;
         }
 
+        const tipo = document.querySelector('input[name="tipo_s"]:checked').value;
         let anual = (tipo === 'diario') ? importe * 365 : (tipo === 'mensual' ? importe * 12 : importe);
         let s_dia = anual / 365;
         let diff = Math.floor((ff - fi) / (1000 * 60 * 60 * 24));
@@ -239,17 +175,12 @@
             <div style="display:flex; justify-content:space-between"><span>Antigüedad:</span> <span>${anios.toFixed(2)} años</span></div>
             <div style="display:flex; justify-content:space-between"><span>Salario Día:</span> <span>${s_dia.toFixed(2)} €</span></div>
             <hr>
-            <div style="display:flex; justify-content:space-between; color:#00ff88"><strong>Despido Improcedente:</strong> <span>${(s_dia * 33 * anios).toFixed(2)} €</span></div>
+            <div style="display:flex; justify-content:space-between; color:#00ff88"><strong>Indemnización (33d/año):</strong> <span>${(s_dia * 33 * anios).toFixed(2)} €</span></div>
         `;
         
         document.getElementById('res_data').innerHTML = html;
         document.getElementById('resultado').style.display = 'block';
-        document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
     }
-
-    // Escuchadores
-    document.getElementById('f_inicio').addEventListener('change', actualizarAntiguedad);
-    document.getElementById('f_fin').addEventListener('change', actualizarAntiguedad);
 </script>
 
 </body>
