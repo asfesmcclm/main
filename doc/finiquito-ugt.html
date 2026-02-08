@@ -43,6 +43,19 @@
         <div id="info_dias" class="info-calculo" style="display:none;"></div>
     </div>
 
+    <div id="f_manual_wrap" style="display:none; margin-top:15px; padding: 10px; border: 1px dashed #ccc; border-radius: 6px;">
+    <label>Indica tu porcentaje de jornada:</label>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <input type="number" id="f_jornada_perc" value="100" min="1" max="100" 
+               oninput="validarSMIProporcional()" 
+               style="width: 80px; text-align: center;">
+        <span style="font-weight: bold;">%</span>
+    </div>
+    <small style="display: block; margin-top: 5px; color: #666;">
+        Ejemplo: Si trabajas 15h de las 40h de jornada completa, tu porcentaje es 37.5%.
+    </small>
+</div>    
+    
     <div class="card">
         <h3>2. Salario Bruto Total</h3>
         <p style="font-size:0.8rem; color:#666; margin-bottom:15px;">Necesitamos tu salario total (incluyendo el prorrateo de extras) para saber cuánto vale cada día de vacaciones.</p>
