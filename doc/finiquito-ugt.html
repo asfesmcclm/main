@@ -14,14 +14,41 @@
         .form-group { margin-bottom: 15px; }
         label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
         input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
-        .btn-main { background: var(--ugt-green); color: white; border: none; width: 100%; padding: 18px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
-        .info-calculo { background: #e9ecef; padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 0.9rem; border-left: 5px solid var(--ugt-red); }
-        .res-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
-        .total-box { background: #333; color: white; padding: 15px; border-radius: 8px; margin-top: 20px; display: flex; justify-content: space-between; font-weight: bold; }
-        .alert-smi { background: #fff3cd; color: #856404; padding: 15px; border-radius: 8px; margin-top: 10px; font-size: 0.9rem; border: 1px solid #ffeeba; border-left: 5px solid #ffc107; }
+        .btn-main { background: var(--ugt-green); color: white; border: none; width: 100%; padding: 18px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-main:hover { background: #218838; transform: translateY(-2px); }
+
+        /* --- ANIMACIÓN DE PULSACIÓN --- */
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .info-calculo { 
+            background: #e9ecef; 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin: 15px 0; 
+            font-size: 0.9rem; 
+            border-left: 5px solid var(--ugt-red);
+            animation: pulse-soft 3s ease-in-out infinite; /* Aplicada aquí */
+        }
+
+        .alert-smi { 
+            background: #fff3cd; 
+            color: #856404; 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin-top: 10px; 
+            font-size: 0.9rem; 
+            border: 1px solid #ffeeba; 
+            border-left: 5px solid #ffc107;
+            animation: pulse-soft 2s ease-in-out infinite; /* Pulsación más rápida para alerta */
+        }
+
         .check-group { display: flex; align-items: center; gap: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; margin-bottom: 15px; }
         .check-group input { width: auto; cursor: pointer; }
-    </small>
+        .res-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .total-box { background: #333; color: white; padding: 15px; border-radius: 8px; margin-top: 20px; display: flex; justify-content: space-between; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -29,7 +56,7 @@
 <div class="container">
     <div style="text-align: center; margin-bottom: 25px;">
         <h2>Liquidación de Haberes (Finiquito)</h2>
-        <p style="color:#666;">Cálculo técnico basado en devengo real</p>
+        <p style="color:#666;">Cálculo técnico con aviso de SMI proporcional</p>
     </div>
 
     <div class="card">
@@ -37,10 +64,9 @@
         <div class="form-group">
             <label>Inicio del devengo (Vacaciones/Extras)</label>
             <input type="date" id="f_inicio" onchange="actualizarInfo()">
-            <small style="color:#666;">Fecha en la que se reinicia el contador (ej: 1 de enero).</small>
         </div>
         <div class="form-group">
-            <label>Fecha de cese (Último día de contrato)</label>
+            <label>Fecha de cese (Último día)</label>
             <input type="date" id="f_fin" onchange="actualizarInfo()">
         </div>
         <div id="info_dias" class="info-calculo" style="display:none;"></div>
@@ -48,7 +74,6 @@
 
     <div class="card">
         <h3>2. Jornada y Salario</h3>
-        
         <div class="check-group">
             <input type="checkbox" id="f_jornada_check" checked onchange="toggleJornada()">
             <label for="f_jornada_check" style="margin:0;">¿Contrato a jornada completa (40h)?</label>
@@ -58,40 +83,34 @@
             <label>Tipo de Jornada Parcial:</label>
             <select id="f_jornada_sel" onchange="ajustarPorcentajeManual(this.value)">
                 <option value="100">100% (40h semanales)</option>
-                <option value="87.5">87.5% (35h semanales)</option>
                 <option value="75">75% (30h semanales)</option>
                 <option value="50">50% (20h semanales)</option>
-                <option value="25">25% (10h semanales)</option>
-                <option value="manual">Otra (introducir manualmente)</option>
+                <option value="manual">Otra (introducir % manualmente)</option>
             </select>
-
             <div id="f_manual_wrap" style="display:none; margin-top:15px; padding: 10px; border: 1px dashed #ccc; border-radius: 6px; background: white;">
-                <label>Indica tu % de jornada:</label>
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <input type="number" id="f_jornada_perc" value="100" min="1" max="100" oninput="validarSMIProporcional()" style="width: 80px; text-align: center;">
-                    <span style="font-weight: bold;">%</span>
-                </div>
+                <label>Porcentaje de jornada (%):</label>
+                <input type="number" id="f_jornada_perc" value="100" min="1" max="100" oninput="validarSMIProporcional()">
             </div>
         </div>
 
         <div class="form-group">
             <label>Salario Bruto Mensual TOTAL (€)</label>
-            <input type="number" id="f_s_total" placeholder="Ej: 2000" oninput="validarSMIProporcional()">
+            <input type="number" id="f_s_total" placeholder="Ej: 1500" oninput="validarSMIProporcional()">
             <div id="alert_smi_proporcional" class="alert-smi" style="display:none;"></div>
         </div>
         
         <div class="form-group">
-            <label>¿Cómo cobras las pagas extras?</label>
+            <label>¿Pagas extras prorrateadas?</label>
             <select id="f_p_tipo" onchange="toggleExtras()">
-                <option value="si">Prorrateadas (Ya incluidas en mi salario mensual)</option>
-                <option value="no">Aparte (No están incluidas en el importe anterior)</option>
+                <option value="si">Sí, ya incluidas en la nómina</option>
+                <option value="no">No, se cobran aparte</option>
             </select>
         </div>
 
-        <div id="bloque_extras" style="display:none; border-top: 1px dashed #ccc; padding-top:15px; margin-top:15px;">
+        <div id="bloque_extras" style="display:none; margin-top:15px;">
             <div class="form-group">
                 <label>Importe Bruto de UNA Paga Extra (€)</label>
-                <input type="number" id="f_s_extra" placeholder="Solo salario base + antigüedad">
+                <input type="number" id="f_s_extra" placeholder="Base + Antigüedad">
             </div>
             <div class="form-group">
                 <label>Nº de pagas extras al año</label>
@@ -102,13 +121,15 @@
 
     <div class="card">
         <h3>3. Configuración de Vacaciones</h3>
-        <div class="form-group">
-            <label>Días de vacaciones según Convenio (año completo)</label>
-            <input type="number" id="f_v_con" value="30" oninput="actualizarInfo()">
-        </div>
-        <div class="form-group">
-            <label>Días ya disfrutados en este periodo</label>
-            <input type="number" id="f_v_dis" value="0">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+                <label>Días Convenio/Año</label>
+                <input type="number" id="f_v_con" value="30" oninput="actualizarInfo()">
+            </div>
+            <div class="form-group">
+                <label>Días Disfrutados</label>
+                <input type="number" id="f_v_dis" value="0">
+            </div>
         </div>
     </div>
 
@@ -118,7 +139,7 @@
         <h3>Resumen de la Liquidación</h3>
         <div id="lista_detalles"></div>
         <div class="total-box">
-            <span>TOTAL BRUTO A PERCIBIR:</span>
+            <span>TOTAL BRUTO:</span>
             <span id="val_total"></span>
         </div>
     </div>
@@ -138,7 +159,6 @@
     function toggleJornada() {
         const isFullTime = document.getElementById('f_jornada_check').checked;
         document.getElementById('bloque_parcial').style.display = isFullTime ? 'none' : 'block';
-        
         if (isFullTime) {
             document.getElementById('f_jornada_perc').value = 100;
             document.getElementById('f_jornada_sel').value = "100";
@@ -163,15 +183,11 @@
         const sMensual = parseFloat(document.getElementById('f_s_total').value) || 0;
         const sAnualReal = sMensual * 12;
         const perc = parseFloat(document.getElementById('f_jornada_perc').value) || 100;
-        
         const smiProp = (SMI_2026_ANUAL * perc) / 100;
         const alerta = document.getElementById('alert_smi_proporcional');
 
         if (sAnualReal > 0 && sAnualReal < smiProp) {
-            alerta.innerHTML = `
-                <strong>Atención:</strong> Tu salario anual es de <strong>${sAnualReal.toLocaleString('de-DE')} €</strong>. 
-                Para una jornada del <strong>${perc}%</strong>, tu SMI debería ser de <strong>${smiProp.toLocaleString('de-DE')} €</strong>.
-                <br><small>(SMI 2026 jornada completa: ${SMI_2026_ANUAL.toLocaleString('de-DE')} €)</small>`;
+            alerta.innerHTML = `<strong>Aviso:</strong> Salario anual (${sAnualReal.toLocaleString()}€) inferior al SMI proporcional para el ${perc}% de jornada (Mínimo: ${smiProp.toLocaleString()}€).`;
             alerta.style.display = 'block';
         } else {
             alerta.style.display = 'none';
@@ -179,8 +195,7 @@
     }
 
     function toggleExtras() {
-        const tipo = document.getElementById('f_p_tipo').value;
-        document.getElementById('bloque_extras').style.display = (tipo === 'no') ? 'block' : 'none';
+        document.getElementById('bloque_extras').style.display = (document.getElementById('f_p_tipo').value === 'no') ? 'block' : 'none';
     }
 
     function actualizarInfo() {
@@ -192,9 +207,7 @@
             const dias = Math.floor((f2 - f1) / (1000*60*60*24)) + 1;
             const vacCon = parseFloat(document.getElementById('f_v_con').value) || 30;
             const gen = ((vacCon / 365) * dias).toFixed(2);
-            
-            info.innerHTML = `Este año has trabajado <strong>${dias} días</strong>.<br>
-                              Has generado <strong>${gen} días</strong> de vacaciones en este periodo.`;
+            info.innerHTML = `Has trabajado <strong>${dias} días</strong> y generado <strong>${gen} días</strong> de vacaciones.`;
             info.style.display = 'block';
             return { dias, gen };
         }
@@ -204,14 +217,12 @@
 
     function ejecutarCalculo() {
         const t = actualizarInfo();
-        if (!t) return alert("Revisa las fechas introducidas.");
-
+        if (!t) return alert("Revisa las fechas.");
         const sTotal = parseFloat(document.getElementById('f_s_total').value) || 0;
         const sDia = sTotal / 30;
         const f2 = new Date(document.getElementById('f_fin').value);
         const diasMesActual = f2.getDate();
         const impMes = sDia * diasMesActual;
-
         const vacDis = parseFloat(document.getElementById('f_v_dis').value) || 0;
         const vacPen = t.gen - vacDis;
         const impVac = vacPen * sDia;
@@ -223,17 +234,13 @@
             impExtras = ((sExtra * nPagas) / 365) * t.dias;
         }
 
-        const total = impMes + impVac + impExtras;
-
         document.getElementById('lista_detalles').innerHTML = `
-            <div class="res-item"><span>Salario mes actual (${diasMesActual} días):</span> <strong>${impMes.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>
+            <div class="res-item"><span>Días mes actual (${diasMesActual}):</span> <strong>${impMes.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>
             <div class="res-item"><span>Vacaciones (${vacPen.toFixed(2)} días):</span> <strong>${impVac.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>
             ${impExtras > 0 ? `<div class="res-item"><span>Atrasos Pagas Extras:</span> <strong>${impExtras.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>` : ''}
         `;
-        
-        document.getElementById('val_total').innerText = total.toLocaleString('de-DE', {minimumFractionDigits:2}) + " €";
+        document.getElementById('val_total').innerText = (impMes + impVac + impExtras).toLocaleString('de-DE', {minimumFractionDigits:2}) + " €";
         document.getElementById('resultado_fin').style.display = 'block';
-        document.getElementById('resultado_fin').scrollIntoView({ behavior: 'smooth' });
     }
 </script>
 </body>
