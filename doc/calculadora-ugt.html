@@ -3,63 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Indemnizaciones - UGT</title>
+    <title>Calculadora de Despido Profesional - UGT</title>
     <style>
-        /* Estilos generales para mantener la estética UGT */
-        :root { --ugt-red: #e30613; --text: #333; --bg: #f4f4f4; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
+        /* ESTILOS DE MARCA UGT */
+        :root { --ugt-red: #e30613; --text: #333; --bg: #f4f4f4; --blue-info: #17a2b8; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); padding: 20px; line-height: 1.5; }
         .container { max-width: 650px; margin: auto; }
-        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        h2, h3 { color: var(--ugt-red); margin-top: 0; }
         
-        /* Formulario */
+        /* TARJETAS Y SECCIONES */
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; position: relative; }
+        h2, h3 { color: var(--ugt-red); margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        
+        /* BOTÓN DE CIERRE (X) */
+        .btn-close { position: absolute; top: 15px; right: 15px; background: #eee; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; font-weight: bold; color: #666; }
+        .btn-close:hover { background: #ddd; color: #000; }
+
+        /* FORMULARIO */
         .form-group { margin-bottom: 15px; }
         label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
-        input[type="date"], input[type="text"], select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
-        
+        input[type="date"], input[type="text"] { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 1rem; }
         .radio-group { display: flex; gap: 15px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #eee; }
         
-        /* Alertas */
+        /* ALERTAS */
         .alert { padding: 12px; border-radius: 6px; margin-top: 10px; font-size: 0.85rem; display: none; }
         .alert-warning { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
         .alert-info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
 
-        /* Botón Principal */
-        .btn-main { background: var(--ugt-red); color: white; border: none; width: 100%; padding: 18px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        /* BOTÓN CALCULAR */
+        .btn-main { background: var(--ugt-red); color: white; border: none; width: 100%; padding: 18px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
         .btn-main:hover { background: #b3050f; transform: translateY(-2px); }
 
-        /* Resultados */
-        #resultado { display: none; }
-        .res-item { background: white; border-bottom: 1px solid #eee; padding: 15px; }
+        /* RESULTADOS */
+        #resultado { display: none; padding: 0; overflow: hidden; }
+        .res-item { background: white; border-bottom: 1px solid #eee; padding: 15px; transition: background 0.2s; }
+        .res-item:hover { background: #fffafb; }
         .res-item:last-child { border-bottom: none; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div style="text-align: center; margin-bottom: 20px;">
-        <h2 style="margin-bottom: 5px;">Calculadora de Despido</h2>
-        <p style="font-size: 0.9rem; color: #666;">Herramienta oficial para el cálculo de indemnizaciones</p>
+    <div style="text-align: center; margin-bottom: 25px;">
+        <h2 style="margin-bottom: 5px; border:none;">Calculadora de Indemnizaciones</h2>
+        <p style="font-size: 0.9rem; color: #666;">Basada en la normativa vigente 2026</p>
     </div>
 
     <div class="card">
-        <h3>1. Periodo de Trabajo</h3>
+        <h3>1. Cronología Laboral</h3>
         <div class="form-group">
             <label>Fecha de inicio del contrato</label>
             <input type="date" id="f_inicio">
         </div>
         <div class="form-group">
-            <label>Fecha de finalización</label>
+            <label>Fecha de cese o despido</label>
             <input type="date" id="f_fin">
+        </div>
+        
+        <div id="info_antiguedad" class="alert alert-info" style="border-left: 4px solid var(--blue-info);">
+            <span id="val_antiguedad"></span>
         </div>
     </div>
 
     <div class="card">
-        <h3>2. Salario Bruto</h3>
-        <p id="ayuda_salario" style="font-size: 0.8rem; background: #f0f7ff; padding: 10px; border-left: 4px solid #007bff;"></p>
+        <h3>2. Salario y Jornada</h3>
+        <p id="ayuda_salario" style="font-size: 0.8rem; background: #f0f7ff; padding: 12px; border-radius: 6px; border-left: 4px solid #007bff; margin-bottom: 20px;"></p>
         
         <div class="form-group">
-            <label>¿Cómo vas a introducir tu salario?</label>
+            <label>Periodicidad del importe bruto</label>
             <div class="radio-group">
                 <label><input type="radio" name="tipo_s" value="diario"> Diario</label>
                 <label><input type="radio" name="tipo_s" value="mensual" checked> Mensual</label>
@@ -69,21 +79,38 @@
 
         <div class="form-group">
             <label>Importe Bruto (€)</label>
-            <input type="text" id="s_importe" placeholder="Ej: 1800.50">
+            <input type="text" id="s_importe" placeholder="Ej: 1950.75">
         </div>
 
         <div id="alert_smi" class="alert alert-warning"></div>
         <div id="alert_high" class="alert alert-info"></div>
     </div>
 
-    <button class="btn-main" onclick="ejecutarCalculo()">CALCULAR INDEMNIZACIONES</button>
+    <button class="btn-main" onclick="ejecutarCalculo()">GENERAR INFORME DETALLADO</button>
 
-    <div id="resultado" class="card" style="padding: 0; overflow: hidden; margin-top: 30px;">
-        <div style="background: #333; color: white; padding: 15px; text-align: center; font-weight: bold;">
-            INFORME DE CUANTÍAS ESTIMADAS
+    <div id="resultado" class="card" style="margin-top: 30px;">
+        <div style="background: #333; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 0.9rem;">
+            CUANTÍAS ESTIMADAS POR TIPO DE EXTINCIÓN
         </div>
-        <div id="lista_indemnizaciones">
-            </div>
+        <div id="lista_indemnizaciones"></div>
+    </div>
+
+    <div id="seccion_hacienda" class="card" style="margin-top: 40px; border-top: 4px solid #ffc107;">
+        <button class="btn-close" onclick="UI.cerrarSeccion('seccion_hacienda')">X</button>
+        <h3 style="color: #856404; font-size: 1rem;">Tributación (I.R.P.F.)</h3>
+        <p style="font-size: 0.85rem; color: #555;">
+            Las indemnizaciones por despido obligatorio están exentas de IRPF hasta el límite legal de 180.000 €. 
+            Cualquier exceso o las indemnizaciones pactadas voluntariamente tributan como rendimiento del trabajo.
+        </p>
+    </div>
+
+    <div id="seccion_seguro" class="card" style="border-top: 4px solid #28a745;">
+        <button class="btn-close" onclick="UI.cerrarSeccion('seccion_seguro')">X</button>
+        <h3 style="color: #155724; font-size: 1rem;">Cotización a la S.S.</h3>
+        <p style="font-size: 0.85rem; color: #555;">
+            Las indemnizaciones por despido o cese en las cuantías obligatorias no cotizan a la Seguridad Social. 
+            Sin embargo, el finiquito (vacaciones, extras) sí conlleva cotización.
+        </p>
     </div>
 </div>
 
@@ -92,71 +119,89 @@
 <script src="js-calculadora/ui.js"></script>
 
 <script>
-    // Al cargar la página, configuramos valores por defecto
+    /**
+     * INICIALIZACIÓN
+     */
     window.onload = function() {
+        // Configuramos fechas por defecto
         const hoy = new Date().toISOString().split('T')[0];
         document.getElementById('f_fin').value = hoy;
         document.getElementById('f_inicio').max = hoy;
         
-        // Ponemos el texto de ayuda que definimos en la UI
+        // Inyectamos textos desde la UI
         document.getElementById('ayuda_salario').innerHTML = UI.textos.ayudaSalario;
-        
-        // Configuramos los textos de las alertas
         document.getElementById('alert_smi').innerText = UI.textos.smiAviso;
         document.getElementById('alert_high').innerText = UI.textos.altoAviso;
+
+        // VIGILANTE DE FECHAS (Antigüedad instantánea)
+        document.querySelectorAll('#f_inicio, #f_fin').forEach(el => {
+            el.addEventListener('change', () => {
+                const f1 = new Date(document.getElementById('f_inicio').value);
+                const f2 = new Date(document.getElementById('f_fin').value);
+
+                if (f1.getTime() && f2.getTime() && f1 <= f2) {
+                    const antiguedad = MotorCalculo.obtenerAntiguedadDetallada(f1, f2);
+                    UI.mostrarAntiguedad(antiguedad);
+                }
+            });
+        });
     };
 
-    // Función que se activa al pulsar el botón rojo
+    /**
+     * ACCIÓN AL PULSAR CALCULAR
+     */
     function ejecutarCalculo() {
-        const fIni = document.getElementById('f_inicio').value;
-        const fFin = document.getElementById('f_fin').value;
-        const imp = document.getElementById('s_importe').value.replace(',', '.');
+        const fIni = new Date(document.getElementById('f_inicio').value);
+        const fFin = new Date(document.getElementById('f_fin').value);
+        const impRaw = document.getElementById('s_importe').value.replace(',', '.');
         const tipo = document.querySelector('input[name="tipo_s"]:checked').value;
 
-        if (!fIni || !fFin || !imp) {
-            alert("Completa todos los campos para continuar.");
+        if (!fIni.getTime() || !fFin.getTime() || !impRaw || isNaN(impRaw)) {
+            alert("Por favor, introduce una fecha válida y un salario correcto.");
             return;
         }
 
-        // Convertimos a salario anual para normalizar el cálculo
-        let anual = parseFloat(imp);
+        // Normalizamos salario anual para el motor
+        let anual = parseFloat(impRaw);
         if (tipo === 'diario') anual *= 365;
         if (tipo === 'mensual') anual *= 12;
 
         const datos = {
-            fInicio: new Date(fIni),
-            fFin: new Date(fFin),
+            fInicio: fIni,
+            fFin: fFin,
             sDia: anual / 365,
             sMes: anual / 12
         };
 
-        // Pedimos el informe al motor (logic.js) usando la configuración (config.js)
+        // Procesamos el informe con el motor y la config legal
         const informe = MotorCalculo.generarInformeCompleto(CONFIG_LEGAL, datos);
         
-        // Dibujamos el informe
-        renderizar(informe);
+        // Renderizamos los resultados
+        renderizarLista(informe);
     }
 
-    function renderizar(informe) {
+    function renderizarLista(informe) {
         let html = "";
         informe.forEach(item => {
             html += `
                 <div class="res-item">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span style="font-weight:bold; font-size:0.9rem;">${item.nombre}</span>
-                        <span style="color:var(--ugt-red); font-weight:800; font-size:1.1rem;">${UI.formatEuro(item.importe)}</span>
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                        <span style="font-weight:bold; font-size:0.9rem; max-width:70%;">${item.nombre}</span>
+                        <span style="color:var(--ugt-red); font-weight:800; font-size:1rem; white-space:nowrap;">${UI.formatEuro(item.importe)}</span>
                     </div>
-                    <div style="font-size:0.75rem; color:#666; margin-top:3px;">${item.descripcion}</div>
-                    <div style="font-size:0.7rem; color:#0056b3; font-style:italic;">${item.formula_aplicada}</div>
-                    ${item.alerta ? `<div style="color:red; font-weight:bold; font-size:0.7rem; margin-top:5px;">${item.alerta}</div>` : ''}
+                    <div style="font-size:0.75rem; color:#666; margin-top:4px;">${item.descripcion}</div>
+                    <div style="font-size:0.7rem; color:#0056b3; font-style:italic; margin-top:2px;">Fórmula: ${item.formula_aplicada}</div>
+                    ${item.alerta ? `<div style="color:#d94141; font-weight:bold; font-size:0.75rem; margin-top:6px;">${item.alerta}</div>` : ''}
                 </div>`;
         });
+        
+        const resDiv = document.getElementById('resultado');
         document.getElementById('lista_indemnizaciones').innerHTML = html;
-        document.getElementById('resultado').style.display = 'block';
-        document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
+        resDiv.style.display = 'block';
+        resDiv.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Listener para alertas de salario en tiempo real
+    // ALERTA DE SALARIO EN TIEMPO REAL
     document.getElementById('s_importe').addEventListener('input', function() {
         const val = parseFloat(this.value.replace(',', '.')) || 0;
         const tipo = document.querySelector('input[name="tipo_s"]:checked').value;
