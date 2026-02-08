@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrada de Datos - Calculadora UGT</title>
+    <style>
+        :root { --ugt-red: #e30613; --bg: #f8f9fa; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); padding: 15px; color: #333; }
+        .container { max-width: 500px; margin: auto; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        h3 { color: var(--ugt-red); margin: 0 0 15px 0; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 1rem; }
+        .info-box { background: #eef6ff; padding: 10px; border-radius: 8px; font-size: 0.85rem; color: #0056b3; margin-top: 5px; line-height: 1.4; }
+        .hidden { display: none; }
+        .btn-next { background: var(--ugt-red); color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <h3>1. Fechas clave</h3>
+        <div class="form-group">
+            <label>Fecha inicio de contrato</label>
+            <input type="date" id="f_inicio">
+        </div>
+        <div class="form-group">
+            <label>Fecha fin / despido</label>
+            <input type="date" id="f_fin">
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>2. Salario y Pagas Extra</h3>
+        <div class="form-group">
+            <label>Salario Bruto Anual (€)</label>
+            <input type="number" id="s_bruto" placeholder="Ej: 22400">
+            <div class="info-box">Suma tus 12 nóminas brutas + todas las pagas extras del año.</div>
+        </div>
+        
+        <div class="form-group">
+            <label>¿Cómo cobras las pagas extras?</label>
+            <select id="p_sistema" onchange="togglePagas()">
+                <option value="pro">Prorrateadas (mes a mes)</option>
+                <option value="no_pro">No prorrateadas (meses sueltos)</option>
+            </select>
+        </div>
+
+        <div id="extra_pagas" class="hidden">
+            <div class="form-group">
+                <label>Nº de pagas NO prorrateadas al año</label>
+                <input type="number" id="p_num" value="2">
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>3. Vacaciones</h3>
+        <div class="form-group">
+            <label>Días por convenio al año</label>
+            <input type="number" id="v_convenio" value="30">
+        </div>
+        <div class="form-group">
+            <label>Días ya disfrutados este año</label>
+            <input type="number" id="v_disfrutadas" value="0">
+        </div>
+        <div class="info-box">Si tienes días de años anteriores por una baja, súmalos aquí.</div>
+    </div>
+
+    <button class="btn-next" onclick="validarYProceder()">Calcular Indemnización y Finiquito</button>
+</div>
+
+<script>
+    function togglePagas() {
+        const sistema = document.getElementById('p_sistema').value;
+        const divExtra = document.getElementById('extra_pagas');
+        divExtra.className = (sistema === 'no_pro') ? '' : 'hidden';
+    }
+
+    function validarYProceder() {
+        // Aquí conectaremos con la pantalla de advertencia y luego los resultados
+        alert("Datos recogidos. Siguiente paso: Pantalla de Advertencia del Finiquito.");
+    }
+</script>
+
+</body>
+</html>
