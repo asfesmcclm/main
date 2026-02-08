@@ -94,7 +94,9 @@
         </div>
 
         <div class="form-group">
-            <label>Salario Bruto Mensual TOTAL (€)</label>
+         <label><strong>Salario Bruto Mensual</strong> <small>(incluyendo prorrateo de extras) *</small></label>
+<input type="number" id="f_s_total" ...>
+<small style="color: #888;">* Este dato es necesario para calcular el valor real de cada día de vacaciones.</small>
             <input type="number" id="f_s_total" placeholder="Ej: 1500" oninput="validarSMIProporcional()">
             <div id="alert_smi_proporcional" class="alert-smi" style="display:none;"></div>
         </div>
