@@ -19,8 +19,8 @@
         .alert-smi { background: #fff3cd; color: #856404; padding: 12px; border-radius: 6px; border-left: 5px solid #ffeeba; margin-top: 10px; font-size: 0.85rem; }
         .res-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
         .total-box { background: #333; color: white; padding: 15px; border-radius: 8px; margin-top: 20px; display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: bold; }
-        .btn-close { position: absolute; top: 15px; right: 15px; background: #eee; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; }
-        small { color: #666; font-size: 0.75rem; }
+        .btn-close { position: absolute; top: 15px; right: 15px; background: #eee; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; font-size: 12px; line-height: 25px; text-align: center; font-weight: bold; }
+        small { color: #666; font-size: 0.75rem; display: block; margin-top: 4px; }
     </style>
 </head>
 <body>
@@ -35,41 +35,42 @@
         <h3>1. Datos Salariales</h3>
         <div class="form-group">
             <label>Importe Bruto (€)</label>
-            <input type="number" id="f_s_importe" placeholder="Ej: 1500" oninput="validarSMIFiniquito()">
+            <input type="number" id="f_s_importe" placeholder="Ej: 1800" oninput="validarSMIFiniquito()">
             <div id="info_anual" style="font-size:0.8rem; color:#666; margin-top:5px; font-style:italic;"></div>
             <div id="alert_smi" class="alert-smi" style="display:none;">
                 ⚠️ El salario anual es inferior al SMI 2026 (17.094 €).
             </div>
         </div>
         <div class="form-group">
-            <label>Periodicidad</label>
+            <label>Periodicidad del importe</label>
             <select id="f_s_tipo" onchange="validarSMIFiniquito()">
                 <option value="mensual">Mensual</option>
                 <option value="anual">Anual</option>
                 <option value="diario">Diario</option>
             </select>
+            <small>Recuerda: Incluye el prorrateo de pagas extras si las cobras mes a mes.</small>
         </div>
     </div>
 
     <div class="card">
-        <h3>2. Periodo a Liquidar</h3>
+        <h3>2. Periodos a Liquidar</h3>
         <div class="form-group">
-            <label>Inicio del periodo de devengo</label>
+            <label>Inicio del devengo (Vacaciones/Extras)</label>
             <input type="date" id="f_inicio_devengo">
-            <small>Normalmente el 1 de enero del año actual o tu fecha de alta.</small>
+            <small>Fecha en la que empezaste a acumular vacaciones (normalmente 1 de enero o fecha de alta).</small>
         </div>
         <div class="form-group">
-            <label>Fecha del último día trabajado</label>
+            <label>Fecha de cese o fin de contrato</label>
             <input type="date" id="f_cese">
-            <small>Fecha efectiva del fin de la relación laboral.</small>
+            <small>Tu último día de trabajo efectivo.</small>
         </div>
     </div>
 
     <div class="card">
-        <h3>3. Vacaciones y Pagas (Convenio)</h3>
+        <h3>3. Parámetros del Convenio</h3>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
             <div class="form-group">
-                <label>Vacaciones/año</label>
+                <label>Días vacaciones/año</label>
                 <input type="number" id="f_vac_convenio" value="30">
             </div>
             <div class="form-group">
@@ -78,15 +79,15 @@
             </div>
         </div>
         <div class="form-group">
-            <label>Número de pagas extras totales al año</label>
+            <label>Número de pagas extras anuales</label>
             <input type="number" id="f_num_pagas" value="2">
-            <small>Ej: Navidad, Verano y Beneficios = 3 pagas.</small>
+            <small>Indica cuántas pagas "aparte" tienes (Navidad, Verano, Marzo...)</small>
         </div>
         <div class="form-group">
-            <label>¿Pagas ya prorrateadas mes a mes?</label>
+            <label>¿Pagas extras prorrateadas?</label>
             <select id="f_pagas_pro">
-                <option value="no">No (Se cobran en fechas específicas)</option>
-                <option value="si">Sí (Ya incluidas en la nómina mensual)</option>
+                <option value="no">No (Las cobro en meses específicos)</option>
+                <option value="si">Sí (Ya incluidas en el salario mensual)</option>
             </select>
         </div>
     </div>
@@ -106,21 +107,20 @@
         </div>
     </div>
 
-    <div id="seccion_hacienda" class="card" style="margin-top:20px; background:#fff9f9;">
+    <div id="seccion_hacienda" class="card" style="margin-top:20px; background:#fff9f9; border-top: 4px solid #ffc107;">
         <button class="btn-close" onclick="this.parentElement.style.display='none'">x</button>
-        <h3 style="font-size:1rem;">Información Fiscal</h3>
+        <h3 style="font-size:1rem; color:#856404;">Aviso sobre Tributación</h3>
         <p id="txt_hacienda" style="font-size:0.85rem; color:#555;"></p>
     </div>
 </div>
 
 <script src="js-calculadora/ui.js"></script>
 <script>
-    // Inicialización de textos legales
     window.onload = function() {
         if (typeof UI !== 'undefined') {
             document.getElementById('txt_hacienda').innerHTML = UI.textos.haciendaInfo;
         }
-        // Fechas por defecto: 1 de enero al día de hoy
+        // Fechas por defecto
         const hoy = new Date().toISOString().split('T')[0];
         const inicioAnio = new Date(new Date().getFullYear(), 0, 1).toISOString().split('T')[0];
         document.getElementById('f_inicio_devengo').value = inicioAnio;
@@ -138,7 +138,7 @@
         const alertSmi = document.getElementById('alert_smi');
         
         if (anual > 0) {
-            info.innerText = "Salario bruto anual: " + anual.toLocaleString('de-DE') + " €";
+            info.innerText = "Salario bruto anual calculado: " + anual.toLocaleString('de-DE') + " €";
             alertSmi.style.display = (anual < 17094) ? 'block' : 'none';
         } else {
             info.innerText = "";
@@ -153,42 +153,41 @@
         const f2 = new Date(document.getElementById('f_cese').value);
         
         if (isNaN(f1) || isNaN(f2) || f1 > f2) {
-            alert("Por favor, revisa las fechas."); return;
+            alert("Las fechas son incorrectas."); return;
         }
 
-        // 1. Días de devengo
+        // 1. Días de devengo acumulados
         const diasDevengo = Math.floor((f2 - f1) / (1000*60*60*24)) + 1;
 
-        // 2. Cálculo Vacaciones
+        // 2. Cálculo Vacaciones (Regla de proporcionalidad)
         const vacConvenio = parseFloat(document.getElementById('f_vac_convenio').value) || 30;
-        const vacGozadas = parseFloat(document.getElementById('f_vac_disfrutadas').value) || 0;
-        const diasDerecho = (vacConvenio / 365) * diasDevengo;
-        const diasAPagar = diasDerecho - vacGozadas;
-        const impVac = diasAPagar * salarios.sDia;
+        const vacDisfrutadas = parseFloat(document.getElementById('f_vac_disfrutadas').value) || 0;
+        const diasGenerados = (vacConvenio / 365) * diasDevengo;
+        const diasPendientes = diasGenerados - vacDisfrutadas;
+        const impVac = diasPendientes * salarios.sDia;
 
-        // 3. Cálculo Pagas Extras
+        // 3. Cálculo Pagas Extras (Estimación por devengo en el año)
         let impExtras = 0;
         const nPagas = parseFloat(document.getElementById('f_num_pagas').value) || 2;
         if (document.getElementById('f_pagas_pro').value === 'no') {
-            // El valor de una paga extra suele ser el salario base (estimamos un mes)
-            // Se asume devengo semestral (182 días)
             const valorPaga = salarios.sAnual / (12 + nPagas);
+            // Cálculo proporcional semestral (aproximado a días de devengo)
             impExtras = (valorPaga / 182) * (diasDevengo % 182); 
         }
 
-        // 4. Salario mes actual (días sueltos)
-        const diaDelMes = f2.getDate();
-        const impMes = salarios.sDia * diaDelMes;
+        // 4. Salario de los días trabajados en el último mes
+        const diasUltimoMes = f2.getDate();
+        const impUltimoMes = salarios.sDia * diasUltimoMes;
 
-        // Renderizar
+        // RENDERIZADO
         const lista = document.getElementById('f_detalle_lista');
         lista.innerHTML = `
-            <div class="res-item"><span>Días trabajados mes cese (${diaDelMes} días):</span> <strong>${impMes.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>
-            <div class="res-item"><span>Vacaciones pendientes (${diasAPagar.toFixed(2)} días):</span> <strong>${impVac.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>
-            ${impExtras > 0 ? `<div class="res-item"><span>Parte proporcional Pagas Extras:</span> <strong>${impExtras.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>` : ''}
+            <div class="res-item"><span>Días trabajados mes del cese (${diasUltimoMes} días):</span> <strong>${impUltimoMes.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>
+            <div class="res-item"><span>Vacaciones no disfrutadas (${diasPendientes.toFixed(2)} días):</span> <strong>${Math.max(0, impVac).toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>
+            ${impExtras > 0 ? `<div class="res-item"><span>Proporcional Pagas Extras:</span> <strong>${impExtras.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>` : ''}
         `;
         
-        const total = impMes + impVac + impExtras;
+        const total = impUltimoMes + Math.max(0, impVac) + impExtras;
         document.getElementById('f_total_final').innerText = total.toLocaleString('de-DE', {minimumFractionDigits:2}) + " €";
         document.getElementById('f_resultado_area').style.display = 'block';
         document.getElementById('f_resultado_area').scrollIntoView({ behavior: 'smooth' });
