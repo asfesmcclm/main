@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Finiquito Técnica - UGT</title>
+    <title>Liquidación de Haberes - UGT</title>
     <link rel="stylesheet" href="css/estilos.css">
     <style>
         :root { --ugt-red: #e30613; --ugt-green: #28a745; --bg: #f4f4f4; }
@@ -15,52 +15,56 @@
         label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
         input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
         .btn-main { background: var(--ugt-green); color: white; border: none; width: 100%; padding: 18px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
-        .info-calculo { background: #e9ecef; padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 0.9rem; border-left: 5px solid #6c757d; }
-        .res-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .info-calculo { background: #e9ecef; padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 0.9rem; border-left: 5px solid var(--ugt-red); }
+        .res-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
         .total-box { background: #333; color: white; padding: 15px; border-radius: 8px; margin-top: 20px; display: flex; justify-content: space-between; font-weight: bold; }
+        .alert-smi { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.85rem; border: 1px solid #ffeeba; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div style="text-align: center; margin-bottom: 20px;">
+    <div style="text-align: center; margin-bottom: 25px;">
         <h2>Liquidación de Haberes (Finiquito)</h2>
+        <p style="color:#666;">Cálculo técnico basado en devengo real</p>
     </div>
 
     <div class="card">
-        <h3>1. Periodos y Devengo</h3>
+        <h3>1. Periodos de Devengo</h3>
         <div class="form-group">
             <label>Inicio del devengo (Vacaciones/Extras)</label>
-            <input type="date" id="f_inicio" onchange="actualizarInfoDias()">
-            <small>Fecha en la que empezaste a acumular (ej. 1 de enero).</small>
+            <input type="date" id="f_inicio" onchange="actualizarInfo()">
+            <small style="color:#666;">Fecha en la que se reinicia el contador (ej: 1 de enero).</small>
         </div>
         <div class="form-group">
-            <label>Fecha de cese (Último día)</label>
-            <input type="date" id="f_fin" onchange="actualizarInfoDias()">
+            <label>Fecha de cese (Último día de contrato)</label>
+            <input type="date" id="f_fin" onchange="actualizarInfo()">
         </div>
-        <div id="info_dias_trabajados" class="info-calculo" style="display:none;">
-            </div>
+        <div id="info_dias" class="info-calculo" style="display:none;"></div>
     </div>
 
     <div class="card">
-        <h3>2. Salarios y Pagas</h3>
+        <h3>2. Salario Bruto Total</h3>
+        <p style="font-size:0.8rem; color:#666; margin-bottom:15px;">Necesitamos tu salario total (incluyendo el prorrateo de extras) para saber cuánto vale cada día de vacaciones.</p>
         <div class="form-group">
-            <label>Salario Bruto Mensual (sin extras)</label>
-            <input type="number" id="f_s_mes" placeholder="Sueldo base + pluses mensuales" oninput="validarSMI()">
+            <label>Salario Bruto Mensual TOTAL (€)</label>
+            <input type="number" id="f_s_total" placeholder="Ej: 2000" oninput="validarSMI()">
+            <div id="alert_smi" class="alert-smi" style="display:none;">⚠️ Salario inferior al SMI 2026.</div>
         </div>
         
         <div class="form-group">
-            <label>¿Pagas extras prorrateadas?</label>
-            <select id="f_p_pro" onchange="document.getElementById('bloque_extras').style.display = (this.value=='no'?'block':'none')">
-                <option value="si">Sí, ya están en mi nómina mensual</option>
-                <option value="no">No, las cobro aparte</option>
+            <label>¿Cómo cobras las pagas extras?</label>
+            <select id="f_p_tipo" onchange="toggleExtras()">
+                <option value="si">Prorrateadas (Ya incluidas en mi salario mensual)</option>
+                <option value="no">Aparte (No están incluidas en el importe anterior)</option>
             </select>
         </div>
 
-        <div id="bloque_extras" style="display:none; border-top: 1px dashed #ccc; padding-top:15px;">
+        <div id="bloque_extras" style="display:none; border-top: 1px dashed #ccc; padding-top:15px; margin-top:15px;">
             <div class="form-group">
-                <label>Importe bruto de UNA paga extra</label>
-                <input type="number" id="f_s_extra" placeholder="Sueldo base + antigüedad de la extra">
+                <label>Importe Bruto de UNA Paga Extra (€)</label>
+                <input type="number" id="f_s_extra" placeholder="Solo salario base + antigüedad">
+                <small>Este importe se usará para pagar la parte proporcional que aún no has cobrado.</small>
             </div>
             <div class="form-group">
                 <label>Nº de pagas extras al año</label>
@@ -70,9 +74,9 @@
     </div>
 
     <div class="card">
-        <h3>3. Vacaciones</h3>
+        <h3>3. Configuración de Vacaciones</h3>
         <div class="form-group">
-            <label>Días de vacaciones según Convenio</label>
+            <label>Días de vacaciones según Convenio (año completo)</label>
             <input type="number" id="f_v_con" value="30">
         </div>
         <div class="form-group">
@@ -81,23 +85,28 @@
         </div>
     </div>
 
-    <button class="btn-main" onclick="calcularTodo()">CALCULAR FINIQUITO</button>
+    <button class="btn-main" onclick="ejecutarCalculo()">GENERAR LIQUIDACIÓN</button>
 
-    <div id="resultado_fin" class="card" style="display:none; margin-top:20px;">
+    <div id="resultado_fin" class="card" style="display:none; margin-top:20px; border-top: 5px solid var(--ugt-green);">
         <h3>Resumen de la Liquidación</h3>
         <div id="lista_detalles"></div>
         <div class="total-box">
-            <span>TOTAL BRUTO:</span>
+            <span>TOTAL BRUTO A PERCIBIR:</span>
             <span id="val_total"></span>
         </div>
     </div>
 </div>
 
 <script>
-    function actualizarInfoDias() {
+    function toggleExtras() {
+        const tipo = document.getElementById('f_p_tipo').value;
+        document.getElementById('bloque_extras').style.display = (tipo === 'no') ? 'block' : 'none';
+    }
+
+    function actualizarInfo() {
         const f1 = new Date(document.getElementById('f_inicio').value);
         const f2 = new Date(document.getElementById('f_fin').value);
-        const info = document.getElementById('info_dias_trabajados');
+        const info = document.getElementById('info_dias');
 
         if (!isNaN(f1) && !isNaN(f2) && f2 >= f1) {
             const dias = Math.floor((f2 - f1) / (1000*60*60*24)) + 1;
@@ -113,42 +122,49 @@
         return null;
     }
 
-    function calcularTodo() {
-        const datosTiempos = actualizarInfoDias();
-        if (!datosTiempos) return alert("Revisa las fechas");
+    function validarSMI() {
+        const mensual = parseFloat(document.getElementById('f_s_total').value) || 0;
+        const anual = mensual * 12;
+        document.getElementById('alert_smi').style.display = (anual > 0 && anual < 17094) ? 'block' : 'none';
+    }
 
-        const sMes = parseFloat(document.getElementById('f_s_mes').value) || 0;
-        const sDia = sMes / 30;
+    function ejecutarCalculo() {
+        const t = actualizarInfo();
+        if (!t) return alert("Por favor, introduce fechas válidas.");
+
+        const sMensualTotal = parseFloat(document.getElementById('f_s_total').value) || 0;
+        const sDia = sMensualTotal / 30; // Valor del día para vacaciones y días sueltos
         
-        // 1. Días del mes actual
+        // 1. Días trabajados del mes actual
         const f2 = new Date(document.getElementById('f_fin').value);
         const diasMesActual = f2.getDate();
         const impMes = sDia * diasMesActual;
 
         // 2. Vacaciones
         const vacDis = parseFloat(document.getElementById('f_v_dis').value) || 0;
-        const vacPendientes = datosTiempos.gen - vacDis;
+        const vacPendientes = t.gen - vacDis;
         const impVac = vacPendientes * sDia;
 
-        // 3. Extras
+        // 3. Pagas Extras (Atrasos)
         let impExtras = 0;
-        if (document.getElementById('f_p_pro').value === 'no') {
+        if (document.getElementById('f_p_tipo').value === 'no') {
             const sExtra = parseFloat(document.getElementById('f_s_extra').value) || 0;
             const nPagas = parseFloat(document.getElementById('f_n_pagas').value) || 2;
-            // Prorrateo de las extras pendientes según los días trabajados en el ciclo
-            // (Simplificado a devengo anual para mayor claridad del usuario)
-            impExtras = ((sExtra * nPagas) / 365) * datosTiempos.dias;
+            // Se calcula la parte proporcional de la extra por los días trabajados en el año
+            impExtras = ((sExtra * nPagas) / 365) * t.dias;
         }
 
         const total = impMes + impVac + impExtras;
 
         document.getElementById('lista_detalles').innerHTML = `
-            <div class="res-item"><span>Días trabajados mes actual (${diasMesActual}):</span> <strong>${impMes.toLocaleString()} €</strong></div>
-            <div class="res-item"><span>Vacaciones (${vacPendientes.toFixed(2)} días):</span> <strong>${impVac.toLocaleString()} €</strong></div>
-            ${impExtras > 0 ? `<div class="res-item"><span>Prorrateo Pagas Extras:</span> <strong>${impExtras.toLocaleString()} €</strong></div>` : ''}
+            <div class="res-item"><span>Salario mes actual (${diasMesActual} días):</span> <strong>${impMes.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>
+            <div class="res-item"><span>Vacaciones no disfrutadas (${vacPendientes.toFixed(2)} días):</span> <strong>${impVac.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>
+            ${impExtras > 0 ? `<div class="res-item"><span>Atrasos Pagas Extras (Devengo):</span> <strong>${impExtras.toLocaleString('de-DE', {minimumFractionDigits:2})} €</strong></div>` : ''}
         `;
-        document.getElementById('val_total').innerText = total.toLocaleString() + " €";
+        
+        document.getElementById('val_total').innerText = total.toLocaleString('de-DE', {minimumFractionDigits:2}) + " €";
         document.getElementById('resultado_fin').style.display = 'block';
+        document.getElementById('resultado_fin').scrollIntoView({ behavior: 'smooth' });
     }
 </script>
 </body>
