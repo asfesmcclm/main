@@ -117,7 +117,7 @@
 <script src="js-calculadora/logic.js"></script>
 <script src="js-calculadora/ui.js"></script>
 
-    <script>
+<script>
     window.onload = function() {
         // 1. Configuración de fechas por defecto
         const hoy = new Date().toISOString().split('T')[0];
@@ -126,14 +126,13 @@
         if (fFinInput) fFinInput.value = hoy;
         if (fIniInput) fIniInput.max = hoy;
         
-        // 2. Inyección de textos (ESTO RELLENA LAS CAJAS VACÍAS)
+        // 2. Inyección de textos iniciales desde ui.js
         try {
             if (typeof UI !== 'undefined') {
                 document.getElementById('ayuda_salario').innerHTML = UI.textos.ayudaSalario;
                 document.getElementById('alert_smi').innerText = UI.textos.smiAviso;
                 document.getElementById('alert_high').innerText = UI.textos.altoAviso;
                 
-                // Rellenamos los párrafos de Hacienda y Seguridad Social
                 const pHacienda = document.querySelector('#seccion_hacienda p');
                 if (pHacienda) pHacienda.innerHTML = UI.textos.haciendaInfo;
                 
@@ -141,10 +140,14 @@
                 if (pSeguro) pSeguro.innerHTML = UI.textos.ssInfo;
             }
         } catch (e) {
-            console.error("Error al inyectar textos:", e);
+            console.error("Error al cargar textos de UI:", e);
         }
 
-        // 3. Vigilante de antigüedad (Cálculo automático al poner fechas)
+        // 3. VALIDACIÓN INICIAL DE LÍMITES (SMI)
+        // Esto hace que si ya hay un valor, la alerta aparezca al cargar
+        validarLimitesSalariales();
+
+        // 4. Vigilante de antigüedad automático
         document.querySelectorAll('#f_inicio, #f_fin').forEach(el => {
             el.addEventListener('change', () => {
                 const f1Val = document.getElementById('f_inicio').value;
@@ -161,6 +164,44 @@
         });
     };
 
+    // FUNCIÓN: Valida SMI y Salario Alto en tiempo real
+    function validarLimitesSalariales() {
+        const input = document.getElementById('s_importe');
+        const alertSmi = document.getElementById('alert_smi');
+        const alertHigh = document.getElementById('alert_high');
+        
+        if (!input || !alertSmi || typeof CONFIG_LEGAL === 'undefined') return;
+
+        const val = parseFloat(input.value.replace(',', '.')) || 0;
+        const radio = document.querySelector('input[name="tipo_s"]:checked');
+        const tipo = radio ? radio.value : 'mensual';
+        
+        let anual = 0;
+        if (tipo === 'diario') anual = val * 365;
+        else if (tipo === 'mensual') anual = val * 12;
+        else anual = val;
+
+        // Mostrar/Ocultar alertas según límites de config.js
+        if (anual > 0 && anual < CONFIG_LEGAL.parametros_legales.smi_anual_2026) {
+            alertSmi.style.display = 'block';
+        } else {
+            alertSmi.style.display = 'none';
+        }
+
+        if (anual > CONFIG_LEGAL.parametros_legales.umbral_salario_alto) {
+            alertHigh.style.display = 'block';
+        } else {
+            alertHigh.style.display = 'none';
+        }
+    }
+
+    // Escuchadores para cambios en el salario
+    document.getElementById('s_importe').addEventListener('input', validarLimitesSalariales);
+    document.querySelectorAll('input[name="tipo_s"]').forEach(r => {
+        r.addEventListener('change', validarLimitesSalariales);
+    });
+
+    // FUNCIÓN: Ejecuta el cálculo al pulsar el botón
     function ejecutarCalculo() {
         const fIniVal = document.getElementById('f_inicio').value;
         const fFinVal = document.getElementById('f_fin').value;
@@ -193,8 +234,9 @@
         }
     }
 
+    // FUNCIÓN: Dibuja los resultados en pantalla
     function renderizarTodo(informe) {
-        // 1. Mostrar Exclusiones (Aparece arriba de los resultados)
+        // 1. Mostrar Bloque de Exclusiones
         const avisoEx = document.getElementById('aviso_exclusiones');
         const textoEx = document.getElementById('texto_exclusiones');
         if (avisoEx && textoEx) {
@@ -202,7 +244,7 @@
             avisoEx.style.display = 'block';
         }
 
-        // 2. Renderizar la lista de indemnizaciones
+        // 2. Renderizar lista de indemnizaciones
         let html = "";
         informe.forEach(item => {
             html += `
