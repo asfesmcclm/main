@@ -1,4 +1,5 @@
-// Centralizamos aquí las redacciones para editarlas fácilmente sin tocar código.
+const UI = {
+    // 1. Diccionario de textos (Sin emojis)
     textos: {
         ayudaSalario: `
             <strong>INFO: ¿Qué cantidad debo poner?</strong><br>
@@ -32,3 +33,25 @@
             (incluyendo la liquidación de vacaciones y pagas extraordinarias).
         `
     },
+
+    // 2. Función para formatear dinero
+    formatEuro: function(cantidad) {
+        return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(cantidad);
+    },
+
+    // 3. Función para pintar la antigüedad (Corrige que no se vea)
+    mostrarAntiguedad: function(datosAntiguedad) {
+        const contenedor = document.getElementById('info_antiguedad');
+        const valorTexto = document.getElementById('val_antiguedad');
+        if (!datosAntiguedad || !contenedor || !valorTexto) return;
+
+        valorTexto.innerHTML = `Antigüedad detectada: <strong>${datosAntiguedad.dias} días</strong> (${datosAntiguedad.anios.replace('.', ',')} años).`;
+        contenedor.style.display = 'block';
+    },
+
+    // 4. Función para cerrar secciones (Corrige que la X no funcione)
+    cerrarSeccion: function(idSeccion) {
+        const elemento = document.getElementById(idSeccion);
+        if (elemento) elemento.style.display = 'none';
+    }
+};
