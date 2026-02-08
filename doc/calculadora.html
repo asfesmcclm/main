@@ -3,86 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrada de Datos - Calculadora UGT</title>
+    <title>Sandbox Calculadora UGT - Todo en Uno</title>
     <style>
-        :root { --ugt-red: #e30613; --bg: #f8f9fa; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); padding: 15px; color: #333; }
-        .container { max-width: 500px; margin: auto; }
-        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
-        h3 { color: var(--ugt-red); margin: 0 0 15px 0; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        :root { --ugt-red: #e30613; --bg: #f4f4f4; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); padding: 20px; line-height: 1.6; }
+        .container { max-width: 600px; margin: auto; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h3 { color: var(--ugt-red); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 8px; }
         .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
-        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 1rem; }
-        .info-box { background: #eef6ff; padding: 10px; border-radius: 8px; font-size: 0.85rem; color: #0056b3; margin-top: 5px; line-height: 1.4; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        .info-box { background: #e7f3ff; padding: 10px; border-radius: 6px; font-size: 0.85rem; color: #005bb7; margin-top: 5px; }
         .hidden { display: none; }
-        .btn-next { background: var(--ugt-red); color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
+        button { background: var(--ugt-red); color: white; border: none; width: 100%; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #b3050f; }
+        
+        /* Estilos para el Resultado */
+        #resultado { background: #333; color: #fff; padding: 20px; border-radius: 12px; margin-top: 20px; display: none; }
+        .res-line { display: flex; justify-content: space-between; border-bottom: 1px solid #555; padding: 8px 0; }
+        .res-total { font-size: 1.2rem; color: #00ff88; font-weight: bold; margin-top: 15px; text-align: center; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="card">
-        <h3>1. Fechas clave</h3>
+        <h3>1. Fechas y Antigüedad</h3>
         <div class="form-group">
-            <label>Fecha inicio de contrato</label>
+            <label>Fecha de Inicio de Contrato</label>
             <input type="date" id="f_inicio">
         </div>
         <div class="form-group">
-            <label>Fecha fin / despido</label>
+            <label>Fecha de Cese / Despido</label>
             <input type="date" id="f_fin">
         </div>
     </div>
 
     <div class="card">
-        <h3>2. Salario y Pagas Extra</h3>
+        <h3>2. Salarios y Pagas</h3>
+        <div class="form-group">
+            <label>Salario Bruto Mensual (€)</label>
+            <input type="number" id="s_mensual" placeholder="Ej: 1600">
+        </div>
         <div class="form-group">
             <label>Salario Bruto Anual (€)</label>
-            <input type="number" id="s_bruto" placeholder="Ej: 22400">
-            <div class="info-box">Suma tus 12 nóminas brutas + todas las pagas extras del año.</div>
+            <input type="number" id="s_anual" placeholder="Ej: 22400">
+            <div class="info-box">Indispensable para el cálculo de la indemnización.</div>
         </div>
-        
         <div class="form-group">
-            <label>¿Cómo cobras las pagas extras?</label>
+            <label>Pagas Extras</label>
             <select id="p_sistema" onchange="togglePagas()">
-                <option value="pro">Prorrateadas (mes a mes)</option>
-                <option value="no_pro">No prorrateadas (meses sueltos)</option>
+                <option value="pro">Prorrateadas en la nómina mensual</option>
+                <option value="no_pro">NO prorrateadas (se cobran aparte)</option>
             </select>
         </div>
-
-        <div id="extra_pagas" class="hidden">
-            <div class="form-group">
-                <label>Nº de pagas NO prorrateadas al año</label>
-                <input type="number" id="p_num" value="2">
-            </div>
+        <div id="extra_data" class="hidden">
+            <label>Importe de UNA Paga Extra (€)</label>
+            <input type="number" id="p_importe" placeholder="Ej: 1200">
         </div>
     </div>
 
     <div class="card">
         <h3>3. Vacaciones</h3>
         <div class="form-group">
-            <label>Días por convenio al año</label>
+            <label>Días de Vacaciones por Convenio (Anual)</label>
             <input type="number" id="v_convenio" value="30">
         </div>
         <div class="form-group">
             <label>Días ya disfrutados este año</label>
             <input type="number" id="v_disfrutadas" value="0">
         </div>
-        <div class="info-box">Si tienes días de años anteriores por una baja, súmalos aquí.</div>
     </div>
 
-    <button class="btn-next" onclick="validarYProceder()">Calcular Indemnización y Finiquito</button>
+    <button onclick="procesarCalculo()">CALCULAR AHORA</button>
+
+    <div id="resultado">
+        <h3>Estimación de Resultados</h3>
+        <div id="res_content"></div>
+        <div class="res-total" id="res_total"></div>
+    </div>
 </div>
 
 <script>
     function togglePagas() {
         const sistema = document.getElementById('p_sistema').value;
-        const divExtra = document.getElementById('extra_pagas');
-        divExtra.className = (sistema === 'no_pro') ? '' : 'hidden';
+        document.getElementById('extra_data').classList.toggle('hidden', sistema === 'pro');
     }
 
-    function validarYProceder() {
-        // Aquí conectaremos con la pantalla de advertencia y luego los resultados
-        alert("Datos recogidos. Siguiente paso: Pantalla de Advertencia del Finiquito.");
+    function procesarCalculo() {
+        // 1. Recoger Valores
+        const f_inicio = new Date(document.getElementById('f_inicio').value);
+        const f_fin = new Date(document.getElementById('f_fin').value);
+        const s_anual = parseFloat(document.getElementById('s_anual').value) || 0;
+        const s_mensual = parseFloat(document.getElementById('s_mensual').value) || 0;
+        const v_convenio = parseInt(document.getElementById('v_convenio').value) || 30;
+        const v_disfrutadas = parseInt(document.getElementById('v_disfrutadas').value) || 0;
+
+        if (isNaN(f_inicio) || isNaN(f_fin)) {
+            alert("Por favor, introduce las fechas correctamente.");
+            return;
+        }
+
+        // 2. Cálculos de Tiempos
+        const diffTime = Math.abs(f_fin - f_inicio);
+        const totalDiasRelacion = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        const añosAntiguedad = (totalDiasRelacion / 365).toFixed(2);
+
+        // 3. Cálculo Salario Día (Indemnización)
+        const salarioDiaIndem = s_anual / 365;
+
+        // 4. Cálculo Vacaciones Pendientes
+        // Calculamos días desde el 1 de enero del año de fin
+        const inicioAño = new Date(f_fin.getFullYear(), 0, 1);
+        const diasAñoActual = Math.ceil((f_fin - inicioAño) / (1000 * 60 * 60 * 24)) + 1;
+        const vacacionesGeneradas = (v_convenio / 365) * diasAñoActual;
+        const vacacionesPendientes = Math.max(0, vacacionesGeneradas - v_disfrutadas);
+        const pagoVacaciones = vacacionesPendientes * (s_anual / 360); // Criterio habitual finiquito
+
+        // 5. Mostrar en el "Ticket" de resultados
+        document.getElementById('resultado').style.display = 'block';
+        let html = `
+            <div class="res-line"><span>Antigüedad total:</span> <span>${añosAntiguedad} años</span></div>
+            <div class="res-line"><span>Salario Día (Indem):</span> <span>${salarioDiaIndem.toFixed(2)} €</span></div>
+            <div class="res-line"><span>Días Vacaciones Devengados:</span> <span>${vacacionesGeneradas.toFixed(2)}</span></div>
+            <div class="res-line"><span>Vacaciones a cobrar:</span> <span>${vacacionesPendientes.toFixed(2)} días</span></div>
+            <div class="res-line"><span>Importe Vacaciones:</span> <span>${pagoVacaciones.toFixed(2)} €</span></div>
+            <hr>
+            <p style="font-size: 0.8rem; color: #aaa;">* El cálculo de vacaciones es proporcional al año en curso.</p>
+        `;
+        
+        document.getElementById('res_content').innerHTML = html;
+        document.getElementById('res_total').innerText = "INDEMNIZACIÓN (33 días): " + (salarioDiaIndem * 33 * añosAntiguedad).toFixed(2) + " €";
     }
 </script>
 
