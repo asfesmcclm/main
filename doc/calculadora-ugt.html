@@ -116,48 +116,43 @@
 <script src="js-calculadora/config.js"></script>
 <script src="js-calculadora/logic.js"></script>
 <script src="js-calculadora/ui.js"></script>
-<script>
+
+    <script>
     window.onload = function() {
-        // 1. Configuración de fechas
+        // 1. Configuración de fechas por defecto
         const hoy = new Date().toISOString().split('T')[0];
         const fFinInput = document.getElementById('f_fin');
         const fIniInput = document.getElementById('f_inicio');
-        
         if (fFinInput) fFinInput.value = hoy;
         if (fIniInput) fIniInput.max = hoy;
         
-        // 2. Inyección segura de textos (Evita cajas vacías)
+        // 2. Inyección de textos (ESTO RELLENA LAS CAJAS VACÍAS)
         try {
             if (typeof UI !== 'undefined') {
-                const ayuda = document.getElementById('ayuda_salario');
-                if (ayuda) ayuda.innerHTML = UI.textos.ayudaSalario;
-
-                const smi = document.getElementById('alert_smi');
-                if (smi) smi.innerText = UI.textos.smiAviso;
-
-                const alto = document.getElementById('alert_high');
-                if (alto) alto.innerText = UI.textos.altoAviso;
-
+                document.getElementById('ayuda_salario').innerHTML = UI.textos.ayudaSalario;
+                document.getElementById('alert_smi').innerText = UI.textos.smiAviso;
+                document.getElementById('alert_high').innerText = UI.textos.altoAviso;
+                
+                // Rellenamos los párrafos de Hacienda y Seguridad Social
                 const pHacienda = document.querySelector('#seccion_hacienda p');
                 if (pHacienda) pHacienda.innerHTML = UI.textos.haciendaInfo;
-
+                
                 const pSeguro = document.querySelector('#seccion_seguro p');
                 if (pSeguro) pSeguro.innerHTML = UI.textos.ssInfo;
             }
         } catch (e) {
-            console.error("Error al cargar textos de la interfaz:", e);
+            console.error("Error al inyectar textos:", e);
         }
 
-        // 3. Vigilante de antigüedad (Cálculo en tiempo real)
+        // 3. Vigilante de antigüedad (Cálculo automático al poner fechas)
         document.querySelectorAll('#f_inicio, #f_fin').forEach(el => {
             el.addEventListener('change', () => {
                 const f1Val = document.getElementById('f_inicio').value;
                 const f2Val = document.getElementById('f_fin').value;
-                
-                if (f1Val && f2Val) {
+                if (f1Val && f2Val && typeof MotorCalculo !== 'undefined') {
                     const f1 = new Date(f1Val);
                     const f2 = new Date(f2Val);
-                    if (f1 <= f2 && typeof MotorCalculo !== 'undefined') {
+                    if (f1 <= f2) {
                         const antiguedad = MotorCalculo.obtenerAntiguedadDetallada(f1, f2);
                         UI.mostrarAntiguedad(antiguedad);
                     }
@@ -199,7 +194,7 @@
     }
 
     function renderizarTodo(informe) {
-        // 1. Mostrar Exclusiones
+        // 1. Mostrar Exclusiones (Aparece arriba de los resultados)
         const avisoEx = document.getElementById('aviso_exclusiones');
         const textoEx = document.getElementById('texto_exclusiones');
         if (avisoEx && textoEx) {
@@ -207,7 +202,7 @@
             avisoEx.style.display = 'block';
         }
 
-        // 2. Renderizar Lista
+        // 2. Renderizar la lista de indemnizaciones
         let html = "";
         informe.forEach(item => {
             html += `
@@ -230,23 +225,6 @@
             avisoEx.scrollIntoView({ behavior: 'smooth' });
         }
     }
-
-    // Detector de SMI en tiempo real con validación
-    document.getElementById('s_importe').addEventListener('input', function() {
-        const val = parseFloat(this.value.replace(',', '.')) || 0;
-        const radio = document.querySelector('input[name="tipo_s"]:checked');
-        const tipo = radio ? radio.value : 'mensual';
-        let anual = (tipo === 'diario') ? val * 365 : (tipo === 'mensual') ? val * 12 : val;
-
-        const alertSmi = document.getElementById('alert_smi');
-        const alertHigh = document.getElementById('alert_high');
-        
-        if (alertSmi && alertHigh && typeof CONFIG_LEGAL !== 'undefined') {
-            alertSmi.style.display = (anual > 0 && anual < CONFIG_LEGAL.parametros_legales.smi_anual_2026) ? 'block' : 'none';
-            alertHigh.style.display = (anual > CONFIG_LEGAL.parametros_legales.umbral_salario_alto) ? 'block' : 'none';
-        }
-    });
-</script>
-    
+</script>    
 </body>
 </html>
