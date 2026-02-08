@@ -1,5 +1,5 @@
 const UI = {
-    // 1. Diccionario de textos (Sin emojis)
+    // 1. Diccionario de textos (Sin emojis y con formato profesional)
     textos: {
         ayudaSalario: `
             <strong>INFO: ¿Qué cantidad debo poner?</strong><br>
@@ -34,24 +34,30 @@ const UI = {
         `
     },
 
-    // 2. Función para formatear dinero
+    // 2. Función para formatear dinero (Añade el símbolo € y separadores de miles)
     formatEuro: function(cantidad) {
-        return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(cantidad);
+        return new Intl.NumberFormat('es-ES', { 
+            style: 'currency', 
+            currency: 'EUR' 
+        }).format(cantidad);
     },
 
-    // 3. Función para pintar la antigüedad (Corrige que no se vea)
+    // 3. Función para pintar la antigüedad en el recuadro azul
     mostrarAntiguedad: function(datosAntiguedad) {
         const contenedor = document.getElementById('info_antiguedad');
         const valorTexto = document.getElementById('val_antiguedad');
+        
         if (!datosAntiguedad || !contenedor || !valorTexto) return;
 
         valorTexto.innerHTML = `Antigüedad detectada: <strong>${datosAntiguedad.dias} días</strong> (${datosAntiguedad.anios.replace('.', ',')} años).`;
         contenedor.style.display = 'block';
     },
 
-    // 4. Función para cerrar secciones (Corrige que la X no funcione)
+    // 4. Función para cerrar secciones (Activa la funcionalidad de la "X")
     cerrarSeccion: function(idSeccion) {
         const elemento = document.getElementById(idSeccion);
-        if (elemento) elemento.style.display = 'none';
+        if (elemento) {
+            elemento.style.display = 'none';
+        }
     }
 };
