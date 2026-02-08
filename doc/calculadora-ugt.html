@@ -15,7 +15,7 @@
         h2, h3 { color: var(--ugt-red); margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         
         /* BOTÓN DE CIERRE (X) */
-        .btn-close { position: absolute; top: 15px; right: 15px; background: #eee; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; font-weight: bold; color: #666; }
+        .btn-close { position: absolute; top: 15px; right: 15px; background: #eee; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; font-weight: bold; color: #666; font-size: 12px; line-height: 25px; text-align: center; }
         .btn-close:hover { background: #ddd; color: #000; }
 
         /* FORMULARIO */
@@ -88,7 +88,12 @@
 
     <button class="btn-main" onclick="ejecutarCalculo()">GENERAR INFORME DETALLADO</button>
 
-    <div id="resultado" class="card" style="margin-top: 30px;">
+    <div id="aviso_exclusiones" class="card" style="display:none; border-left: 4px solid #666; background: #f9f9f9; margin-top: 30px;">
+        <button class="btn-close" onclick="UI.cerrarSeccion('aviso_exclusiones')">X</button>
+        <div id="texto_exclusiones" style="font-size: 0.85rem; color: #444;"></div>
+    </div>
+
+    <div id="resultado" class="card" style="padding: 0; overflow: hidden; margin-top: 10px;">
         <div style="background: #333; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 0.9rem;">
             CUANTÍAS ESTIMADAS POR TIPO DE EXTINCIÓN
         </div>
@@ -98,19 +103,13 @@
     <div id="seccion_hacienda" class="card" style="margin-top: 40px; border-top: 4px solid #ffc107;">
         <button class="btn-close" onclick="UI.cerrarSeccion('seccion_hacienda')">X</button>
         <h3 style="color: #856404; font-size: 1rem;">Tributación (I.R.P.F.)</h3>
-        <p style="font-size: 0.85rem; color: #555;">
-            Las indemnizaciones por despido obligatorio están exentas de IRPF hasta el límite legal de 180.000 €. 
-            Cualquier exceso o las indemnizaciones pactadas voluntariamente tributan como rendimiento del trabajo.
-        </p>
+        <p style="font-size: 0.85rem; color: #555;"></p>
     </div>
 
     <div id="seccion_seguro" class="card" style="border-top: 4px solid #28a745;">
         <button class="btn-close" onclick="UI.cerrarSeccion('seccion_seguro')">X</button>
         <h3 style="color: #155724; font-size: 1rem;">Cotización a la S.S.</h3>
-        <p style="font-size: 0.85rem; color: #555;">
-            Las indemnizaciones por despido o cese en las cuantías obligatorias no cotizan a la Seguridad Social. 
-            Sin embargo, el finiquito (vacaciones, extras) sí conlleva cotización.
-        </p>
+        <p style="font-size: 0.85rem; color: #555;"></p>
     </div>
 </div>
 
@@ -119,26 +118,23 @@
 <script src="js-calculadora/ui.js"></script>
 
 <script>
-    /**
-     * INICIALIZACIÓN
-     */
     window.onload = function() {
-        // Configuramos fechas por defecto
         const hoy = new Date().toISOString().split('T')[0];
         document.getElementById('f_fin').value = hoy;
         document.getElementById('f_inicio').max = hoy;
         
-        // Inyectamos textos desde la UI
+        // Inyección de textos desde UI.js
         document.getElementById('ayuda_salario').innerHTML = UI.textos.ayudaSalario;
         document.getElementById('alert_smi').innerText = UI.textos.smiAviso;
         document.getElementById('alert_high').innerText = UI.textos.altoAviso;
+        document.querySelector('#seccion_hacienda p').innerHTML = UI.textos.haciendaInfo;
+        document.querySelector('#seccion_seguro p').innerHTML = UI.textos.ssInfo;
 
-        // VIGILANTE DE FECHAS (Antigüedad instantánea)
+        // Vigilante de antigüedad
         document.querySelectorAll('#f_inicio, #f_fin').forEach(el => {
             el.addEventListener('change', () => {
                 const f1 = new Date(document.getElementById('f_inicio').value);
                 const f2 = new Date(document.getElementById('f_fin').value);
-
                 if (f1.getTime() && f2.getTime() && f1 <= f2) {
                     const antiguedad = MotorCalculo.obtenerAntiguedadDetallada(f1, f2);
                     UI.mostrarAntiguedad(antiguedad);
@@ -147,9 +143,6 @@
         });
     };
 
-    /**
-     * ACCIÓN AL PULSAR CALCULAR
-     */
     function ejecutarCalculo() {
         const fIni = new Date(document.getElementById('f_inicio').value);
         const fFin = new Date(document.getElementById('f_fin').value);
@@ -161,7 +154,6 @@
             return;
         }
 
-        // Normalizamos salario anual para el motor
         let anual = parseFloat(impRaw);
         if (tipo === 'diario') anual *= 365;
         if (tipo === 'mensual') anual *= 12;
@@ -173,41 +165,43 @@
             sMes: anual / 12
         };
 
-        // Procesamos el informe con el motor y la config legal
         const informe = MotorCalculo.generarInformeCompleto(CONFIG_LEGAL, datos);
-        
-        // Renderizamos los resultados
-        renderizarLista(informe);
+        renderizarTodo(informe);
     }
 
-    function renderizarLista(informe) {
+    function renderizarTodo(informe) {
+        // 1. Mostrar Exclusiones
+        const avisoEx = document.getElementById('aviso_exclusiones');
+        document.getElementById('texto_exclusiones').innerHTML = UI.textos.exclusionIndemnizacion;
+        avisoEx.style.display = 'block';
+
+        // 2. Renderizar Lista
         let html = "";
         informe.forEach(item => {
             html += `
                 <div class="res-item">
                     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                         <span style="font-weight:bold; font-size:0.9rem; max-width:70%;">${item.nombre}</span>
-                        <span style="color:var(--ugt-red); font-weight:800; font-size:1rem; white-space:nowrap;">${UI.formatEuro(item.importe)}</span>
+                        <span style="color:var(--ugt-red); font-weight:800; font-size:1rem;">${UI.formatEuro(item.importe)}</span>
                     </div>
                     <div style="font-size:0.75rem; color:#666; margin-top:4px;">${item.descripcion}</div>
-                    <div style="font-size:0.7rem; color:#0056b3; font-style:italic; margin-top:2px;">Fórmula: ${item.formula_aplicada}</div>
+                    <div style="font-size:0.7rem; color:#0056b3; font-style:italic;">Fórmula: ${item.formula_aplicada}</div>
                     ${item.alerta ? `<div style="color:#d94141; font-weight:bold; font-size:0.75rem; margin-top:6px;">${item.alerta}</div>` : ''}
                 </div>`;
         });
         
-        const resDiv = document.getElementById('resultado');
         document.getElementById('lista_indemnizaciones').innerHTML = html;
-        resDiv.style.display = 'block';
-        resDiv.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('resultado').style.display = 'block';
+        
+        // 3. Scroll al aviso de exclusiones para lectura obligada
+        avisoEx.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // ALERTA DE SALARIO EN TIEMPO REAL
+    // Detector de SMI en tiempo real
     document.getElementById('s_importe').addEventListener('input', function() {
         const val = parseFloat(this.value.replace(',', '.')) || 0;
         const tipo = document.querySelector('input[name="tipo_s"]:checked').value;
-        let anual = val;
-        if (tipo === 'diario') anual *= 365;
-        if (tipo === 'mensual') anual *= 12;
+        let anual = (tipo === 'diario') ? val * 365 : (tipo === 'mensual') ? val * 12 : val;
 
         document.getElementById('alert_smi').style.display = (anual > 0 && anual < CONFIG_LEGAL.parametros_legales.smi_anual_2026) ? 'block' : 'none';
         document.getElementById('alert_high').style.display = (anual > CONFIG_LEGAL.parametros_legales.umbral_salario_alto) ? 'block' : 'none';
