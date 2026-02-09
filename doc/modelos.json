@@ -1,80 +1,80 @@
-{
-"m1": {
-    "titulo": "1. Permiso Parental (8 semanas) - Art. 48.bis ET",
-    "uso": "Para el cuidado de hija/o menor de 8 años. Individual e intransferible.\n• 2 SEMANAS: Pagadas al 100% (nacimientos desde 02/08/24).\n• 6 SEMANAS: No remuneradas, salvo mejora por Convenio.\n• AVISO: Hay sentencias que ya reconocen el pago de las 8 semanas íntegras. ¡Consulta con UGT para reclamar!",
+
+  "m1": {
+    "titulo": "1. Permiso Parental (hasta 8 semanas) - Art. 48 bis ET",
+    "uso": "Permiso parental para cuidado de menor hasta 8 años. Derecho individual. Puede disfrutarse de forma flexible. ACTUALIZACIÓN 2025: 2 semanas retribuidas al 100% por la Seguridad Social (4 semanas en monoparental), las restantes sin retribución. Protección contra despido.",
     "variables": ["empresa", "localidad", "fecha", "nombre", "dni", "email", "telefono", "fecha_nacimiento", "semanas", "monoparental", "modalidad", "fecha_inicio", "fecha_fin", "motivo"],
-    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Comunicación de disfrute de Permiso Parental (Art. 48 bis ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nLes comunico que, en virtud del art. 48 bis del Estatuto de los Trabajadores, disfrutaré del permiso parental para el cuidado de mi hijo/a nacido/a el {fecha_nacimiento}.\n\nDATOS DEL PERMISO:\n• Duración: {semanas} semanas\n• Familia monoparental: {monoparental}\n• Modalidad: {modalidad}\n• Fecha inicio: {fecha_inicio}\n• Fecha fin: {fecha_fin}\n• Motivo específico: {motivo}\n\nSe comunica con la antelación mínima de 10 días establecida por ley.\n\nAtentamente,\nFdo: {nombre}"
+    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Comunicación de disfrute de Permiso Parental (Art. 48 bis ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nLes comunico que, en virtud del art. 48 bis del Estatuto de los Trabajadores, disfrutaré del permiso parental para el cuidado de mi hijo/a nacido/a el {fecha_nacimiento}.\n\nDATOS DEL PERMISO:\n• Duración: {semanas} semanas\n• Retribución: 2 semanas retribuidas al 100% por la Seguridad Social + 6 semanas sin retribución (RD-ley 9/2025)\n• Familia monoparental: {monoparental}\n• Modalidad: {modalidad}\n• Fecha inicio: {fecha_inicio}\n• Fecha fin: {fecha_fin}\n• Motivo específico: {motivo}\n\nSe comunica con la antelación legalmente prevista (15 días o la establecida en convenio colectivo).\n\nAtentamente,\nFdo: {nombre}"
   },
   "m2": {
     "titulo": "2. Adaptación de Puesto (Art. 25 LPRL)",
-    "uso": "Protección de trabajadores especialmente sensibles a riesgos laborales por salud o embarazo.",
+    "uso": "Protección de trabajadores especialmente sensibles a riesgos laborales por razones de salud, embarazo u otras condiciones personales.",
     "variables": ["empresa", "localidad", "fecha", "nombre", "dni", "email", "telefono", "puesto", "motivo"],
-    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Solicitud de Adaptación de Puesto (Art. 25 LPRL)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nEn virtud del Art. 25 de la Ley de Prevención de Riesgos Laborales, solicito la evaluación y adaptación de mi puesto de trabajo ({puesto}) por considerar que las condiciones actuales pueden afectar a mi salud debido a: {motivo}.\n\nAtentamente,\nFdo: {nombre}"
+    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Solicitud de evaluación y adaptación de puesto (Art. 25 LPRL)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nEn virtud del Art. 25 de la Ley de Prevención de Riesgos Laborales, solicito la evaluación de mi puesto de trabajo ({puesto}) y la adopción de las medidas preventivas necesarias debido a: {motivo}.\n\nAtentamente,\nFdo: {nombre}"
   },
   "m3": {
     "titulo": "3. Hospitalización Recién Nacido (Art. 37.4 ET)",
-    "uso": "Derecho a ausencia (1h) y reducción (hasta 2h) por hospitalización tras el parto.",
+    "uso": "Derecho a ausencia de 1 hora o reducción de jornada hasta 2 horas con disminución proporcional de salario por hospitalización del recién nacido tras el parto.",
     "variables": ["empresa", "localidad", "fecha", "nombre", "dni", "email", "telefono", "fecha_nacimiento", "modalidad"],
-    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Comunicación de Ausencia por Hospitalización de Recién Nacido\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nComunico que, encontrándose mi hijo/a nacido el {fecha_nacimiento} hospitalizado a continuación del parto, hago uso de mi derecho a {modalidad} (ausencia de 1h o reducción de jornada) según el Art. 37.4 del ET.\n\nAtentamente,\nFdo: {nombre}"
+    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Comunicación de derecho por hospitalización de recién nacido (Art. 37.4 ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nComunico que, encontrándose mi hijo/a nacido el {fecha_nacimiento} hospitalizado a continuación del parto, hago uso de mi derecho a {modalidad} conforme al Art. 37.4 del ET.\n\nAtentamente,\nFdo: {nombre}"
   },
   "m4": {
     "titulo": "4. Exámenes Prenatales y Preparación (Art. 37.3.f ET)",
-    "uso": "Permiso retribuido por el tiempo indispensable para pruebas y técnicas de preparación al parto.",
+    "uso": "Permiso retribuido por el tiempo indispensable para exámenes prenatales y técnicas de preparación al parto.",
     "variables": ["empresa", "localidad", "fecha", "nombre", "dni", "email", "telefono", "fecha_inicio", "motivo"],
-    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Comunicación de Ausencia Retribuida (Art. 37.3.f ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nComunico que el día {fecha_inicio} me ausentaré de mi puesto por el tiempo indispensable para: {motivo} (Examen prenatal / Técnica de preparación al parto), aportando posteriormente el justificante correspondiente.\n\nAtentamente,\nFdo: {nombre}"
+    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Ausencia retribuida por exámenes prenatales/preparación al parto (Art. 37.3.f ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nComunico que el día {fecha_inicio} me ausentaré de mi puesto por el tiempo indispensable para: {motivo}, aportando el justificante correspondiente.\n\nAtentamente,\nFdo: {nombre}"
   },
   "m5": {
     "titulo": "5. Excedencia Voluntaria (Art. 46.2 ET)",
-    "uso": "Para trabajadores con al menos un año de antigüedad. Duración de 4 meses a 5 años.",
+    "uso": "Para personas trabajadoras con al menos un año de antigüedad. Duración entre 4 meses y 5 años.",
     "variables": ["empresa", "localidad", "fecha", "nombre", "dni", "email", "telefono", "fecha_inicio", "fecha_fin"],
-    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Solicitud de Excedencia Voluntaria\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nSolicito mi paso a la situación de Excedencia Voluntaria, según el Art. 46.2 del ET, desde el día {fecha_inicio} hasta el {fecha_fin}.\n\nAtentamente,\nFdo: {nombre}"
+    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Solicitud de excedencia voluntaria (Art. 46.2 ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nSolicito mi paso a la situación de excedencia voluntaria desde el día {fecha_inicio} hasta el {fecha_fin}.\n\nAtentamente,\nFdo: {nombre}"
   },
   "m6": {
-    "titulo": "6. Formación Profesional (20 Horas) - Art. 23.3 ET",
-    "uso": "Permiso retribuido de 20h anuales acumulables para formación vinculada al puesto.",
+    "titulo": "6. Formación Profesional (20 horas) - Art. 23.3 ET",
+    "uso": "Derecho a 20 horas anuales de formación vinculada al puesto, acumulables hasta 5 años. Requiere al menos 1 año de antigüedad. Es un permiso retribuido, no obligación de la empresa de impartir formación.",
     "variables": ["empresa", "localidad", "fecha", "nombre", "dni", "email", "telefono", "motivo", "fecha_inicio"],
-    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Solicitud de Permiso Retribuido para Formación\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nSolicito el disfrute de las 20 horas anuales de formación acumuladas para realizar la siguiente actividad formativa: {motivo}, con inicio el día {fecha_inicio}.\n\nAtentamente,\nFdo: {nombre}"
+    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Solicitud de permiso retribuido para formación (Art. 23.3 ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nSolicito el disfrute de horas de formación acumuladas para realizar la actividad formativa: {motivo}, vinculada a la actividad de la empresa, con inicio el día {fecha_inicio}.\n\nAtentamente,\nFdo: {nombre}"
   },
   "m7": {
     "titulo": "7. Fin de Permiso y Reincorporación",
-    "uso": "Preaviso para el retorno al puesto tras finalizar una excedencia o permiso.",
+    "uso": "Comunicación de reincorporación tras excedencia o permiso.",
     "variables": ["empresa", "localidad", "fecha", "nombre", "dni", "email", "telefono", "motivo", "fecha_inicio"],
-    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Comunicación de Reincorporación tras {motivo}\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nComunico mi decisión de reincorporarme a mi puesto de trabajo habitual el próximo día {fecha_inicio}, tras finalizar mi periodo de {motivo}.\n\nAtentamente,\nFdo: {nombre}"
+    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Comunicación de reincorporación tras {motivo}\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nComunico mi reincorporación a mi puesto de trabajo el día {fecha_inicio}.\n\nAtentamente,\nFdo: {nombre}"
   },
   "m8": {
-    "titulo": "8. Lactancia Acumulada - Derecho Automático",
-    "uso": "DERECHO AUTOMÁTICO (RDL 2/2024). No requiere acuerdo con la empresa ni previsión en convenio.",
+    "titulo": "8. Lactancia (Art. 37.4 ET)",
+    "uso": "Derecho a una hora de ausencia, reducción de jornada o acumulación en jornadas completas. ACTUALIZACIÓN 2024: La modalidad de disfrute es decisión del trabajador, sin necesidad de acuerdo con la empresa (RD-ley 2/2024).",
     "variables": ["empresa", "localidad", "fecha", "nombre", "dni", "email", "telefono", "fecha_nacimiento", "parto_multiple", "fecha_inicio", "fecha_fin"],
-    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Comunicación de ejercicio del derecho a Lactancia Acumulada (Art. 37.4 ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nEn virtud del Art. 37.4 del Estatuto de los Trabajadores, tras la reforma del RDL 2/2024, les comunico mi decisión de sustituir la hora de ausencia por lactancia por su acumulación en jornadas completas.\n\nDATOS:\n• Fecha nacimiento hijo/a: {fecha_nacimiento}\n• Parto múltiple: {parto_multiple}\n• Inicio acumulación: {fecha_inicio}\n• Fin acumulación: {fecha_fin}\n\nEste derecho es de ejercicio unilateral y no requiere pacto previo con la empresa.\n\nAtentamente,\nFdo: {nombre}"
+    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Ejercicio del derecho de lactancia (Art. 37.4 ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nComunico mi decisión de ejercer el derecho de lactancia respecto a mi hijo/a nacido el {fecha_nacimiento}, optando por la modalidad de acumulación en jornadas completas.\n\nConforme al Art. 37.4 ET modificado por RD-ley 2/2024, la decisión sobre la modalidad de disfrute corresponde al trabajador.\n\nInicio: {fecha_inicio}\nFin: {fecha_fin}\n\nAtentamente,\nFdo: {nombre}"
   },
   "m9": {
     "titulo": "9. Adaptación de Jornada (Art. 34.8 ET)",
-    "uso": "Para conciliación familiar hasta los 12 años del hijo/a. Incluye teletrabajo y cambios de turno.",
+    "uso": "Solicitud de adaptación de jornada y forma de trabajo para conciliación familiar. La empresa debe contestar en 15 días. Protección contra despido.",
     "variables": ["empresa", "localidad", "fecha", "nombre", "dni", "email", "telefono", "puesto", "departamento", "edad_menor", "parentesco", "motivo"],
-    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Solicitud de Adaptación de Jornada (Conciliación Familiar - Art. 34.8 ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\nPuesto: {puesto} / Depto: {departamento}\n\nSolicito acogerme al derecho de adaptación de mi jornada para conciliar la vida familiar y laboral por el cuidado de {parentesco} de {edad_menor} años.\n\nPROPUESTA DE ADAPTACIÓN:\n{motivo}\n\nAbro con esta comunicación el periodo de negociación de 15 días establecido por ley.\n\nAtentamente,\nFdo: {nombre}"
+    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Solicitud de adaptación de jornada (Art. 34.8 ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\nPuesto: {puesto} / Depto: {departamento}\n\nSolicito la adaptación de mi jornada por cuidado de {parentesco} de {edad_menor} años.\n\nPROPUESTA:\n{motivo}\n\nQuedo a la espera del inicio del periodo de negociación previsto legalmente (la empresa debe contestar en un plazo máximo de 15 días).\n\nAtentamente,\nFdo: {nombre}"
   },
   "m10": {
     "titulo": "10. Excedencia Cuidado Hijo/a (Art. 46.3 ET)",
-    "uso": "Reserva del puesto de trabajo y cómputo de antigüedad. Máximo 3 años.",
+    "uso": "Excedencia por cuidado de hijo/a con reserva de puesto durante el primer año (15-18 meses en familia numerosa) y cómputo de antigüedad. Duración máxima 3 años.",
     "variables": ["empresa", "localidad", "fecha", "nombre", "dni", "email", "telefono", "puesto", "fecha_nacimiento", "fecha_inicio", "fecha_fin"],
-    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Solicitud de Excedencia por Cuidado de Hijo/a (Art. 46.3 ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nSolicito el pase a situación de excedencia por cuidado de mi hijo/a nacido el {fecha_nacimiento}, con efectos desde el día {fecha_inicio} y hasta el {fecha_fin}.\n\nAtentamente,\nFdo: {nombre}"
+    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Excedencia por cuidado de hijo/a (Art. 46.3 ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nSolicito excedencia por cuidado de mi hijo/a nacido el {fecha_nacimiento} desde {fecha_inicio} hasta {fecha_fin}.\n\nAtentamente,\nFdo: {nombre}"
   },
   "m11": {
     "titulo": "11. Prórroga Excedencia Familiar",
-    "uso": "Para ampliar el periodo de excedencia comunicado previamente, dentro de los límites legales.",
+    "uso": "Comunicación de prórroga dentro de los límites legales: hasta 3 años para hijos, hasta 2 años para otros familiares (salvo mejora en convenio colectivo).",
     "variables": ["empresa", "localidad", "fecha", "nombre", "dni", "email", "telefono", "parentesco", "fecha_fin", "convenio"],
-    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Comunicación de Prórroga de Excedencia Familiar\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nComunico mi decisión de prorrogar la excedencia que vengo disfrutando por el cuidado de {parentesco} hasta el próximo día {fecha_fin}, según lo previsto en el {convenio}.\n\nAtentamente,\nFdo: {nombre}"
+    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Prórroga de excedencia por cuidado de {parentesco}\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nComunico la prórroga de la excedencia que vengo disfrutando hasta el {fecha_fin}.\n\nAtentamente,\nFdo: {nombre}"
   },
   "m12": {
     "titulo": "12. Reducción Jornada Guarda Legal (Art. 37.6 ET)",
-    "uso": "Reducción de entre 1/8 y 1/2 de la jornada con reducción proporcional de salario.",
+    "uso": "Reducción entre un octavo (12,5%) y la mitad (50%) de la jornada con reducción proporcional de salario por cuidado de menor de 12 años o familiar dependiente. La reducción afecta solo a conceptos salariales ligados al tiempo de trabajo.",
     "variables": ["empresa", "localidad", "fecha", "nombre", "dni", "email", "telefono", "edad_menor", "reduccion", "fecha_inicio"],
-    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Comunicación de Reducción de Jornada por Guarda Legal\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nComunico que, en virtud del Art. 37.6 del ET, ejerceré mi derecho a la reducción de jornada por cuidado de menor de {edad_menor} años.\n\nDATOS DE LA REDUCCIÓN:\n• Porcentaje/Concreción: {reduccion}\n• Fecha de inicio: {fecha_inicio}\n\nAtentamente,\nFdo: {nombre}"
+    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Reducción de jornada por guarda legal (Art. 37.6 ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nComunico el ejercicio de mi derecho a reducción de jornada por cuidado de menor de {edad_menor} años.\n\nConcreción: {reduccion}\nInicio: {fecha_inicio}\n\nSe comunica con el preaviso de 15 días o el previsto en convenio colectivo.\n\nAtentamente,\nFdo: {nombre}"
   },
   "m13": {
-    "titulo": "13. Permiso Nacimiento (19 semanas) - ACTUALIZADO",
-    "uso": "Actualizado a 19 semanas (Ley Familias 2026). Incluye ampliaciones por parto múltiple o discapacidad.",
+    "titulo": "13. Permiso por Nacimiento y Cuidado del Menor (Art. 48 ET)",
+    "uso": "Suspensión del contrato por nacimiento y cuidado del menor. ACTUALIZACIÓN 2025: 19 semanas cada progenitor (antes 16), ampliadas a 32 semanas en familias monoparentales. Vigente desde 31 julio 2025 (RD-ley 9/2025). Incluye 2 semanas adicionales flexibles hasta los 8 años del menor.",
     "variables": ["empresa", "localidad", "fecha", "nombre", "dni", "email", "telefono", "fecha_nacimiento", "semanas", "monoparental", "discapacidad", "fecha_inicio", "fecha_fin"],
-    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Comunicación de suspensión de contrato por nacimiento (19 SEMANAS)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nComunico el nacimiento de mi hijo/a el {fecha_nacimiento} y mi decisión de disfrutar del permiso de {semanas} semanas (incluyendo la ampliación de 2026).\n\nDATOS:\n• Familia monoparental: {monoparental}\n• Discapacidad/Parto múltiple: {discapacidad}\n• Fecha inicio: {fecha_inicio}\n• Fecha fin: {fecha_fin}\n\nAtentamente,\nFdo: {nombre}"
+    "plantilla": "A la Dirección de la empresa: {empresa}\nEn {localidad}, a {fecha}\n\nAsunto: Suspensión del contrato por nacimiento y cuidado del menor (Art. 48 ET)\n\nD./Dña. {nombre} con DNI {dni}\nEmail: {email}\nTeléfono: {telefono}\n\nComunico el nacimiento de mi hijo/a el {fecha_nacimiento} y mi decisión de iniciar el periodo de suspensión del contrato por nacimiento y cuidado del menor.\n\nDuración: {semanas} semanas (RD-ley 9/2025: 19 semanas en familias biparentales, 32 en monoparentales)\n• 6 semanas obligatorias inmediatamente tras el nacimiento\n• 11 semanas voluntarias (hasta 12 meses después del nacimiento)\n• 2 semanas adicionales flexibles (pueden disfrutarse hasta que el menor cumpla 8 años)\n\nInicio: {fecha_inicio}\nFin estimado semanas obligatorias y voluntarias: {fecha_fin}\n\nAtentamente,\nFdo: {nombre}"
   }
 }
