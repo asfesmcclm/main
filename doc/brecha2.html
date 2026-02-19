@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe Brecha Salarial 2026 · FeSMC UGT CLM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+  <style>
+    :root {
+      --bg-dark: #0F0A1A;
+      --primary: #9333EA;
+      --secondary: #C026D3;
+      --accent: #EA580C;
+      --text-main: #FAF5FF;
+      --text-muted: #A855F7;
+      --glass: rgba(107, 33, 168, 0.15);
+      --border: rgba(168, 85, 247, 0.2);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #C084FC, #E879F9, #F0ABFC);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(15, 10, 26, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 1rem 2rem;
+    }
+
+    .navbar ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .navbar a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+      color: var(--primary);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url('https://image.qwenlm.ai/public_source/5fda7da2-2ee6-476c-9672-1b464aeb4516/15ee15a59-056f-46df-9567-4387d2742fe9.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.4;
+      z-index: 0;
+      filter: blur(2px);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .hero-tag {
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(4rem, 15vw, 10rem);
+      line-height: 0.9;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 40px rgba(147, 51, 234, 0.5);
+    }
+
+    .hero-sub {
+      font-size: 1.25rem;
+      color: #E9D5FF;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      font-weight: 300;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      opacity: 0.7;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, 10px); }
+    }
+
+    /* ─── BIG STAT ─── */
+    .big-stat-section {
+      background: linear-gradient(135deg, #4C1D95, #7E22CE);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .big-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 15vw, 12rem);
+      line-height: 1;
+      color: white;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .big-label {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.9;
+      margin-top: 1rem;
+    }
+
+    /* ─── LAYOUT UTILS ─── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: #C084FC;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      color: #A78BFA;
+      max-width: 600px;
+      font-size: 1.1rem;
+    }
+
+    /* ─── SALARY CHARTS ─── */
+    .salary-chart-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: var(--glass);
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+    }
+
+    /* ─── PROVINCES ─── */
+    .province-section {
+      background: rgba(107, 33, 168, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .province-map-bg {
+      position: absolute;
+      right: -10%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50%;
+      opacity: 0.1;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .province-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .province-card {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .province-card:hover {
+      background: rgba(147, 51, 234, 0.2);
+      border-color: var(--primary);
+      transform: scale(1.05);
+    }
+
+    .province-name {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .province-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: white;
+      line-height: 1;
+    }
+
+    .province-bar-bg {
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      margin-top: 1rem;
+      overflow: hidden;
+    }
+
+    .province-bar-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .province-card.worst .province-bar-fill { background: #EF4444; }
+    .province-card.best .province-bar-fill { background: #10B981; }
+
+    .province-note {
+      font-size: 0.75rem;
+      color: #D8B4FE;
+      margin-top: 0.5rem;
+      min-height: 2.5em;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s;
+    }
+
+    .province-card.active .province-note {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── SECTORS LIST ─── */
+    .sector-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .sector-row {
+      display: grid;
+      grid-template-columns: 2fr 80px 1fr;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.02);
+      border-radius: 0.75rem;
+      border: 1px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .sector-row:hover {
+      background: rgba(147, 51, 234, 0.1);
+      border-color: var(--border);
+    }
+
+    .sector-name { font-weight: 500; }
+    .sector-pct { font-family: 'Bebas Neue'; font-size: 1.5rem; color: var(--secondary); text-align: right; }
+
+    .sector-bar-track {
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .sector-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      width: 0;
+      transition: width 1.2s ease-out;
+    }
+
+    /* ─── PART TIME ─── */
+    .parttime-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .parttime-card {
+      background: rgba(0,0,0,0.2);
+      padding: 2rem;
+      border-radius: 1rem;
+    }
+
+    .parttime-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .bar-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .bar-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .bar-container {
+      height: 40px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0;
+      transition: width 1s ease-out;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .bar-woman { background: linear-gradient(90deg, #C026D3, #9333EA); }
+    .bar-man { background: linear-gradient(90deg, #4F46E5, #3B82F6); }
+
+    /* ─── PENSIONS ─── */
+    .pension-section {
+      background: linear-gradient(180deg, var(--bg-dark) 0%, #1C1244 100%);
+      text-align: center;
+    }
+
+    .pension-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .pension-stat {
+      padding: 2rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .pension-num {
+      font-family: 'Bebas Neue';
+      font-size: 4rem;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .text-red { color: #F87171; }
+    .text-purple { color: #C084FC; }
+    .text-orange { color: #FB923C; }
+
+    /* ─── QUOTE ─── */
+    .quote-section {
+      padding: 6rem 2rem;
+      text-align: center;
+      background: url('https://image.qwenlm.ai/public_source/5fda7da2-2ee6-476c-9672-1b464aeb4516/155285bad-67bf-4cd0-9c89-a07c43a0efa4.png') no-repeat center center;
+      background-size: cover;
+      position: relative;
+    }
+
+    .quote-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 10, 26, 0.85);
+      backdrop-filter: blur(5px);
+    }
+
+    .quote-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      color: white;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #7C3AED;
+      font-size: 0.9rem;
+    }
+
+    .share-buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .share-button {
+      padding: 0.5rem 1rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      transition: background 0.3s;
+    }
+
+    .share-button:hover {
+      background: var(--secondary);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal.delay-1 { animation-delay: 0.2s; }
+    .reveal.delay-2 { animation-delay: 0.4s; }
+    .reveal.delay-3 { animation-delay: 0.6s; }
+
+    @media (max-width: 768px) {
+      .sector-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        text-align: center;
+      }
+      .sector-pct { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="#salarios">Salarios</a></li>
+      <li><a href="#provincias">Provincias</a></li>
+      <li><a href="#sectores">Sectores</a></li>
+      <li><a href="#pensiones">Pensiones</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-tag">FeSMC UGT Castilla-La Mancha · 22 de Febrero 2026</p>
+      <h1>
+        BRECHA <br>
+        <span class="gradient-text">SALARIAL</span> <br>
+        2026
+      </h1>
+      <p class="hero-sub">
+        Las mujeres de Castilla-La Mancha ganan de media <strong>429,8€ menos al mes</strong> que los hombres. Una desigualdad estructural que no termina con la jubilación.
+      </p>
+    </div>
+    <div class="scroll-indicator">Explora los datos ↓</div>
+  </section>
+
+  <!-- BIG STAT -->
+  <div class="big-stat-section">
+    <div class="big-number" id="counter">0%</div>
+    <p class="big-label">Brecha salarial en Castilla-La Mancha (INE 2023)</p>
+  </div>
+
+  <!-- SALARIES -->
+  <section class="container" id="salarios">
+    <div class="section-header reveal">
+      <h2 class="section-title">Lo que cobran</h2>
+      <p class="section-desc">Salario medio mensual en Castilla-La Mancha. La diferencia no es solo un número, es calidad de vida.</p>
+    </div>
+
+    <div class="salary-chart-container reveal">
+      <canvas id="salaryChart"></canvas>
+    </div>
+
+    <div class="gap-highlight reveal">
+      <h3>–429,8 € / mes</h3>
+      <p>–5.158 € / año de diferencia</p>
+    </div>
+
+    <div class="facts-grid reveal">
+      <div class="fact-item">
+        <div class="fact-num">85%</div>
+        <div class="fact-text">De las excedencias por cuidados en CLM (2025) fueron pedidas por mujeres.</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-num">75,3%</div>
+        <div class="fact-text">De las personas con jornada parcial son mujeres. Solo el 16% lo eligió voluntariamente.</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-num">29,6%</div>
+        <div class="fact-text">Brecha en ocupaciones básicas vs 14,28% en puestos con titulación superior.</div>
+      </div>
+      <div class="fact-item">
+        <div class="fact-num">–64%</div>
+        <div class="fact-text">Se reduciría la brecha si las mujeres trabajaran con la misma intensidad horaria.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVINCES -->
+  <section class="container province-section" id="provincias">
+    <img src="https://image.qwenlm.ai/public_source/5fda7da2-2ee6-476c-9672-1b464aeb4516/12c3474c5-035a-4ec7-bf25-fbc31365fbce.png" alt="Mapa CLM" class="province-map-bg">
+
+    <div class="section-header reveal">
+      <h2 class="section-title">Por provincias</h2>
+      <p class="section-desc">Guadalajara encabeza la desigualdad por el auge logístico masculinizado del Corredor del Henares.</p>
+    </div>
+
+    <div class="province-grid reveal">
+      <div class="province-card worst" onclick="toggleNote(this)">
+        <div class="province-name">Guadalajara</div>
+        <div class="province-val">33%</div>
+        <div class="province-bar-bg"><div class="province-bar-fill" data-width="100%"></div></div>
+        <div class="province-note">El boom logístico del Corredor del Henares masculiniza los puestos mejor remunerados.</div>
+      </div>
+
+      <div class="province-card" onclick="toggleNote(this)">
+        <div class="province-name">Toledo</div>
+        <div class="province-val">27%</div>
+        <div class="province-bar-bg"><div class="province-bar-fill" data-width="82%"></div></div>
+        <div class="province-note">Mayor concentración de pensiones con complemento a mínimos: 37.847 pensiones.</div>
+      </div>
+
+      <div class="province-card" onclick="toggleNote(this)">
+        <div class="province-name">C. Real</div>
+        <div class="province-val">24%</div>
+        <div class="province-bar-bg"><div class="province-bar-fill" data-width="73%"></div></div>
+        <div class="province-note">Brechas superiores a la media regional en todos los sectores analizados.</div>
+      </div>
+
+      <div class="province-card" onclick="toggleNote(this)">
+        <div class="province-name">Albacete</div>
+        <div class="province-val">21%</div>
+        <div class="province-bar-bg"><div class="province-bar-fill" data-width="64%"></div></div>
+        <div class="province-note">Tejido productivo de pymes con estructura más igualitaria pero aún desigual.</div>
+      </div>
+
+      <div class="province-card best" onclick="toggleNote(this)">
+        <div class="province-name">Cuenca</div>
+        <div class="province-val">17%</div>
+        <div class="province-bar-bg"><div class="province-bar-fill" data-width="52%"></div></div>
+        <div class="province-note">Menor industrialización = menor brecha, pero también los salarios más bajos.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTORS -->
+  <section class="container" id="sectores">
+    <div class="section-header reveal">
+      <h2 class="section-title">Por sectores</h2>
+      <p class="section-desc">Los sectores de FeSMC presentan una brecha conjunta del 18,33% — 2,8 puntos por encima de la media regional.</p>
+    </div>
+
+    <div class="sector-list reveal">
+      <div class="sector-row">
+        <div class="sector-name">Act. Administrativas y Servicios Auxiliares</div>
+        <div class="sector-pct">26,7%</div>
+        <div class="sector-bar-track"><div class="sector-bar-fill" data-width="100%"></div></div>
+      </div>
+      <div class="sector-row">
+        <div class="sector-name">Comercio y Grandes Almacenes</div>
+        <div class="sector-pct">23,8%</div>
+        <div class="sector-bar-track"><div class="sector-bar-fill" data-width="89%"></div></div>
+      </div>
+      <div class="sector-row">
+        <div class="sector-name">Financiero, Oficinas y Seguros</div>
+        <div class="sector-pct">19,4%</div>
+        <div class="sector-bar-track"><div class="sector-bar-fill" data-width="73%"></div></div>
+      </div>
+      <div class="sector-row">
+        <div class="sector-name">Limpieza de Edificios y Locales</div>
+        <div class="sector-pct">18,5%</div>
+        <div class="sector-bar-track"><div class="sector-bar-fill" data-width="69%"></div></div>
+      </div>
+      <div class="sector-row">
+        <div class="sector-name">Hostelería, Restauración y Turismo</div>
+        <div class="sector-pct">16,2%</div>
+        <div class="sector-bar-track"><div class="sector-bar-fill" data-width="61%"></div></div>
+      </div>
+      <div class="sector-row">
+        <div class="sector-name">Comunicaciones y Cultura</div>
+        <div class="sector-pct">15,6%</div>
+        <div class="sector-bar-track"><div class="sector-bar-fill" data-width="58%"></div></div>
+      </div>
+      <div class="sector-row">
+        <div class="sector-name">Transporte y Logística (Carreteras)</div>
+        <div class="sector-pct">14,1%</div>
+        <div class="sector-bar-track"><div class="sector-bar-fill" data-width="53%"></div></div>
+      </div>
+      <div class="sector-row">
+        <div class="sector-name">Seguridad Privada</div>
+        <div class="sector-pct">12,3%</div>
+        <div class="sector-bar-track"><div class="sector-bar-fill" data-width="46%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART TIME -->
+  <section class="container" style="background: rgba(107, 33, 168, 0.05); border-radius: 2rem;">
+    <div class="section-header reveal">
+      <h2 class="section-title">Trabajo a tiempo parcial</h2>
+      <p class="section-desc">La jornada parcial involuntaria es el principal mecanismo de discriminación indirecta. Porcentaje de empleados a tiempo parcial por sexo.</p>
+    </div>
+
+    <div class="parttime-grid reveal">
+      <div class="parttime-card">
+        <div class="parttime-title">Limpieza de Edificios</div>
+        <div class="bar-group">
+          <div class="bar-labels"><span>Mujeres</span><span>81,3%</span></div>
+          <div class="bar-container"><div class="bar-fill bar-woman" data-width="81.3%"></div></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-labels"><span>Hombres</span><span>12,6%</span></div>
+          <div class="bar-container"><div class="bar-fill bar-man" data-width="12.6%"></div></div>
+        </div>
+      </div>
+
+      <div class="parttime-card">
+        <div class="parttime-title">Comercio y Grandes Almacenes</div>
+        <div class="bar-group">
+          <div class="bar-labels"><span>Mujeres</span><span>68,4%</span></div>
+          <div class="bar-container"><div class="bar-fill bar-woman" data-width="68.4%"></div></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-labels"><span>Hombres</span><span>18,2%</span></div>
+          <div class="bar-container"><div class="bar-fill bar-man" data-width="18.2%"></div></div>
+        </div>
+      </div>
+
+      <div class="parttime-card">
+        <div class="parttime-title">Oficinas y Seguros</div>
+        <div class="bar-group">
+          <div class="bar-labels"><span>Mujeres</span><span>44,2%</span></div>
+          <div class="bar-container"><div class="bar-fill bar-woman" data-width="44.2%"></div></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-labels"><span>Hombres</span><span>11,3%</span></div>
+          <div class="bar-container"><div class="bar-fill bar-man" data-width="11.3%"></div></div>
+        </div>
+      </div>
+
+      <div class="parttime-card">
+        <div class="parttime-title">Media CLM (Total)</div>
+        <div class="bar-group">
+          <div class="bar-labels"><span>Mujeres</span><span>72%</span></div>
+          <div class="bar-container"><div class="bar-fill bar-woman" data-width="72%"></div></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-labels"><span>Hombres</span><span>17%</span></div>
+          <div class="bar-container"><div class="bar-fill bar-man" data-width="17%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PENSIONS -->
+  <section class="container pension-section" id="pensiones">
+    <div class="section-header reveal">
+      <h2 class="section-title">La brecha llega a la jubilación</h2>
+      <p class="section-desc">La desigualdad salarial de toda una vida se convierte en pensiones más bajas.</p>
+    </div>
+
+    <div class="pension-cards reveal">
+      <div class="pension-stat">
+        <div class="pension-num text-red">31,4%</div>
+        <p>Brecha de pensión de jubilación en CLM. Las mujeres reciben 1.072€ frente a 1.564€ de los hombres.</p>
+      </div>
+      <div class="pension-stat">
+        <div class="pension-num text-purple">40,9%</div>
+        <p>De las mujeres pensionistas necesita complemento a mínimos. Solo el 23,6% de los hombres.</p>
+      </div>
+      <div class="pension-stat">
+        <div class="pension-num text-orange">95,7%</div>
+        <p>De las pensiones de viudedad son cobradas por mujeres. Reflejo de una vida laboral discontinua.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-section">
+    <div class="quote-overlay"></div>
+    <div class="quote-content reveal">
+      <p class="quote-text">"Las mujeres de cualquier edad, sector, tipo de jornada o contrato, tienen que trabajar más para ganar lo mismo que los hombres."</p>
+      <p style="color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;">FeSMC UGT Castilla-La Mancha · Informe 2026</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><strong>FeSMC UGT Castilla-La Mancha</strong> · Informe Brecha Salarial 2026</p>
+    <p style="margin-top: 0.5rem; opacity: 0.7;">Fuentes: INE, AEAT, EPA 4T 2024, Instituto de las Mujeres, Ministerio de Trabajo.</p>
+    <div class="share-buttons">
+      <a href="https://twitter.com/intent/tweet?text=Informe%20Brecha%20Salarial%202026%20en%20Castilla-La%20Mancha%20%23IgualdadSalarial" target="_blank" class="share-button">Compartir en Twitter</a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://tudominio.com/informe-brecha-salarial" target="_blank" class="share-button">Compartir en Facebook</a>
+    </div>
+    <p style="margin-top: 2rem; color: var(--primary);">¡Ni un céntimo menos, ni un derecho atrás!</p>
+  </footer>
+
+  <script>
+    // Counter Animation
+    const counterElement = document.getElementById('counter');
+    const targetValue = 15.53;
+    let startValue = 0;
+    const duration = 2000;
+    const stepTime = Math.abs(Math.floor(duration / (targetValue * 10)));
+
+    const timer = setInterval(() => {
+      startValue += 0.1;
+      if (startValue >= targetValue) {
+        startValue = targetValue;
+        clearInterval(timer);
+      }
+      counterElement.textContent = startValue.toFixed(2) + '%';
+    }, stepTime);
+
+    // Intersection Observer for Reveal Animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+
+          // Animate bars inside the revealed section
+          const bars = entry.target.querySelectorAll('[data-width]');
+          bars.forEach(bar => {
+            bar.style.width = bar.getAttribute('data-width');
+          });
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Province Card Interaction
+    function toggleNote(card) {
+      const allCards = document.querySelectorAll('.province-card');
+      allCards.forEach(c => {
+        if (c !== card) c.classList.remove('active');
+      });
+      card.classList.toggle('active');
+    }
+
+    // Tooltips
+    tippy('.province-card', {
+      content: "Haz clic para más detalles",
+      placement: 'top',
+      animation: 'fade',
+    });
+
+    // Salary Chart
+    document.addEventListener('DOMContentLoaded', function() {
+      const ctx = document.getElementById('salaryChart').getContext('2d');
+      const salaryChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Mujeres', 'Hombres'],
+          datasets: [{
+            label: 'Salario mensual (€)',
+            data: [2163, 2593],
+            backgroundColor: [
+              'rgba(192, 132, 252, 0.7)',
+              'rgba(147, 51, 234, 0.7)'
+            ],
+            borderColor: [
+              'rgba(192, 132, 252, 1)',
+              'rgba(147, 51, 234, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            tooltip: {
+              callbacks: {
+                afterLabel: function(context) {
+                  return `Diferencia: ${2593 - 2163}€`;
+                }
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
