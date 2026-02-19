@@ -543,6 +543,99 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+/* Estilos específicos para la sección de recursos - No afectan al resto */
+  .resources-container {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 24px; 
+    justify-content: center;
+    margin: 40px auto;
+    max-width: 1200px;
+  }
+
+  /* Forzamos que los enlaces de esta sección no hereden subrayados de otros estilos */
+  a.btn-resource {
+    text-decoration: none !important;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 24px 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 320px;
+    box-sizing: border-box; /* Evita que el padding afecte al ancho total */
+  }
+
+  /* Aseguramos color blanco puro solo en los elementos internos del botón */
+  .btn-resource .btn-symbol,
+  .btn-resource .btn-title,
+  .btn-resource .btn-sub {
+    color: #FFFFFF !important;
+  }
+
+  .btn-resource:hover {
+    background: rgba(168, 85, 247, 0.15);
+    border-color: #C084FC;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Estilo exclusivo para el botón del PDF */
+  .btn-resource.highlighted {
+    background: linear-gradient(135deg, #9333EA, #C026D3) !important;
+    border: none !important;
+  }
+
+  .btn-resource.highlighted:hover {
+    box-shadow: 0 0 30px rgba(192, 38, 211, 0.5);
+  }
+
+  .btn-symbol {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  .btn-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    background: none !important; /* Evita heredar fondos de otras capas */
+  }
+
+  .btn-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .btn-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.9;
+    display: block;
+  }
+
+  /* Ajuste para móviles para que no se rompa la estructura */
+  @media (max-width: 650px) {
+    .btn-resource {
+      width: 100%;
+      min-width: auto;
+      padding: 20px;
+    }
+    .btn-title {
+      font-size: 1.6rem;
+    }
+  }  
 </style>
 </head>
 <body>
