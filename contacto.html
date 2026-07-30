@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contáctanos · FeSMC UGT Castilla-La Mancha</title>
+<style>
+  :root{
+    --rojo: #c62828;
+    --rojo-oscuro: #8e1b1b;
+    --rojo-suave: #fdecec;
+    --gris-texto: #4a4a4a;
+    --gris-claro: #6b6b6b;
+    --borde: #f0d9d9;
+    --blanco: #ffffff;
+    --fondo: #f6f3f2;
+    --radio: 20px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--fondo);
+    color: var(--gris-texto);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap{
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 0 48px;
+  }
+
+  header{
+    background: var(--blanco);
+    padding: 22px 24px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  header .logo-mark{
+    width:42px;height:42px;border-radius:50%;
+    background: var(--rojo);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:800;font-size:14px;letter-spacing:0.5px;
+    flex-shrink:0;
+  }
+
+  header .logo-text strong{
+    display:block;
+    font-size:17px;
+    color:#1c1c1c;
+    font-weight:800;
+    letter-spacing:0.2px;
+  }
+  header .logo-text span{
+    display:block;
+    font-size:11px;
+    color: var(--gris-claro);
+    letter-spacing:0.6px;
+    text-transform:uppercase;
+    margin-top:1px;
+  }
+
+  .hero{
+    margin: 20px 20px 0;
+    background: linear-gradient(160deg, var(--rojo) 0%, var(--rojo-oscuro) 100%);
+    border-radius: var(--radio);
+    padding: 40px 28px 36px;
+    text-align:center;
+    color:#fff;
+    box-shadow: 0 12px 30px -14px rgba(142,27,27,0.55);
+  }
+
+  .hero h1{
+    margin:0 0 10px;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+  }
+
+  .hero p{
+    margin:0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: #ffe4e4;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .hero .badge{
+    display:inline-block;
+    margin-top:16px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    color:#fff;
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:0.4px;
+    text-transform:uppercase;
+    padding:6px 14px;
+    border-radius: 30px;
+  }
+
+  .intro-card{
+    margin: -18px 20px 0;
+    position:relative;
+    background: var(--blanco);
+    border-radius: 16px;
+    padding: 22px 22px 20px;
+    box-shadow: 0 10px 24px -18px rgba(0,0,0,0.25);
+    border: 1px solid #f1e6e6;
+  }
+
+  .intro-card p{
+    margin:0;
+    font-size: 13.8px;
+    line-height:1.6;
+    color: var(--gris-texto);
+  }
+
+  .intro-card p.confidencial{
+    margin-top:10px;
+    font-size:12.5px;
+    color: var(--gris-claro);
+    font-style: italic;
+  }
+
+  .form-section{
+    margin: 22px 20px 0;
+  }
+
+  .form-section .section-label{
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--rojo);
+    margin: 0 0 10px 4px;
+  }
+
+  .form-card{
+    background: var(--blanco);
+    border-radius: 16px;
+    border: 1px solid #eee;
+    overflow: hidden;
+    box-shadow: 0 10px 24px -20px rgba(0,0,0,0.25);
+  }
+
+  .form-card iframe{
+    width: 100%;
+    min-height: 900px;
+    border: none;
+    display:block;
+  }
+
+  .form-loading{
+    padding: 60px 20px;
+    text-align:center;
+    color: var(--gris-claro);
+    font-size: 13.5px;
+  }
+
+  .privacidad-link{
+    margin: 26px 20px 0;
+    text-align:center;
+  }
+
+  .privacidad-link button{
+    background: var(--rojo-suave);
+    border: 1px solid var(--borde);
+    color: var(--rojo);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 11px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s ease;
+  }
+
+  .privacidad-link button:hover{
+    background: #fadada;
+  }
+
+  .privacidad-link button:focus-visible{
+    outline: 2px solid var(--rojo-oscuro);
+    outline-offset: 2px;
+  }
+
+  footer{
+    margin-top: 30px;
+    text-align:center;
+    font-size: 11.5px;
+    color: #a3a3a3;
+    padding: 0 24px;
+  }
+
+  /* Modal */
+  .modal-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(20,10,10,0.55);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index: 1000;
+    padding: 0;
+  }
+  .modal-overlay.open{ display:flex; }
+
+  @media (min-width: 640px){
+    .modal-overlay{ align-items:center; padding: 24px; }
+  }
+
+  .modal{
+    background: var(--blanco);
+    width: 100%;
+    max-width: 620px;
+    max-height: 88vh;
+    border-radius: 20px 20px 0 0;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    animation: subir 0.22s ease;
+  }
+
+  @media (min-width: 640px){
+    .modal{ border-radius: 20px; max-height: 82vh; }
+  }
+
+  @keyframes subir{
+    from{ transform: translateY(24px); opacity:0; }
+    to{ transform: translateY(0); opacity:1; }
+  }
+
+  .modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 18px 20px;
+    border-bottom: 1px solid #f0e8e8;
+    flex-shrink:0;
+  }
+
+  .modal-header h2{
+    margin:0;
+    font-size: 16px;
+    font-weight:800;
+    color:#1c1c1c;
+  }
+
+  .modal-header button{
+    background: var(--rojo-suave);
+    border:none;
+    color: var(--rojo);
+    width:30px;height:30px;
+    border-radius:50%;
+    font-size:16px;
+    cursor:pointer;
+    line-height:1;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+
+  .modal-body{
+    padding: 4px 20px 24px;
+    overflow-y:auto;
+    font-size: 13.3px;
+    line-height:1.65;
+    color: var(--gris-texto);
+  }
+
+  .modal-body h3{
+    font-size: 13.5px;
+    color: var(--rojo-oscuro);
+    margin: 18px 0 6px;
+  }
+  .modal-body h3:first-child{ margin-top: 14px; }
+
+  .modal-body p{ margin: 0 0 10px; }
+  .modal-body ul{ margin: 0 0 10px; padding-left: 18px; }
+  .modal-body li{ margin-bottom: 4px; }
+  .modal-body a{ color: var(--rojo); }
+
+  .modal-body .contacto-datos{
+    background: var(--rojo-suave);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin: 6px 0 12px;
+    font-size: 12.8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-mark">UGT</div>
+  <div class="logo-text">
+    <strong>FeSMC UGT</strong>
+    <span>Castilla-La Mancha</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Contáctanos</h1>
+    <p>Contacta con nosotros y estaremos encantados de ayudarte a resolver tus dudas laborales.</p>
+    <span class="badge">Respuesta personalizada</span>
+  </div>
+
+  <div class="intro-card">
+    <p>
+      ¿Tienes una duda laboral o necesitas orientación? Utiliza este formulario para trasladarnos tu consulta.
+      El equipo de FeSMC UGT Castilla-La Mancha revisará la información que nos facilites y se pondrá en contacto
+      contigo para ofrecerte el asesoramiento y la atención que necesites.
+    </p>
+    <p class="confidencial">La información que nos facilites será tratada de forma confidencial.</p>
+  </div>
+
+  <div class="form-section">
+    <div class="section-label">Formulario de contacto</div>
+    <div class="form-card">
+      <div class="form-loading" id="formLoading">Cargando formulario…</div>
+      <iframe
+        id="googleForm"
+        src="https://docs.google.com/forms/d/e/1FAIpQLSclplVHDd6-RcmZwBzQ3SzmU58fG2da8RWRsi0xX1-xt5ONZA/viewform?embedded=true"
+        onload="document.getElementById('formLoading').style.display='none'; this.style.display='block';"
+        style="display:none;">
+        Cargando…
+      </iframe>
+    </div>
+  </div>
+
+  <div class="privacidad-link">
+    <button type="button" onclick="document.getElementById('modalPrivacidad').classList.add('open')">
+      🔒 Política de Protección de Datos
+    </button>
+  </div>
+
+  <footer>
+    FeSMC UGT Castilla-La Mancha · Plaza de España, 12, 2.ª planta · 19001 Guadalajara
+  </footer>
+
+</div>
+
+<!-- Modal política de privacidad -->
+<div class="modal-overlay" id="modalPrivacidad" onclick="if(event.target===this) this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Política de Privacidad</h2>
+      <button type="button" aria-label="Cerrar" onclick="document.getElementById('modalPrivacidad').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <h3>1. Responsable del tratamiento</h3>
+      <p>
+        En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y de la Ley Orgánica 3/2018, de 5 de diciembre, de
+        Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), te informamos sobre el
+        tratamiento de los datos personales que nos facilites a través de este formulario.
+      </p>
+      <div class="contacto-datos">
+        <strong>Federación de Servicios, Movilidad y Consumo, FeSMC UGT Castilla-La Mancha</strong><br>
+        Plaza de España, 12, 2.ª planta · 19001 Guadalajara<br>
+        Tel: 949 223 980 · castillalamancha@fesmcugt.org
+      </div>
+
+      <h3>2. Finalidad del tratamiento</h3>
+      <p>Los datos que nos facilites se tratarán para:</p>
+      <ul>
+        <li>Atender las consultas realizadas mediante este formulario.</li>
+        <li>Ofrecer información y asesoramiento sindical y laboral.</li>
+        <li>Contactar contigo para dar respuesta a tu consulta.</li>
+        <li>Gestionar las actuaciones derivadas de tu solicitud.</li>
+      </ul>
+      <p>Tus datos no se usarán para fines distintos sin informarte previamente, salvo obligación legal.</p>
+
+      <h3>3. Datos que tratamos</h3>
+      <p>
+        Nombre y apellidos, correo electrónico, teléfono, provincia, empresa, sector de actividad y el contenido
+        de tu consulta, junto con cualquier otra información que decidas incluir voluntariamente. Te recomendamos
+        no incorporar datos de terceras personas ni información especialmente sensible que no sea necesaria.
+      </p>
+
+      <h3>4. Base jurídica</h3>
+      <p>El consentimiento otorgado al enviar el formulario y la necesidad de gestionar tu consulta.</p>
+
+      <h3>5. Conservación</h3>
+      <p>
+        Los datos se conservarán el tiempo necesario para gestionar tu consulta y, después, durante los plazos
+        legalmente exigibles, tras lo cual se eliminarán o bloquearán conforme a la normativa aplicable.
+      </p>
+
+      <h3>6. Destinatarios</h3>
+      <p>
+        Por lo general no se comunican a terceros, salvo, cuando resulte necesario para atender tu consulta,
+        a otras Federaciones, Uniones o estructuras de UGT competentes por territorio o materia. Determinados
+        proveedores tecnológicos podrán intervenir como encargados del tratamiento, con las garantías legales
+        correspondientes.
+      </p>
+
+      <h3>7. Seguridad</h3>
+      <p>Aplicamos las medidas técnicas y organizativas adecuadas para proteger tus datos frente a pérdida, alteración o acceso no autorizado.</p>
+
+      <h3>8. Tus derechos</h3>
+      <p>Puedes ejercer en cualquier momento tus derechos de acceso, rectificación, supresión, oposición, limitación, portabilidad y retirada del consentimiento, escribiendo a castillalamancha@fesmcugt.org.</p>
+
+      <h3>9. Reclamaciones</h3>
+      <p>Si consideras que el tratamiento no se ajusta a la normativa, puedes reclamar ante la Agencia Española de Protección de Datos (AEPD).</p>
+
+      <h3>10. Modificaciones</h3>
+      <p>Esta política podrá actualizarse para adaptarla a cambios normativos. La versión vigente será siempre la publicada en esta página.</p>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
