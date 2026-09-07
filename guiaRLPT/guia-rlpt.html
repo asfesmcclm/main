@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Básica RLPT</title>
+<style>
+  :root{
+    --red:#DA1A1A;
+    --red-dark:#A10F0F;
+    --ink:#171414;
+    --paper:#FAF7F5;
+    --panel:#FDECEA;
+    --gray:#6E6660;
+    --line:#E8DFDB;
+    --rail-w:76px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .display{
+    font-weight:900;
+    letter-spacing:-0.02em;
+    text-transform:uppercase;
+    transform:scaleX(0.94);
+    transform-origin:left;
+    line-height:0.98;
+  }
+  .eyebrow{
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--red);
+  }
+
+  /* ---------- Layout shell ---------- */
+  .shell{display:flex;min-height:100vh;}
+  .rail{
+    width:var(--rail-w);
+    flex-shrink:0;
+    background:var(--red);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:18px 0 24px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+    scrollbar-width:none;
+  }
+  .rail::-webkit-scrollbar{display:none;}
+  .ring-wrap{margin-bottom:18px;position:relative;width:48px;height:48px;flex-shrink:0;}
+  .ring-wrap svg{transform:rotate(-90deg);}
+  .ring-bg{fill:none;stroke:rgba(255,255,255,0.28);stroke-width:4;}
+  .ring-fg{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;transition:stroke-dasharray 0.4s ease;}
+  .ring-num{
+    position:absolute;top:0;left:0;width:100%;height:100%;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:12px;font-weight:800;
+  }
+  .navlist{list-style:none;margin:0;padding:0;width:100%;}
+  .navlist li{width:100%;}
+  .navbtn{
+    width:100%;
+    background:none;border:none;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    padding:11px 4px;
+    color:rgba(255,255,255,0.75);
+  }
+  .navbtn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;}
+  .navbtn span{font-size:9px;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;text-align:center;}
+  .navbtn.active{color:#fff;}
+  .navbtn.active::before{
+    content:"";
+    display:block;position:absolute;
+  }
+  .navbtn:hover{color:#fff;}
+
+  .main{flex:1;min-width:0;padding:0 0 80px;}
+  .topbar-mobile{display:none;}
+
+  section{
+    padding:56px 28px;
+    max-width:820px;
+    margin:0 auto;
+    border-bottom:1px solid var(--line);
+  }
+  section:last-of-type{border-bottom:none;}
+  h1{font-size:40px;margin:0 0 6px;}
+  h2{font-size:28px;margin:0 0 6px;}
+  .lede{color:var(--gray);font-size:16px;margin:0 0 32px;max-width:56ch;line-height:1.55;}
+
+  .hero{padding-top:64px;}
+  .hero-tag{
+    font-size:15px;color:var(--gray);margin-top:14px;line-height:1.6;max-width:52ch;
+  }
+  .hero-strap{
+    margin-top:28px;padding:14px 18px;background:var(--panel);border-left:3px solid var(--red);
+    font-size:14px;color:var(--ink);font-weight:600;
+  }
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .grid.cols-1{grid-template-columns:1fr;}
+  @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:20px;display:flex;gap:14px;align-items:flex-start;
+  }
+  .card .icn{
+    flex-shrink:0;width:38px;height:38px;border-radius:8px;background:var(--panel);
+    display:flex;align-items:center;justify-content:center;color:var(--red);
+  }
+  .card .icn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;}
+  .card h3{margin:0 0 4px;font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:0.01em;}
+  .card p{margin:0;color:var(--gray);font-size:14px;line-height:1.5;}
+
+  .steps{list-style:none;margin:0;padding:0;}
+  .step{display:flex;gap:16px;padding:18px 0;border-bottom:1px dashed var(--line);}
+  .step:last-child{border-bottom:none;}
+  .step-num{
+    flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;
+  }
+  .step h3{margin:0 0 4px;font-size:15px;font-weight:800;text-transform:uppercase;}
+  .step p{margin:0;color:var(--gray);font-size:14px;line-height:1.5;}
+
+  .check-item{
+    display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:#fff;
+    border:1px solid var(--line);border-radius:10px;margin-bottom:10px;cursor:pointer;
+    transition:background 0.15s, border-color 0.15s;
+  }
+  .check-item:hover{border-color:var(--red);}
+  .check-item.checked{background:var(--panel);border-color:var(--red);}
+  .check-box{
+    flex-shrink:0;width:22px;height:22px;border-radius:6px;border:2px solid var(--gray);
+    display:flex;align-items:center;justify-content:center;margin-top:1px;
+  }
+  .check-item.checked .check-box{background:var(--red);border-color:var(--red);}
+  .check-box svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:3;opacity:0;}
+  .check-item.checked .check-box svg{opacity:1;}
+  .check-item .txt strong{display:block;font-size:14.5px;font-weight:700;}
+  .check-item .txt span{display:block;font-size:13px;color:var(--gray);margin-top:2px;}
+  .check-item.checked .txt strong{text-decoration:line-through;text-decoration-color:var(--red);color:var(--gray);}
+
+  .tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+  .tab{
+    padding:8px 14px;border-radius:20px;border:1px solid var(--line);background:#fff;
+    font-size:13px;font-weight:700;cursor:pointer;color:var(--gray);
+  }
+  .tab.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .tabpanel{display:none;}
+  .tabpanel.active{display:block;}
+
+  .doc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:640px){.doc-grid{grid-template-columns:1fr;}}
+
+  textarea{
+    width:100%;min-height:220px;border:1px solid var(--line);border-radius:10px;
+    padding:16px;font-family:inherit;font-size:14px;line-height:1.6;color:var(--ink);
+    resize:vertical;background:#fff;
+  }
+  .save-hint{font-size:12px;color:var(--gray);margin-top:8px;display:flex;align-items:center;gap:6px;}
+  .save-hint svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+
+  .footer-note{
+    max-width:820px;margin:0 auto;padding:28px 28px 56px;color:var(--gray);font-size:13px;text-align:center;
+  }
+
+  /* Mobile rail -> top bar */
+  @media(max-width:760px){
+    .shell{flex-direction:column;}
+    .rail{
+      position:sticky;top:0;left:0;width:100%;height:auto;
+      flex-direction:row;padding:10px 8px;overflow-x:auto;overflow-y:hidden;z-index:20;
+    }
+    .ring-wrap{margin:0 10px 0 4px;}
+    .navlist{display:flex;flex-direction:row;width:auto;}
+    .navbtn{flex-direction:row;gap:6px;padding:8px 12px;white-space:nowrap;}
+    .navbtn span{font-size:10px;}
+    h1{font-size:30px;}
+    h2{font-size:22px;}
+    section{padding:40px 18px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <!-- RAIL / NAV -->
+  <nav class="rail" id="rail">
+    <div class="ring-wrap">
+      <svg width="48" height="48" viewBox="0 0 48 48">
+        <circle class="ring-bg" cx="24" cy="24" r="20"></circle>
+        <circle class="ring-fg" id="ringFg" cx="24" cy="24" r="20" stroke-dasharray="0 126"></circle>
+      </svg>
+      <div class="ring-num" id="ringNum">0%</div>
+    </div>
+    <ul class="navlist" id="navlist"></ul>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <section id="sec-inicio" data-nav="Inicio">
+      <div class="eyebrow">UGT FeSMC · Castilla-La Mancha</div>
+      <h1 class="display">Guía Básica<br>RLPT</h1>
+      <p class="hero-tag">Representación Legal de las Personas Trabajadoras — todo lo que necesitas para representar, defender, negociar y vigilar el cumplimiento de los derechos de tu plantilla.</p>
+      <div class="hero-strap">Tu voz. Tus derechos. Nuestro compromiso.</div>
+
+      <div style="margin-top:40px;">
+        <div class="eyebrow" style="margin-bottom:10px;">¿Qué es la RLPT?</div>
+        <p class="lede" style="margin-bottom:20px;">El conjunto de representantes elegidos por la plantilla para defender sus derechos en la empresa. Elegidos por la plantilla, para la plantilla.</p>
+        <div class="grid" id="rlptTypesGrid"></div>
+      </div>
+    </section>
+
+    <section id="sec-derechos" data-nav="Derechos">
+      <div class="eyebrow">Como delegado/a</div>
+      <h2>Derechos clave</h2>
+      <p class="lede">Tienes una serie de derechos reconocidos por la ley.</p>
+      <div class="grid cols-1" id="derechosGrid"></div>
+    </section>
+
+    <section id="sec-funciones" data-nav="Funciones">
+      <div class="eyebrow">Tu papel es amplio</div>
+      <h2>Funciones principales</h2>
+      <p class="lede">Como RLPT, estas son las funciones que ejerces en el día a día.</p>
+      <div class="grid" id="funcionesGrid"></div>
+    </section>
+
+    <section id="sec-pasos" data-nav="Pasos">
+      <div class="eyebrow">Tu labor empieza hoy</div>
+      <h2>Primeros pasos prácticos</h2>
+      <p class="lede">Marca cada paso a medida que lo completes. El cambio lo hacemos juntos y juntas.</p>
+      <div id="pasosList"></div>
+    </section>
+
+    <section id="sec-consejos" data-nav="Consejos">
+      <div class="eyebrow">Herramientas del día a día</div>
+      <h2>Actuar, negociar, comunicar</h2>
+      <p class="lede">Tres claves prácticas para ejercer tu representación con rigor.</p>
+
+      <div class="tabs" id="consejoTabs"></div>
+      <div id="consejoPanels"></div>
+    </section>
+
+    <section id="sec-errores" data-nav="Errores">
+      <div class="eyebrow">Autoevaluación</div>
+      <h2>Errores comunes a evitar</h2>
+      <p class="lede">Repasa esta lista de vez en cuando y marca lo que ya tienes bajo control.</p>
+      <div id="erroresList"></div>
+    </section>
+
+    <section id="sec-documentos" data-nav="Documentos">
+      <div class="eyebrow">Conócelos, úsalos, defiéndelos</div>
+      <h2>Documentos básicos</h2>
+      <p class="lede">Los documentos clave para garantizar los derechos de la plantilla.</p>
+      <div class="doc-grid" id="documentosGrid"></div>
+    </section>
+
+    <section id="sec-notas" data-nav="Notas">
+      <div class="eyebrow">Tus apuntes, nuestra acción</div>
+      <h2>Bloc de notas</h2>
+      <p class="lede">Escribe aquí lo que necesites recordar. Se guarda automáticamente en este dispositivo.</p>
+      <textarea id="notasArea" placeholder="Escribe tus notas..."></textarea>
+      <div class="save-hint" id="saveHint">Guardado solo en tu navegador — nadie más lo ve.</div>
+    </section>
+
+    <div class="footer-note">Ser delegado/a no es solo un cargo: es una responsabilidad colectiva. Cuanto más informado/a estés y mejor te coordines, más útil serás para tus compañeros/as. · UGT FeSMC Castilla-La Mancha</div>
+
+  </main>
+</div>
+
+<script>
+const ICON = {
+  users: '<svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  usersGroup: '<svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  fileText: '<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>',
+  chat: '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
+  clock: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  shield: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  megaphone: '<svg viewBox="0 0 24 24"><path d="M3 11l18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>',
+  handshake: '<svg viewBox="0 0 24 24"><path d="M8.5 14.5 5 11a2 2 0 1 1 3-3l1.5 1.5"/><path d="M15.5 14.5 19 11a2 2 0 1 0-3-3l-1.5 1.5"/><path d="M12 20l-4-4"/><path d="M12 20l4-4"/><path d="M9.5 9.5 12 12l2.5-2.5"/></svg>',
+  eye: '<svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
+  scale: '<svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 8l-3 6a3 3 0 0 0 6 0z"/><path d="M19 8l-3 6a3 3 0 0 0 6 0z"/><path d="M5 8h14"/><path d="M9 21h6"/></svg>',
+  helmet: '<svg viewBox="0 0 24 24"><path d="M4 18v-3a8 8 0 0 1 16 0v3"/><path d="M2 18h20"/><path d="M12 7V4"/></svg>',
+  target: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>',
+  edit: '<svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
+  ear: '<svg viewBox="0 0 24 24"><path d="M6 12a5 5 0 0 1 5-5 4 4 0 0 1 4 4c0 2-2 2-2 4a3 3 0 0 0 3 3"/><path d="M11 4a8 8 0 0 0-8 8c0 2 1 3 1 5a3 3 0 0 0 3 3"/></svg>',
+  folder: '<svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>',
+  calendar: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>',
+  book: '<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+  mail: '<svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>',
+  check: '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>',
+  lock: '<svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>',
+  alert: '<svg viewBox="0 0 24 24"><path d="M12 2 1 21h22z"/><path d="M12 9v5"/><path d="M12 17h.01"/></svg>'
+};
+
+// ---- content data ----
+const derechos = [
+  {icon:ICON.fileText, title:'1. Información', text:'Derecho a acceder a información relevante sobre la empresa: contratos, salarios, sanciones, despidos, prevención de riesgos, datos económicos, etc.'},
+  {icon:ICON.chat, title:'2. Consulta y participación', text:'La empresa debe consultarte y escucharte en decisiones que afecten a condiciones de trabajo, organización, empleo, formación, igualdad, prevención, etc.'},
+  {icon:ICON.clock, title:'3. Crédito horario sindical', text:'Horas retribuidas dentro de tu jornada para ejercer tus funciones como representante. El número depende del tamaño de la empresa.'},
+  {icon:ICON.shield, title:'4. Protección frente a despido o sanción', text:'No pueden despedirte ni sancionarte por el ejercicio de tus funciones. Cualquier medida disciplinaria requiere expediente contradictorio y audiencia previa.'},
+  {icon:ICON.megaphone, title:'5. Libertad de expresión sindical', text:'Puedes comunicarte libremente con la plantilla: repartir información, colocar carteles en tablones sindicales, convocar asambleas, usar medios de la empresa en los términos acordados.'}
+];
+
+const funciones = [
+  {icon:ICON.shield, title:'Defender', text:'Derechos individuales y colectivos. Eres la voz de la plantilla.'},
+  {icon:ICON.handshake, title:'Negociar', text:'Convenios o acuerdos de empresa para mejorar condiciones de trabajo.'},
+  {icon:ICON.megaphone, title:'Informar', text:'A la plantilla de forma clara y veraz sobre los asuntos que le afectan.'},
+  {icon:ICON.eye, title:'Vigilar', text:'El cumplimiento del convenio colectivo y de los derechos pactados.'},
+  {icon:ICON.scale, title:'Intervenir en conflictos', text:'Actúas como mediador/a buscando soluciones justas y equilibradas.'},
+  {icon:ICON.helmet, title:'Colaborar en PRL', text:'Participas activamente en la mejora de la seguridad y salud en el trabajo.'}
+];
+
+const pasosData = [
+  {id:'p1', icon:ICON.book, title:'Lee el convenio colectivo y normativa interna', text:'Conoce tus derechos, funciones y los acuerdos que regulan las condiciones laborales.'},
+  {id:'p2', icon:ICON.chat, title:'Preséntate a la plantilla como su representante', text:'Da a conocer quién eres, qué papel desempeñas y que estás ahí para escuchar, informar y defender.'},
+  {id:'p3', icon:ICON.fileText, title:'Solicita información básica a la empresa', text:'Pide los datos necesarios para poder ejercer tu representación con rigor y eficacia.'},
+  {id:'p4', icon:ICON.handshake, title:'Coordínate con tu sindicato', text:'No estás solo/a. Tu sindicato aporta asesoramiento, formación, apoyo y experiencia.'},
+  {id:'p5', icon:ICON.calendar, title:'Organiza un sistema de reuniones periódicas', text:'Mantén informada a la plantilla, escucha sus inquietudes y avanzad juntos/as.'}
+];
+
+const actuarSteps = [
+  {title:'Escuchar con atención', text:'Entender la situación es el primer paso.'},
+  {title:'Recoger información (documentos, pruebas)', text:'Junta correos, partes, testigos... todo puede ser importante.'},
+  {title:'Revisar convenio y legislación', text:'Analiza el caso según el convenio colectivo aplicable y la legislación vigente.'},
+  {title:'Hablar con la empresa si procede', text:'Intenta resolver el conflicto por la vía del diálogo y la negociación.'},
+  {title:'Escalar al sindicato si es necesario', text:'Si no hay solución, se defienden los derechos con todas las herramientas sindicales disponibles.'}
+];
+
+const negociarSteps = [
+  {title:'Preparar argumentos (datos, convenio, leyes)', text:'La información es tu mejor herramienta.'},
+  {title:'Ir con propuestas claras', text:'Lleva alternativas concretas. Negociar es plantear soluciones, no solo señalar problemas.'},
+  {title:'Mantener actitud firme pero dialogante', text:'Defiende con firmeza los intereses de la plantilla, desde el respeto.'},
+  {title:'Dejar constancia por escrito', text:'Todo lo acordado debe quedar reflejado por escrito. Evita malentendidos.'},
+  {title:'Informar siempre a la plantilla', text:'La transparencia fortalece la confianza. Informa antes, durante y después.'}
+];
+
+const habilidadesSteps = [
+  {title:'Comunicación clara', text:'Ideas expresadas de forma sencilla, directa y respetuosa.'},
+  {title:'Capacidad de escucha', text:'Escucha activa, comprensión de diferentes perspectivas.'},
+  {title:'Organización', text:'Planificar, priorizar y gestionar tiempo y recursos con eficacia.'},
+  {title:'Discreción', text:'Manejo confidencial y responsable de información sensible.'},
+  {title:'Trabajo en equipo', text:'Colaborar, compartir conocimiento y sumar esfuerzos.'}
+];
+
+const erroresData = [
+  {id:'e1', title:'Actuar sin conocer el convenio', text:'Infórmate siempre antes de responder o negociar.'},
+  {id:'e2', title:'No informar a la plantilla', text:'La transparencia es la base de la confianza.'},
+  {id:'e3', title:'Personalizar los conflictos', text:'No es algo "contra ti": mantén la distancia profesional.'},
+  {id:'e4', title:'Falta de coordinación con el sindicato', text:'No estás solo/a, apóyate en tu organización.'},
+  {id:'e5', title:'No dejar registro escrito', text:'Documenta siempre lo tratado y acordado.'}
+];
+
+const documentos = [
+  {icon:ICON.book, title:'Convenio colectivo', text:'Regula las condiciones de trabajo en tu sector o empresa. Mejora lo que establece la ley.'},
+  {icon:ICON.fileText, title:'Estatuto de los Trabajadores', text:'La norma básica que regula tus derechos y deberes como persona trabajadora.'},
+  {icon:ICON.edit, title:'Contratos tipo', text:'Recoge las modalidades de contratación y garantiza que se respeten tus condiciones.'},
+  {icon:ICON.calendar, title:'Calendario laboral', text:'Establece días laborales, festivos, jornadas y horarios del año.'},
+  {icon:ICON.fileText, title:'Actas de reuniones', text:'Reflejan lo tratado y acordado. Son la memoria de la acción sindical.'},
+  {icon:ICON.mail, title:'Comunicaciones a empresa', text:'Herramienta clave para informar, solicitar, negociar y dejar constancia por escrito.'}
+];
+
+const navSections = ['inicio','derechos','funciones','pasos','consejos','errores','documentos','notas'];
+
+// ---- render helpers ----
+function renderCards(container, items){
+  container.innerHTML = items.map(it => `
+    <div class="card">
+      <div class="icn">${it.icon}</div>
+      <div><h3>${it.title}</h3><p>${it.text}</p></div>
+    </div>`).join('');
+}
+
+function renderSteps(container, items){
+  container.innerHTML = '<ol class="steps" style="list-style:none;padding:0;margin:0;">' + items.map((it,i) => `
+    <li class="step">
+      <div class="step-num">${i+1}</div>
+      <div><h3>${it.title}</h3><p>${it.text}</p></div>
+    </li>`).join('') + '</ol>';
+}
+
+function renderChecklist(container, items, storeKey, stateObj){
+  container.innerHTML = items.map(it => `
+    <div class="check-item ${stateObj[it.id] ? 'checked':''}" data-id="${it.id}">
+      <div class="check-box">${ICON.check}</div>
+      <div class="txt"><strong>${it.title}</strong><span>${it.text}</span></div>
+    </div>`).join('');
+  container.querySelectorAll('.check-item').forEach(el => {
+    el.addEventListener('click', async () => {
+      const id = el.dataset.id;
+      stateObj[id] = !stateObj[id];
+      el.classList.toggle('checked');
+      updateProgress();
+      try { await window.storage.set(storeKey, JSON.stringify(stateObj), false); } catch(e){ console.error(e); }
+    });
+  });
+}
+
+renderCards(document.getElementById('rlptTypesGrid'), [
+  {icon:ICON.users, title:'Delegados/as de personal', text:'En empresas pequeñas. Una voz cercana que te representa.'},
+  {icon:ICON.usersGroup, title:'Comité de empresa', text:'En empresas más grandes. La fuerza del colectivo, la voz de toda la plantilla.'}
+]);
+document.getElementById('saveHint').insertAdjacentHTML('afterbegin', ICON.lock);
+renderCards(document.getElementById('derechosGrid'), derechos);
+renderCards(document.getElementById('funcionesGrid'), funciones);
+renderCards(document.getElementById('documentosGrid'), documentos);
+
+// consejos tabs
+const consejoTabsEl = document.getElementById('consejoTabs');
+const consejoPanelsEl = document.getElementById('consejoPanels');
+const consejoTabsData = [
+  {key:'actuar', label:'Ante un problema', data:actuarSteps},
+  {key:'negociar', label:'Negociación básica', data:negociarSteps},
+  {key:'habilidades', label:'Habilidades clave', data:habilidadesSteps}
+];
+consejoTabsEl.innerHTML = consejoTabsData.map((t,i) => `<div class="tab ${i===0?'active':''}" data-key="${t.key}">${t.label}</div>`).join('');
+consejoPanelsEl.innerHTML = consejoTabsData.map((t,i) => `<div class="tabpanel ${i===0?'active':''}" id="panel-${t.key}"></div>`).join('');
+consejoTabsData.forEach(t => renderSteps(document.getElementById('panel-'+t.key), t.data));
+consejoTabsEl.querySelectorAll('.tab').forEach(tabEl => {
+  tabEl.addEventListener('click', () => {
+    consejoTabsEl.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    consejoPanelsEl.querySelectorAll('.tabpanel').forEach(x=>x.classList.remove('active'));
+    tabEl.classList.add('active');
+    document.getElementById('panel-'+tabEl.dataset.key).classList.add('active');
+  });
+});
+
+// ---- state + storage ----
+let pasosState = {};
+let erroresState = {};
+
+async function loadState(){
+  try {
+    const r = await window.storage.get('rlpt:pasos', false);
+    pasosState = r ? JSON.parse(r.value) : {};
+  } catch(e){ pasosState = {}; }
+  try {
+    const r2 = await window.storage.get('rlpt:errores', false);
+    erroresState = r2 ? JSON.parse(r2.value) : {};
+  } catch(e){ erroresState = {}; }
+
+  renderChecklist(document.getElementById('pasosList'), pasosData, 'rlpt:pasos', pasosState);
+  renderChecklist(document.getElementById('erroresList'), erroresData, 'rlpt:errores', erroresState);
+  updateProgress();
+
+  try {
+    const notes = await window.storage.get('rlpt:notas', false);
+    if (notes) document.getElementById('notasArea').value = notes.value;
+  } catch(e) { /* no existing notes */ }
+}
+
+function updateProgress(){
+  const total = pasosData.length + erroresData.length;
+  const done = Object.values(pasosState).filter(Boolean).length + Object.values(erroresState).filter(Boolean).length;
+  const pct = total ? Math.round((done/total)*100) : 0;
+  const circumference = 2 * Math.PI * 20;
+  const fg = document.getElementById('ringFg');
+  fg.setAttribute('stroke-dasharray', `${(pct/100)*circumference} ${circumference}`);
+  document.getElementById('ringNum').textContent = pct + '%';
+}
+
+// notes autosave (debounced)
+let notesTimeout;
+document.getElementById('notasArea').addEventListener('input', (e) => {
+  clearTimeout(notesTimeout);
+  const val = e.target.value;
+  notesTimeout = setTimeout(async () => {
+    try { await window.storage.set('rlpt:notas', val, false); } catch(err){ console.error(err); }
+  }, 600);
+});
+
+// ---- nav rail ----
+const navlistEl = document.getElementById('navlist');
+const navIcons = {inicio:ICON.megaphone, derechos:ICON.fileText, funciones:ICON.shield, pasos:ICON.check, consejos:ICON.handshake, errores:ICON.alert, documentos:ICON.folder, notas:ICON.edit};
+navlistEl.innerHTML = navSections.map(key => {
+  const label = document.getElementById('sec-'+key).dataset.nav;
+  return `<li><button class="navbtn" data-target="sec-${key}">${navIcons[key]}<span>${label}</span></button></li>`;
+}).join('');
+
+const navButtons = Array.from(document.querySelectorAll('.navbtn'));
+navButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById(btn.dataset.target).scrollIntoView({behavior:'smooth'});
+  });
+});
+
+const sections = navSections.map(k => document.getElementById('sec-'+k));
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navButtons.forEach(b => b.classList.toggle('active', b.dataset.target === entry.target.id));
+    }
+  });
+}, {rootMargin: '-40% 0px -50% 0px'});
+sections.forEach(s => observer.observe(s));
+
+loadState();
+</script>
+</body>
+</html>
